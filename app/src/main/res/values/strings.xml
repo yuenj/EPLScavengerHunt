@@ -3,4 +3,11 @@
 
     <string name="start_text">START</string>
     <string name="title_text">EPL\nSCAVENGER HUNT</string>
+    <string name="goto_LocationActivity_text">goto LocationActivity</string>
+    <string name="goto_QuestionActivity_text">goto QuestionActivity</string>
+    <string name="goto_congratulationsActivity_text">goto CongratulationsActivity</string>
+    <string name="goto_resultsActivity_text">goto ResultsActivity</string>
+
+
+
 </resources>

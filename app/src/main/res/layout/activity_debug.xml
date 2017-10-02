@@ -1,9 +1,44 @@
 <?xml version="1.0" encoding="utf-8"?>
-<android.support.constraint.ConstraintLayout xmlns:android="http://schemas.android.com/apk/res/android"
+<android.support.v7.widget.LinearLayoutCompat xmlns:android="http://schemas.android.com/apk/res/android"
     xmlns:app="http://schemas.android.com/apk/res-auto"
     xmlns:tools="http://schemas.android.com/tools"
     android:layout_width="match_parent"
     android:layout_height="match_parent"
+    android:orientation="vertical"
     tools:context="com.cmput401f17.eplscavengerhunt.DebugActivity">
 
-</android.support.constraint.ConstraintLayout>
+    <TextView
+        android:layout_width="wrap_content"
+        android:layout_height="wrap_content"
+        android:text="DEBUG SCREEN"
+        android:textSize="30sp"/>
+
+    <Button
+        android:id="@+id/goto_locationactivity_button"
+        android:layout_width="wrap_content"
+        android:layout_height="wrap_content"
+        android:text="@string/goto_LocationActivity_text"/>
+
+    <Button
+        android:id="@+id/goto_questionactivity_button"
+        android:layout_width="wrap_content"
+        android:layout_height="wrap_content"
+        android:text="@string/goto_QuestionActivity_text"/>
+    <Button
+        android:id="@+id/goto_congratulationsactivity_button"
+        android:layout_width="wrap_content"
+        android:layout_height="wrap_content"
+        android:text="@string/goto_congratulationsActivity_text"/>
+    <Button
+        android:id="@+id/goto_resultsactivity_button"
+        android:layout_width="wrap_content"
+        android:layout_height="wrap_content"
+        android:text="@string/goto_resultsActivity_text"/>
+
+
+
+
+
+
+
+</android.support.v7.widget.LinearLayoutCompat>
