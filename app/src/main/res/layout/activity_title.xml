@@ -3,7 +3,7 @@
     android:layout_width="match_parent"
     android:layout_height="match_parent"
     android:background="#0099cc"
-    tools:context="com.cmput401f17.eplscavengerhunt.TitleActivity">
+    tools:context="com.cmput401f17.eplscavengerhunt.activity.TitleActivity">
     <TextView
         android:id="@+id/title_text_view"
         android:layout_width="match_parent"

@@ -9,22 +9,18 @@
         android:roundIcon="@mipmap/ic_launcher_round"
         android:supportsRtl="true"
         android:theme="@style/AppTheme">
-        <activity
-            android:name=".TitleActivity"
-            android:configChanges="orientation|keyboardHidden|screenSize"
-            android:label="@string/app_name"
-            android:theme="@style/Theme.AppCompat.NoActionBar">
+        <activity android:name=".activity.TitleActivity">
             <intent-filter>
                 <action android:name="android.intent.action.MAIN" />
 
                 <category android:name="android.intent.category.LAUNCHER" />
             </intent-filter>
         </activity>
-        <activity android:name=".DebugActivity" />
-        <activity android:name=".QuestionActivity" />
-        <activity android:name=".LocationActivity" />
-        <activity android:name=".CongratulationsActivity" />
-        <activity android:name=".ResultsActivity"></activity>
+        <activity android:name=".activity.DebugActivity" />
+        <activity android:name=".activity.QuestionActivity" />
+        <activity android:name=".activity.LocationActivity" />
+        <activity android:name=".activity.CongratulationsActivity" />
+        <activity android:name=".activity.ResultsActivity"></activity>
     </application>
 
 </manifest>

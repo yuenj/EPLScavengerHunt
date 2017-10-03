@@ -5,7 +5,7 @@
     android:layout_width="match_parent"
     android:layout_height="match_parent"
     android:orientation="vertical"
-    tools:context="com.cmput401f17.eplscavengerhunt.DebugActivity">
+    tools:context="com.cmput401f17.eplscavengerhunt.activity.DebugActivity">
 
     <TextView
         android:layout_width="wrap_content"
@@ -35,6 +35,12 @@
         android:layout_height="wrap_content"
         android:text="@string/goto_resultsActivity_text"/>
 
+    <TextView
+        android:id="@+id/dagger"
+        android:layout_width="wrap_content"
+        android:layout_height="wrap_content"
+        android:text="Dagger is not working ):"
+        android:textSize="30sp" />
 
 
 
