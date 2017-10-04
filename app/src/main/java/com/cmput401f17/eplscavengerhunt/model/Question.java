@@ -1,27 +1,23 @@
 package com.cmput401f17.eplscavengerhunt.model;
 
-/**
- * Created by ryan on 2017-10-03.
- */
 
 public class Question {
 
     private int questionID;
-    private String questionText;
+    private String prompt;
     private Boolean skipped;
     private String solution;
 
     public Question() {
         this.questionID = 0;
-        this.questionText = "";
+        this.prompt = "";
         this.skipped = false;
         this.solution = "";
-
     }
 
     public Question(int questionID, String questionText, String solution) {
         this.questionID = questionID;
-        this.questionText = questionText;
+        this.prompt = questionText;
         this.solution = solution;
         this.skipped = false;
     }
@@ -34,12 +30,12 @@ public class Question {
         this.questionID = questionID;
     }
 
-    public String getQuestionText() {
-        return questionText;
+    public String getQuestionPrompt() {
+        return prompt;
     }
 
     public void setQuestionText(String questionText) {
-        this.questionText = questionText;
+        this.prompt = questionText;
     }
 
     public String getSolution() {

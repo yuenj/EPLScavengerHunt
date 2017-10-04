@@ -35,25 +35,25 @@ public class QuestionModelTest {
     }
 
     @Test
-    public void getQuestionTextTest() {
+    public void getQuestionPromptTest() {
         String questionStrDummy = "Question??";
         String solutionStrDummy = "Solution!";
         int intDummy = 300;
         Question testQuestion = new Question(intDummy, questionStrDummy, solutionStrDummy);
 
-        String returnedText = testQuestion.getQuestionText();
+        String returnedText = testQuestion.getQuestionPrompt();
 
         assertEquals(returnedText, questionStrDummy);
     }
 
     @Test
-    public void setQuestionText() {
+    public void setQuestionPrompt() {
         String questionStrDummy = "Question??";
         Question testQuestion = new Question();
 
         testQuestion.setQuestionText(questionStrDummy);
 
-        assertEquals(testQuestion.getQuestionText(), questionStrDummy);
+        assertEquals(testQuestion.getQuestionPrompt(), questionStrDummy);
     }
 
     @Test
