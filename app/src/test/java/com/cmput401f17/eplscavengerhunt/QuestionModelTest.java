@@ -1,5 +1,6 @@
 package com.cmput401f17.eplscavengerhunt;
-import org.junit.Rule;
+import com.cmput401f17.eplscavengerhunt.model.Question;
+
 import org.junit.Test;
 import static org.junit.Assert.assertEquals;
 import static org.junit.Assert.assertTrue;

@@ -1,4 +1,4 @@
-package com.cmput401f17.eplscavengerhunt;
+package com.cmput401f17.eplscavengerhunt.model;
 
 /**
  * Created by ryan on 2017-10-03.

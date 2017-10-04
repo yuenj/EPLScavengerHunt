@@ -1,5 +1,7 @@
 package com.cmput401f17.eplscavengerhunt;
 
+import com.cmput401f17.eplscavengerhunt.model.Response;
+
 import org.junit.Test;
 
 import static junit.framework.Assert.assertEquals;
