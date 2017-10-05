@@ -13,6 +13,10 @@ import android.support.v7.app.AppCompatActivity;
 import android.util.Log;
 
 import com.cmput401f17.eplscavengerhunt.R;
+import com.cmput401f17.eplscavengerhunt.ScavengerHuntApplication;
+import com.cmput401f17.eplscavengerhunt.controller.GameController;
+import com.cmput401f17.eplscavengerhunt.controller.LocationController;
+import com.estimote.coresdk.cloud.model.Device;
 import com.estimote.coresdk.common.config.EstimoteSDK;
 import com.estimote.coresdk.common.requirements.SystemRequirementsChecker;
 import com.estimote.coresdk.observation.region.RegionUtils;
@@ -22,6 +26,8 @@ import com.estimote.coresdk.service.BeaconManager;
 
 import java.util.List;
 
+import javax.inject.Inject;
+
 public class LocationActivity extends AppCompatActivity {
     /*
     @Override
@@ -30,6 +36,18 @@ public class LocationActivity extends AppCompatActivity {
         setContentView(R.layout.activity_location);
     } */
 
+    public LocationController locationController;
+
+    @Override
+    protected void onCreate(Bundle savedInstanceState) {
+        super.onCreate(savedInstanceState);
+        setContentView(R.layout.activity_location);
+
+        locationController = new LocationController(getApplicationContext());
+        locationController.VerifyLocation();
+    }
+
+    /*
     private boolean notificationAlreadyShown = false;
 
     // 1. Create the beacon manager
@@ -127,5 +145,5 @@ public class LocationActivity extends AppCompatActivity {
 
         notificationManager.notify(1, notification.build());
         notificationAlreadyShown = false;
-    }
+    } */
 }

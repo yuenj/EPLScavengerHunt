@@ -1,5 +1,6 @@
 package com.cmput401f17.eplscavengerhunt.controller;
 
+import android.app.Application;
 import android.content.Context;
 import android.util.Log;
 
@@ -14,7 +15,7 @@ import java.util.List;
  * Created by Nathan on 2017-10-05.
  */
 
-public class LocationController {
+public class LocationController extends Application {
     private BeaconManager beaconManager;
 
     public LocationController(Context context) {
@@ -29,7 +30,8 @@ public class LocationController {
         });
     }
 
-    public int VerifyLocation() {
+    // TODO: Change arguments to a Zone
+    public int VerifyLocation(String beacon) {
         beaconManager.setLocationListener(new BeaconManager.LocationListener() {
             @Override
             public void onLocationsFound(List<EstimoteLocation> beacons) {
@@ -42,21 +44,10 @@ public class LocationController {
                 String Lemonade = "[9a78af8c1252fcb37abefecbbbe7322a]";
 
                 for (EstimoteLocation beacon : beacons) {
-                    if (beacon.id.toString().equals(CandyStore) &&
+                    if (beacon.id.toString().equals(beacon) &&
                             (RegionUtils.computeProximity(beacon) == Proximity.IMMEDIATE ||
                             RegionUtils.computeProximity(beacon) == Proximity.NEAR)) {
-                                //return 1;
-                                Log.d("LocationListener", "Found");
-                    }
-                    if (beacon.id.toString().equals(DJBeet) &&
-                            (RegionUtils.computeProximity(beacon) == Proximity.IMMEDIATE || 
-                            RegionUtils.computeProximity(beacon) == Proximity.NEAR)) {
-                                Log.d("LocationListener", "Found");
-                    }
-                    if (beacon.id.toString().equals(Lemonade) && 
-                            (RegionUtils.computeProximity(beacon) == Proximity.IMMEDIATE ||
-                            RegionUtils.computeProximity(beacon) == Proximity.NEAR)) {
-                                Log.d("LocationListener", "Found");
+                                Log.d("LocationListener", "Found Beacon");
                     }
                 }
             }
