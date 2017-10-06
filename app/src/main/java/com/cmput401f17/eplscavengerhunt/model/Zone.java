@@ -7,6 +7,7 @@ package com.cmput401f17.eplscavengerhunt.model;
 
 public class Zone {
     private String beaconID;
+    private String name;
 
     public Zone(String beaconID) {
         this.beaconID = beaconID;
@@ -14,5 +15,13 @@ public class Zone {
 
     public String getBeaconID() {
         return beaconID;
+    }
+
+    public String getName() {
+        return name;
+    }
+
+    public void setName(String name) {
+        this.name = name;
     }
 }
