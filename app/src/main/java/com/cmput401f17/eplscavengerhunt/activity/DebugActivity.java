@@ -63,6 +63,6 @@ public class DebugActivity extends AppCompatActivity {
             }
         });
 
-        dagger.setText(gameController.initGame());
+        // dagger.setText(gameController.initGame());
     }
 }
