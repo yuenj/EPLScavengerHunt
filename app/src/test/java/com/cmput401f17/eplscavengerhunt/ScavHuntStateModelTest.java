@@ -5,6 +5,7 @@ package com.cmput401f17.eplscavengerhunt;
 import com.cmput401f17.eplscavengerhunt.model.Question;
 import com.cmput401f17.eplscavengerhunt.model.Response;
 import com.cmput401f17.eplscavengerhunt.model.ScavHuntState;
+import com.cmput401f17.eplscavengerhunt.model.Zone;
 
 import org.junit.Rule;
 import org.junit.Test;
@@ -97,5 +98,36 @@ public class ScavHuntStateModelTest {
         assertTrue(testGameOver);
     }
 
+    @Test
+    public void getCurrentQuestionTest() {
+        List<Question> dummyQuestions = new ArrayList<>();
+        Question mockQuestion1 = mock(Question.class);
+        Question mockQuestion2 = mock(Question.class);
+        dummyQuestions.add(mockQuestion1);
+        dummyQuestions.add(mockQuestion2);
+        ScavHuntState testScavHuntState = new ScavHuntState();
+        testScavHuntState.setQuestions(dummyQuestions);
+        testScavHuntState.setNumQuestions(2);
+        testScavHuntState.setCurrentStage(1);
 
+        Question returnedQuestion = testScavHuntState.getCurrentQuestion();
+
+        assertTrue(returnedQuestion == mockQuestion2);
+    }
+
+    @Test
+    public void getCurrentZoneTest() {
+        List<Zone> dummyZones = new ArrayList<>();
+        Zone mockZone1 = mock(Zone.class);
+        Zone mockZone2 = mock(Zone.class);
+        dummyZones.add(mockZone1);
+        dummyZones.add(mockZone2);
+        ScavHuntState testScavHuntState = new ScavHuntState();
+        testScavHuntState.setZoneRoute(dummyZones);
+        testScavHuntState.setCurrentStage(1);
+
+        Zone returnedZone = testScavHuntState.getCurrentZone();
+
+        assertTrue(returnedZone == mockZone2);
+    }
 }

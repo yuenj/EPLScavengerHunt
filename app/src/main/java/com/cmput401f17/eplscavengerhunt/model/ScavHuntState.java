@@ -82,9 +82,7 @@ public class ScavHuntState {
     }
 
 
-
     // Getters and Setters
-
     public String getBranch() {
         return branch;
     }
@@ -97,6 +95,10 @@ public class ScavHuntState {
         return questions;
     }
 
+    public Question getCurrentQuestion() {
+        return questions.get(currentStage);
+    }
+
     public void setQuestions(List<Question> questions) {
         this.questions = questions;
     }
@@ -105,9 +107,14 @@ public class ScavHuntState {
         return zoneRoute;
     }
 
+    public Zone getCurrentZone() {
+        return zoneRoute.get(currentStage);
+    }
+
     public void setZoneRoute(List<Zone> zoneRoute) {
         this.zoneRoute = zoneRoute;
     }
+
     public int getCurrentStage() {
         return currentStage;
     }
