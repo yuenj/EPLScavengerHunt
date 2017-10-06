@@ -9,6 +9,12 @@
     android:orientation="vertical"
     tools:context="com.cmput401f17.eplscavengerhunt.activity.DebugActivity">
 
+    <TextView
+        android:id="@+id/question_prompt"
+        android:layout_width="wrap_content"
+        android:layout_height="wrap_content"
+        android:text="@string/question_temp_text"
+        android:textSize="30sp"/>
 
 </android.support.v7.widget.LinearLayoutCompat>
 

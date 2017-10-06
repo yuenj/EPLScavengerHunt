@@ -10,6 +10,8 @@ import android.widget.Toast;
 
 import com.cmput401f17.eplscavengerhunt.R;
 
+import java.util.ArrayList;
+
 public class QuestionActivity extends AppCompatActivity {
 
     @Override
@@ -18,11 +20,16 @@ public class QuestionActivity extends AppCompatActivity {
         setContentView(R.layout.activity_question);
 
         int numMCAnswers = 2;
+        ArrayList<String> choices = new ArrayList<String>();
+
+        /* Get the MC choices */
+        choices.add("text");
+        choices.add("Ryan");
 
         /* Create choice button(s) */
         for(int i = 0; i < numMCAnswers; i++) {
             Button mcOption = new Button(this);
-            mcOption.setText("test");
+            mcOption.setText(choices.get(i));
 
             LinearLayoutCompat layout = (LinearLayoutCompat) findViewById(R.id.question_layout);
             LinearLayoutCompat.LayoutParams parameters = new LinearLayoutCompat.LayoutParams(LinearLayoutCompat.LayoutParams.MATCH_PARENT, LinearLayoutCompat.LayoutParams.WRAP_CONTENT);

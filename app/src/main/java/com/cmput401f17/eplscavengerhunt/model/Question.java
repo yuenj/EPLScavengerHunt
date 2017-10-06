@@ -50,7 +50,6 @@ public class Question {
         return skipped;
     }
 
-
     public void skip() {
         this.skipped = true;
     }
