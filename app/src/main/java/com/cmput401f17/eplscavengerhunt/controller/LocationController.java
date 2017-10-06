@@ -23,6 +23,10 @@ public class LocationController extends Application {
 
     private BeaconManager beaconManager;
 
+    /**
+     * Instantiates the beacon mangaer to use beacon technologies
+     * @param context
+     */
     public LocationController(Context context) {
         beaconManager = new BeaconManager(context);
 
@@ -35,8 +39,13 @@ public class LocationController extends Application {
         });
     }
 
-    // https://stackoverflow.com/questions/42128909/return-value-from-valueeventlistener-java 06/10/2017
-    // Hacky method to get a return value
+    /**
+     * https://stackoverflow.com/questions/42128909/return-value-from-valueeventlistener-java 06/10/2017
+     * Hacky method to get a return value
+     * Sets a listener for proximity to see if the user has entered
+     * the zone of the current beacon
+     * @param finishedCallback
+     */
     public void verifyLocation(@NonNull final SimpleCallback<Boolean> finishedCallback) {
         beaconManager.setLocationListener(new BeaconManager.LocationListener() {
             @Override
@@ -56,6 +65,10 @@ public class LocationController extends Application {
         });
     }
 
+    /**
+     * Requests and updates the Zone from scavHuntState
+     * @return
+     */
     public Zone requestNextZone() {
         scavHuntState.incrementCurrentStage();
         int currentStage = scavHuntState.getCurrentStage();

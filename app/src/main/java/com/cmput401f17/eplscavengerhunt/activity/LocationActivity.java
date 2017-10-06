@@ -27,10 +27,11 @@ public class LocationActivity extends AppCompatActivity {
         // Zone zone = (Zone) getIntent().getSerializableExtra("Object-Name");
 
         // DJbeet Beacon identifier for testing
-        //Zone zone = new Zone("[4f8113396f78d23ec78edfb96c79e23a]");
+        // Zone zone = new Zone("[4f8113396f78d23ec78edfb96c79e23a]");
 
         LocationController locationController = new LocationController(getApplicationContext());
 
+        // If the location is verified go to Question activity
         locationController.verifyLocation(new SimpleCallback<Boolean>() {
             @Override
             public void callback(Boolean data) {
