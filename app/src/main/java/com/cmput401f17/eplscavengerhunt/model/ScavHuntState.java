@@ -2,6 +2,7 @@ package com.cmput401f17.eplscavengerhunt.model;
 
 
 import java.util.ArrayList;
+import java.util.List;
 
 /**
  * persistent application game state. stores game progress and contains
@@ -9,10 +10,10 @@ import java.util.ArrayList;
  */
 public class ScavHuntState {
     private String branch;
-    private ArrayList<Question> questions;
-    private ArrayList<Zone> zoneRoute;
+    private List<Question> questions;
+    private List<Zone> zoneRoute;
     private int currentStage;
-    private ArrayList<Response> playerResponses;
+    private List<Response> playerResponses;
     private int numCorrect;
     private int numQuestions = 0;
 
@@ -24,22 +25,18 @@ public class ScavHuntState {
         this.currentStage = 0;
         this.playerResponses = new ArrayList<>();
         this.numCorrect = 0;
-
     }
 
-    public ScavHuntState(String branch, ArrayList<Question> questions, ArrayList<Zone> zoneRoute, int currentStage, ArrayList<Response> playerResponses, int numCorrect) {
+    public ScavHuntState(String branch, List<Question> questions, List<Zone> zoneRoute, int currentStage, List<Response> playerResponses, int numCorrect) {
         this.branch = branch;
         this.questions = questions;
         this.zoneRoute = zoneRoute;
         this.currentStage = currentStage;
         this.playerResponses = playerResponses;
         this.numCorrect = numCorrect;
-
     }
 
-    /**
-     * private method for incrementing numCorrect
-     */
+
     private void incrementNumCorrect() {
         this.numCorrect += 1;
     }
@@ -96,19 +93,19 @@ public class ScavHuntState {
         this.branch = branch;
     }
 
-    public ArrayList<Question> getQuestions() {
+    public List<Question> getQuestions() {
         return questions;
     }
 
-    public void setQuestions(ArrayList<Question> questions) {
+    public void setQuestions(List<Question> questions) {
         this.questions = questions;
     }
 
-    public ArrayList<Zone> getZoneRoute() {
+    public List<Zone> getZoneRoute() {
         return zoneRoute;
     }
 
-    public void setZoneRoute(ArrayList<Zone> zoneRoute) {
+    public void setZoneRoute(List<Zone> zoneRoute) {
         this.zoneRoute = zoneRoute;
     }
     public int getCurrentStage() {
@@ -119,11 +116,11 @@ public class ScavHuntState {
         this.currentStage = currentStage;
     }
 
-    public ArrayList<Response> getPlayerResponses() {
+    public List<Response> getPlayerResponses() {
         return playerResponses;
     }
 
-    public void setPlayerResponses(ArrayList<Response> playerResponses) {
+    public void setPlayerResponses(List<Response> playerResponses) {
         this.playerResponses = playerResponses;
     }
 

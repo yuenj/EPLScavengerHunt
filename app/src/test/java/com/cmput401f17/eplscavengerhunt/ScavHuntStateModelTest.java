@@ -13,6 +13,7 @@ import org.mockito.junit.MockitoJUnit;
 import org.mockito.junit.MockitoRule;
 
 import java.util.ArrayList;
+import java.util.List;
 
 import static org.junit.Assert.*;
 
@@ -31,19 +32,17 @@ public class ScavHuntStateModelTest {
         Response testResponse = mock(Response.class);
         when(testQuestion.getSolution()).thenReturn("Dog!");
         when(testResponse.getResponseStr()).thenReturn("Dog!");
-        ArrayList<Question> testQuestionList = new ArrayList<>();
+        List<Question> testQuestionList = new ArrayList<>();
         testQuestionList.add(testQuestion);
         testScavHuntState.setQuestions(testQuestionList);
 
         testScavHuntState.addResponse(testResponse);
 
         int score = testScavHuntState.getNumCorrect();
-        ArrayList<Question> stateQList = testScavHuntState.getQuestions();
-        ArrayList<Response> stateRList = testScavHuntState.getPlayerResponses();
+        List<Question> stateQList = testScavHuntState.getQuestions();
+        List<Response> stateRList = testScavHuntState.getPlayerResponses();
 
         assertTrue((score == 1) && (stateQList.get(0).getSolution()==stateRList.get(0).getResponseStr()));
-
-
     }
 
     @Test
@@ -53,19 +52,17 @@ public class ScavHuntStateModelTest {
         Response testResponse = mock(Response.class);
         when(testQuestion.getSolution()).thenReturn("Dog!");
         when(testResponse.getResponseStr()).thenReturn("Cat!");
-        ArrayList<Question> testQuestionList = new ArrayList<>();
+        List<Question> testQuestionList = new ArrayList<>();
         testQuestionList.add(testQuestion);
         testScavHuntState.setQuestions(testQuestionList);
 
         testScavHuntState.addResponse(testResponse);
 
         int score = testScavHuntState.getNumCorrect();
-        ArrayList<Question> stateQList = testScavHuntState.getQuestions();
-        ArrayList<Response> stateRList = testScavHuntState.getPlayerResponses();
+        List<Question> stateQList = testScavHuntState.getQuestions();
+        List<Response> stateRList = testScavHuntState.getPlayerResponses();
 
         assertTrue((score == 0) && (stateQList.get(0).getSolution()!=stateRList.get(0).getResponseStr()));
-
-
     }
 
 
@@ -82,7 +79,7 @@ public class ScavHuntStateModelTest {
 
     @Test
     public void isGameOverTest() {
-        ArrayList<Response> dummyResponses = new ArrayList<>();
+        List<Response> dummyResponses = new ArrayList<>();
         Response dummyResponse1 = mock(Response.class);
         Response dummyResponse2 = mock(Response.class);
         when(dummyResponse1.getResponseStr()).thenReturn("Response1!");
@@ -98,7 +95,6 @@ public class ScavHuntStateModelTest {
         Boolean testGameOver = testScavHuntState.isGameOver();
 
         assertTrue(testGameOver);
-
     }
 
 
