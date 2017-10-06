@@ -1,61 +1,81 @@
 package com.cmput401f17.eplscavengerhunt.model;
 
-/**
- * Created by ryan on 2017-10-05.
- */
+
+import java.util.ArrayList;
 
 public class ScavHuntState {
     private String branch;
-    private int[] questions;
-    //private Zone[] zoneRoute;
+    private ArrayList<Question> questions;
+    private ArrayList<Zone> zoneRoute;
     private int currentStage;
-    private String[] playerResponses;
+    private ArrayList<Response> playerResponses;
     private int numCorrect;
     private int numQuestions = 0;
 
 
     public ScavHuntState() {
         this.branch = "";
-        this.questions = null;
-        //this.zoneRoute = null;
+        this.questions = new ArrayList<>();
+        this.zoneRoute = new ArrayList<>();
         this.currentStage = 0;
-        this.playerResponses = null;
+        this.playerResponses = new ArrayList<>();
         this.numCorrect = 0;
 
     }
 
-    public ScavHuntState(String branch, int[] questions, /* Zone[] zoneRoute,*/ int currentStage, String[] playerResponses, int numCorrect) {
+    public ScavHuntState(String branch, ArrayList<Question> questions, ArrayList<Zone> zoneRoute, int currentStage, ArrayList<Response> playerResponses, int numCorrect) {
         this.branch = branch;
         this.questions = questions;
-        //this.zoneRoute = zoneRoute;
+        this.zoneRoute = zoneRoute;
         this.currentStage = currentStage;
         this.playerResponses = playerResponses;
         this.numCorrect = numCorrect;
 
     }
 
-    public void generateResults() {
-
-    }
-
-
-    public void incrementNumCorrect() {
+    /**
+     * private method for incrementing numCorrect
+     */
+    private void incrementNumCorrect() {
         this.numCorrect += 1;
     }
 
-    private Boolean checkIfCorrect() {
-        return true;
-
+    /**
+     * Checks response correctness. If correct, mark it correct and increment numCorrect.
+     * @param question
+     * @param response
+     */
+    private void validateResponse(Question question, Response response) {
+        if (question.getSolution() == response.getResponseStr()) {
+            response.markCorrect();
+            incrementNumCorrect();
+        }
     }
 
-    public void updateCurrentStage() {
-
+    /**
+     * Adds response to playerResponse and checks if correct & incrementing score if correct
+     * @param response
+     */
+    public void addResponse(Response response) {
+        // check correctness of response.
+        // by comparing the response with the question of the current stage
+        validateResponse(questions.get(currentStage), response);
+        this.playerResponses.add(response);
     }
 
+    /**
+     * Used by LocationController whenever player arrives in the correct zone
+     */
+    public void incrementCurrentStage() {
+        this.currentStage += 1;
+    }
 
     public Boolean isGameOver() {
-        return playerResponses.length == numQuestions;
+        return playerResponses.size() == numQuestions;
     }
+
+
+    // Getters and Setters
 
 
     public String getBranch() {
@@ -66,14 +86,21 @@ public class ScavHuntState {
         this.branch = branch;
     }
 
-    public int[] getQuestions() {
+    public ArrayList<Question> getQuestions() {
         return questions;
     }
 
-    public void setQuestions(int[] questions) {
+    public void setQuestions(ArrayList<Question> questions) {
         this.questions = questions;
     }
 
+    public ArrayList<Zone> getZoneRoute() {
+        return zoneRoute;
+    }
+
+    public void setZoneRoute(ArrayList<Zone> zoneRoute) {
+        this.zoneRoute = zoneRoute;
+    }
     public int getCurrentStage() {
         return currentStage;
     }
@@ -82,11 +109,11 @@ public class ScavHuntState {
         this.currentStage = currentStage;
     }
 
-    public String[] getPlayerResponses() {
+    public ArrayList<Response> getPlayerResponses() {
         return playerResponses;
     }
 
-    public void setPlayerResponses(String[] playerResponses) {
+    public void setPlayerResponses(ArrayList<Response> playerResponses) {
         this.playerResponses = playerResponses;
     }
 

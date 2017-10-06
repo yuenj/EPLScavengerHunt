@@ -1,48 +1,97 @@
 package com.cmput401f17.eplscavengerhunt;
 
 
+
+import com.cmput401f17.eplscavengerhunt.model.Question;
+import com.cmput401f17.eplscavengerhunt.model.Response;
 import com.cmput401f17.eplscavengerhunt.model.ScavHuntState;
 
+import org.junit.Rule;
 import org.junit.Test;
+import static org.mockito.Mockito.*;
+import org.mockito.junit.MockitoJUnit;
+import org.mockito.junit.MockitoRule;
 
-import static org.junit.Assert.assertEquals;
-import static org.junit.Assert.assertTrue;
+import java.util.ArrayList;
+
+import static org.junit.Assert.*;
+
 
 
 public class ScavHuntStateModelTest {
+    @Rule
+    public MockitoRule mockitoRule = MockitoJUnit.rule();
 
     @Test
-    public void generateResultsTest() {
-
-    }
-
-    @Test
-    public void updateNumCorrectTest() {
+    // Check that when addResponse adds correct answer, correctly
+    // increments player score & response corresponds to question's solution
+    public void addCorrectResponseTest() {
         ScavHuntState testScavHuntState = new ScavHuntState();
-        testScavHuntState.setNumCorrect(0);
+        Question testQuestion = mock(Question.class);
+        Response testResponse = mock(Response.class);
+        when(testQuestion.getSolution()).thenReturn("Dog!");
+        when(testResponse.getResponseStr()).thenReturn("Dog!");
+        ArrayList<Question> testQuestionList = new ArrayList<>();
+        testQuestionList.add(testQuestion);
+        testScavHuntState.setQuestions(testQuestionList);
 
-        testScavHuntState.incrementNumCorrect();
-        int incrementedNumCorrect = testScavHuntState.getNumCorrect();
+        testScavHuntState.addResponse(testResponse);
 
-        assertEquals(1, incrementedNumCorrect);
+        int score = testScavHuntState.getNumCorrect();
+        ArrayList<Question> stateQList = testScavHuntState.getQuestions();
+        ArrayList<Response> stateRList = testScavHuntState.getPlayerResponses();
+
+        assertTrue((score == 1) && (stateQList.get(0).getSolution()==stateRList.get(0).getResponseStr()));
+
+
     }
 
     @Test
-    public void checkIfCorrectTest() {
+    public void addIncorrectResponseTest() {
+        ScavHuntState testScavHuntState = new ScavHuntState();
+        Question testQuestion = mock(Question.class);
+        Response testResponse = mock(Response.class);
+        when(testQuestion.getSolution()).thenReturn("Dog!");
+        when(testResponse.getResponseStr()).thenReturn("Cat!");
+        ArrayList<Question> testQuestionList = new ArrayList<>();
+        testQuestionList.add(testQuestion);
+        testScavHuntState.setQuestions(testQuestionList);
+
+        testScavHuntState.addResponse(testResponse);
+
+        int score = testScavHuntState.getNumCorrect();
+        ArrayList<Question> stateQList = testScavHuntState.getQuestions();
+        ArrayList<Response> stateRList = testScavHuntState.getPlayerResponses();
+
+        assertTrue((score == 0) && (stateQList.get(0).getSolution()!=stateRList.get(0).getResponseStr()));
+
 
     }
 
-    @Test
-    public void updateCurrentStageTest() {
 
+    @Test
+    public void incrementCurrentStageTest() {
+        ScavHuntState testScavHuntState = new ScavHuntState();
+        testScavHuntState.setCurrentStage(0);
+
+        testScavHuntState.incrementCurrentStage();
+        int incrementedCurrentStage = testScavHuntState.getCurrentStage();
+
+        assertEquals(1, incrementedCurrentStage);
     }
 
     @Test
     public void isGameOverTest() {
+        ArrayList<Response> dummyResponses = new ArrayList<>();
+        Response dummyResponse1 = mock(Response.class);
+        Response dummyResponse2 = mock(Response.class);
+        when(dummyResponse1.getResponseStr()).thenReturn("Response1!");
+        when(dummyResponse1.getResponseStr()).thenReturn("Response2!");
+        dummyResponses.add(dummyResponse1);
+        dummyResponses.add(dummyResponse2);
 
-        String[] dummyResponses = {"Response1", "Response2", "Response3", "Response4", "Response5"};
         ScavHuntState testScavHuntState = new ScavHuntState();
-        testScavHuntState.setNumQuestions(5);
+        testScavHuntState.setNumQuestions(2);
         testScavHuntState.setPlayerResponses(dummyResponses);
 
 
@@ -51,5 +100,6 @@ public class ScavHuntStateModelTest {
         assertTrue(testGameOver);
 
     }
+
 
 }
