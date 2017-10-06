@@ -10,11 +10,14 @@ class QuestionController {
     }
 
     private QuestionController() {
+
     }
 
+    /**
     public Question requestnexQuestion() {
-
+        return
     }
+     **/
 
     public void requestSubmitResponse(){
 
