@@ -3,6 +3,10 @@ package com.cmput401f17.eplscavengerhunt.model;
 
 import java.util.ArrayList;
 
+/**
+ * persistent application game state. stores game progress and contains
+ * game logic.
+ */
 public class ScavHuntState {
     private String branch;
     private ArrayList<Question> questions;
@@ -41,7 +45,8 @@ public class ScavHuntState {
     }
 
     /**
-     * Checks response correctness. If correct, mark it correct and increment numCorrect.
+     * private method for checking response correctness.
+     * If correct, mark it correct and increment numCorrect.
      * @param question
      * @param response
      */
@@ -53,7 +58,8 @@ public class ScavHuntState {
     }
 
     /**
-     * Adds response to playerResponse and checks if correct & incrementing score if correct
+     * Checks response correctness and adds
+     * to playerResponses.
      * @param response
      */
     public void addResponse(Response response) {
@@ -70,13 +76,17 @@ public class ScavHuntState {
         this.currentStage += 1;
     }
 
+    /**
+     * When submitted responses equals number of questions, it is game over.
+     * @return Boolean True if gameOver, False if not
+     */
     public Boolean isGameOver() {
         return playerResponses.size() == numQuestions;
     }
 
 
-    // Getters and Setters
 
+    // Getters and Setters
 
     public String getBranch() {
         return branch;
