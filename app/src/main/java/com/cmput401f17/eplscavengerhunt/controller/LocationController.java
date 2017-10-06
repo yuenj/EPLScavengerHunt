@@ -11,10 +11,6 @@ import com.estimote.coresdk.service.BeaconManager;
 
 import java.util.List;
 
-/**
- * Created by Nathan on 2017-10-05.
- */
-
 public class LocationController extends Application {
     private BeaconManager beaconManager;
 
