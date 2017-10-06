@@ -16,6 +16,7 @@ import com.cmput401f17.eplscavengerhunt.R;
 import com.cmput401f17.eplscavengerhunt.ScavengerHuntApplication;
 import com.cmput401f17.eplscavengerhunt.controller.GameController;
 import com.cmput401f17.eplscavengerhunt.controller.LocationController;
+import com.cmput401f17.eplscavengerhunt.model.Zone;
 import com.estimote.coresdk.cloud.model.Device;
 import com.estimote.coresdk.common.config.EstimoteSDK;
 import com.estimote.coresdk.common.requirements.SystemRequirementsChecker;
@@ -43,8 +44,11 @@ public class LocationActivity extends AppCompatActivity {
         super.onCreate(savedInstanceState);
         setContentView(R.layout.activity_location);
 
+        // Not sure how you want to pass the data through an intent
+        Zone zone = (Zone) getIntent().getSerializableExtra("Object-Name");
+
         locationController = new LocationController(getApplicationContext());
-        locationController.VerifyLocation();
+        locationController.VerifyLocation(zone);
     }
 
     /*

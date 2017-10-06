@@ -4,6 +4,7 @@ import android.app.Application;
 import android.content.Context;
 import android.util.Log;
 
+import com.cmput401f17.eplscavengerhunt.model.Zone;
 import com.estimote.coresdk.observation.region.RegionUtils;
 import com.estimote.coresdk.observation.utils.Proximity;
 import com.estimote.coresdk.recognition.packets.EstimoteLocation;
@@ -13,6 +14,7 @@ import java.util.List;
 
 public class LocationController extends Application {
     private BeaconManager beaconManager;
+    public boolean result;
 
     public LocationController(Context context) {
         beaconManager = new BeaconManager(context);
@@ -26,28 +28,30 @@ public class LocationController extends Application {
         });
     }
 
-    // TODO: Change arguments to a Zone
-    public int VerifyLocation(String beacon) {
+    public boolean VerifyLocation(final Zone zone) {
+        result = false;
         beaconManager.setLocationListener(new BeaconManager.LocationListener() {
             @Override
             public void onLocationsFound(List<EstimoteLocation> beacons) {
                 Log.d("LocationListener", "Nearby beacons: " + beacons);
 
-                // TODO: Read string id's from database according to zone
-                // Square brackets because beacon.id.toString() parses with square brackets
-                String CandyStore = "[ab1d6643c33e5f6ed7c52a062168f137]";
-                String DJBeet = "[4f8113396f78d23ec78edfb96c79e23a]";       // Beacon names
-                String Lemonade = "[9a78af8c1252fcb37abefecbbbe7322a]";
-
                 for (EstimoteLocation beacon : beacons) {
-                    if (beacon.id.toString().equals(beacon) &&
-                            (RegionUtils.computeProximity(beacon) == Proximity.IMMEDIATE ||
-                            RegionUtils.computeProximity(beacon) == Proximity.NEAR)) {
-                                Log.d("LocationListener", "Found Beacon");
+                    if (beacon.id.toString().equals(zone.getBeaconID()) &&
+                            RegionUtils.computeProximity(beacon) == Proximity.IMMEDIATE &&
+                            RegionUtils.computeProximity(beacon) == Proximity.IMMEDIATE) {
+                        Log.d("LocationListener", "Found Beacon");
+                        beaconManager.stopLocationDiscovery();
+                        result = true;
+                        break;
                     }
                 }
             }
         });
-        return 0;
+        if (result) {
+            return true;
+        } else { // This shouldn't fire
+            Log.d("LocationListener", "returned false??");
+            return false;
+        }
     }
 }
