@@ -1,11 +1,21 @@
 package com.cmput401f17.eplscavengerhunt.controller;
 
+import com.cmput401f17.eplscavengerhunt.ScavengerHuntApplication;
 import com.cmput401f17.eplscavengerhunt.model.Results;
+import com.cmput401f17.eplscavengerhunt.model.ScavHuntState;
+import com.cmput401f17.eplscavengerhunt.ScavengerHuntApplication;
+import android.app.Application;
+
+
+import javax.inject.Inject;
 
 public class GameController {
+    @Inject
+    ScavHuntState scavHuntState;
+
 
     public GameController() {
-
+        ScavengerHuntApplication.getInstance().getAppComponent().inject(this);
     }
 
     public Boolean initGame() {
@@ -17,7 +27,7 @@ public class GameController {
     }
 
     public Boolean requestCheckGameOver() {
-        return null;
+        return scavHuntState.isGameOver();
     }
 
     /**
