@@ -36,12 +36,12 @@ public class DatabaseController {
     }
 
     /**
-     * Retreives random question from database's question pool
-     * corresponding to zone
-     * @param zone
-     * @return
+     * Retreives a randomly selected question from database for each zone in zoneRoute.
+     * @param zoneRoute
+     * @return list of Questions, with each question related to a zone in
+     * zoneRoute by index.
      */
-    public Question retreiveRandomQuestion(Zone zone) {
+    public List<Question> retreiveRandomQuestions(List<Zone> zoneRoute) {
         return null;
     }
 
