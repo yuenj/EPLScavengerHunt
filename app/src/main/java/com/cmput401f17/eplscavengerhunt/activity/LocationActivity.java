@@ -21,14 +21,6 @@ public class LocationActivity extends AppCompatActivity {
     @Override
     protected void onStart() {
         super.onStart();
-
-        // Not sure how data is passed
-        // TODO: Update in accordance with intent passing
-        // Zone zone = (Zone) getIntent().getSerializableExtra("Object-Name");
-
-        // DJbeet Beacon identifier for testing
-        // Zone zone = new Zone("[4f8113396f78d23ec78edfb96c79e23a]");
-
         LocationController locationController = new LocationController(getApplicationContext());
 
         // If the location is verified go to Question activity

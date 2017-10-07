@@ -42,7 +42,7 @@ public class LocationController extends Application {
     /**
      * https://stackoverflow.com/questions/42128909/return-value-from-valueeventlistener-java 06/10/2017
      * Hacky method to get a return value
-     * Sets a listener for proximity to see if the user has entered
+     * Sets a listener for proximity to see if the user has enteredw
      * the zone of the current beacon
      * @param finishedCallback
      */
@@ -51,7 +51,6 @@ public class LocationController extends Application {
             @Override
             public void onLocationsFound(List<EstimoteLocation> beacons) {
                 Log.d("LocationListener", "Nearby beacons: " + beacons);
-
                 for (EstimoteLocation beacon : beacons) {
                     if (beacon.id.toString().equals(requestNextZone().getBeaconID()) &&
                             RegionUtils.computeProximity(beacon) == Proximity.NEAR ||
@@ -73,5 +72,16 @@ public class LocationController extends Application {
         scavHuntState.incrementCurrentStage();
         int currentStage = scavHuntState.getCurrentStage();
         return scavHuntState.getZoneRoute().get(currentStage);
+    }
+
+    /**
+     * If the user completes the game
+     * Return the location to get the prize
+     * Change this if we store prize location in the database or
+     * if we get the location some other way
+     * @return
+     */
+    public String requestPrizeLocation() {
+        return "Customer Service Desk";
     }
 }
