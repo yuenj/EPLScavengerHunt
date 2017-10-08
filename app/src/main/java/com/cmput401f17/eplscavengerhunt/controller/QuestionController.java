@@ -9,15 +9,16 @@ class QuestionController {
         return ourInstance;
     }
 
-    private QuestionController() {
+    private QuestionController() {}
+
+    public void requestQuestion() {
+
+        //TODO Determine view
+        //getCurrentStage();
+        //getQuestion(state);
+
 
     }
-
-    /**
-    public Question requestnexQuestion() {
-        return
-    }
-     **/
 
     public void requestSubmitResponse(){
 

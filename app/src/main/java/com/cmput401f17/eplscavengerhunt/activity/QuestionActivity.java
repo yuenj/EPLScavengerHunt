@@ -17,17 +17,16 @@ public class QuestionActivity extends AppCompatActivity {
     @Override
     protected void onCreate(Bundle savedInstanceState) {
         super.onCreate(savedInstanceState);
-        setContentView(R.layout.activity_question);
+        setContentView(R.layout.activity_mult_choice);
 
-        int numMCAnswers = 2;
-        ArrayList<String> choices = new ArrayList<String>();
+        QuestionController.requestQuestion()
 
         /* Get the MC choices */
         choices.add("text");
         choices.add("Ryan");
 
         /* Create choice button(s) */
-        for(int i = 0; i < numMCAnswers; i++) {
+        for(int i = 0; i < choices.size(); i++) {
             Button mcOption = new Button(this);
             mcOption.setText(choices.get(i));
 
