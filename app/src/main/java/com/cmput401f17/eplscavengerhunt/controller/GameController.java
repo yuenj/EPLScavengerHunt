@@ -54,4 +54,8 @@ public class GameController {
     private void generateQuestionSet() {
 
     }
+
+    private void generateResults() {
+
+    }
 }
