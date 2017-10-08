@@ -87,7 +87,7 @@ public class ScavHuntStateModelTest {
         dummyResponses.add(dummyResponse2);
 
         ScavHuntState testScavHuntState = new ScavHuntState();
-        testScavHuntState.setNumQuestions(2);
+        testScavHuntState.setNumStages(2);
         testScavHuntState.setPlayerResponses(dummyResponses);
 
 
@@ -105,7 +105,7 @@ public class ScavHuntStateModelTest {
         dummyQuestions.add(mockQuestion2);
         ScavHuntState testScavHuntState = new ScavHuntState();
         testScavHuntState.setQuestions(dummyQuestions);
-        testScavHuntState.setNumQuestions(2);
+        testScavHuntState.setNumStages(2);
         testScavHuntState.setCurrentStage(1);
 
         Question returnedQuestion = testScavHuntState.getCurrentQuestion();

@@ -50,6 +50,9 @@ public class GameControllerTest {
     @Captor
     private ArgumentCaptor<Response> ResponseCaptor;
 
+    @Captor
+    private ArgumentCaptor<Integer> IntegerCaptor;
+
     Zone zone1 = mock(Zone.class);
     Zone zone2 = mock(Zone.class);
     Zone zone3 = mock(Zone.class);
@@ -71,15 +74,19 @@ public class GameControllerTest {
 
     @Test
     /**
+     * retreiveRandomQuestions and generateZoneRoute are private methods
+     * so cannot be tested
+     * ** ZONE GENERATION related tests already pass **
+     * TODO: Implement generateQuestionSet method to pass this test
      * Verify that:
      * - getBranch() called on ScavHuntState
      * - retreiveZones and retreiveRandomQuestions called on
      *   DatabaseController
-     * - setQuestions and setZoneRoute have been called
+     * - setQuestions, setZoneRoute, setNumStages have been called
      * exactly once each on ScavHuntState
      *
      * Capture:
-     * - zoneRoute and questionSet sent to mock scavHuntState.
+     * - zoneRoute and questionSet and numStages sent to mock scavHuntState.
      */
     public void initGameTest() {
         List<Zone> zoneRoute = new ArrayList<>();
@@ -97,13 +104,16 @@ public class GameControllerTest {
         verify(mockDatabaseController).retreiveZones("Clareview");
         verify(mockDatabaseController).retreiveRandomQuestions(zoneRoute);
         verify(mockScavHuntState, times(1)).setQuestions(QuestionSetCaptor.capture());
+        verify(mockScavHuntState, times(1)).setNumStages(IntegerCaptor.capture());
         verify(mockScavHuntState, times(1)).setZoneRoute(ZoneCaptor.capture());
 
         List<Question> questionsSetSentToScavHuntState = QuestionSetCaptor.getValue();
         List<Zone> zoneRouteSentToScavHuntState = ZoneCaptor.getValue();
+        Integer numStagesSentToScavHuntState = IntegerCaptor.getValue();
 
         assertEquals(zoneRoute, zoneRouteSentToScavHuntState);
         assertEquals(questionSet,questionsSetSentToScavHuntState);
+        assertEquals(numStagesSentToScavHuntState,(Integer) 5);
     }
 
     @Test
@@ -112,16 +122,16 @@ public class GameControllerTest {
         Collections.addAll(responses,
                 response1, response2, response3, response4, response5);
         int score = 5;
-        int numQuestions = 5;
+        int numStages = 5;
         when(mockScavHuntState.getPlayerResponses()).thenReturn(responses);
         when(mockScavHuntState.getNumCorrect()).thenReturn(score);
-        when(mockScavHuntState.getNumQuestions()).thenReturn(numQuestions);
+        when(mockScavHuntState.getNumStages()).thenReturn(numStages);
 
         Results resultsToBeSent = gameController.requestResults();
 
         assertEquals(resultsToBeSent.getResponses(), responses);
         assertEquals(resultsToBeSent.getScore(), score);
-        assertEquals(resultsToBeSent.getNumQuestions(), numQuestions);
+        assertEquals(resultsToBeSent.getNumQuestions(), numStages);
     }
 
     @Test
