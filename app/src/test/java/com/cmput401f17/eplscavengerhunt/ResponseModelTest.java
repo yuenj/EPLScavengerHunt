@@ -4,9 +4,8 @@ import com.cmput401f17.eplscavengerhunt.model.Response;
 
 import org.junit.Test;
 
-import static junit.framework.Assert.assertEquals;
-import static junit.framework.Assert.assertFalse;
-import static org.junit.Assert.assertTrue;
+import static org.junit.Assert.*;
+
 
 /**
  * Created by ryan on 2017-10-03.

@@ -4,6 +4,7 @@ import android.content.Context;
 
 import com.cmput401f17.eplscavengerhunt.ScavengerHuntApplication;
 import com.cmput401f17.eplscavengerhunt.controller.GameController;
+import com.cmput401f17.eplscavengerhunt.model.ScavHuntState;
 
 import javax.inject.Singleton;
 
@@ -29,5 +30,12 @@ public class AppModule {
     @Singleton
     public GameController provideGameController() {
         return new GameController();
+    }
+
+
+    @Provides
+    @Singleton
+    public ScavHuntState provideScavHuntState() {
+        return new ScavHuntState();
     }
 }

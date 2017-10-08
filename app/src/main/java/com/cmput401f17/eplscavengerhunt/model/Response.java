@@ -30,7 +30,6 @@ public class Response {
 
     public void markCorrect() {
         this.correct = true;
-
     }
 
     public void markIncorrect() {
