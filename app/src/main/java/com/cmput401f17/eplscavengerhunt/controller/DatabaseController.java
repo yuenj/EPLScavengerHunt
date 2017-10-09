@@ -25,23 +25,24 @@ public class DatabaseController {
     }
 
     /**
-     * Retreives all Zones that are in the inputted library branch name.
+     * Retrieves all Zones that are in the inputted library branch name.
      * NOTE: returned list's order is to be randomized in GameController
      * @see GameController
      * @param branch : the branch name the player is in
      * @return list of all zones in the branch
      */
-    public List<Zone> retreiveZones(String branch){
+    public List<Zone> retrieveZones(String branch){
         return null;
     }
 
     /**
-     * Retreives a randomly selected question from database for each zone in zoneRoute.
-     * @param zoneRoute
-     * @return list of Questions, with each question related to a zone in
-     * zoneRoute by index.
+     * Retrieves all questions relating to inputted zone.
+     * Randomized selection handled by GameController
+     * @see GameController
+     * @param zone
+     * @return list of Questions relating to the zone
      */
-    public List<Question> retreiveRandomQuestions(List<Zone> zoneRoute) {
+    public List<Question> retrieveQuestionsinZone (Zone zone) {
         return null;
     }
 
