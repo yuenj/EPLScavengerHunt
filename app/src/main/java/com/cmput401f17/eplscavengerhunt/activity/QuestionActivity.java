@@ -1,12 +1,15 @@
 package com.cmput401f17.eplscavengerhunt.activity;
 
+import android.content.Context;
 import android.graphics.Color;
 import android.os.Bundle;
+import android.support.design.widget.TextInputLayout;
 import android.support.v7.app.AppCompatActivity;
 import android.support.v7.widget.LinearLayoutCompat;
 import android.view.KeyEvent;
 import android.view.View;
 import android.view.inputmethod.EditorInfo;
+import android.view.inputmethod.InputMethodManager;
 import android.widget.Button;
 import android.widget.EditText;
 import android.widget.TextView;
@@ -88,18 +91,36 @@ public class QuestionActivity extends AppCompatActivity {
     }
 
     /**
-     *  Makes a toast to inform user answer has been received.
-     *  Gets the user input nad changes to string.
-     *  Pass the answer to the controller for further use.
+     *  Ensure that an answer is entered (>0 characters)
+     *
+     *  If answer is entered:
+     *      1.Makes a toast to inform user answer has been received.
+     *      2.Gets the user input nad changes to string.
+     *      3.Hide the on-screen/ soft keyboard
+     *      4.Pass the answer to the controller for further use.
+     *
+     *  Modified code originally from https://code.tutsplus.com/tutorials/creating-a-login-screen-using-textinputlayout--cms-24168
      *
      *  @param view, editText
      */
-    private void writtenAnswerSubmitted(View view, EditText editText) {
-        Toast.makeText(view.getContext(), "Answer Submitted!", Toast.LENGTH_SHORT).show();
+    private void writtenAnswerChecker(View view, EditText editText) {
+        TextInputLayout userAnswerLayout = (TextInputLayout) findViewById(R.id.userAnswerWrapper);
 
-        //TODO add basic error checker
+        if(editText.getText().length() == 0){
+            userAnswerLayout.setError("Answer is too short.");
+        } else {
+            userAnswerLayout.setErrorEnabled(false);
 
-        qController.requestSubmitResponse(editText.getText().toString());
+            Toast.makeText(view.getContext(), "Answer Submitted!", Toast.LENGTH_SHORT).show();
+
+            /* Hides the on-screen (soft) keyboard */
+            if (view != null) {
+                ((InputMethodManager) getSystemService(Context.INPUT_METHOD_SERVICE)).
+                        hideSoftInputFromWindow(view.getWindowToken(), InputMethodManager.HIDE_NOT_ALWAYS);
+            }
+
+            qController.requestSubmitResponse(editText.getText().toString());
+        }
     }
 
     /**
@@ -123,7 +144,7 @@ public class QuestionActivity extends AppCompatActivity {
 
                 /* Answer sent through keyboard send button */
                 if (actionId == EditorInfo.IME_ACTION_SEND) {
-                    writtenAnswerSubmitted(v, editText);
+                    writtenAnswerChecker(v, editText);
                     handled = true;
                 }
 
@@ -135,7 +156,7 @@ public class QuestionActivity extends AppCompatActivity {
         Button submit = (Button) findViewById(R.id.submit);
         submit.setOnClickListener(new View.OnClickListener() {
             public void onClick(View view) {
-                writtenAnswerSubmitted(view, editText);
+                writtenAnswerChecker(view, editText);
             }
         });
     }
