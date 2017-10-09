@@ -5,8 +5,11 @@ import android.graphics.Color;
 import android.os.Bundle;
 import android.support.v7.app.AppCompatActivity;
 import android.support.v7.widget.LinearLayoutCompat;
+import android.view.KeyEvent;
 import android.view.View;
+import android.view.inputmethod.EditorInfo;
 import android.widget.Button;
+import android.widget.EditText;
 import android.widget.TextView;
 import android.widget.Toast;
 
@@ -35,6 +38,7 @@ public class QuestionActivity extends AppCompatActivity {
         TextView zone = (TextView)findViewById(R.id.zone);
         zone.setText("Zone: " + qController.requestZone());
         zone.setTextColor(Color.RED);
+        zone.setTextSize(20);
     }
 
     /**
@@ -52,7 +56,7 @@ public class QuestionActivity extends AppCompatActivity {
         displayPrompt();
 
         /* Get the MC choices */
-         ArrayList<String> choices = new ArrayList<String>();
+         final ArrayList<String> choices = new ArrayList<String>();
          choices.add("Hello");
          choices.add("World");
          choices.add("!");
@@ -72,10 +76,25 @@ public class QuestionActivity extends AppCompatActivity {
                  public void onClick(View view) {
                      Toast.makeText(view.getContext(), "Button clicked index = " + id, Toast.LENGTH_SHORT).show();
 
-                     //TODO: Pass response to Question Controller
+                     //Pass the answer to the controller
+                     qController.requestSubmitResponse(choices.get(id));
                  }
              });
          }
+    }
+
+    /**
+     *  Makes a toast to inform user answer has been received.
+     *  Gets the user input nad changes to string.
+     *  Pass the answer to the controller for further use.
+     *
+     *  @param view, editText
+     */
+    private void writtenAnswerSubmitted(View view, EditText editText) {
+        Toast.makeText(view.getContext(), "Answer Submitted!", Toast.LENGTH_SHORT).show();
+
+
+        qController.requestSubmitResponse(editText.getText().toString());
     }
 
     private void displayWrittenInput(){
@@ -83,6 +102,32 @@ public class QuestionActivity extends AppCompatActivity {
 
         displayZone();
         displayPrompt();
+
+        /* Modified code whose original is from https://developer.android.com/training/keyboard-input/style.html */
+        /* User's keyboard has a send button, which when pressed will submit the answer the user typed in */
+        final EditText editText = (EditText) findViewById(R.id.userAnswer);
+        editText.setOnEditorActionListener(new TextView.OnEditorActionListener() {
+            @Override
+            public boolean onEditorAction(TextView v, int actionId, KeyEvent event) {
+                boolean handled = false;
+
+                /* Answer sent through keyboard send button */
+                if (actionId == EditorInfo.IME_ACTION_SEND) {
+                    writtenAnswerSubmitted(v, editText);
+                    handled = true;
+                }
+
+                return handled;
+            }
+        });
+
+        /* Listens for when button is pressed. When it is pressed, answer is submitted */
+        Button submit = (Button) findViewById(R.id.submit);
+        submit.setOnClickListener(new View.OnClickListener() {
+            public void onClick(View view) {
+                writtenAnswerSubmitted(view, editText);
+            }
+        });
     }
 
     private void displayPicInput(){
@@ -98,8 +143,8 @@ public class QuestionActivity extends AppCompatActivity {
 
         currentQuestion = qController.requestQuestion();
 
-        displayMultChoice();
-        //displayWrittenInput();
+        //displayMultChoice();
+        displayWrittenInput();
         //displayPicInput();
 
     }

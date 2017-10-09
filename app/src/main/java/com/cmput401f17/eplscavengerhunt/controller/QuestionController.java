@@ -1,6 +1,7 @@
 package com.cmput401f17.eplscavengerhunt.controller;
 
 import com.cmput401f17.eplscavengerhunt.model.Question;
+import com.cmput401f17.eplscavengerhunt.model.Response;
 import com.cmput401f17.eplscavengerhunt.model.ScavHuntState;
 import com.cmput401f17.eplscavengerhunt.model.Zone;
 
@@ -12,7 +13,7 @@ public class QuestionController {
     private ScavHuntState huntState;
 
     public QuestionController() {
-            huntState = new ScavHuntState();
+        huntState = new ScavHuntState();
     }
 
     /**
@@ -38,11 +39,14 @@ public class QuestionController {
     }
 
     /**
-     *  Passes the user answer
+     *  Passes/ updates the user answer
      *  @pre User has input an answer
+     *  @param answer
      */
-    public void requestSubmitResponse(){
-        //huntState.addResponse();
+    public void requestSubmitResponse(String answer){
+        Response response = new Response(answer);
+        System.out.println(response.getResponseStr());
+        //huntState.addResponse(response);
     }
 
     public void skip(Question question){
