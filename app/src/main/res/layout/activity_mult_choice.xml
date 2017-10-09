@@ -3,11 +3,18 @@
 <android.support.v7.widget.LinearLayoutCompat xmlns:android="http://schemas.android.com/apk/res/android"
     xmlns:app="http://schemas.android.com/apk/res-auto"
     xmlns:tools="http://schemas.android.com/tools"
-    android:id="@+id/question_layout"
+    android:id="@+id/mult_question_layout"
     android:layout_width="match_parent"
     android:layout_height="match_parent"
     android:orientation="vertical"
     tools:context="com.cmput401f17.eplscavengerhunt.activity.DebugActivity">
+
+    <TextView
+        android:id="@+id/zone"
+        android:layout_width="wrap_content"
+        android:layout_height="wrap_content"
+        android:text="@string/question_temp_text"
+        android:textSize="30sp"/>
 
     <TextView
         android:id="@+id/question_prompt"
