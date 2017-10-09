@@ -1,6 +1,5 @@
 package com.cmput401f17.eplscavengerhunt.activity;
 
-/* Imports  */
 import android.graphics.Color;
 import android.os.Bundle;
 import android.support.v7.app.AppCompatActivity;
@@ -14,7 +13,6 @@ import android.widget.TextView;
 import android.widget.Toast;
 
 import com.cmput401f17.eplscavengerhunt.R;
-import com.cmput401f17.eplscavengerhunt.model.MultChoiceQuestion;
 import com.cmput401f17.eplscavengerhunt.model.Question;
 import com.cmput401f17.eplscavengerhunt.controller.QuestionController;
 
@@ -49,6 +47,12 @@ public class QuestionActivity extends AppCompatActivity {
         prompt.setText("Task: " + currentQuestion.getQuestionPrompt());
     }
 
+    /**
+     * Displays the view for a mulitple choice question
+     *  1. Display Zone, and Prompt
+     *  2. Add buttons according to the number of choices in the question
+     *  3. Listen for user to press button. When pressed pass on answer to controller.
+     */
     private void displayMultChoice(){
         setContentView(R.layout.activity_mult_choice);
 
@@ -93,10 +97,16 @@ public class QuestionActivity extends AppCompatActivity {
     private void writtenAnswerSubmitted(View view, EditText editText) {
         Toast.makeText(view.getContext(), "Answer Submitted!", Toast.LENGTH_SHORT).show();
 
+        //TODO add basic error checker
 
         qController.requestSubmitResponse(editText.getText().toString());
     }
 
+    /**
+     * Displays view for a written input question
+     *  1. Display zone and prompt text
+     *  2. Listen for user input, through the on-screen keyboard send, or by pressing the button
+     */
     private void displayWrittenInput(){
         setContentView(R.layout.activity_written_input);
 
@@ -130,13 +140,26 @@ public class QuestionActivity extends AppCompatActivity {
         });
     }
 
+    /**
+     * Displays view for a picture input question
+     *  1. Display zone and prompt text
+     *  2.
+     */
     private void displayPicInput(){
         setContentView(R.layout.activity_pic_input);
 
         displayZone();
         displayPrompt();
+
+        //TODO
     }
 
+    /**
+     * Choose which view to display
+     * Gets the current question and all info to display the question on user interface
+     *
+     * @param savedInstanceState
+     */
     @Override
     protected void onCreate(Bundle savedInstanceState) {
         super.onCreate(savedInstanceState);
