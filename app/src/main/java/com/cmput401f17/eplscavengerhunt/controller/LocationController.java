@@ -1,6 +1,5 @@
 package com.cmput401f17.eplscavengerhunt.controller;
 
-import android.app.Application;
 import android.content.Context;
 import android.support.annotation.NonNull;
 import android.util.Log;
@@ -16,7 +15,7 @@ import java.util.List;
 
 import javax.inject.Inject;
 
-public class LocationController extends Application {
+public class LocationController {
 
     @Inject
     ScavHuntState scavHuntState;
