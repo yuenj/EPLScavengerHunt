@@ -2,14 +2,14 @@
 
 <RelativeLayout xmlns:android="http://schemas.android.com/apk/res/android"
     android:id="@+id/results_background"
-    android:layout_width="fill_parent"
+    android:layout_width="match_parent"
     android:layout_height="wrap_content"
     android:orientation="horizontal"
     android:padding="5dip">
 
     <!-- Thumbnail image -->
     <LinearLayout
-        android:id="@+id/results_thumbnail"
+        android:id="@+id/results_thumbnail_ll"
         android:layout_width="wrap_content"
         android:layout_height="wrap_content"
         android:layout_alignParentLeft="true"
@@ -17,7 +17,7 @@
         android:padding="3dip">
 
         <ImageView
-            android:id="@+id/list_image"
+            android:id="@+id/results_thumbnail"
             android:layout_width="50dip"
             android:layout_height="50dip" />
 
@@ -26,10 +26,10 @@
     <!-- Question prompt -->
     <TextView
         android:id="@+id/results_prompt"
-        android:layout_width="wrap_content"
+        android:layout_width="match_parent"
         android:layout_height="wrap_content"
-        android:layout_alignTop="@+id/results_thumbnail"
-        android:layout_toRightOf="@+id/results_thumbnail"
+        android:layout_alignTop="@+id/results_thumbnail_ll"
+        android:layout_toRightOf="@+id/results_thumbnail_ll"
         android:text="Which flower is this?"
         android:textColor="#d70d2b"
         android:textSize="20dip"
@@ -43,7 +43,7 @@
         android:layout_height="wrap_content"
         android:layout_below="@id/results_prompt"
         android:layout_marginTop="1dip"
-        android:layout_toRightOf="@+id/results_thumbnail"
+        android:layout_toRightOf="@+id/results_thumbnail_ll"
         android:text="Lily"
         android:textColor="#09b900"
         android:textSize="15dip"
@@ -56,7 +56,7 @@
         android:layout_height="wrap_content"
         android:layout_below="@id/results_response"
         android:layout_marginTop="1dip"
-        android:layout_toRightOf="@+id/results_thumbnail"
+        android:layout_toRightOf="@+id/results_thumbnail_ll"
         android:text="Poppy"
         android:textColor="#09b900"
         android:textSize="15dip"
