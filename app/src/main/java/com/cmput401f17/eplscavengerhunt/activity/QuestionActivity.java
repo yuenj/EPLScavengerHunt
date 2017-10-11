@@ -1,11 +1,13 @@
 package com.cmput401f17.eplscavengerhunt.activity;
 
 import android.content.Context;
+import android.content.Intent;
 import android.graphics.Color;
 import android.os.Bundle;
 import android.support.design.widget.TextInputLayout;
 import android.support.v7.app.AppCompatActivity;
 import android.support.v7.widget.LinearLayoutCompat;
+import android.util.Log;
 import android.view.KeyEvent;
 import android.view.View;
 import android.view.inputmethod.EditorInfo;
@@ -38,8 +40,6 @@ public class QuestionActivity extends AppCompatActivity {
     private void displayZone() {
         TextView zone = (TextView)findViewById(R.id.zone);
         zone.setText("Zone: " + qController.requestZone());
-        zone.setTextColor(Color.RED);
-        zone.setTextSize(20);
     }
 
     /**
@@ -63,6 +63,7 @@ public class QuestionActivity extends AppCompatActivity {
         displayPrompt();
 
         /* Get the MC choices */
+        //TODO grab from supplied question
          final ArrayList<String> choices = new ArrayList<String>();
          choices.add("Hello");
          choices.add("World");
@@ -74,7 +75,7 @@ public class QuestionActivity extends AppCompatActivity {
              mcOption.setText(choices.get(i));
 
              LinearLayoutCompat layout = (LinearLayoutCompat) findViewById(R.id.mult_question_layout);
-             LinearLayoutCompat.LayoutParams parameters = new LinearLayoutCompat.LayoutParams(LinearLayoutCompat.LayoutParams.MATCH_PARENT, LinearLayoutCompat.LayoutParams.WRAP_CONTENT);
+             LinearLayoutCompat.LayoutParams parameters = new LinearLayoutCompat.LayoutParams(LinearLayoutCompat.LayoutParams.MATCH_PARENT, LinearLayoutCompat.LayoutParams.WRAP_CONTENT,0f);
              layout.addView(mcOption, parameters);
 
             /* Listen for button click. If clicked, make a toast telling which button was clicked */
@@ -187,9 +188,18 @@ public class QuestionActivity extends AppCompatActivity {
 
         currentQuestion = qController.requestQuestion();
 
-        //displayMultChoice();
-        displayWrittenInput();
+        displayMultChoice();
+        //displayWrittenInput();
         //displayPicInput();
+
+        Button skipButton = (Button) findViewById(R.id.skip);
+
+        skipButton.setOnClickListener(new View.OnClickListener() {
+            public void onClick(View v) {
+                Toast.makeText(v.getContext(), "Question skipped", Toast.LENGTH_SHORT).show();
+                //qController.skip();
+            }
+        });
 
     }
 }

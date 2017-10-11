@@ -14,7 +14,8 @@
         android:layout_width="wrap_content"
         android:layout_height="wrap_content"
         android:text="@string/question_temp_text"
-        android:textSize="30sp"/>
+        android:textSize="20sp"
+        android:textColor="#33b5e5"/>
 
     <TextView
         android:id="@+id/question_prompt"
@@ -22,6 +23,19 @@
         android:layout_height="wrap_content"
         android:text="@string/question_temp_text"
         android:textSize="30sp"/>
+
+    <LinearLayout
+        android:layout_width="match_parent"
+        android:layout_height="0dip"
+        android:layout_weight="1"
+        android:gravity="center|bottom"
+        android:orientation="vertical">
+        <Button
+            android:id="@+id/skip"
+            android:layout_width="wrap_content"
+            android:layout_height="wrap_content"
+            android:text="Skip"/>
+    </LinearLayout>
 
 </android.support.v7.widget.LinearLayoutCompat>
 
