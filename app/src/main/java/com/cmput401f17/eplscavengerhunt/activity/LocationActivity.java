@@ -6,23 +6,27 @@ import android.support.v7.app.AppCompatActivity;
 import android.util.Log;
 
 import com.cmput401f17.eplscavengerhunt.R;
+import com.cmput401f17.eplscavengerhunt.ScavengerHuntApplication;
 import com.cmput401f17.eplscavengerhunt.controller.LocationController;
 import com.cmput401f17.eplscavengerhunt.controller.SimpleCallback;
 import com.cmput401f17.eplscavengerhunt.model.Zone;
 
+import javax.inject.Inject;
+
 public class LocationActivity extends AppCompatActivity {
+    @Inject
+    LocationController locationController;
 
     @Override
     protected void onCreate(Bundle savedInstanceState) {
         super.onCreate(savedInstanceState);
+        ScavengerHuntApplication.getInstance().getAppComponent().inject(this);
         setContentView(R.layout.activity_location);
     }
 
     @Override
     protected void onStart() {
         super.onStart();
-        LocationController locationController = new LocationController(getApplicationContext());
-
         // If the location is verified go to Question activity
         locationController.verifyLocation(new SimpleCallback<Boolean>() {
             @Override

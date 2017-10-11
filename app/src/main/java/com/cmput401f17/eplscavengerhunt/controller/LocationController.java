@@ -4,6 +4,7 @@ import android.content.Context;
 import android.support.annotation.NonNull;
 import android.util.Log;
 
+import com.cmput401f17.eplscavengerhunt.ScavengerHuntApplication;
 import com.cmput401f17.eplscavengerhunt.model.ScavHuntState;
 import com.cmput401f17.eplscavengerhunt.model.Zone;
 import com.estimote.coresdk.observation.region.RegionUtils;
@@ -23,11 +24,14 @@ public class LocationController {
     private BeaconManager beaconManager;
 
     /**
-     * Instantiates the beacon mangaer to use beacon technologies
-     * @param context
+     * Instantiates the beacon manager to use beacon technologies
      */
-    public LocationController(Context context) {
-        beaconManager = new BeaconManager(context);
+    public LocationController() {
+        // inject scavHuntState singleton into LocationController
+        ScavengerHuntApplication.getInstance().getAppComponent().inject(this);
+
+        Context appContext = ScavengerHuntApplication.getInstance();
+        beaconManager = new BeaconManager(appContext);
 
         // Connect to scanning service
         beaconManager.connect(new BeaconManager.ServiceReadyCallback() {

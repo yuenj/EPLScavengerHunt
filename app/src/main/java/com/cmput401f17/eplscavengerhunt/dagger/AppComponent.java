@@ -6,6 +6,7 @@ import com.cmput401f17.eplscavengerhunt.activity.LocationActivity;
 import com.cmput401f17.eplscavengerhunt.activity.QuestionActivity;
 import com.cmput401f17.eplscavengerhunt.activity.ResultsActivity;
 import com.cmput401f17.eplscavengerhunt.activity.TitleActivity;
+import com.cmput401f17.eplscavengerhunt.controller.LocationController;
 
 import javax.inject.Singleton;
 
@@ -20,4 +21,5 @@ public interface AppComponent {
     void inject(QuestionActivity questionActivity);
     void inject(ResultsActivity resultsActivity);
     void inject(TitleActivity titleActivity);
+    void inject(LocationController locationController);
 }
