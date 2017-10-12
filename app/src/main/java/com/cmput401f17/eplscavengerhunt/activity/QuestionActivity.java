@@ -12,6 +12,9 @@ import android.view.inputmethod.EditorInfo;
 import android.view.inputmethod.InputMethodManager;
 import android.widget.Button;
 import android.widget.EditText;
+import android.widget.LinearLayout;
+import android.widget.RadioButton;
+import android.widget.RadioGroup;
 import android.widget.TextView;
 import android.widget.Toast;
 
@@ -173,6 +176,34 @@ public class QuestionActivity extends AppCompatActivity {
         displayPrompt();
 
         //TODO
+
+        //Link button to camera
+
+        //Display photo once taken
+
+        /* Display the choices */
+        final ArrayList<String> choices = new ArrayList<String>();
+        choices.add("Hello");
+        choices.add("World");
+        choices.add("!");
+
+        /* Create group for radio buttons */
+        RadioGroup rg = new RadioGroup(this);
+        rg.setOrientation(LinearLayout.VERTICAL);
+
+        /* Create choice radio button(s) */
+        for(int i = 0; i < choices.size(); i++) {
+            RadioButton radio = new RadioButton(this);
+            radio.setId(i);
+            radio.setText(choices.get(i));
+
+            rg.addView(radio);
+        }
+
+        /* Add the radio button group to the view */
+        LinearLayoutCompat layout = (LinearLayoutCompat) findViewById(R.id.pic_input_layout);
+        LinearLayoutCompat.LayoutParams parameters = new LinearLayoutCompat.LayoutParams(LinearLayoutCompat.LayoutParams.MATCH_PARENT, LinearLayoutCompat.LayoutParams.WRAP_CONTENT);
+        layout.addView(rg, parameters);
     }
 
     /**
@@ -187,9 +218,10 @@ public class QuestionActivity extends AppCompatActivity {
 
         currentQuestion = qController.requestQuestion();
 
+        //TODO Conditional for choosing the view
         //displayMultChoice();
-        displayWrittenInput();
-        //displayPicInput();
+        //displayWrittenInput();
+        displayPicInput();
 
     }
 }

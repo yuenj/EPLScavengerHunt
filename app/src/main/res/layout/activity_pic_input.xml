@@ -3,6 +3,7 @@
 <android.support.v7.widget.LinearLayoutCompat xmlns:android="http://schemas.android.com/apk/res/android"
     xmlns:app="http://schemas.android.com/apk/res-auto"
     xmlns:tools="http://schemas.android.com/tools"
+    android:id="@+id/pic_input_layout"
     android:layout_width="match_parent"
     android:layout_height="match_parent"
     android:orientation="vertical">
@@ -20,5 +21,44 @@
         android:layout_height="wrap_content"
         android:text="@string/question_temp_text"
         android:textSize="30sp"/>
+
+    <ImageView
+        android:id="@+id/user_image"
+        android:layout_width="wrap_content"
+        android:layout_height="wrap_content"/>
+
+    <!-- Radio buttons are dynamically generated in code. See QuestionActivity.java, displayPicInput() -->
+    <!--
+    <RadioGroup
+        android:id="@+id/rg"
+        android:layout_width="wrap_content"
+        android:layout_height="wrap_content">
+
+        <RadioButton
+            android:id="@+id/radio1"
+            android:layout_width="match_parent"
+            android:layout_height="match_parent"
+            android:text="@string/temp_text"/>
+
+        <RadioButton
+            android:id="@+id/radio2"
+            android:layout_width="match_parent"
+            android:layout_height="match_parent"
+            android:text="@string/temp_text"/>
+
+        <RadioButton
+            android:id="@+id/radio3"
+            android:layout_width="match_parent"
+            android:layout_height="match_parent"
+            android:text="@string/temp_text"/>
+
+        <RadioButton
+            android:id="@+id/radio4"
+            android:layout_width="match_parent"
+            android:layout_height="match_parent"
+            android:text="@string/temp_text"/>
+
+    </RadioGroup>
+    -->
 
 </android.support.v7.widget.LinearLayoutCompat>

@@ -23,5 +23,7 @@
         android:text="@string/question_temp_text"
         android:textSize="30sp"/>
 
+    <!-- Buttons are dynamically generated in code. See QuestionActivity.java, displayMultChoice() -->
+
 </android.support.v7.widget.LinearLayoutCompat>
 
