@@ -27,7 +27,6 @@ public class LocationController {
      * Instantiates the beacon manager to use beacon technologies
      */
     public LocationController() {
-        // inject scavHuntState singleton into LocationController
         ScavengerHuntApplication.getInstance().getAppComponent().inject(this);
 
         Context appContext = ScavengerHuntApplication.getInstance();
@@ -56,8 +55,8 @@ public class LocationController {
                 Log.d("LocationListener", "Nearby beacons: " + beacons);
                 for (EstimoteLocation beacon : beacons) {
                     if (beacon.id.toString().equals(requestNextZone().getBeaconID()) &&
-                            RegionUtils.computeProximity(beacon) == Proximity.NEAR ||
-                            RegionUtils.computeProximity(beacon) == Proximity.IMMEDIATE) {
+                            (RegionUtils.computeProximity(beacon) == Proximity.NEAR ||
+                            RegionUtils.computeProximity(beacon) == Proximity.IMMEDIATE)) {
                         Log.d("LocationListener", "Found Beacon");
                         beaconManager.stopLocationDiscovery();
                         finishedCallback.callback(true);
