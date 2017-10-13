@@ -23,7 +23,18 @@
         android:text="@string/question_temp_text"
         android:textSize="30sp"/>
 
+    <!-- Layout as placeholder -->
+    <android.support.v7.widget.LinearLayoutCompat xmlns:android="http://schemas.android.com/apk/res/android"
+        android:id="@+id/choice_buttons"
+        android:layout_width="match_parent"
+        android:layout_height="wrap_content"
+        android:orientation="vertical">
+
     <!-- Buttons are dynamically generated in code. See QuestionActivity.java, displayMultChoice() -->
+
+    </android.support.v7.widget.LinearLayoutCompat>
+
+    <!-- Add skip button here and remove comment -->
 
 </android.support.v7.widget.LinearLayoutCompat>
 

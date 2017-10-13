@@ -1,8 +1,6 @@
 <?xml version="1.0" encoding="utf-8"?>
 
 <android.support.v7.widget.LinearLayoutCompat xmlns:android="http://schemas.android.com/apk/res/android"
-    xmlns:app="http://schemas.android.com/apk/res-auto"
-    xmlns:tools="http://schemas.android.com/tools"
     android:id="@+id/pic_input_layout"
     android:layout_width="match_parent"
     android:layout_height="match_parent"
@@ -27,38 +25,49 @@
         android:layout_width="wrap_content"
         android:layout_height="wrap_content"/>
 
-    <!-- Radio buttons are dynamically generated in code. See QuestionActivity.java, displayPicInput() -->
-    <!--
-    <RadioGroup
-        android:id="@+id/rg"
-        android:layout_width="wrap_content"
-        android:layout_height="wrap_content">
+    <!-- Layout as placeholder -->
+    <android.support.v7.widget.LinearLayoutCompat xmlns:android="http://schemas.android.com/apk/res/android"
+        android:id="@+id/choice_buttons"
+        android:layout_width="match_parent"
+        android:layout_height="wrap_content"
+        android:orientation="vertical">
 
-        <RadioButton
-            android:id="@+id/radio1"
-            android:layout_width="match_parent"
-            android:layout_height="match_parent"
-            android:text="@string/temp_text"/>
+        <!-- Radio buttons are dynamically generated in code. See QuestionActivity.java, displayPicInput() -->
 
-        <RadioButton
-            android:id="@+id/radio2"
-            android:layout_width="match_parent"
-            android:layout_height="match_parent"
-            android:text="@string/temp_text"/>
+        <!--
+        <RadioGroup
+            android:id="@+id/rg"
+            android:layout_width="wrap_content"
+            android:layout_height="wrap_content">
 
-        <RadioButton
-            android:id="@+id/radio3"
-            android:layout_width="match_parent"
-            android:layout_height="match_parent"
-            android:text="@string/temp_text"/>
+            <RadioButton
+                android:id="@+id/radio1"
+                android:layout_width="match_parent"
+                android:layout_height="match_parent"
+                android:text="@string/temp_text"/>
 
-        <RadioButton
-            android:id="@+id/radio4"
-            android:layout_width="match_parent"
-            android:layout_height="match_parent"
-            android:text="@string/temp_text"/>
+            <RadioButton
+                android:id="@+id/radio2"
+                android:layout_width="match_parent"
+                android:layout_height="match_parent"
+                android:text="@string/temp_text"/>
 
-    </RadioGroup>
-    -->
+            <RadioButton
+                android:id="@+id/radio3"
+                android:layout_width="match_parent"
+                android:layout_height="match_parent"
+                android:text="@string/temp_text"/>
+
+            <RadioButton
+                android:id="@+id/radio4"
+                android:layout_width="match_parent"
+                android:layout_height="match_parent"
+                android:text="@string/temp_text"/>
+
+        </RadioGroup>
+        -->
+    </android.support.v7.widget.LinearLayoutCompat>
+
+    <!-- Skip button here -->
 
 </android.support.v7.widget.LinearLayoutCompat>

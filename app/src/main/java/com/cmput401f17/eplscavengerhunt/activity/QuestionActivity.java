@@ -76,7 +76,7 @@ public class QuestionActivity extends AppCompatActivity {
              Button mcOption = new Button(this);
              mcOption.setText(choices.get(i));
 
-             LinearLayoutCompat layout = (LinearLayoutCompat) findViewById(R.id.mult_question_layout);
+             LinearLayoutCompat layout = (LinearLayoutCompat) findViewById(R.id.choice_buttons);
              LinearLayoutCompat.LayoutParams parameters = new LinearLayoutCompat.LayoutParams(LinearLayoutCompat.LayoutParams.MATCH_PARENT, LinearLayoutCompat.LayoutParams.WRAP_CONTENT);
              layout.addView(mcOption, parameters);
 
@@ -193,11 +193,21 @@ public class QuestionActivity extends AppCompatActivity {
 
         /* Create choice radio button(s) */
         for(int i = 0; i < choices.size(); i++) {
-            RadioButton radio = new RadioButton(this);
+            final RadioButton radio = new RadioButton(this);
             radio.setId(i);
             radio.setText(choices.get(i));
 
             rg.addView(radio);
+
+            /* Listen for a radio button to be selected. */
+            radio.setOnClickListener(new View.OnClickListener() {
+                public void onClick(View view) {
+                    Toast.makeText(view.getContext(), "You selected: " + radio.getText().toString(), Toast.LENGTH_SHORT).show();
+
+                    //Pass the answer to the controller
+                    qController.requestSubmitResponse(radio.getText().toString());
+                }
+            });
         }
 
         /* Add the radio button group to the view */
@@ -219,9 +229,9 @@ public class QuestionActivity extends AppCompatActivity {
         currentQuestion = qController.requestQuestion();
 
         //TODO Conditional for choosing the view
-        //displayMultChoice();
+        displayMultChoice();
         //displayWrittenInput();
-        displayPicInput();
+        //displayPicInput();
 
     }
 }
