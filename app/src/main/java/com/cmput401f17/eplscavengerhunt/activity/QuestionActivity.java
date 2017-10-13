@@ -77,13 +77,8 @@ public class QuestionActivity extends AppCompatActivity {
              Button mcOption = new Button(this);
              mcOption.setText(choices.get(i));
 
-<<<<<<< HEAD
              LinearLayoutCompat layout = (LinearLayoutCompat) findViewById(R.id.choice_buttons);
              LinearLayoutCompat.LayoutParams parameters = new LinearLayoutCompat.LayoutParams(LinearLayoutCompat.LayoutParams.MATCH_PARENT, LinearLayoutCompat.LayoutParams.WRAP_CONTENT);
-=======
-             LinearLayoutCompat layout = (LinearLayoutCompat) findViewById(R.id.mult_question_layout);
-             LinearLayoutCompat.LayoutParams parameters = new LinearLayoutCompat.LayoutParams(LinearLayoutCompat.LayoutParams.MATCH_PARENT, LinearLayoutCompat.LayoutParams.WRAP_CONTENT,0f);
->>>>>>> origin/QuestionController
              layout.addView(mcOption, parameters);
 
             /* Listen for button click. If clicked, make a toast telling which button was clicked */
@@ -191,7 +186,6 @@ public class QuestionActivity extends AppCompatActivity {
         final ArrayList<String> choices = new ArrayList<String>();
         choices.add("Hello");
         choices.add("World");
-        choices.add("!");
 
         /* Create group for radio buttons */
         RadioGroup rg = new RadioGroup(this);
@@ -217,7 +211,7 @@ public class QuestionActivity extends AppCompatActivity {
         }
 
         /* Add the radio button group to the view */
-        LinearLayoutCompat layout = (LinearLayoutCompat) findViewById(R.id.pic_input_layout);
+        LinearLayoutCompat layout = (LinearLayoutCompat) findViewById(R.id.pic_choice_layout);
         LinearLayoutCompat.LayoutParams parameters = new LinearLayoutCompat.LayoutParams(LinearLayoutCompat.LayoutParams.MATCH_PARENT, LinearLayoutCompat.LayoutParams.WRAP_CONTENT);
         layout.addView(rg, parameters);
     }
@@ -234,14 +228,12 @@ public class QuestionActivity extends AppCompatActivity {
 
         currentQuestion = qController.requestQuestion();
 
-<<<<<<< HEAD
         //TODO Conditional for choosing the view
-=======
->>>>>>> origin/QuestionController
-        displayMultChoice();
+        //displayMultChoice();
         //displayWrittenInput();
-        //displayPicInput();
+        displayPicInput();
 
+        /* Skip button on all view */
         Button skipButton = (Button) findViewById(R.id.skip);
 
         skipButton.setOnClickListener(new View.OnClickListener() {
