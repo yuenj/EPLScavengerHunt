@@ -31,6 +31,7 @@ public class QuestionActivity extends AppCompatActivity {
 
     public QuestionActivity() {
         qController = new QuestionController();
+        //TODO should grab current question from question controller.
         currentQuestion = new Question();
     }
 
@@ -177,6 +178,15 @@ public class QuestionActivity extends AppCompatActivity {
     }
 
     /**
+     * Intent to next activity.
+     * If the game is over this is the ConngratulationsActivity
+     * If the game is not over , this is the next zone.
+     */
+
+    private void ToNextActivity(){}
+
+
+    /**
      * Choose which view to display
      * Gets the current question and all info to display the question on user interface
      *
@@ -197,7 +207,7 @@ public class QuestionActivity extends AppCompatActivity {
         skipButton.setOnClickListener(new View.OnClickListener() {
             public void onClick(View v) {
                 Toast.makeText(v.getContext(), "Question skipped", Toast.LENGTH_SHORT).show();
-                //qController.skip();
+                qController.skip(currentQuestion);
             }
         });
 

@@ -1,7 +1,11 @@
 <resources>
     <string name="app_name">EPLScavengerHunt</string>
 
-    <string name="start_text">START</string>
+    <string name="start_button_text">START</string>
+    <string name="rules_button_text">RULES</string>
+    <string name="about_button_text">ABOUT</string>
+    <string name="credits_button_text">CREDITS</string>
+
     <string name="title_text">EPL\nSCAVENGER HUNT</string>
     <string name="goto_LocationActivity_text">goto LocationActivity</string>
     <string name="goto_QuestionActivity_text">goto QuestionActivity</string>
@@ -10,8 +14,6 @@
     <string name="question_temp_text">Temporary Text</string>
     <string name="user_answer">Your Answer:</string>
     <string name="submit">Submit</string>
-
-
 
 
 </resources>
