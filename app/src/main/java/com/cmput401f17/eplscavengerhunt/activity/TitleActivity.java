@@ -25,6 +25,7 @@ public class TitleActivity extends AppCompatActivity {
                 Log.d("TitleActivity", "start button pressed");
                 Intent intent = new Intent(TitleActivity.this, DebugActivity.class);
                 startActivity(intent);
+                finish();
                 // TODO functionality for starting a game
             }
         });
@@ -34,6 +35,7 @@ public class TitleActivity extends AppCompatActivity {
                 Log.d("TitleActivity", "rules button pressed");
                 Intent intent = new Intent(TitleActivity.this, RulesActivity.class);
                 startActivity(intent);
+                finish();
             }
         });
 
@@ -42,6 +44,7 @@ public class TitleActivity extends AppCompatActivity {
                 Log.d("TitleActivity", "about button pressed");
                 Intent intent = new Intent(TitleActivity.this, AboutActivity.class);
                 startActivity(intent);
+                finish();
             }
         });
 
@@ -50,6 +53,7 @@ public class TitleActivity extends AppCompatActivity {
                 Log.d("TitleActivity", "credits button pressed");
                 Intent intent = new Intent(TitleActivity.this, CreditsActivity.class);
                 startActivity(intent);
+                finish();
             }
         });
 

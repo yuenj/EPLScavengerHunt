@@ -21,6 +21,7 @@ public class CreditsActivity extends AppCompatActivity {
             public void onClick(View v) {
                 Intent intent = new Intent(CreditsActivity.this, TitleActivity.class);
                 startActivity(intent);
+                finish();
             }
         });
     }

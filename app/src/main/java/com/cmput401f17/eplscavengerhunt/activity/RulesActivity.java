@@ -29,6 +29,7 @@ public class RulesActivity extends AppCompatActivity {
             public void onClick(View v) {
                 Intent intent = new Intent(RulesActivity.this, TitleActivity.class);
                 startActivity(intent);
+                finish();
             }
         });
     }

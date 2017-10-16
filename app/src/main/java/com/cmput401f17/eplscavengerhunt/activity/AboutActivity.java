@@ -20,6 +20,7 @@ public class AboutActivity extends AppCompatActivity {
             public void onClick(View v) {
                 Intent intent = new Intent(AboutActivity.this, TitleActivity.class);
                 startActivity(intent);
+                finish();
             }
         });
     }
