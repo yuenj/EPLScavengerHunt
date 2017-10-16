@@ -5,6 +5,8 @@
     <string name="rules_button_text">RULES</string>
     <string name="about_button_text">ABOUT</string>
     <string name="credits_button_text">CREDITS</string>
+    <string name="return_button_text">RETURN</string>
+
 
     <string name="title_text">EPL\nSCAVENGER HUNT</string>
     <string name="goto_LocationActivity_text">goto LocationActivity</string>
@@ -14,6 +16,12 @@
     <string name="question_temp_text">Temporary Text</string>
     <string name="user_answer">Your Answer:</string>
     <string name="submit">Submit</string>
+
+    <string name="rules_text">This app is a scavenger hunt where you moving from zone to zone and
+    answer questions. Zones are different section of the library (TEMPORARY).</string>
+    <string name="credits_text">Credits due to those who deserve credits. (TEMPORARY).</string>
+    <string name="about_text">This app is a scavenger hunt where you moving from zone to zone and
+    answer questions. (TEMPORARY).</string>
 
 
 </resources>
