@@ -16,12 +16,7 @@
     <string name="question_temp_text">Temporary Text</string>
     <string name="user_answer">Your Answer:</string>
     <string name="submit">Submit</string>
-<<<<<<< HEAD
-=======
     <string name="temp_text">Temporary Text</string>
-
->>>>>>> 470d9af76b2d9dbb1d5ed5a78b6ab3bbee90c244
-
     <string name="rules_text">This app is a scavenger hunt where you moving from zone to zone and
     answer questions. Zones are different section of the library (TEMPORARY).</string>
     <string name="credits_text">Credits due to those who deserve credits. (TEMPORARY).</string>
