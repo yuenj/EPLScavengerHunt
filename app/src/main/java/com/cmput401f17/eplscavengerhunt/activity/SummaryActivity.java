@@ -41,8 +41,9 @@ public class SummaryActivity extends AppCompatActivity {
 
         questions = gameController.retrieveQuestions();
         responses = gameController.retrieveResponses();
-        int score = gameController.retrieveTotalScore();
-        totalScore.setText(Integer.toString(score) + "/5");
+        int score = gameController.retrieveScore();
+        int maxScore = gameController.retrieveMaxScore();
+        totalScore.setText(Integer.toString(score) + "/" + Integer.toString(maxScore));
     }
 
     @Override

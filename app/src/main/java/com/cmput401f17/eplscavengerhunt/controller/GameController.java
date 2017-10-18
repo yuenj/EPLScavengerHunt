@@ -45,7 +45,11 @@ public class GameController {
         return responses;
     }
 
-    public int retrieveTotalScore() {
+    public int retrieveScore() {
+        return 3;
+    }
+
+    public int retrieveMaxScore() {
         return 5;
     }
 }
