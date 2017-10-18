@@ -25,6 +25,5 @@ public interface AppComponent {
     void inject(QuestionActivity questionActivity);
     void inject(ResultsActivity resultsActivity);
     void inject(TitleActivity titleActivity);
-    void inject(GameController gameController);
     void inject(LocationController locationController);
 }
