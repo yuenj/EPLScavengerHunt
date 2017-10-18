@@ -38,4 +38,10 @@ dependencies {
     compile 'com.google.dagger:dagger-android-support:2.11'
     annotationProcessor 'com.google.dagger:dagger-android-processor:2.11'
     annotationProcessor 'com.google.dagger:dagger-compiler:2.11'
+
+    // Power Mock
+    testCompile "org.powermock:powermock-module-junit4:1.6.4"
+    testCompile "org.powermock:powermock-module-junit4-rule:1.6.4"
+    testCompile "org.powermock:powermock-api-mockito:1.6.4"
+    testCompile "org.powermock:powermock-classloading-xstream:1.6.4"
 }
