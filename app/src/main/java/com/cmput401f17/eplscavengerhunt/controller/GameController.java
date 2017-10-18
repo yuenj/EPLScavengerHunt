@@ -1,12 +1,9 @@
 package com.cmput401f17.eplscavengerhunt.controller;
 
 import com.cmput401f17.eplscavengerhunt.ScavengerHuntApplication;
+import com.cmput401f17.eplscavengerhunt.model.Question;
 import com.cmput401f17.eplscavengerhunt.model.Response;
 import com.cmput401f17.eplscavengerhunt.model.Results;
-import com.cmput401f17.eplscavengerhunt.model.ScavHuntState;
-import com.cmput401f17.eplscavengerhunt.model.Zone;
-
-import com.cmput401f17.eplscavengerhunt.model.Question;
 import com.cmput401f17.eplscavengerhunt.model.ScavHuntState;
 import com.cmput401f17.eplscavengerhunt.model.Zone;
 
@@ -144,6 +141,49 @@ public class GameController {
         testQuestionList.add(testQuestion2);
         scavHuntState.setQuestions(testQuestionList);
 
+    }
+
+    // TODO actual implementation will replace hardcoded values when database is set up
+    public ArrayList<Question> retrieveQuestions() {
+        Question question1 = new Question();
+        question1.setQuestionText("question 1 prompt");
+        question1.setSolution("question 1 solution");
+        Question question2 = new Question();
+        question2.setQuestionText("question 2 prompt");
+        question2.setSolution("question 2 solution");
+
+        ArrayList<Question> questions = new ArrayList<>();
+        questions.add(question1);
+        questions.add(question2);
+
+        return questions;
+    }
+
+
+    // TODO actual implementation will replace hardcoded values when database is set up
+    public ArrayList<Response> retrieveResponses() {
+        Response response1 = new Response();
+        response1.setResponseStr("question 1 response");
+        response1.markCorrect();
+        Response response2 = new Response();
+        response2.setResponseStr("question 2 response");
+        response2.markIncorrect();
+
+        ArrayList<Response> responses = new ArrayList<>();
+        responses.add(response1);
+        responses.add(response2);
+
+        return responses;
+    }
+
+    // TODO actual implementation will replace hardcoded values when database is set up
+    public int retrieveScore() {
+        return 3;
+    }
+    
+    // TODO actual implementation will replace hardcoded values when database is set up
+    public int retrieveMaxScore() {
+        return 5;
     }
 }
 

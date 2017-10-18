@@ -57,8 +57,8 @@ public class DebugActivity extends AppCompatActivity {
 
         goto_resultsActivity.setOnClickListener(new View.OnClickListener() {
             public void onClick(View v) {
-                Log.d("DebugActivity", "going to ResultsActivity");
-                Intent intent = new Intent(DebugActivity.this, ResultsActivity.class);
+                Log.d("DebugActivity", "going to SummaryActivity");
+                Intent intent = new Intent(DebugActivity.this, SummaryActivity.class);
                 startActivity(intent);
             }
         });
