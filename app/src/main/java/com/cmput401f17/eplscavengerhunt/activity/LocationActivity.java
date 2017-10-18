@@ -26,6 +26,7 @@ public class LocationActivity extends AppCompatActivity {
     @Override
     protected void onStart() {
         super.onStart();
+        locationController.startDiscovery();
         // If the location is verified go to Question activity
         locationController.verifyLocation(new SimpleCallback<Boolean>() {
             @Override

@@ -29,10 +29,24 @@ public class LocationController {
     public LocationController() {
         ScavengerHuntApplication.getInstance().getAppComponent().inject(this);
 
+        /*
         Context appContext = ScavengerHuntApplication.getInstance();
         beaconManager = new BeaconManager(appContext);
 
         // Connect to scanning service
+        beaconManager.connect(new BeaconManager.ServiceReadyCallback() {
+            @Override
+            public void onServiceReady() {
+                beaconManager.startLocationDiscovery();
+            }
+        }); */
+    }
+
+    public void startDiscovery() {
+        Context appContext = ScavengerHuntApplication.getInstance();
+        beaconManager = new BeaconManager(appContext);
+        scavHuntState.incrementCurrentStage();
+
         beaconManager.connect(new BeaconManager.ServiceReadyCallback() {
             @Override
             public void onServiceReady() {
@@ -71,9 +85,13 @@ public class LocationController {
      * @return
      */
     public Zone requestNextZone() {
-        scavHuntState.incrementCurrentStage();
         int currentStage = scavHuntState.getCurrentStage();
+        Log.d("LocationController", Integer.toString(currentStage));
+        Log.d("LocationController", scavHuntState.getBranch().toString());
+        //Log.d("LocationController", scavHuntState.getZoneRoute().get(0).getName());
+            Log.d("LocationController", scavHuntState.getZoneRoute().get(1).getName());
         return scavHuntState.getZoneRoute().get(currentStage);
+
     }
 
     /**

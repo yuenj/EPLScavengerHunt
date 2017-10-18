@@ -6,4 +6,10 @@
     android:layout_height="match_parent"
     tools:context="com.cmput401f17.eplscavengerhunt.activity.LocationActivity">
 
+    <TextView
+        android:layout_width="wrap_content"
+        android:layout_height="wrap_content"
+        android:text="Go to the next zone!"
+        android:textSize="30sp"/>
+
 </android.support.constraint.ConstraintLayout>
