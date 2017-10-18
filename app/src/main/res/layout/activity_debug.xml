@@ -14,10 +14,10 @@
         android:textSize="30sp"/>
 
     <Button
-        android:id="@+id/goto_locationactivity_button"
-        android:layout_width="wrap_content"
-        android:layout_height="wrap_content"
-        android:text="@string/goto_LocationActivity_text"/>
+    android:id="@+id/goto_locationactivity_button"
+    android:layout_width="wrap_content"
+    android:layout_height="wrap_content"
+    android:text="@string/goto_LocationActivity_text"/>
 
     <Button
         android:id="@+id/goto_questionactivity_button"
@@ -39,7 +39,6 @@
         android:id="@+id/dagger"
         android:layout_width="wrap_content"
         android:layout_height="wrap_content"
-        android:text="Dagger is not working ):"
         android:textSize="30sp" />
 
 

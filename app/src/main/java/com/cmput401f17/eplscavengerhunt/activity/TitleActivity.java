@@ -8,6 +8,7 @@ import android.view.View;
 import android.widget.Button;
 
 import com.cmput401f17.eplscavengerhunt.R;
+import com.estimote.coresdk.common.requirements.SystemRequirementsChecker;
 
 public class TitleActivity extends AppCompatActivity {
 
@@ -24,6 +25,13 @@ public class TitleActivity extends AppCompatActivity {
                 startActivity(intent);
             }
         });
+    }
+
+    // Checks permissions, specifically bluetooth, for location beaocnss
+    @Override
+    protected void onResume() {
+        super.onResume();
+        SystemRequirementsChecker.checkWithDefaultDialogs(this);
     }
 }
 
