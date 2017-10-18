@@ -142,6 +142,7 @@ public class GameController {
         scavHuntState.setQuestions(testQuestionList);
     }
 
+    // TODO actual implementation will replace hardcoded values when database is set up
     public ArrayList<Question> retrieveQuestions() {
         Question question1 = new Question();
         question1.setQuestionText("question 1 prompt");
@@ -157,6 +158,8 @@ public class GameController {
         return questions;
     }
 
+
+    // TODO actual implementation will replace hardcoded values when database is set up
     public ArrayList<Response> retrieveResponses() {
         Response response1 = new Response();
         response1.setResponseStr("question 1 response");
@@ -172,10 +175,12 @@ public class GameController {
         return responses;
     }
 
+    // TODO actual implementation will replace hardcoded values when database is set up
     public int retrieveScore() {
         return 3;
     }
-
+    
+    // TODO actual implementation will replace hardcoded values when database is set up
     public int retrieveMaxScore() {
         return 5;
     }
