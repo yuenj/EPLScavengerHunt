@@ -14,12 +14,10 @@ import android.view.inputmethod.EditorInfo;
 import android.view.inputmethod.InputMethodManager;
 import android.widget.Button;
 import android.widget.EditText;
-<<<<<<< HEAD
-=======
 import android.widget.LinearLayout;
 import android.widget.RadioButton;
 import android.widget.RadioGroup;
->>>>>>> 470d9af76b2d9dbb1d5ed5a78b6ab3bbee90c244
+
 import android.widget.TextView;
 import android.widget.Toast;
 
@@ -37,10 +35,6 @@ public class QuestionActivity extends AppCompatActivity {
 
     public QuestionActivity() {
         qController = new QuestionController();
-<<<<<<< HEAD
-        //TODO should grab current question from question controller.
-=======
->>>>>>> 470d9af76b2d9dbb1d5ed5a78b6ab3bbee90c244
         currentQuestion = new Question();
     }
 
@@ -84,13 +78,9 @@ public class QuestionActivity extends AppCompatActivity {
              Button mcOption = new Button(this);
              mcOption.setText(choices.get(i));
 
-<<<<<<< HEAD
-             LinearLayoutCompat layout = (LinearLayoutCompat) findViewById(R.id.mult_question_layout);
-             LinearLayoutCompat.LayoutParams parameters = new LinearLayoutCompat.LayoutParams(LinearLayoutCompat.LayoutParams.MATCH_PARENT, LinearLayoutCompat.LayoutParams.WRAP_CONTENT,0f);
-=======
+
              LinearLayoutCompat layout = (LinearLayoutCompat) findViewById(R.id.choice_buttons);
              LinearLayoutCompat.LayoutParams parameters = new LinearLayoutCompat.LayoutParams(LinearLayoutCompat.LayoutParams.MATCH_PARENT, LinearLayoutCompat.LayoutParams.WRAP_CONTENT);
->>>>>>> 470d9af76b2d9dbb1d5ed5a78b6ab3bbee90c244
              layout.addView(mcOption, parameters);
 
             /* Listen for button click. If clicked, make a toast telling which button was clicked */
@@ -136,12 +126,9 @@ public class QuestionActivity extends AppCompatActivity {
             }
 
             qController.requestSubmitResponse(editText.getText().toString());
-<<<<<<< HEAD
-=======
             Intent intent = new Intent(QuestionActivity.this, LocationActivity.class);
             startActivity(intent);
             finish();
->>>>>>> 470d9af76b2d9dbb1d5ed5a78b6ab3bbee90c244
         }
     }
 
@@ -195,18 +182,6 @@ public class QuestionActivity extends AppCompatActivity {
         displayPrompt();
 
         //TODO
-<<<<<<< HEAD
-    }
-
-    /**
-     * Intent to next activity.
-     * If the game is over this is the ConngratulationsActivity
-     * If the game is not over , this is the next zone.
-     */
-
-    private void ToNextActivity(){}
-
-=======
 
         //Link button to camera
 
@@ -245,7 +220,7 @@ public class QuestionActivity extends AppCompatActivity {
         LinearLayoutCompat.LayoutParams parameters = new LinearLayoutCompat.LayoutParams(LinearLayoutCompat.LayoutParams.MATCH_PARENT, LinearLayoutCompat.LayoutParams.WRAP_CONTENT);
         layout.addView(rg, parameters);
     }
->>>>>>> 470d9af76b2d9dbb1d5ed5a78b6ab3bbee90c244
+
 
     /**
      * Choose which view to display
@@ -259,29 +234,21 @@ public class QuestionActivity extends AppCompatActivity {
 
         currentQuestion = qController.requestQuestion();
 
-<<<<<<< HEAD
-        displayMultChoice();
-        //displayWrittenInput();
-        //displayPicInput();
 
-=======
         //TODO Conditional for choosing the view
         //displayMultChoice();
         displayWrittenInput();
         //displayPicInput();
 
         /* Skip button on all view */
->>>>>>> 470d9af76b2d9dbb1d5ed5a78b6ab3bbee90c244
         Button skipButton = (Button) findViewById(R.id.skip);
 
         skipButton.setOnClickListener(new View.OnClickListener() {
             public void onClick(View v) {
                 Toast.makeText(v.getContext(), "Question skipped", Toast.LENGTH_SHORT).show();
-<<<<<<< HEAD
-                qController.skip(currentQuestion);
-=======
+
                 //qController.skip();
->>>>>>> 470d9af76b2d9dbb1d5ed5a78b6ab3bbee90c244
+
             }
         });
 

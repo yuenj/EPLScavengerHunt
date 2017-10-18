@@ -1,19 +1,15 @@
 package com.cmput401f17.eplscavengerhunt.controller;
 
-<<<<<<< HEAD
-=======
+
 import com.cmput401f17.eplscavengerhunt.ScavengerHuntApplication;
->>>>>>> 470d9af76b2d9dbb1d5ed5a78b6ab3bbee90c244
+
 import com.cmput401f17.eplscavengerhunt.model.Question;
 import com.cmput401f17.eplscavengerhunt.model.Response;
 import com.cmput401f17.eplscavengerhunt.model.ScavHuntState;
 import com.cmput401f17.eplscavengerhunt.model.Zone;
-
-<<<<<<< HEAD
-=======
 import javax.inject.Inject;
 
->>>>>>> 470d9af76b2d9dbb1d5ed5a78b6ab3bbee90c244
+
 /**
  * An intermediate class that passes data
  */
