@@ -48,7 +48,6 @@ public class SummaryAdapter extends BaseAdapter {
         Question question = questions.get(position);
         Response response = responses.get(position);
 
-        // TODO set the thumbnail
         prompt.setText(question.getQuestionPrompt());
         usersResponse.setText(response.getResponseStr());
         answer.setText(question.getSolution());
