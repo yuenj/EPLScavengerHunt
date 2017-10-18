@@ -68,7 +68,7 @@ public class GameController {
      * @return the zone route passed to scavHuntState
      */
     private List<Zone> generateZoneRoute(String branch) {
-        List<Zone> zoneRoute = databaseController.retreiveZones(branch);
+        List<Zone> zoneRoute = databaseController.retrieveZones(branch);
         scavHuntState.setZoneRoute(zoneRoute);
 
         scavHuntState.setNumStages(zoneRoute.size());
@@ -97,4 +97,6 @@ public class GameController {
 
         return results;
     }
+
+
 }
