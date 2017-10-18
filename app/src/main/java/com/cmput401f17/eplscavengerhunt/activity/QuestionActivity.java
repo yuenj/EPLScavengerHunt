@@ -221,6 +221,12 @@ public class QuestionActivity extends AppCompatActivity {
         layout.addView(rg, parameters);
     }
 
+    /**
+     * Used to intent to the next activity
+     * If this is the last question we need to intent to the Congrats Activity
+     * If this is not the last question we need to intent to the
+     * @param currentView
+     */
     private void intentAway (View currentView){
 
     }
@@ -248,8 +254,9 @@ public class QuestionActivity extends AppCompatActivity {
 
         skipButton.setOnClickListener(new View.OnClickListener() {
             public void onClick(View v) {
-                Toast.makeText(v.getContext(), "Question skipped", Toast.LENGTH_SHORT).show();
-                //qController.skip();
+                //Toast.makeText(v.getContext(), "Question skipped", Toast.LENGTH_SHORT).show();
+                qController.skip(currentQuestion);
+                qController.requestSubmitResponse("");
             }
         });
 

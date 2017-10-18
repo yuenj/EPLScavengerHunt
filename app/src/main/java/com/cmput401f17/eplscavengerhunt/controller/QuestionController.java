@@ -47,7 +47,7 @@ public class QuestionController {
     }
 
     public void skip(Question question){
-
+        question.skip();
     }
 
 }
