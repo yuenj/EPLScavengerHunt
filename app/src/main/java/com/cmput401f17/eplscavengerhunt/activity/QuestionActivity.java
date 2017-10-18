@@ -257,6 +257,7 @@ public class QuestionActivity extends AppCompatActivity {
                 //Toast.makeText(v.getContext(), "Question skipped", Toast.LENGTH_SHORT).show();
                 qController.skip(currentQuestion);
                 qController.requestSubmitResponse("");
+                //intentAway();
             }
         });
 
