@@ -21,6 +21,7 @@ import android.widget.TextView;
 import android.widget.Toast;
 
 import com.cmput401f17.eplscavengerhunt.R;
+import com.cmput401f17.eplscavengerhunt.controller.GameController;
 import com.cmput401f17.eplscavengerhunt.controller.LocationController;
 import com.cmput401f17.eplscavengerhunt.model.Question;
 import com.cmput401f17.eplscavengerhunt.controller.QuestionController;
@@ -34,6 +35,7 @@ public class QuestionActivity extends AppCompatActivity {
 
     @Inject
     QuestionController qController;
+    GameController gController;
 
     private Question currentQuestion;
 
@@ -227,8 +229,11 @@ public class QuestionActivity extends AppCompatActivity {
      * If this is not the last question we need to intent to the
      * @param currentView
      */
-    private void intentAway (View currentView){
-
+    private void intentAway (){
+        //if(gController.requestCheckGameOver() == true)
+        Intent intent = new Intent(QuestionActivity.this, LocationActivity.class);
+        startActivity(intent);
+        finish();
     }
 
     /**
