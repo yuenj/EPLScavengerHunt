@@ -7,6 +7,11 @@
     <string name="goto_QuestionActivity_text">goto QuestionActivity</string>
     <string name="goto_congratulationsActivity_text">goto CongratulationsActivity</string>
     <string name="goto_resultsActivity_text">goto ResultsActivity</string>
+    <string name="question_temp_text">Temporary Text</string>
+    <string name="user_answer">Your Answer:</string>
+    <string name="submit">Submit</string>
+    <string name="temp_text">Temporary Text</string>
+
 
 
 

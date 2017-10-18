@@ -16,8 +16,13 @@ import java.util.List;
 
 import javax.inject.Inject;
 
+/**
+ * Location controller handles finding beacons and
+ * requesting the prize location
+ * It also increments the current stage so the game can
+ * know which zone it is on
+ */
 public class LocationController {
-
     @Inject
     ScavHuntState scavHuntState;
 
@@ -31,6 +36,14 @@ public class LocationController {
 
         Context appContext = ScavengerHuntApplication.getInstance();
         beaconManager = new BeaconManager(appContext);
+    }
+
+    /**
+     * Starts beacon discovery
+     */
+    public void startDiscovery() {
+        // Increment stage so we can look for the next zone
+        scavHuntState.incrementCurrentStage();
 
         // Connect to scanning service
         beaconManager.connect(new BeaconManager.ServiceReadyCallback() {
@@ -44,8 +57,8 @@ public class LocationController {
     /**
      * https://stackoverflow.com/questions/42128909/return-value-from-valueeventlistener-java 06/10/2017
      * Hacky method to get a return value
-     * Sets a listener for proximity to see if the user has enteredw
-     * the zone of the current beacon
+     * Sets a listener for proximity to see if the user has
+     * entered the zone of the current beacon
      * @param finishedCallback
      */
     public void verifyLocation(@NonNull final SimpleCallback<Boolean> finishedCallback) {
@@ -54,7 +67,9 @@ public class LocationController {
             public void onLocationsFound(List<EstimoteLocation> beacons) {
                 Log.d("LocationListener", "Nearby beacons: " + beacons);
                 for (EstimoteLocation beacon : beacons) {
-                    if (beacon.id.toString().equals(requestNextZone().getBeaconID()) &&
+                    // If the user is close or very close to the beacon
+                    // we stop discovery and return true via callback
+                    if (beacon.id.toString().equals(requestZone().getBeaconID()) &&
                             (RegionUtils.computeProximity(beacon) == Proximity.NEAR ||
                             RegionUtils.computeProximity(beacon) == Proximity.IMMEDIATE)) {
                         Log.d("LocationListener", "Found Beacon");
@@ -67,23 +82,11 @@ public class LocationController {
     }
 
     /**
-     * Requests and updates the Zone from scavHuntState
+     * Requests the next zone from scavHuntState
      * @return
      */
-    public Zone requestNextZone() {
-        scavHuntState.incrementCurrentStage();
+    public Zone requestZone() {
         int currentStage = scavHuntState.getCurrentStage();
         return scavHuntState.getZoneRoute().get(currentStage);
-    }
-
-    /**
-     * If the user completes the game
-     * Return the location to get the prize
-     * Change this if we store prize location in the database or
-     * if we get the location some other way
-     * @return
-     */
-    public String requestPrizeLocation() {
-        return "Customer Service Desk";
     }
 }
