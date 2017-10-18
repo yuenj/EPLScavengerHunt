@@ -158,4 +158,12 @@ public class GameControllerTest {
     @Test
     public void startQuestionActivityTest() {
     }
+
+    @Test
+    public void requestIncrementCurrentStageTest() {
+
+        gameController.requestIncrementCurrentStage();
+
+        verify(mockScavHuntState, times(1)).incrementCurrentStage();
+    }
 }

@@ -52,7 +52,7 @@ public class LocationControllerTest {
 
         Context fakeContext = mock(Context.class, RETURNS_DEEP_STUBS);
 
-        locationController = new LocationController(fakeContext);
+        locationController = new LocationController();
 
         // If the location is verified go to Question activity
         locationController.verifyLocation(new SimpleCallback<Boolean>() {
@@ -81,7 +81,7 @@ public class LocationControllerTest {
         scavHuntState.setCurrentStage(0);
 
         Context fakeContext = mock(Context.class, RETURNS_DEEP_STUBS);
-        locationController = new LocationController(fakeContext);
+        locationController = new LocationController();
 
         assertEquals(scavHuntState.getCurrentZone(), zone1);
         assertEquals(locationController.requestNextZone(), zone2);

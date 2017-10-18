@@ -7,7 +7,7 @@ import com.cmput401f17.eplscavengerhunt.dagger.AppModule;
 import com.cmput401f17.eplscavengerhunt.dagger.DaggerAppComponent;
 
 public class ScavengerHuntApplication extends Application {
-    private static ScavengerHuntApplication instance;
+    private static ScavengerHuntApplication instance = new ScavengerHuntApplication();
     private static AppComponent appComponent;
 
     public static ScavengerHuntApplication getInstance() {
@@ -18,7 +18,6 @@ public class ScavengerHuntApplication extends Application {
     public void onCreate() {
         super.onCreate();
         getAppComponent();
-        instance = this;
     }
 
     public AppComponent getAppComponent() {

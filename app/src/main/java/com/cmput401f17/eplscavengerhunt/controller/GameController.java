@@ -53,6 +53,14 @@ public class GameController {
     }
 
     /**
+     * Increments current stage.
+     * Called when user submits a question (called by QuestionActivity after submission)
+     */
+    public void requestIncrementCurrentStage() {
+        scavHuntState.incrementCurrentStage();
+    }
+
+    /**
      * Starts the QuestionActivity that corresponds to the current
      * question's type. Used by LocationController when user is
      * in the correct zone and is ready to receive a question.
@@ -97,6 +105,4 @@ public class GameController {
 
         return results;
     }
-
-
 }
