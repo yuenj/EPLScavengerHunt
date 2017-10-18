@@ -73,10 +73,7 @@ public class QuestionActivity extends AppCompatActivity {
 
         /* Get the MC choices */
         //TODO grab from supplied question
-         final ArrayList<String> choices = new ArrayList<String>();
-         choices.add("Hello");
-         choices.add("World");
-         choices.add("!");
+         final ArrayList<String> choices = currentQuestion.getChoices();
 
         /* Create choice button(s) */
          for(int i = 0; i < choices.size(); i++) {
@@ -227,13 +224,20 @@ public class QuestionActivity extends AppCompatActivity {
      * Used to intent to the next activity
      * If this is the last question we need to intent to the Congrats Activity
      * If this is not the last question we need to intent to the
-     * @param currentView
      */
     private void intentAway (){
-        //if(gController.requestCheckGameOver() == true)
+        //if(gController.requestCheckGameOver() != true){}
         Intent intent = new Intent(QuestionActivity.this, LocationActivity.class);
         startActivity(intent);
         finish();
+
+        //else
+        /*
+        Intent intent = new Intent(QuestionActivity.this, CongratulationsActivity.class);
+        startActivity(intent);
+        finish();
+        */
+
     }
 
     /**

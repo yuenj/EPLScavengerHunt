@@ -8,6 +8,8 @@
 
 package com.cmput401f17.eplscavengerhunt.model;
 
+import java.util.ArrayList;
+
 /**
  * Created by brettgarbitt on 2017-10-18.
  */
@@ -15,14 +17,15 @@ package com.cmput401f17.eplscavengerhunt.model;
 public class Question {
 
     private int questionID, zone;
-    private String prompt, choices, solution, image_link, sound_link;
+    private String prompt, image_link, solution,sound_link;
+    private ArrayList<String> choices;
     private boolean take_pic, skipped;
 
     public Question() {
         this.questionID = 0;
         this.zone = 0;
         this.prompt = "";
-        this.choices = "";
+        this.choices = new ArrayList<String>();
         this.solution = "";
         this.image_link = "";
         this.sound_link = "";
@@ -30,11 +33,11 @@ public class Question {
         this.skipped = false;
     }
 
-    public Question(int questionID, int zone, String questionText, String choices, String solution, String q_link, String s_link, boolean take_pic, boolean skipped) {
+    public Question(int questionID, int zone, String questionText, String solution, String q_link, String s_link, boolean take_pic, boolean skipped) {
         this.questionID = questionID;
         this.zone = zone;
         this.prompt = questionText;
-        this.choices = choices;
+        this.choices = new ArrayList<String>();
         this.solution = solution;
         this.image_link = q_link;
         this.sound_link = s_link;
@@ -66,11 +69,9 @@ public class Question {
         this.prompt = questionText;
     }
 
-    public String getChoices() {
-        return choices;
-    }
+    public ArrayList<String> getChoices() { return(this.choices); }
 
-    public void setChoices(String choices) { this.choices = choices; }
+    public void setChoices(ArrayList<String> choices) { this.choices = choices;}
 
     public String getSolution() {
         return solution;
