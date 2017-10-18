@@ -3,6 +3,7 @@ package com.cmput401f17.eplscavengerhunt.dagger;
 import android.content.Context;
 
 import com.cmput401f17.eplscavengerhunt.ScavengerHuntApplication;
+import com.cmput401f17.eplscavengerhunt.controller.DatabaseController;
 import com.cmput401f17.eplscavengerhunt.controller.GameController;
 import com.cmput401f17.eplscavengerhunt.controller.LocationController;
 import com.cmput401f17.eplscavengerhunt.model.ScavHuntState;
@@ -33,11 +34,16 @@ public class AppModule {
         return new GameController();
     }
 
-
     @Provides
     @Singleton
     public ScavHuntState provideScavHuntState() {
         return new ScavHuntState();
+    }
+
+    @Provides
+    @Singleton
+    public DatabaseController provideDatabaseController() {
+        return new DatabaseController();
     }
 
     @Provides

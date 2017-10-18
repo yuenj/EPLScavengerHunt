@@ -15,16 +15,17 @@ public class ScavHuntState {
     private int currentStage;
     private List<Response> playerResponses;
     private int numCorrect;
-    private int numQuestions = 0;
+    private int numStages = 0;
 
 
     public ScavHuntState() {
         this.branch = "";
         this.questions = new ArrayList<>();
         this.zoneRoute = new ArrayList<>();
-        this.currentStage = -1;
+        this.currentStage = 0;
         this.playerResponses = new ArrayList<>();
         this.numCorrect = 0;
+        this.numStages = 0;
     }
 
     public ScavHuntState(String branch, List<Question> questions, List<Zone> zoneRoute, int currentStage, List<Response> playerResponses, int numCorrect) {
@@ -78,7 +79,7 @@ public class ScavHuntState {
      * @return Boolean True if gameOver, False if not
      */
     public Boolean isGameOver() {
-        return playerResponses.size() == numQuestions;
+        return playerResponses.size() == numStages;
     }
 
 
@@ -139,11 +140,11 @@ public class ScavHuntState {
         this.numCorrect = numCorrect;
     }
 
-    public int getNumQuestions() {
-        return numQuestions;
+    public int getNumStages() {
+        return numStages;
     }
 
-    public void setNumQuestions(int numQuestions) {
-        this.numQuestions = numQuestions;
+    public void setNumStages(int numStages) {
+        this.numStages = numStages;
     }
 }
