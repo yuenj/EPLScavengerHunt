@@ -41,9 +41,8 @@ public class SummaryActivity extends AppCompatActivity {
 
         questions = gameController.retrieveQuestions();
         responses = gameController.retrieveResponses();
-        int score = gameController.retrieveScore();
-        int maxScore = gameController.retrieveMaxScore();
-        usersScore.setText(Integer.toString(score) + "/" + Integer.toString(maxScore));
+
+        displayScore();
     }
 
     @Override
@@ -61,5 +60,11 @@ public class SummaryActivity extends AppCompatActivity {
         super.onResume();
 
         summaryAdapter.notifyDataSetChanged();
+    }
+
+    private void displayScore() {
+        final int score = gameController.retrieveScore();
+        final int maxScore = gameController.retrieveMaxScore();
+        usersScore.setText(Integer.toString(score) + "/" + Integer.toString(maxScore));
     }
 }
