@@ -17,7 +17,7 @@ import com.cmput401f17.eplscavengerhunt.model.Response;
 
 import java.util.ArrayList;
 
-public class ResultsAdapter extends BaseAdapter {
+public class SummaryAdapter extends BaseAdapter {
 
     private static LayoutInflater inflater = null;
 
@@ -25,7 +25,7 @@ public class ResultsAdapter extends BaseAdapter {
     private ArrayList<Response> responses;
     private ArrayList<Question> questions;
 
-    public ResultsAdapter(final Activity activity, final ArrayList<Response> responses,
+    public SummaryAdapter(final Activity activity, final ArrayList<Response> responses,
                           final ArrayList<Question> questions) {
         this.activity = activity;
         this.questions = questions;
@@ -37,13 +37,13 @@ public class ResultsAdapter extends BaseAdapter {
     public View getView(int position, View convertView, ViewGroup parent) {
         View vi = convertView;
         if (convertView == null)
-            vi = inflater.inflate(R.layout.item_results, null);
+            vi = inflater.inflate(R.layout.item_summary, null);
 
-        ImageView thumbnail = (ImageView) vi.findViewById(R.id.results_thumbnail);
-        TextView prompt = (TextView) vi.findViewById(R.id.results_prompt);
-        TextView usersResponse = (TextView) vi.findViewById(R.id.results_response);
-        TextView answer = (TextView) vi.findViewById(R.id.results_answer);
-        RelativeLayout background = (RelativeLayout) vi.findViewById(R.id.results_background);
+        ImageView thumbnail = (ImageView) vi.findViewById(R.id.summary_thumbnail);
+        TextView prompt = (TextView) vi.findViewById(R.id.summary_prompt);
+        TextView usersResponse = (TextView) vi.findViewById(R.id.summary_response);
+        TextView answer = (TextView) vi.findViewById(R.id.summary_answer);
+        RelativeLayout background = (RelativeLayout) vi.findViewById(R.id.summary_background);
 
         Question question = questions.get(position);
         Response response = responses.get(position);

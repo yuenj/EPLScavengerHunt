@@ -1,5 +1,5 @@
 package com.cmput401f17.eplscavengerhunt.activity;
 
-public class ResultsActivityTest {
+public class SummaryActivityTest {
 
 }

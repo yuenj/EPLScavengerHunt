@@ -21,7 +21,7 @@
         <activity android:name=".activity.QuestionActivity" />
         <activity android:name=".activity.LocationActivity" />
         <activity android:name=".activity.CongratulationsActivity" />
-        <activity android:name=".activity.ResultsActivity" />
+        <activity android:name=".activity.SummaryActivity" />
     </application>
 
 </manifest>

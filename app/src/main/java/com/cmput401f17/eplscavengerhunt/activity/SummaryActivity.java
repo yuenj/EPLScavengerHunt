@@ -9,7 +9,7 @@ import android.widget.TextView;
 import com.cmput401f17.eplscavengerhunt.R;
 import com.cmput401f17.eplscavengerhunt.ScavengerHuntApplication;
 import com.cmput401f17.eplscavengerhunt.controller.GameController;
-import com.cmput401f17.eplscavengerhunt.custom.ResultsAdapter;
+import com.cmput401f17.eplscavengerhunt.custom.SummaryAdapter;
 import com.cmput401f17.eplscavengerhunt.model.Question;
 import com.cmput401f17.eplscavengerhunt.model.Response;
 
@@ -17,9 +17,9 @@ import java.util.ArrayList;
 
 import javax.inject.Inject;
 
-public class ResultsActivity extends AppCompatActivity {
+public class SummaryActivity extends AppCompatActivity {
 
-    private ResultsAdapter resultsAdapter;
+    private SummaryAdapter summaryAdapter;
     private ArrayList<Question> questions;
     private ArrayList<Response> responses;
     private ListView resultsListView;
@@ -32,12 +32,12 @@ public class ResultsActivity extends AppCompatActivity {
     @Override
     protected void onCreate(Bundle savedInstanceState) {
         super.onCreate(savedInstanceState);
-        setContentView(R.layout.activity_results);
+        setContentView(R.layout.activity_summary);
         ScavengerHuntApplication.getInstance().getAppComponent().inject(this);
 
-        resultsListView = (ListView) findViewById(R.id.resultsLV);
-        totalScore = (TextView) findViewById(R.id.results_total);
-        next = (Button) findViewById(R.id.results_next);
+        resultsListView = (ListView) findViewById(R.id.summaryLV);
+        totalScore = (TextView) findViewById(R.id.summary_total);
+        next = (Button) findViewById(R.id.summary_next);
 
         questions = gameController.retrieveQuestions();
         responses = gameController.retrieveResponses();
@@ -49,16 +49,16 @@ public class ResultsActivity extends AppCompatActivity {
     protected void onStart() {
         super.onStart();
 
-        resultsAdapter = new ResultsAdapter(this, responses, questions);
-        resultsListView.setAdapter(resultsAdapter);
+        summaryAdapter = new SummaryAdapter(this, responses, questions);
+        resultsListView.setAdapter(summaryAdapter);
 
-        resultsAdapter.notifyDataSetChanged();
+        summaryAdapter.notifyDataSetChanged();
     }
 
     @Override
     protected void onResume() {
         super.onResume();
 
-        resultsAdapter.notifyDataSetChanged();
+        summaryAdapter.notifyDataSetChanged();
     }
 }
