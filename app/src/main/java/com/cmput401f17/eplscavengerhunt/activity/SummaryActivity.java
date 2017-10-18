@@ -23,7 +23,7 @@ public class SummaryActivity extends AppCompatActivity {
     private ArrayList<Question> questions;
     private ArrayList<Response> responses;
     private ListView resultsListView;
-    private TextView totalScore;
+    private TextView usersScore;
     private Button next;
 
     @Inject
@@ -36,14 +36,14 @@ public class SummaryActivity extends AppCompatActivity {
         ScavengerHuntApplication.getInstance().getAppComponent().inject(this);
 
         resultsListView = (ListView) findViewById(R.id.summaryLV);
-        totalScore = (TextView) findViewById(R.id.summary_total);
+        usersScore = (TextView) findViewById(R.id.summary_total);
         next = (Button) findViewById(R.id.summary_next);
 
         questions = gameController.retrieveQuestions();
         responses = gameController.retrieveResponses();
         int score = gameController.retrieveScore();
         int maxScore = gameController.retrieveMaxScore();
-        totalScore.setText(Integer.toString(score) + "/" + Integer.toString(maxScore));
+        usersScore.setText(Integer.toString(score) + "/" + Integer.toString(maxScore));
     }
 
     @Override
