@@ -18,6 +18,7 @@ public class ScavengerHuntApplication extends Application {
     public void onCreate() {
         super.onCreate();
         getAppComponent();
+        instance = this;
     }
 
     public AppComponent getAppComponent() {
