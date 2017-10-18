@@ -124,6 +124,7 @@ public class QuestionActivity extends AppCompatActivity {
             }
 
             qController.requestSubmitResponse(editText.getText().toString());
+
         }
     }
 
@@ -230,8 +231,9 @@ public class QuestionActivity extends AppCompatActivity {
 
         //TODO Conditional for choosing the view
         //displayMultChoice();
-        //displayWrittenInput();
-        displayPicInput();
+        displayWrittenInput();
+        //displayPicInput();
+
 
         /* Skip button on all view */
         Button skipButton = (Button) findViewById(R.id.skip);

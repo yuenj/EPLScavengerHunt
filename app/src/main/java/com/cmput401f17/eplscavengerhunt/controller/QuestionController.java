@@ -1,19 +1,22 @@
 package com.cmput401f17.eplscavengerhunt.controller;
 
+import com.cmput401f17.eplscavengerhunt.ScavengerHuntApplication;
 import com.cmput401f17.eplscavengerhunt.model.Question;
 import com.cmput401f17.eplscavengerhunt.model.Response;
 import com.cmput401f17.eplscavengerhunt.model.ScavHuntState;
 import com.cmput401f17.eplscavengerhunt.model.Zone;
+import javax.inject.Inject;
 
 /**
  * An intermediate class that passes data
  */
 public class QuestionController {
 
-    private ScavHuntState huntState;
+    @Inject
+    ScavHuntState scavHuntState;
 
     public QuestionController() {
-        huntState = new ScavHuntState();
+        ScavengerHuntApplication.getInstance().getAppComponent().inject(this);
     }
 
     /**
@@ -21,9 +24,8 @@ public class QuestionController {
      * @return A Question object relating to the current question
      */
     public Question requestQuestion() {
-        Question question = new Question(1, "Test", "TestAnswer");
-        return(question);
-        //return(huntState.getCurrentQuestion());
+        return(scavHuntState.getCurrentQuestion());
+
     }
 
     /**
@@ -31,11 +33,7 @@ public class QuestionController {
      * @return A string representing the Zone
      */
     public String requestZone() {
-        Zone zone = new Zone("Test");
-        zone.setName("1");
-
-        return(zone.getName());
-        //return(huntState.getCurrentZone().getName());
+        return(scavHuntState.getCurrentZone().getName());
     }
 
     /**
@@ -45,8 +43,7 @@ public class QuestionController {
      */
     public void requestSubmitResponse(String answer){
         Response response = new Response(answer);
-        System.out.println(response.getResponseStr());
-        //huntState.addResponse(response);
+        scavHuntState.addResponse(response);
     }
 
     public void skip(Question question){
