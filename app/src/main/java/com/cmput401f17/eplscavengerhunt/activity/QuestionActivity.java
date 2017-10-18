@@ -64,6 +64,7 @@ public class QuestionActivity extends AppCompatActivity {
      *  1. Display Zone, and Prompt
      *  2. Add buttons according to the number of choices in the question
      *  3. Listen for user to press button. When pressed pass on answer to controller.
+     *  4. Use intentAway to move to next activity
      */
     private void displayMultChoice(){
         setContentView(R.layout.activity_mult_choice);
@@ -72,7 +73,6 @@ public class QuestionActivity extends AppCompatActivity {
         displayPrompt();
 
         /* Get the MC choices */
-        //TODO grab from supplied question
          final ArrayList<String> choices = currentQuestion.getChoices();
 
         /* Create choice button(s) */
@@ -92,6 +92,7 @@ public class QuestionActivity extends AppCompatActivity {
 
                      //Pass the answer to the controller
                      qController.requestSubmitResponse(choices.get(id));
+                     intentAway();
                  }
              });
          }
@@ -105,6 +106,7 @@ public class QuestionActivity extends AppCompatActivity {
      *      2.Gets the user input nad changes to string.
      *      3.Hide the on-screen/ soft keyboard
      *      4.Pass the answer to the controller for further use.
+     *      5.Use intentAway to move to next activity
      *
      *  Modified code originally from https://code.tutsplus.com/tutorials/creating-a-login-screen-using-textinputlayout--cms-24168
      *
@@ -127,6 +129,7 @@ public class QuestionActivity extends AppCompatActivity {
             }
 
             qController.requestSubmitResponse(editText.getText().toString());
+            intentAway();
 
         }
     }
@@ -187,9 +190,7 @@ public class QuestionActivity extends AppCompatActivity {
         //Display photo once taken
 
         /* Display the choices */
-        final ArrayList<String> choices = new ArrayList<String>();
-        choices.add("Hello");
-        choices.add("World");
+        final ArrayList<String> choices = currentQuestion.getChoices();
 
         /* Create group for radio buttons */
         RadioGroup rg = new RadioGroup(this);
@@ -210,6 +211,7 @@ public class QuestionActivity extends AppCompatActivity {
 
                     //Pass the answer to the controller
                     qController.requestSubmitResponse(radio.getText().toString());
+                    intentAway();
                 }
             });
         }
@@ -226,6 +228,8 @@ public class QuestionActivity extends AppCompatActivity {
      * If this is not the last question we need to intent to the
      */
     private void intentAway (){
+
+        //TODO : this won't work without a functioning game controller
         //if(gController.requestCheckGameOver() != true){}
         Intent intent = new Intent(QuestionActivity.this, LocationActivity.class);
         startActivity(intent);
@@ -243,7 +247,10 @@ public class QuestionActivity extends AppCompatActivity {
     /**
      * Choose which view to display
      * Gets the current question and all info to display the question on user interface
-     *
+     * Also handles user skipping a question
+     *  1. Question is set to skipped
+     *  2. Passes a blank response to question controller
+     *  3. Moves to next activity using intent away
      * @param savedInstanceState
      */
     @Override
@@ -266,7 +273,8 @@ public class QuestionActivity extends AppCompatActivity {
                 //Toast.makeText(v.getContext(), "Question skipped", Toast.LENGTH_SHORT).show();
                 qController.skip(currentQuestion);
                 qController.requestSubmitResponse("");
-                //intentAway();
+
+                intentAway();
             }
         });
 
