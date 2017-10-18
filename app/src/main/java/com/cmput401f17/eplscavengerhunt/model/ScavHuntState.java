@@ -22,7 +22,7 @@ public class ScavHuntState {
         this.branch = "";
         this.questions = new ArrayList<>();
         this.zoneRoute = new ArrayList<>();
-        this.currentStage = 0;
+        this.currentStage = -1;
         this.playerResponses = new ArrayList<>();
         this.numCorrect = 0;
         this.numStages = 0;

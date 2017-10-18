@@ -8,6 +8,7 @@ import android.view.View;
 import android.widget.Button;
 
 import com.cmput401f17.eplscavengerhunt.R;
+import com.estimote.coresdk.common.requirements.SystemRequirementsChecker;
 
 public class TitleActivity extends AppCompatActivity {
 
@@ -17,6 +18,8 @@ public class TitleActivity extends AppCompatActivity {
         setContentView(R.layout.activity_title);
         Button startButton = (Button) findViewById(R.id.title_start_button);
 
+        //EstimoteSDK.initialize(getApplicationContext(), "eplscavengerhunt-1w7", "873d67b3977902a51b8d172bdba0a94c");
+
         startButton.setOnClickListener(new View.OnClickListener() {
             public void onClick(View v) {
                 Log.d("TitleActivity", "start button pressed");
@@ -24,6 +27,13 @@ public class TitleActivity extends AppCompatActivity {
                 startActivity(intent);
             }
         });
+    }
+
+    // Checks permissions, specifically bluetooth, for location beaocnss
+    @Override
+    protected void onResume() {
+        super.onResume();
+        SystemRequirementsChecker.checkWithDefaultDialogs(this);
     }
 }
 
