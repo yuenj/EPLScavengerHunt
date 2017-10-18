@@ -41,6 +41,9 @@ public class GameController {
         return "Dagger is working!";
     }
 
+    /**
+     * Hard coded scavHuntState
+     */
     public void initScav() {
         scavHuntState.setBranch("Clareview");
 
