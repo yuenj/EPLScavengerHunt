@@ -21,20 +21,24 @@ import android.widget.TextView;
 import android.widget.Toast;
 
 import com.cmput401f17.eplscavengerhunt.R;
+import com.cmput401f17.eplscavengerhunt.controller.LocationController;
 import com.cmput401f17.eplscavengerhunt.model.Question;
 import com.cmput401f17.eplscavengerhunt.controller.QuestionController;
 
 
 import java.util.ArrayList;
 
+import javax.inject.Inject;
+
 public class QuestionActivity extends AppCompatActivity {
 
-    private QuestionController qController;
+    @Inject
+    QuestionController qController;
+
     private Question currentQuestion;
 
     public QuestionActivity() {
-        qController = new QuestionController();
-        currentQuestion = new Question();
+        currentQuestion = qController.requestQuestion();
     }
 
     /**
@@ -215,6 +219,10 @@ public class QuestionActivity extends AppCompatActivity {
         LinearLayoutCompat layout = (LinearLayoutCompat) findViewById(R.id.pic_choice_layout);
         LinearLayoutCompat.LayoutParams parameters = new LinearLayoutCompat.LayoutParams(LinearLayoutCompat.LayoutParams.MATCH_PARENT, LinearLayoutCompat.LayoutParams.WRAP_CONTENT);
         layout.addView(rg, parameters);
+    }
+
+    private void intentAway (View currentView){
+        
     }
 
     /**
