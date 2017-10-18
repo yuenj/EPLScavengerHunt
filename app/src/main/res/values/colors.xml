@@ -5,4 +5,8 @@
     <color name="colorAccent">#FF4081</color>
 
     <color name="black_overlay">#66000000</color>
+
+    <!-- Item Results -->
+    <color name="colorCorrectResponse">#B2FF59</color>
+    <color name="colorIncorrectResponse">#FF5252</color>
 </resources>

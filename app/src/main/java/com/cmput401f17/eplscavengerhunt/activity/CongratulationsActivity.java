@@ -20,7 +20,7 @@ public class CongratulationsActivity extends AppCompatActivity {
         startButton.setOnClickListener(new View.OnClickListener() {
             public void onClick(View v) {
                 Log.d("Congrats Activity", "results button pressed");
-                Intent intent = new Intent(CongratulationsActivity.this, ResultsActivity.class);
+                Intent intent = new Intent(CongratulationsActivity.this, SummaryActivity.class);
                 startActivity(intent);
             }
         });
