@@ -16,14 +16,14 @@ public class AboutActivityTest extends ActivityInstrumentationTestCase2<AboutAct
         super(AboutActivity.class);
     }
 
-    public void setUp() throws Exception {
+    public void setUp() {
         solo = new Solo(getInstrumentation(), getActivity());
     }
 
-    public void testAboutActivityIsProperlyDisplayed() throws Exception {
+    public void testAboutActivityIsProperlyDisplayed() {
         solo.assertCurrentActivity(ERR_MSG, AboutActivity.class);
-        TextView text = (TextView) solo.getCurrentActivity().findViewById(R.id.about_text_view);
-        assertEquals(text.getText().toString(), solo.getString(R.string.about_text));
+        TextView aboutMessage = solo.getCurrentActivity().findViewById(R.id.about_text_view);
+        assertEquals(aboutMessage.getText().toString(), solo.getString(R.string.about_text));
     }
 
     public void testReturnButtonShouldGoToTitleActivity() {
@@ -31,7 +31,7 @@ public class AboutActivityTest extends ActivityInstrumentationTestCase2<AboutAct
         solo.assertCurrentActivity(ERR_MSG, TitleActivity.class);
     }
 
-    public void tearDown() throws Exception {
+    public void tearDown() {
         solo.finishOpenedActivities();
     }
 }

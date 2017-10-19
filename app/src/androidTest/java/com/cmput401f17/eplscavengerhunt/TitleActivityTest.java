@@ -18,11 +18,11 @@ public class TitleActivityTest extends ActivityInstrumentationTestCase2<TitleAct
         super(TitleActivity.class);
     }
 
-    public void setUp() throws Exception {
+    public void setUp() {
         solo = new Solo(getInstrumentation(), getActivity());
     }
 
-    public void testTitleActivityIsProperlyDisplayed() throws Exception {
+    public void testTitleActivityIsProperlyDisplayed() {
         solo.assertCurrentActivity(errMsg, TitleActivity.class);
     }
 
@@ -46,7 +46,7 @@ public class TitleActivityTest extends ActivityInstrumentationTestCase2<TitleAct
         solo.assertCurrentActivity(errMsg, CreditsActivity.class);
     }
 
-    public void tearDown() throws Exception {
+    public void tearDown() {
         solo.finishOpenedActivities();
     }
 }
