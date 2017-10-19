@@ -15,14 +15,14 @@
         android:layout_marginRight="8dp"
         android:layout_marginStart="30dp"
         android:layout_marginTop="40dp"
-        android:text="Congratulations !"
+        android:text="@string/congrats_msg_header"
         android:textColor="#000"
         android:textSize="40sp"
         android:textStyle="bold"
+        app:layout_constraintHorizontal_bias="0.0"
         app:layout_constraintLeft_toLeftOf="parent"
         app:layout_constraintRight_toRightOf="parent"
-        app:layout_constraintTop_toTopOf="parent"
-        app:layout_constraintHorizontal_bias="0.0" />
+        app:layout_constraintTop_toTopOf="parent" />
 
     <TextView
         android:id="@+id/CongratsMessage"
@@ -33,7 +33,7 @@
         android:layout_marginRight="8dp"
         android:layout_marginStart="30dp"
         android:layout_marginTop="55dp"
-        android:text="You have completed the EPL Scavenger Hunt"
+        android:text="@string/congrats_msg_body"
         android:textColor="#000"
         android:textSize="20sp"
         android:textStyle="bold"
