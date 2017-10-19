@@ -33,16 +33,6 @@ public class QuestionController {
     }
 
     /**
-     * Gets the current zone's name
-     * @return A string representing the Zone
-     */
-    public String requestZone() {
-
-        return(scavHuntState.getCurrentZone().getName());
-
-    }
-
-    /**
      *  Passes/ updates the user answer
      *  @pre User has input an answer
      *  @param answer

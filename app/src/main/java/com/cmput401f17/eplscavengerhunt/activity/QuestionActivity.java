@@ -22,28 +22,37 @@ import android.widget.TextView;
 import android.widget.Toast;
 
 import com.cmput401f17.eplscavengerhunt.R;
+import com.cmput401f17.eplscavengerhunt.ScavengerHuntApplication;
+import com.cmput401f17.eplscavengerhunt.controller.GameController;
+import com.cmput401f17.eplscavengerhunt.controller.LocationController;
 import com.cmput401f17.eplscavengerhunt.model.Question;
 import com.cmput401f17.eplscavengerhunt.controller.QuestionController;
 
 
 import java.util.ArrayList;
 
+import javax.inject.Inject;
+
 public class QuestionActivity extends AppCompatActivity {
 
-    private QuestionController qController;
+    @Inject
+    QuestionController qController;
+
+    @Inject
+    GameController gameController;
+
+    @Inject
+    LocationController locationController;
+
     private Question currentQuestion;
 
-    public QuestionActivity() {
-        qController = new QuestionController();
-        currentQuestion = new Question();
-    }
 
     /**
      * Displays the current zone
      */
     private void displayZone() {
         TextView zone = (TextView)findViewById(R.id.zone);
-        zone.setText("Zone: " + qController.requestZone());
+        zone.setText("Zone: " + locationController.requestZone().getName());
     }
 
     /**
@@ -68,32 +77,34 @@ public class QuestionActivity extends AppCompatActivity {
 
         /* Get the MC choices */
         //TODO grab from supplied question
-         final ArrayList<String> choices = new ArrayList<String>();
-         choices.add("Hello");
-         choices.add("World");
-         choices.add("!");
+        final ArrayList<String> choices = new ArrayList<String>();
+        choices.add("Hello");
+        choices.add("World");
+        choices.add("!");
 
         /* Create choice button(s) */
-         for(int i = 0; i < choices.size(); i++) {
-             Button mcOption = new Button(this);
-             mcOption.setText(choices.get(i));
+        for(int i = 0; i < choices.size(); i++) {
+            Button mcOption = new Button(this);
+            mcOption.setText(choices.get(i));
 
 
-             LinearLayoutCompat layout = (LinearLayoutCompat) findViewById(R.id.choice_buttons);
-             LinearLayoutCompat.LayoutParams parameters = new LinearLayoutCompat.LayoutParams(LinearLayoutCompat.LayoutParams.MATCH_PARENT, LinearLayoutCompat.LayoutParams.WRAP_CONTENT);
-             layout.addView(mcOption, parameters);
+            LinearLayoutCompat layout = (LinearLayoutCompat) findViewById(R.id.choice_buttons);
+            LinearLayoutCompat.LayoutParams parameters = new LinearLayoutCompat.LayoutParams(LinearLayoutCompat.LayoutParams.MATCH_PARENT, LinearLayoutCompat.LayoutParams.WRAP_CONTENT);
+            layout.addView(mcOption, parameters);
 
             /* Listen for button click. If clicked, make a toast telling which button was clicked */
-             final int id = i;
-             mcOption.setOnClickListener(new View.OnClickListener() {
-                 public void onClick(View view) {
-                     Toast.makeText(view.getContext(), "Button clicked index = " + id, Toast.LENGTH_SHORT).show();
+            final int id = i;
+            mcOption.setOnClickListener(new View.OnClickListener() {
+                public void onClick(View view) {
+                    Toast.makeText(view.getContext(), "Button clicked index = " + id, Toast.LENGTH_SHORT).show();
 
-                     //Pass the answer to the controller
-                     qController.requestSubmitResponse(choices.get(id));
-                 }
-             });
-         }
+                    //Pass the answer to the controller
+
+
+                    qController.requestSubmitResponse(choices.get(id));
+                }
+            });
+        }
     }
 
     /**
@@ -126,6 +137,10 @@ public class QuestionActivity extends AppCompatActivity {
             }
 
             qController.requestSubmitResponse(editText.getText().toString());
+
+            // Increment current stage
+            gameController.requestIncrementCurrentStage();
+
             Intent intent = new Intent(QuestionActivity.this, LocationActivity.class);
             startActivity(intent);
             finish();
@@ -232,6 +247,7 @@ public class QuestionActivity extends AppCompatActivity {
     protected void onCreate(Bundle savedInstanceState) {
         super.onCreate(savedInstanceState);
 
+        ScavengerHuntApplication.getInstance().getAppComponent().inject(this);
         currentQuestion = qController.requestQuestion();
 
 
