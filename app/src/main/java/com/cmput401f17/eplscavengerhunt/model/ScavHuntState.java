@@ -51,11 +51,7 @@ public class ScavHuntState {
      * @param response
      */
     private void validateResponse(Question question, Response response) {
-
-        Log.i("SCAVHUNTSTATE QUES", response.getResponseStr());
-        Log.i("SCAVHUNTSTATE RESPO", question.getSolution());
         if (question.getSolution().equals(response.getResponseStr())) {
-            Log.i("SCAVHUNTSTATE RESPO", "SAME");
             response.markCorrect();
             incrementNumCorrect();
         }
