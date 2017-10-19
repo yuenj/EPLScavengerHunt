@@ -234,7 +234,7 @@ public class QuestionActivity extends AppCompatActivity {
      * If this is not the last question we need to intent to the
      */
     private void intentAway () {
-        if (gameController.requestCheckGameOver() != true) {
+        if (!gameController.requestCheckGameOver()) {
             gameController.requestIncrementCurrentStage();
             Intent intent = new Intent(QuestionActivity.this, LocationActivity.class);
             startActivity(intent);

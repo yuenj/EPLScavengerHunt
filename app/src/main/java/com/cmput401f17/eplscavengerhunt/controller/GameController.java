@@ -119,11 +119,8 @@ public class GameController {
         zone1.setName("Zone 1");
         Zone zone2 = new Zone("[ab1d6643c33e5f6ed7c52a062168f137]"); // Candystore
         zone2.setName("Zone 2");
-        Zone zone3 = new Zone("abcdefghijklmnop"); // Candystore
-        zone3.setName("Zone 3");
         testZoneRoute.add(zone1);
         testZoneRoute.add(zone2);
-        testZoneRoute.add(zone3);
         scavHuntState.setZoneRoute(testZoneRoute);
 
         String questionStrDummy1 = "Question 1";
@@ -146,6 +143,7 @@ public class GameController {
         testQuestionList.add(testQuestion1);
         testQuestionList.add(testQuestion2);
         scavHuntState.setQuestions(testQuestionList);
+        scavHuntState.setNumStages(testQuestionList.size());
 
     }
 
