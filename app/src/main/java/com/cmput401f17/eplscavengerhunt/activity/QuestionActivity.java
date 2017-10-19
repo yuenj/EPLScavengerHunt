@@ -46,7 +46,6 @@ public class QuestionActivity extends AppCompatActivity {
 
     private Question currentQuestion;
 
-
     /**
      * Displays the current zone
      */
@@ -68,6 +67,7 @@ public class QuestionActivity extends AppCompatActivity {
      *  1. Display Zone, and Prompt
      *  2. Add buttons according to the number of choices in the question
      *  3. Listen for user to press button. When pressed pass on answer to controller.
+     *  4. Use intentAway to move to next activity
      */
     private void displayMultChoice(){
         setContentView(R.layout.activity_mult_choice);
@@ -76,11 +76,7 @@ public class QuestionActivity extends AppCompatActivity {
         displayPrompt();
 
         /* Get the MC choices */
-        //TODO grab from supplied question
-        final ArrayList<String> choices = new ArrayList<String>();
-        choices.add("Hello");
-        choices.add("World");
-        choices.add("!");
+         final ArrayList<String> choices = currentQuestion.getChoices();
 
         /* Create choice button(s) */
         for(int i = 0; i < choices.size(); i++) {
@@ -93,18 +89,17 @@ public class QuestionActivity extends AppCompatActivity {
             layout.addView(mcOption, parameters);
 
             /* Listen for button click. If clicked, make a toast telling which button was clicked */
-            final int id = i;
-            mcOption.setOnClickListener(new View.OnClickListener() {
-                public void onClick(View view) {
-                    Toast.makeText(view.getContext(), "Button clicked index = " + id, Toast.LENGTH_SHORT).show();
+             final int id = i;
+             mcOption.setOnClickListener(new View.OnClickListener() {
+                 public void onClick(View view) {
+                     Toast.makeText(view.getContext(), "Button clicked index = " + id, Toast.LENGTH_SHORT).show();
 
-                    //Pass the answer to the controller
-
-
-                    qController.requestSubmitResponse(choices.get(id));
-                }
-            });
-        }
+                     //Pass the answer to the controller
+                     qController.requestSubmitResponse(choices.get(id));
+                     intentAway();
+                 }
+             });
+         }
     }
 
     /**
@@ -115,6 +110,7 @@ public class QuestionActivity extends AppCompatActivity {
      *      2.Gets the user input nad changes to string.
      *      3.Hide the on-screen/ soft keyboard
      *      4.Pass the answer to the controller for further use.
+     *      5.Use intentAway to move to next activity
      *
      *  Modified code originally from https://code.tutsplus.com/tutorials/creating-a-login-screen-using-textinputlayout--cms-24168
      *
@@ -137,22 +133,7 @@ public class QuestionActivity extends AppCompatActivity {
             }
 
             qController.requestSubmitResponse(editText.getText().toString());
-
-            // GameOver check current stage
-            if (!gameController.requestCheckGameOver()) {
-                gameController.requestIncrementCurrentStage();
-                Intent intent = new Intent(QuestionActivity.this, LocationActivity.class);
-                startActivity(intent);
-                finish();
-            }
-
-            // goto CongratulationsActivity
-            else {
-                Intent intent = new Intent(QuestionActivity.this, CongratulationsActivity.class);
-                startActivity(intent);
-                finish();
-            }
-
+            intentAway();
         }
     }
 
@@ -212,9 +193,7 @@ public class QuestionActivity extends AppCompatActivity {
         //Display photo once taken
 
         /* Display the choices */
-        final ArrayList<String> choices = new ArrayList<String>();
-        choices.add("Hello");
-        choices.add("World");
+        final ArrayList<String> choices = currentQuestion.getChoices();
 
         /* Create group for radio buttons */
         RadioGroup rg = new RadioGroup(this);
@@ -235,6 +214,7 @@ public class QuestionActivity extends AppCompatActivity {
 
                     //Pass the answer to the controller
                     qController.requestSubmitResponse(radio.getText().toString());
+                    intentAway();
                 }
             });
         }
@@ -247,9 +227,34 @@ public class QuestionActivity extends AppCompatActivity {
 
 
     /**
+     * Used to intent to the next activity
+     * Need to increase the Scavenger Hunt stage before we leave the activity to advance the game.
+     * If this is the last question we need to intent to the Congrats Activity
+     * If this is not the last question we need to intent to the
+     */
+    private void intentAway () {
+        if (!gameController.requestCheckGameOver()) {
+            gameController.requestIncrementCurrentStage();
+            Intent intent = new Intent(QuestionActivity.this, LocationActivity.class);
+            startActivity(intent);
+            finish();
+
+        } else{
+            Intent intent = new Intent(QuestionActivity.this, CongratulationsActivity.class);
+            startActivity(intent);
+            finish();
+        }
+
+    }
+
+    /**
      * Choose which view to display
      * Gets the current question and all info to display the question on user interface
-     *
+     * Determines type of question and how to display based on aspects of the question
+     * Also handles user skipping a question
+     *  1. Question is set to skipped
+     *  2. Passes a blank response to question controller
+     *  3. Moves to next activity using intent away
      * @param savedInstanceState
      */
     @Override
@@ -260,10 +265,15 @@ public class QuestionActivity extends AppCompatActivity {
         currentQuestion = qController.requestQuestion();
 
 
-        //TODO Conditional for choosing the view
-        //displayMultChoice();
-        displayWrittenInput();
+        //TODO Conditional for choosing the view that is less hacky
+        if (currentQuestion.isChoicesEmpty())
+            displayWrittenInput();
+        else{
+            displayMultChoice();
+        }
+
         //displayPicInput();
+
 
         /* Skip button on all view */
         Button skipButton = (Button) findViewById(R.id.skip);
@@ -271,8 +281,9 @@ public class QuestionActivity extends AppCompatActivity {
         skipButton.setOnClickListener(new View.OnClickListener() {
             public void onClick(View v) {
                 Toast.makeText(v.getContext(), "Question skipped", Toast.LENGTH_SHORT).show();
-
-                //qController.skip();
+                qController.skip(currentQuestion);
+                qController.requestSubmitResponse("");
+                intentAway();
 
             }
         });

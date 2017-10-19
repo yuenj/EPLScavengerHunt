@@ -142,7 +142,7 @@ public class GameController {
         testZoneRoute.add(zone2);
         scavHuntState.setZoneRoute(testZoneRoute);
 
-        String questionStrDummy1 = "Question 1?";
+        String questionStrDummy1 = "Question 1";
         int id1 = 0;
         String solutionStrDummy1 = "Solution 1";
         Question testQuestion1 = new Question(id1, questionStrDummy1, solutionStrDummy1);
@@ -151,11 +151,16 @@ public class GameController {
         int id2 = 1;
         String solutionStrDummy2 = "Solution 2";
         Question testQuestion2 = new Question(id2, questionStrDummy2, solutionStrDummy2);
+        ArrayList<String> testChoices = new ArrayList<String>() {{
+            add("Solution 1");
+            add("Solution 2");
+            add("Solution 3");
+        }};
+        testQuestion2.setChoices(testChoices);
 
         List<Question> testQuestionList = new ArrayList<>();
         testQuestionList.add(testQuestion1);
         testQuestionList.add(testQuestion2);
-
         scavHuntState.setQuestions(testQuestionList);
         scavHuntState.setNumStages(testZoneRoute.size());
 
