@@ -17,6 +17,7 @@ import android.widget.EditText;
 import android.widget.LinearLayout;
 import android.widget.RadioButton;
 import android.widget.RadioGroup;
+
 import android.widget.TextView;
 import android.widget.Toast;
 
@@ -76,6 +77,7 @@ public class QuestionActivity extends AppCompatActivity {
          for(int i = 0; i < choices.size(); i++) {
              Button mcOption = new Button(this);
              mcOption.setText(choices.get(i));
+
 
              LinearLayoutCompat layout = (LinearLayoutCompat) findViewById(R.id.choice_buttons);
              LinearLayoutCompat.LayoutParams parameters = new LinearLayoutCompat.LayoutParams(LinearLayoutCompat.LayoutParams.MATCH_PARENT, LinearLayoutCompat.LayoutParams.WRAP_CONTENT);
@@ -219,6 +221,7 @@ public class QuestionActivity extends AppCompatActivity {
         layout.addView(rg, parameters);
     }
 
+
     /**
      * Choose which view to display
      * Gets the current question and all info to display the question on user interface
@@ -231,6 +234,7 @@ public class QuestionActivity extends AppCompatActivity {
 
         currentQuestion = qController.requestQuestion();
 
+
         //TODO Conditional for choosing the view
         //displayMultChoice();
         displayWrittenInput();
@@ -242,7 +246,9 @@ public class QuestionActivity extends AppCompatActivity {
         skipButton.setOnClickListener(new View.OnClickListener() {
             public void onClick(View v) {
                 Toast.makeText(v.getContext(), "Question skipped", Toast.LENGTH_SHORT).show();
+
                 //qController.skip();
+
             }
         });
 

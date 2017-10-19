@@ -24,6 +24,7 @@
         android:text="@string/question_temp_text"
         android:textSize="30sp"/>
 
+
     <!-- Layout as placeholder -->
     <android.support.v7.widget.LinearLayoutCompat xmlns:android="http://schemas.android.com/apk/res/android"
         android:id="@+id/choice_buttons"
@@ -34,6 +35,7 @@
     <!-- Buttons are dynamically generated in code. See QuestionActivity.java, displayMultChoice() -->
 
     </android.support.v7.widget.LinearLayoutCompat>
+
 
     <LinearLayout
         android:layout_width="match_parent"

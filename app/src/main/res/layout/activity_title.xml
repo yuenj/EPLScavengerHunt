@@ -8,7 +8,8 @@
         android:id="@+id/title_text_view"
         android:layout_width="match_parent"
         android:layout_height="match_parent"
-        android:gravity="center"
+        android:gravity="center|top"
+        android:layout_marginTop="30dp"
         android:keepScreenOn="true"
         android:text="@string/title_text"
         android:textColor="#33b5e5"
@@ -21,8 +22,35 @@
         android:layout_width="wrap_content"
         android:layout_height="wrap_content"
         android:layout_weight="1"
-        android:text="@string/start_text"
-        android:layout_marginBottom="136dp"
+        android:text="@string/start_button_text"
+        android:layout_marginBottom="300dp"
+        android:layout_alignParentBottom="true"
+        android:layout_centerHorizontal="true" />
+    <Button
+        android:id="@+id/title_rules_button"
+        android:layout_width="wrap_content"
+        android:layout_height="wrap_content"
+        android:layout_weight="1"
+        android:text="@string/rules_button_text"
+        android:layout_marginBottom="250dp"
+        android:layout_alignParentBottom="true"
+        android:layout_centerHorizontal="true" />
+    <Button
+        android:id="@+id/title_about_button"
+        android:layout_width="wrap_content"
+        android:layout_height="wrap_content"
+        android:layout_weight="1"
+        android:text="@string/about_button_text"
+        android:layout_marginBottom="200dp"
+        android:layout_alignParentBottom="true"
+        android:layout_centerHorizontal="true" />
+    <Button
+        android:id="@+id/title_credits_button"
+        android:layout_width="wrap_content"
+        android:layout_height="wrap_content"
+        android:layout_weight="1"
+        android:text="@string/credits_button_text"
+        android:layout_marginBottom="150dp"
         android:layout_alignParentBottom="true"
         android:layout_centerHorizontal="true" />
 

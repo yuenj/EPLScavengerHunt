@@ -140,6 +140,7 @@ public class GameController {
         testQuestionList.add(testQuestion1);
         testQuestionList.add(testQuestion2);
         scavHuntState.setQuestions(testQuestionList);
+
     }
 
     // TODO actual implementation will replace hardcoded values when database is set up
