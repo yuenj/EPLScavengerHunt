@@ -15,18 +15,18 @@ import com.cmput401f17.eplscavengerhunt.R;
 import com.cmput401f17.eplscavengerhunt.model.Question;
 import com.cmput401f17.eplscavengerhunt.model.Response;
 
-import java.util.ArrayList;
+import java.util.List;
 
 public class SummaryAdapter extends BaseAdapter {
 
     private static LayoutInflater inflater = null;
 
     private Activity activity;
-    private ArrayList<Response> responses;
-    private ArrayList<Question> questions;
+    private List<Response> responses;
+    private List<Question> questions;
 
-    public SummaryAdapter(final Activity activity, final ArrayList<Response> responses,
-                          final ArrayList<Question> questions) {
+    public SummaryAdapter(final Activity activity, final List<Response> responses,
+                          final List<Question> questions) {
         this.activity = activity;
         this.questions = questions;
         this.responses = responses;

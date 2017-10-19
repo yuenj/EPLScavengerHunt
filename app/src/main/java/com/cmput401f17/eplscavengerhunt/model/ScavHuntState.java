@@ -1,6 +1,8 @@
 package com.cmput401f17.eplscavengerhunt.model;
 
 
+import android.util.Log;
+
 import java.util.ArrayList;
 import java.util.List;
 
@@ -49,9 +51,16 @@ public class ScavHuntState {
      * @param response
      */
     private void validateResponse(Question question, Response response) {
-        if (question.getSolution() == response.getResponseStr()) {
+
+        Log.i("SCAVHUNTSTATE QUES", response.getResponseStr());
+        Log.i("SCAVHUNTSTATE RESPO", question.getSolution());
+        if (question.getSolution().equals(response.getResponseStr())) {
+            Log.i("SCAVHUNTSTATE RESPO", "SAME");
             response.markCorrect();
             incrementNumCorrect();
+        }
+        else {
+            response.markIncorrect();
         }
     }
 

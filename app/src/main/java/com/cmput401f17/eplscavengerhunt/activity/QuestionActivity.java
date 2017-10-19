@@ -138,12 +138,21 @@ public class QuestionActivity extends AppCompatActivity {
 
             qController.requestSubmitResponse(editText.getText().toString());
 
-            // Increment current stage
-            gameController.requestIncrementCurrentStage();
+            // GameOver check current stage
+            if (!gameController.requestCheckGameOver()) {
+                gameController.requestIncrementCurrentStage();
+                Intent intent = new Intent(QuestionActivity.this, LocationActivity.class);
+                startActivity(intent);
+                finish();
+            }
 
-            Intent intent = new Intent(QuestionActivity.this, LocationActivity.class);
-            startActivity(intent);
-            finish();
+            // goto CongratulationsActivity
+            else {
+                Intent intent = new Intent(QuestionActivity.this, CongratulationsActivity.class);
+                startActivity(intent);
+                finish();
+            }
+
         }
     }
 

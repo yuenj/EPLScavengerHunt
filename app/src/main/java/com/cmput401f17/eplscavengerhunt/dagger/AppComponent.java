@@ -4,6 +4,7 @@ import com.cmput401f17.eplscavengerhunt.activity.CongratulationsActivity;
 import com.cmput401f17.eplscavengerhunt.activity.DebugActivity;
 import com.cmput401f17.eplscavengerhunt.activity.LocationActivity;
 import com.cmput401f17.eplscavengerhunt.activity.QuestionActivity;
+import com.cmput401f17.eplscavengerhunt.activity.RulesActivity;
 import com.cmput401f17.eplscavengerhunt.activity.SummaryActivity;
 import com.cmput401f17.eplscavengerhunt.activity.TitleActivity;
 import com.cmput401f17.eplscavengerhunt.controller.GameController;
@@ -26,4 +27,6 @@ public interface AppComponent {
     void inject(SummaryActivity summaryActivity);
     void inject(TitleActivity titleActivity);
     void inject(LocationController locationController);
+    void inject(RulesActivity rulesActivity);
+
 }

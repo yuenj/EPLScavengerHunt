@@ -97,6 +97,7 @@ public class GameController {
 
     private Results generateResults() {
         List<Response> responses = scavHuntState.getPlayerResponses();
+        List<Question> questions = scavHuntState.getQuestions();
         int score = scavHuntState.getNumCorrect();
         int numQuestions = scavHuntState.getNumStages();
 
@@ -104,6 +105,7 @@ public class GameController {
         results.setResponses(responses);
         results.setScore(score);
         results.setNumQuestions(numQuestions);
+        results.setQuestions(questions);
 
         return results;
     }
@@ -136,54 +138,20 @@ public class GameController {
         String solutionStrDummy2 = "Solution 2";
         Question testQuestion2 = new Question(id2, questionStrDummy2, solutionStrDummy2);
 
+        String questionStrDummy3 = "Question 3";
+        int id3 = 2;
+        String solutionStrDummy3 = "Solution 3";
+        Question testQuestion3 = new Question(id3, questionStrDummy3, solutionStrDummy3);
+
         List<Question> testQuestionList = new ArrayList<>();
         testQuestionList.add(testQuestion1);
         testQuestionList.add(testQuestion2);
+        testQuestionList.add(testQuestion3);
+
         scavHuntState.setQuestions(testQuestionList);
-
-    }
-
-    // TODO actual implementation will replace hardcoded values when database is set up
-    public ArrayList<Question> retrieveQuestions() {
-        Question question1 = new Question();
-        question1.setQuestionText("question 1 prompt");
-        question1.setSolution("question 1 solution");
-        Question question2 = new Question();
-        question2.setQuestionText("question 2 prompt");
-        question2.setSolution("question 2 solution");
-
-        ArrayList<Question> questions = new ArrayList<>();
-        questions.add(question1);
-        questions.add(question2);
-
-        return questions;
-    }
+        scavHuntState.setNumStages(testZoneRoute.size());
 
 
-    // TODO actual implementation will replace hardcoded values when database is set up
-    public ArrayList<Response> retrieveResponses() {
-        Response response1 = new Response();
-        response1.setResponseStr("question 1 response");
-        response1.markCorrect();
-        Response response2 = new Response();
-        response2.setResponseStr("question 2 response");
-        response2.markIncorrect();
-
-        ArrayList<Response> responses = new ArrayList<>();
-        responses.add(response1);
-        responses.add(response2);
-
-        return responses;
-    }
-
-    // TODO actual implementation will replace hardcoded values when database is set up
-    public int retrieveScore() {
-        return 3;
-    }
-    
-    // TODO actual implementation will replace hardcoded values when database is set up
-    public int retrieveMaxScore() {
-        return 5;
     }
 }
 

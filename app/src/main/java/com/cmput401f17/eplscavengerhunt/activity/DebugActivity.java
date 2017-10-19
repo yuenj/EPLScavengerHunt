@@ -64,6 +64,5 @@ public class DebugActivity extends AppCompatActivity {
         });
 
          // dagger.setText(gameController.initGame());
-        gameController.initScav();
     }
 }
