@@ -119,14 +119,11 @@ public class GameController {
         zone1.setName("Zone 1");
         Zone zone2 = new Zone("[ab1d6643c33e5f6ed7c52a062168f137]"); // Candystore
         zone2.setName("Zone 2");
-        Zone zone3 = new Zone("abcdefghijklmnop"); // Candystore
-        zone3.setName("Zone 3");
         testZoneRoute.add(zone1);
         testZoneRoute.add(zone2);
-        testZoneRoute.add(zone3);
         scavHuntState.setZoneRoute(testZoneRoute);
 
-        String questionStrDummy1 = "Question 1?";
+        String questionStrDummy1 = "Question 1";
         int id1 = 0;
         String solutionStrDummy1 = "Solution 1";
         Question testQuestion1 = new Question(id1, questionStrDummy1, solutionStrDummy1);
@@ -135,11 +132,18 @@ public class GameController {
         int id2 = 1;
         String solutionStrDummy2 = "Solution 2";
         Question testQuestion2 = new Question(id2, questionStrDummy2, solutionStrDummy2);
+        ArrayList<String> testChoices = new ArrayList<String>() {{
+            add("Solution 1");
+            add("Solution 2");
+            add("Solution 3");
+        }};
+        testQuestion2.setChoices(testChoices);
 
         List<Question> testQuestionList = new ArrayList<>();
         testQuestionList.add(testQuestion1);
         testQuestionList.add(testQuestion2);
         scavHuntState.setQuestions(testQuestionList);
+        scavHuntState.setNumStages(testQuestionList.size());
 
     }
 
