@@ -29,18 +29,8 @@ public class QuestionController {
     public Question requestQuestion() {
 
         return(scavHuntState.getCurrentQuestion());
-
     }
 
-    /**
-     * Gets the current zone's name
-     * @return A string representing the Zone
-     */
-    public String requestZone() {
-
-        return(scavHuntState.getCurrentZone().getName());
-
-    }
 
     /**
      *  Passes/ updates the user answer
@@ -52,9 +42,7 @@ public class QuestionController {
         scavHuntState.addResponse(response);
 
     }
-
     public void skip(Question question){
-
+        question.skip();
     }
-
 }

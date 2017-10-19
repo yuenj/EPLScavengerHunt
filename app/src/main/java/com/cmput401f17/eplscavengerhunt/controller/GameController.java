@@ -3,15 +3,22 @@ package com.cmput401f17.eplscavengerhunt.controller;
 import com.cmput401f17.eplscavengerhunt.ScavengerHuntApplication;
 import com.cmput401f17.eplscavengerhunt.model.Question;
 import com.cmput401f17.eplscavengerhunt.model.Response;
-import com.cmput401f17.eplscavengerhunt.model.Results;
+import com.cmput401f17.eplscavengerhunt.model.Summary;
 import com.cmput401f17.eplscavengerhunt.model.ScavHuntState;
 import com.cmput401f17.eplscavengerhunt.model.Zone;
 
 import java.util.ArrayList;
 import java.util.List;
+import java.util.Random;
 
 import javax.inject.Inject;
 
+/**
+ * Responsible for initializing a new game scenario, game logic
+ * such as checking for gameOver and incrementing current stage
+ * when user is ready to get the next zone, and generating summary
+ * of the game upon gameOver.
+ */
 public class GameController {
 
     @Inject
@@ -45,8 +52,8 @@ public class GameController {
         return true;
     }
 
-    public Results requestResults() {
-        return generateResults();
+    public Summary requestSummary() {
+        return generateSummary();
     }
 
     public Boolean requestCheckGameOver() {
@@ -59,15 +66,6 @@ public class GameController {
      */
     public void requestIncrementCurrentStage() {
         scavHuntState.incrementCurrentStage();
-    }
-
-    /**
-     * Starts the QuestionActivity that corresponds to the current
-     * question's type. Used by LocationController when user is
-     * in the correct zone and is ready to receive a question.
-     */
-    public void startQuestionActivity() {
-        // TODO: IMPLEMENT when question subclasses & their activities are implemented
     }
 
     /**
@@ -87,31 +85,52 @@ public class GameController {
     }
 
     /**
-     * Generates a sequence of questions. For each zone, one is randomly
-     * selected (via DBController) from the pool of questions that correspond
-     * to that zone. Each zone gets one question. Stores this in ScavHuntState
+     * Generates a sequence of questions. Randomization of question selection
+     * is done here. For each zone, gets all questions in the question pool, and
+     * randomly selects one. Each zone gets one question. Stores this series
+     * of questions in ScavHuntState
      */
-    private void generateQuestionSet(List<Zone> zoneRoute) {
-        // TODO: IMPLEMENT
+     void generateQuestionSet(List<Zone> zoneRoute) {
+        List<Question> questionPool;
+        List<Question> questionSet = new ArrayList<>();
+        Random rand = new Random();
+
+        for (Zone zone : zoneRoute) {
+            questionPool = databaseController.retrieveQuestionsinZone(zone);
+            Question randomQuestion = questionPool.get(0);
+            questionSet.add(randomQuestion);
+        }
+        scavHuntState.setQuestions(questionSet);
     }
 
-    private Results generateResults() {
+    private Summary generateSummary() {
         List<Response> responses = scavHuntState.getPlayerResponses();
+        List<Question> questions = scavHuntState.getQuestions();
         int score = scavHuntState.getNumCorrect();
         int numQuestions = scavHuntState.getNumStages();
 
-        Results results = new Results();
-        results.setResponses(responses);
-        results.setScore(score);
-        results.setNumQuestions(numQuestions);
+        Summary summary = new Summary();
+        summary.setResponses(responses);
+        summary.setScore(score);
+        summary.setNumQuestions(numQuestions);
+        summary.setQuestions(questions);
 
-        return results;
+        return summary;
     }
 
     /**
-     * Hard coded scavHuntState
+     * Hard coded scavHuntState population
      */
     public void initScav() {
+
+        // Clear previous game data if user just
+        // completed a game, gets sent back to the TitleActivity
+        // and chooses to start the game again.
+        if (!scavHuntState.getBranch().equals("")) {
+            scavHuntState.clearPreviousGameData();
+        }
+
+        scavHuntState.clearPreviousGameData();
         scavHuntState.setBranch("Clareview");
 
         List<Zone> testZoneRoute = new ArrayList<>();
@@ -119,14 +138,11 @@ public class GameController {
         zone1.setName("Zone 1");
         Zone zone2 = new Zone("[ab1d6643c33e5f6ed7c52a062168f137]"); // Candystore
         zone2.setName("Zone 2");
-        Zone zone3 = new Zone("abcdefghijklmnop"); // Candystore
-        zone3.setName("Zone 3");
         testZoneRoute.add(zone1);
         testZoneRoute.add(zone2);
-        testZoneRoute.add(zone3);
         scavHuntState.setZoneRoute(testZoneRoute);
 
-        String questionStrDummy1 = "Question 1?";
+        String questionStrDummy1 = "Question 1";
         int id1 = 0;
         String solutionStrDummy1 = "Solution 1";
         Question testQuestion1 = new Question(id1, questionStrDummy1, solutionStrDummy1);
@@ -135,55 +151,20 @@ public class GameController {
         int id2 = 1;
         String solutionStrDummy2 = "Solution 2";
         Question testQuestion2 = new Question(id2, questionStrDummy2, solutionStrDummy2);
+        ArrayList<String> testChoices = new ArrayList<String>() {{
+            add("Solution 1");
+            add("Solution 2");
+            add("Solution 3");
+        }};
+        testQuestion2.setChoices(testChoices);
 
         List<Question> testQuestionList = new ArrayList<>();
         testQuestionList.add(testQuestion1);
         testQuestionList.add(testQuestion2);
         scavHuntState.setQuestions(testQuestionList);
-
-    }
-
-    // TODO actual implementation will replace hardcoded values when database is set up
-    public ArrayList<Question> retrieveQuestions() {
-        Question question1 = new Question();
-        question1.setQuestionText("question 1 prompt");
-        question1.setSolution("question 1 solution");
-        Question question2 = new Question();
-        question2.setQuestionText("question 2 prompt");
-        question2.setSolution("question 2 solution");
-
-        ArrayList<Question> questions = new ArrayList<>();
-        questions.add(question1);
-        questions.add(question2);
-
-        return questions;
-    }
+        scavHuntState.setNumStages(testZoneRoute.size());
 
 
-    // TODO actual implementation will replace hardcoded values when database is set up
-    public ArrayList<Response> retrieveResponses() {
-        Response response1 = new Response();
-        response1.setResponseStr("question 1 response");
-        response1.markCorrect();
-        Response response2 = new Response();
-        response2.setResponseStr("question 2 response");
-        response2.markIncorrect();
-
-        ArrayList<Response> responses = new ArrayList<>();
-        responses.add(response1);
-        responses.add(response2);
-
-        return responses;
-    }
-
-    // TODO actual implementation will replace hardcoded values when database is set up
-    public int retrieveScore() {
-        return 3;
-    }
-    
-    // TODO actual implementation will replace hardcoded values when database is set up
-    public int retrieveMaxScore() {
-        return 5;
     }
 }
 

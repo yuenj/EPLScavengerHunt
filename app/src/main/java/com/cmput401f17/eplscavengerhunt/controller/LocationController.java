@@ -42,8 +42,6 @@ public class LocationController {
      * Starts beacon discovery
      */
     public void startDiscovery() {
-        // Increment stage so we can look for the next zone
-        scavHuntState.incrementCurrentStage();
 
         // Connect to scanning service
         beaconManager.connect(new BeaconManager.ServiceReadyCallback() {
@@ -71,7 +69,7 @@ public class LocationController {
                     // we stop discovery and return true via callback
                     if (beacon.id.toString().equals(requestZone().getBeaconID()) &&
                             (RegionUtils.computeProximity(beacon) == Proximity.NEAR ||
-                            RegionUtils.computeProximity(beacon) == Proximity.IMMEDIATE)) {
+                                    RegionUtils.computeProximity(beacon) == Proximity.IMMEDIATE)) {
                         Log.d("LocationListener", "Found Beacon");
                         beaconManager.stopLocationDiscovery();
                         finishedCallback.callback(true);

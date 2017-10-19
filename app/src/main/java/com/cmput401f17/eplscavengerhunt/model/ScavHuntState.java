@@ -1,6 +1,8 @@
 package com.cmput401f17.eplscavengerhunt.model;
 
 
+import android.util.Log;
+
 import java.util.ArrayList;
 import java.util.List;
 
@@ -49,9 +51,12 @@ public class ScavHuntState {
      * @param response
      */
     private void validateResponse(Question question, Response response) {
-        if (question.getSolution() == response.getResponseStr()) {
+        if (question.getSolution().equals(response.getResponseStr())) {
             response.markCorrect();
             incrementNumCorrect();
+        }
+        else {
+            response.markIncorrect();
         }
     }
 
@@ -80,6 +85,16 @@ public class ScavHuntState {
      */
     public Boolean isGameOver() {
         return playerResponses.size() == numStages;
+    }
+
+    public void clearPreviousGameData() {
+        this.branch = "";
+        this.questions = new ArrayList<>();
+        this.zoneRoute = new ArrayList<>();
+        this.currentStage = 0;
+        this.playerResponses = new ArrayList<>();
+        this.numCorrect = 0;
+        this.numStages = 0;
     }
 
 
