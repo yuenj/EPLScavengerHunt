@@ -91,6 +91,16 @@ public class ScavHuntState {
         return playerResponses.size() == numStages;
     }
 
+    public void clearPreviousGameData() {
+        this.branch = "";
+        this.questions = new ArrayList<>();
+        this.zoneRoute = new ArrayList<>();
+        this.currentStage = 0;
+        this.playerResponses = new ArrayList<>();
+        this.numCorrect = 0;
+        this.numStages = 0;
+    }
+
 
     // Getters and Setters
     public String getBranch() {

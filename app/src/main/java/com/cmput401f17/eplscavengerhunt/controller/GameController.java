@@ -114,6 +114,14 @@ public class GameController {
      * Hard coded scavHuntState
      */
     public void initScav() {
+
+        // Clear previous game data if new game started
+        // i.e. "Continue" clicked on SummaryActivity
+        if (scavHuntState.getBranch() != "") {
+            scavHuntState.clearPreviousGameData();
+        }
+
+        scavHuntState.clearPreviousGameData();
         scavHuntState.setBranch("Clareview");
 
         List<Zone> testZoneRoute = new ArrayList<>();
