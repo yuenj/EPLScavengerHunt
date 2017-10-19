@@ -10,9 +10,6 @@ package com.cmput401f17.eplscavengerhunt.model;
 
 import java.util.ArrayList;
 
-/**
- * Created by brettgarbitt on 2017-10-18.
- */
 
 public class Question {
 
@@ -33,7 +30,19 @@ public class Question {
         this.skipped = false;
     }
 
-    public Question(int questionID, int zone, String questionText, String solution, String q_link, String s_link, boolean take_pic, boolean skipped) {
+    public Question(int questionID, String questionText, String solution) {
+        this.questionID = questionID;
+        this.zone = zone;
+        this.prompt = questionText;
+        this.choices = new ArrayList<String>();
+        this.solution = solution;
+        this.image_link = "";
+        this.sound_link = "";
+        this.take_pic = false;
+        this.skipped = false;
+    }
+
+    public Question(int questionID, int zone, String questionText, String solution, String q_link, String s_link, boolean take_pic) {
         this.questionID = questionID;
         this.zone = zone;
         this.prompt = questionText;
@@ -41,7 +50,7 @@ public class Question {
         this.solution = solution;
         this.image_link = q_link;
         this.sound_link = s_link;
-        this.take_pic = false;
+        this.take_pic = take_pic;
         this.skipped = false;
     }
 
@@ -72,6 +81,8 @@ public class Question {
     public ArrayList<String> getChoices() { return(this.choices); }
 
     public void setChoices(ArrayList<String> choices) { this.choices = choices;}
+
+    public boolean isChoicesEmpty(){ return(this.choices.isEmpty());}
 
     public String getSolution() {
         return solution;

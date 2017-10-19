@@ -17,10 +17,12 @@ import android.widget.EditText;
 import android.widget.LinearLayout;
 import android.widget.RadioButton;
 import android.widget.RadioGroup;
+
 import android.widget.TextView;
 import android.widget.Toast;
 
 import com.cmput401f17.eplscavengerhunt.R;
+import com.cmput401f17.eplscavengerhunt.ScavengerHuntApplication;
 import com.cmput401f17.eplscavengerhunt.controller.GameController;
 import com.cmput401f17.eplscavengerhunt.controller.LocationController;
 import com.cmput401f17.eplscavengerhunt.model.Question;
@@ -35,7 +37,12 @@ public class QuestionActivity extends AppCompatActivity {
 
     @Inject
     QuestionController qController;
-    GameController gController;
+
+    @Inject
+    GameController gameController;
+
+    @Inject
+    LocationController locationController;
 
     private Question currentQuestion;
 
@@ -48,7 +55,7 @@ public class QuestionActivity extends AppCompatActivity {
      */
     private void displayZone() {
         TextView zone = (TextView)findViewById(R.id.zone);
-        zone.setText("Zone: " + qController.requestZone());
+        zone.setText("Zone: " + locationController.requestZone().getName());
     }
 
     /**
@@ -76,13 +83,14 @@ public class QuestionActivity extends AppCompatActivity {
          final ArrayList<String> choices = currentQuestion.getChoices();
 
         /* Create choice button(s) */
-         for(int i = 0; i < choices.size(); i++) {
-             Button mcOption = new Button(this);
-             mcOption.setText(choices.get(i));
+        for(int i = 0; i < choices.size(); i++) {
+            Button mcOption = new Button(this);
+            mcOption.setText(choices.get(i));
 
-             LinearLayoutCompat layout = (LinearLayoutCompat) findViewById(R.id.choice_buttons);
-             LinearLayoutCompat.LayoutParams parameters = new LinearLayoutCompat.LayoutParams(LinearLayoutCompat.LayoutParams.MATCH_PARENT, LinearLayoutCompat.LayoutParams.WRAP_CONTENT);
-             layout.addView(mcOption, parameters);
+
+            LinearLayoutCompat layout = (LinearLayoutCompat) findViewById(R.id.choice_buttons);
+            LinearLayoutCompat.LayoutParams parameters = new LinearLayoutCompat.LayoutParams(LinearLayoutCompat.LayoutParams.MATCH_PARENT, LinearLayoutCompat.LayoutParams.WRAP_CONTENT);
+            layout.addView(mcOption, parameters);
 
             /* Listen for button click. If clicked, make a toast telling which button was clicked */
              final int id = i;
@@ -222,31 +230,30 @@ public class QuestionActivity extends AppCompatActivity {
         layout.addView(rg, parameters);
     }
 
+
     /**
      * Used to intent to the next activity
      * If this is the last question we need to intent to the Congrats Activity
      * If this is not the last question we need to intent to the
      */
-    private void intentAway (){
+    private void intentAway () {
+        if (gameController.requestCheckGameOver() != true) {
+            Intent intent = new Intent(QuestionActivity.this, LocationActivity.class);
+            startActivity(intent);
+            finish();
 
-        //TODO : this won't work without a functioning game controller
-        //if(gController.requestCheckGameOver() != true){}
-        Intent intent = new Intent(QuestionActivity.this, LocationActivity.class);
-        startActivity(intent);
-        finish();
-
-        //else
-        /*
-        Intent intent = new Intent(QuestionActivity.this, CongratulationsActivity.class);
-        startActivity(intent);
-        finish();
-        */
+        } else{
+            Intent intent = new Intent(QuestionActivity.this, CongratulationsActivity.class);
+            startActivity(intent);
+            finish();
+        }
 
     }
 
     /**
      * Choose which view to display
      * Gets the current question and all info to display the question on user interface
+     * Determines type of question and how to display based on aspects of the question
      * Also handles user skipping a question
      *  1. Question is set to skipped
      *  2. Passes a blank response to question controller
@@ -256,12 +263,18 @@ public class QuestionActivity extends AppCompatActivity {
     @Override
     protected void onCreate(Bundle savedInstanceState) {
         super.onCreate(savedInstanceState);
-
+        
+        ScavengerHuntApplication.getInstance().getAppComponent().inject(this);
         currentQuestion = qController.requestQuestion();
 
-        //TODO Conditional for choosing the view
-        //displayMultChoice();
-        displayWrittenInput();
+
+        //TODO Conditional for choosing the view that is less hacky
+        if (currentQuestion.isChoicesEmpty())
+            displayWrittenInput();
+        else{
+            displayMultChoice();
+        }
+
         //displayPicInput();
 
 
@@ -270,11 +283,11 @@ public class QuestionActivity extends AppCompatActivity {
 
         skipButton.setOnClickListener(new View.OnClickListener() {
             public void onClick(View v) {
-                //Toast.makeText(v.getContext(), "Question skipped", Toast.LENGTH_SHORT).show();
+                Toast.makeText(v.getContext(), "Question skipped", Toast.LENGTH_SHORT).show();
                 qController.skip(currentQuestion);
                 qController.requestSubmitResponse("");
-
                 intentAway();
+
             }
         });
 

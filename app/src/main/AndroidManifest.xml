@@ -27,7 +27,10 @@
         <activity android:name=".activity.QuestionActivity" />
         <activity android:name=".activity.LocationActivity" />
         <activity android:name=".activity.CongratulationsActivity" />
-        <activity android:name=".activity.ResultsActivity"></activity>
+        <activity android:name=".activity.RulesActivity" />
+        <activity android:name=".activity.AboutActivity" />
+        <activity android:name=".activity.CreditsActivity"/>
+        <activity android:name=".activity.SummaryActivity" />
     </application>
 
 </manifest>
