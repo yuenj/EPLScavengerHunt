@@ -12,10 +12,10 @@ import com.cmput401f17.eplscavengerhunt.activity.TitleActivity;
 import com.robotium.solo.Solo;
 
 public class TitleActivityTest extends ActivityInstrumentationTestCase2<TitleActivity> {
+    private static final String errMsg = "Wrong Activity";
+    
     private Solo solo;
     private Resources res;
-
-    private static final String errMsg = "Wrong Activity";
 
     public TitleActivityTest() {
         super(TitleActivity.class);
