@@ -4,7 +4,7 @@ import com.cmput401f17.eplscavengerhunt.controller.DatabaseController;
 import com.cmput401f17.eplscavengerhunt.controller.GameController;
 import com.cmput401f17.eplscavengerhunt.model.Question;
 import com.cmput401f17.eplscavengerhunt.model.Response;
-import com.cmput401f17.eplscavengerhunt.model.Results;
+import com.cmput401f17.eplscavengerhunt.model.Summary;
 import com.cmput401f17.eplscavengerhunt.model.ScavHuntState;
 import com.cmput401f17.eplscavengerhunt.model.Zone;
 
@@ -119,7 +119,7 @@ public class GameControllerTest {
 //    }
 
     @Test
-    public void requestResultsTest() {
+    public void requestSummaryTest() {
         List<Response> responses = new ArrayList<>();
         Collections.addAll(responses,
                 response1, response2, response3, response4, response5);
@@ -129,11 +129,11 @@ public class GameControllerTest {
         when(mockScavHuntState.getNumCorrect()).thenReturn(score);
         when(mockScavHuntState.getNumStages()).thenReturn(numStages);
 
-        Results resultsToBeSent = gameController.requestResults();
+        Summary summaryToBeSent = gameController.requestSummary();
 
-        assertEquals(resultsToBeSent.getResponses(), responses);
-        assertEquals(resultsToBeSent.getScore(), score);
-        assertEquals(resultsToBeSent.getNumQuestions(), numStages);
+        assertEquals(summaryToBeSent.getResponses(), responses);
+        assertEquals(summaryToBeSent.getScore(), score);
+        assertEquals(summaryToBeSent.getNumQuestions(), numStages);
     }
 
     @Test

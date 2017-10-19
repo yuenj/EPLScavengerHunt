@@ -3,7 +3,7 @@ package com.cmput401f17.eplscavengerhunt.controller;
 import com.cmput401f17.eplscavengerhunt.ScavengerHuntApplication;
 import com.cmput401f17.eplscavengerhunt.model.Question;
 import com.cmput401f17.eplscavengerhunt.model.Response;
-import com.cmput401f17.eplscavengerhunt.model.Results;
+import com.cmput401f17.eplscavengerhunt.model.Summary;
 import com.cmput401f17.eplscavengerhunt.model.ScavHuntState;
 import com.cmput401f17.eplscavengerhunt.model.Zone;
 
@@ -45,8 +45,8 @@ public class GameController {
         return true;
     }
 
-    public Results requestResults() {
-        return generateResults();
+    public Summary requestSummary() {
+        return generateSummary();
     }
 
     public Boolean requestCheckGameOver() {
@@ -95,19 +95,19 @@ public class GameController {
         // TODO: IMPLEMENT
     }
 
-    private Results generateResults() {
+    private Summary generateSummary() {
         List<Response> responses = scavHuntState.getPlayerResponses();
         List<Question> questions = scavHuntState.getQuestions();
         int score = scavHuntState.getNumCorrect();
         int numQuestions = scavHuntState.getNumStages();
 
-        Results results = new Results();
-        results.setResponses(responses);
-        results.setScore(score);
-        results.setNumQuestions(numQuestions);
-        results.setQuestions(questions);
+        Summary summary = new Summary();
+        summary.setResponses(responses);
+        summary.setScore(score);
+        summary.setNumQuestions(numQuestions);
+        summary.setQuestions(questions);
 
-        return results;
+        return summary;
     }
 
     /**

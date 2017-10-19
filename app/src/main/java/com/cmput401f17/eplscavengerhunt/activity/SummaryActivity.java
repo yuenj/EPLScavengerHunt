@@ -15,7 +15,7 @@ import com.cmput401f17.eplscavengerhunt.controller.GameController;
 import com.cmput401f17.eplscavengerhunt.custom.SummaryAdapter;
 import com.cmput401f17.eplscavengerhunt.model.Question;
 import com.cmput401f17.eplscavengerhunt.model.Response;
-import com.cmput401f17.eplscavengerhunt.model.Results;
+import com.cmput401f17.eplscavengerhunt.model.Summary;
 
 import java.util.List;
 
@@ -27,7 +27,7 @@ public class SummaryActivity extends AppCompatActivity {
     private ListView summaryListView;
     private TextView usersScore;
     private Button done;
-    private Results results;
+    private Summary summary;
 
     @Inject
     GameController gameController;
@@ -38,8 +38,8 @@ public class SummaryActivity extends AppCompatActivity {
         setContentView(R.layout.activity_summary);
         ScavengerHuntApplication.getInstance().getAppComponent().inject(this);
 
-        results = gameController.requestResults();
-        String str = results.getQuestions().toString();
+        summary = gameController.requestSummary();
+        String str = summary.getQuestions().toString();
         Log.i("SUMMARY:", str);
 
         // set up
@@ -51,16 +51,16 @@ public class SummaryActivity extends AppCompatActivity {
     }
 
     private void displaySummary() {
-        final List<Question> questions = results.getQuestions();
-        final List<Response> responses = results.getResponses();
+        final List<Question> questions = summary.getQuestions();
+        final List<Response> responses = summary.getResponses();
 
         summaryAdapter = new SummaryAdapter(this, responses, questions);
         summaryListView.setAdapter(summaryAdapter);
     }
 
     private void displayScore() {
-        final int score = results.getScore();
-        final int maxScore = results.getNumQuestions();
+        final int score = summary.getScore();
+        final int maxScore = summary.getNumQuestions();
         usersScore.setText(Integer.toString(score) + "/" + Integer.toString(maxScore));
     }
 
