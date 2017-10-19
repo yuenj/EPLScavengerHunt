@@ -22,7 +22,7 @@ public class TitleActivityTest extends ActivityInstrumentationTestCase2<TitleAct
         solo = new Solo(getInstrumentation(), getActivity());
     }
 
-    public void testStart() throws Exception {
+    public void testTitleActivityIsProperlyDisplayed() throws Exception {
         solo.assertCurrentActivity(errMsg, TitleActivity.class);
     }
 
