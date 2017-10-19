@@ -1,6 +1,5 @@
 package com.cmput401f17.eplscavengerhunt;
 
-import android.app.Activity;
 import android.content.res.Resources;
 import android.test.ActivityInstrumentationTestCase2;
 
@@ -13,7 +12,7 @@ import com.robotium.solo.Solo;
 
 public class TitleActivityTest extends ActivityInstrumentationTestCase2<TitleActivity> {
     private static final String errMsg = "Wrong Activity";
-    
+
     private Solo solo;
     private Resources res;
 
