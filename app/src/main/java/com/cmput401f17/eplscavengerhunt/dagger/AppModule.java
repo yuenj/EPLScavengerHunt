@@ -6,6 +6,7 @@ import com.cmput401f17.eplscavengerhunt.ScavengerHuntApplication;
 import com.cmput401f17.eplscavengerhunt.controller.DatabaseController;
 import com.cmput401f17.eplscavengerhunt.controller.GameController;
 import com.cmput401f17.eplscavengerhunt.controller.LocationController;
+import com.cmput401f17.eplscavengerhunt.controller.QuestionController;
 import com.cmput401f17.eplscavengerhunt.model.ScavHuntState;
 
 import javax.inject.Singleton;
@@ -15,7 +16,6 @@ import dagger.Provides;
 
 @Module
 public class AppModule {
-
     private final ScavengerHuntApplication app;
 
     public AppModule(ScavengerHuntApplication app) {
@@ -50,5 +50,11 @@ public class AppModule {
     @Singleton
     public LocationController provideLocationController() {
         return new LocationController();
+    }
+
+    @Provides
+    @Singleton
+    public QuestionController provideQuestionController() {
+        return new QuestionController();
     }
 }
