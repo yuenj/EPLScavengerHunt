@@ -46,10 +46,6 @@ public class QuestionActivity extends AppCompatActivity {
 
     private Question currentQuestion;
 
-    public QuestionActivity() {
-        currentQuestion = qController.requestQuestion();
-    }
-
     /**
      * Displays the current zone
      */
@@ -233,11 +229,13 @@ public class QuestionActivity extends AppCompatActivity {
 
     /**
      * Used to intent to the next activity
+     * Need to increase the Scavenger Hunt stage before we leave the activity to advance the game.
      * If this is the last question we need to intent to the Congrats Activity
      * If this is not the last question we need to intent to the
      */
     private void intentAway () {
         if (gameController.requestCheckGameOver() != true) {
+            gameController.requestIncrementCurrentStage();
             Intent intent = new Intent(QuestionActivity.this, LocationActivity.class);
             startActivity(intent);
             finish();
@@ -263,7 +261,7 @@ public class QuestionActivity extends AppCompatActivity {
     @Override
     protected void onCreate(Bundle savedInstanceState) {
         super.onCreate(savedInstanceState);
-        
+
         ScavengerHuntApplication.getInstance().getAppComponent().inject(this);
         currentQuestion = qController.requestQuestion();
 

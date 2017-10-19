@@ -126,7 +126,7 @@ public class GameController {
         testZoneRoute.add(zone3);
         scavHuntState.setZoneRoute(testZoneRoute);
 
-        String questionStrDummy1 = "Question 1?";
+        String questionStrDummy1 = "Question 1";
         int id1 = 0;
         String solutionStrDummy1 = "Solution 1";
         Question testQuestion1 = new Question(id1, questionStrDummy1, solutionStrDummy1);
