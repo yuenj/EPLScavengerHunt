@@ -8,12 +8,21 @@ import android.view.View;
 import android.widget.Button;
 
 import com.cmput401f17.eplscavengerhunt.R;
+import com.cmput401f17.eplscavengerhunt.ScavengerHuntApplication;
+import com.cmput401f17.eplscavengerhunt.controller.GameController;
+import com.google.android.gms.games.Game;
+
+import javax.inject.Inject;
 
 public class RulesActivity extends AppCompatActivity {
+    @Inject
+    GameController gameController;
 
     @Override
     protected void onCreate(Bundle savedInstanceState) {
         super.onCreate(savedInstanceState);
+        ScavengerHuntApplication.getInstance().getAppComponent().inject(this);
+
         setContentView(R.layout.activity_rules);
         Button startButton = (Button) findViewById(R.id.rules_start_button);
         Button returnButton = (Button) findViewById(R.id.rules_return_button);
@@ -21,7 +30,10 @@ public class RulesActivity extends AppCompatActivity {
         startButton.setOnClickListener(new View.OnClickListener() {
             public void onClick(View v) {
                 Log.d("RulesActivity", "start button pressed");
-                // TODO functionality for starting a game
+                Intent intent = new Intent(RulesActivity.this, DebugActivity.class);
+                gameController.initScav();
+                startActivity(intent);
+                finish();
             }
         });
 
