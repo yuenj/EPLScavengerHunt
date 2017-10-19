@@ -9,9 +9,16 @@ import com.cmput401f17.eplscavengerhunt.model.Zone;
 
 import java.util.ArrayList;
 import java.util.List;
+import java.util.Random;
 
 import javax.inject.Inject;
 
+/**
+ * Responsible for initializing a new game scenario, game logic
+ * such as checking for gameOver and incrementing current stage
+ * when user is ready to get the next zone, and generating summary
+ * of the game upon gameOver.
+ */
 public class GameController {
 
     @Inject
@@ -62,15 +69,6 @@ public class GameController {
     }
 
     /**
-     * Starts the QuestionActivity that corresponds to the current
-     * question's type. Used by LocationController when user is
-     * in the correct zone and is ready to receive a question.
-     */
-    public void startQuestionActivity() {
-        // TODO: IMPLEMENT when question subclasses & their activities are implemented
-    }
-
-    /**
      * Generates a sequence of zones in the branch in randomized order, storing it in
      * ScavHuntApplication. Since num Zones = num Questions, also updates numStages
      * in ScavHuntState
@@ -87,12 +85,22 @@ public class GameController {
     }
 
     /**
-     * Generates a sequence of questions. For each zone, one is randomly
-     * selected (via DBController) from the pool of questions that correspond
-     * to that zone. Each zone gets one question. Stores this in ScavHuntState
+     * Generates a sequence of questions. Randomization of question selection
+     * is done here. For each zone, gets all questions in the question pool, and
+     * randomly selects one. Each zone gets one question. Stores this series
+     * of questions in ScavHuntState
      */
-    private void generateQuestionSet(List<Zone> zoneRoute) {
-        // TODO: IMPLEMENT
+     void generateQuestionSet(List<Zone> zoneRoute) {
+        List<Question> questionPool;
+        List<Question> questionSet = new ArrayList<>();
+        Random rand = new Random();
+
+        for (Zone zone : zoneRoute) {
+            questionPool = databaseController.retrieveQuestionsinZone(zone);
+            Question randomQuestion = questionPool.get(0);
+            questionSet.add(randomQuestion);
+        }
+        scavHuntState.setQuestions(questionSet);
     }
 
     private Summary generateSummary() {
@@ -111,13 +119,14 @@ public class GameController {
     }
 
     /**
-     * Hard coded scavHuntState
+     * Hard coded scavHuntState population
      */
     public void initScav() {
 
-        // Clear previous game data if new game started
-        // i.e. "Continue" clicked on SummaryActivity
-        if (scavHuntState.getBranch() != "") {
+        // Clear previous game data if user just
+        // completed a game, gets sent back to the TitleActivity
+        // and chooses to start the game again.
+        if (!scavHuntState.getBranch().equals("")) {
             scavHuntState.clearPreviousGameData();
         }
 
@@ -129,11 +138,8 @@ public class GameController {
         zone1.setName("Zone 1");
         Zone zone2 = new Zone("[ab1d6643c33e5f6ed7c52a062168f137]"); // Candystore
         zone2.setName("Zone 2");
-        Zone zone3 = new Zone("abcdefghijklmnop"); // Candystore
-        zone3.setName("Zone 3");
         testZoneRoute.add(zone1);
         testZoneRoute.add(zone2);
-        testZoneRoute.add(zone3);
         scavHuntState.setZoneRoute(testZoneRoute);
 
         String questionStrDummy1 = "Question 1?";
@@ -146,15 +152,9 @@ public class GameController {
         String solutionStrDummy2 = "Solution 2";
         Question testQuestion2 = new Question(id2, questionStrDummy2, solutionStrDummy2);
 
-        String questionStrDummy3 = "Question 3";
-        int id3 = 2;
-        String solutionStrDummy3 = "Solution 3";
-        Question testQuestion3 = new Question(id3, questionStrDummy3, solutionStrDummy3);
-
         List<Question> testQuestionList = new ArrayList<>();
         testQuestionList.add(testQuestion1);
         testQuestionList.add(testQuestion2);
-        testQuestionList.add(testQuestion3);
 
         scavHuntState.setQuestions(testQuestionList);
         scavHuntState.setNumStages(testZoneRoute.size());
