@@ -1,10 +1,12 @@
 package com.cmput401f17.eplscavengerhunt;
 
+import android.util.Log;
+
 import com.cmput401f17.eplscavengerhunt.controller.DatabaseController;
 import com.cmput401f17.eplscavengerhunt.controller.GameController;
 import com.cmput401f17.eplscavengerhunt.model.Question;
 import com.cmput401f17.eplscavengerhunt.model.Response;
-import com.cmput401f17.eplscavengerhunt.model.Results;
+import com.cmput401f17.eplscavengerhunt.model.Summary;
 import com.cmput401f17.eplscavengerhunt.model.ScavHuntState;
 import com.cmput401f17.eplscavengerhunt.model.Zone;
 
@@ -64,6 +66,11 @@ public class GameControllerTest {
     Question question3 = mock(Question.class);
     Question question4 = mock(Question.class);
     Question question5 = mock(Question.class);
+    Question question6 = mock(Question.class);
+    Question question7 = mock(Question.class);
+    Question question8 = mock(Question.class);
+    Question question9 = mock(Question.class);
+    Question question10 = mock(Question.class);
 
     Response response1 = mock(Response.class);
     Response response2 = mock(Response.class);
@@ -72,9 +79,8 @@ public class GameControllerTest {
     Response response5 = mock(Response.class);
 
 
-//    @Test
+    @Test
     /**
-     * TODO: UPDATE THIS TEST
      * retreiveRandomQuestions and generateZoneRoute are private methods
      * so cannot be tested
      * ** ZONE GENERATION related tests already pass **
@@ -89,37 +95,90 @@ public class GameControllerTest {
      * Capture:
      * - zoneRoute and questionSet and numStages sent to mock scavHuntState.
      */
+    public void initGameTest() {
+        // mock situation: 5 zones, each zone has question pools of size 2
+        List<Zone> zoneRoute = new ArrayList<>();
+        Collections.addAll(zoneRoute, zone1, zone2, zone3, zone4, zone5);
+        List<Question> questionPool1 = new ArrayList<>();
+        List<Question> questionPool2 = new ArrayList<>();
+        List<Question> questionPool3 = new ArrayList<>();
+        List<Question> questionPool4 = new ArrayList<>();
+        List<Question> questionPool5 = new ArrayList<>();
+        Collections.addAll(questionPool1,
+                question1, question2);
+        Collections.addAll(questionPool2,
+                question3, question4);
+        Collections.addAll(questionPool3,
+                question5, question6);
+        Collections.addAll(questionPool4,
+                question7, question8);
+        Collections.addAll(questionPool5,
+                question9, question10);
+        when(mockDatabaseController
+                .retrieveZones("Clareview")).thenReturn(zoneRoute);
+        when(mockDatabaseController
+                .retrieveQuestionsinZone(zone1)).thenReturn(questionPool1);
+        when(mockDatabaseController
+                .retrieveQuestionsinZone(zone2)).thenReturn(questionPool2);
+        when(mockDatabaseController
+                .retrieveQuestionsinZone(zone3)).thenReturn(questionPool3);
+        when(mockDatabaseController
+                .retrieveQuestionsinZone(zone4)).thenReturn(questionPool4);
+        when(mockDatabaseController.
+                retrieveQuestionsinZone(zone5)).thenReturn(questionPool5);
 
-//    public void initGameTest() {
-//        List<Zone> zoneRoute = new ArrayList<>();
-//        Collections.addAll(zoneRoute, zone1, zone2, zone3, zone4, zone5);
-//        List<Question> questionSet = new ArrayList<>();
-//        Collections.addAll(questionSet,
-//                question1, question2, question3, question4, question5);
-//        when(mockDatabaseController.retrieveZones("Clareview")).thenReturn(zoneRoute);
-//        when(mockDatabaseController.retrieveQuestionsinZone(zoneRoute)).thenReturn(questionSet);
-//        when(mockScavHuntState.getBranch()).thenReturn("Clareview");
-//
-//        gameController.initGame();
-//
-//        verify(mockScavHuntState).getBranch();
-//        verify(mockDatabaseController).retrieveZones("Clareview");
-//        verify(mockDatabaseController).retrieveQuestionsinZone(zoneRoute);
-//        verify(mockScavHuntState, times(1)).setQuestions(QuestionSetCaptor.capture());
-//        verify(mockScavHuntState, times(1)).setNumStages(IntegerCaptor.capture());
-//        verify(mockScavHuntState, times(1)).setZoneRoute(ZoneCaptor.capture());
-//
-//        List<Question> questionsSetSentToScavHuntState = QuestionSetCaptor.getValue();
-//        List<Zone> zoneRouteSentToScavHuntState = ZoneCaptor.getValue();
-//        Integer numStagesSentToScavHuntState = IntegerCaptor.getValue();
-//
-//        assertEquals(zoneRoute, zoneRouteSentToScavHuntState);
-//        assertEquals(questionSet,questionsSetSentToScavHuntState);
-//        assertEquals(numStagesSentToScavHuntState,(Integer) 5);
-//    }
+        when(mockScavHuntState.getBranch()).thenReturn("Clareview");
+
+        gameController.initGame();
+
+        verify(mockScavHuntState).getBranch();
+        verify(mockDatabaseController).retrieveZones("Clareview");
+
+        // verify question pools from all 5 zones is pulled from database
+        verify(mockDatabaseController).retrieveQuestionsinZone(zone1);
+        verify(mockDatabaseController).retrieveQuestionsinZone(zone2);
+        verify(mockDatabaseController).retrieveQuestionsinZone(zone3);
+        verify(mockDatabaseController).retrieveQuestionsinZone(zone4);
+        verify(mockDatabaseController).retrieveQuestionsinZone(zone5);
+
+
+        verify(mockScavHuntState, times(1)).setQuestions(QuestionSetCaptor.capture());
+        verify(mockScavHuntState, times(1)).setNumStages(IntegerCaptor.capture());
+        verify(mockScavHuntState, times(1)).setZoneRoute(ZoneCaptor.capture());
+
+        // capture values
+        List<Question> questionsSetSentToScavHuntState = QuestionSetCaptor.getValue();
+        List<Zone> zoneRouteSentToScavHuntState = ZoneCaptor.getValue();
+        Integer numStagesSentToScavHuntState = IntegerCaptor.getValue();
+
+        assertEquals(zoneRoute, zoneRouteSentToScavHuntState);
+
+        // assert a question from all pools is in question set
+        Boolean QuestionFromPool1Picked = !(Collections.disjoint(
+                questionsSetSentToScavHuntState, questionPool1));
+        Boolean QuestionFromPool2Picked = !(Collections.disjoint(
+                questionsSetSentToScavHuntState, questionPool2));
+        Boolean QuestionFromPool3Picked = !(Collections.disjoint(
+                questionsSetSentToScavHuntState, questionPool3));
+        Boolean QuestionFromPool4Picked = !(Collections.disjoint(
+                questionsSetSentToScavHuntState, questionPool4));
+        Boolean QuestionFromPool5Picked = !(Collections.disjoint(
+                questionsSetSentToScavHuntState, questionPool5));
+        assertTrue(QuestionFromPool1Picked);
+        assertTrue(QuestionFromPool2Picked);
+        assertTrue(QuestionFromPool3Picked);
+        assertTrue(QuestionFromPool4Picked);
+        assertTrue(QuestionFromPool5Picked);
+
+        assertEquals(numStagesSentToScavHuntState,(Integer) 5);
+
+        // note: if questions have been picked from all question pools,
+        // and number of stage
+    }
+
 
     @Test
-    public void requestResultsTest() {
+    public void requestSummaryTest() {
         List<Response> responses = new ArrayList<>();
         Collections.addAll(responses,
                 response1, response2, response3, response4, response5);
@@ -129,11 +188,11 @@ public class GameControllerTest {
         when(mockScavHuntState.getNumCorrect()).thenReturn(score);
         when(mockScavHuntState.getNumStages()).thenReturn(numStages);
 
-        Results resultsToBeSent = gameController.requestResults();
+        Summary summaryToBeSent = gameController.requestSummary();
 
-        assertEquals(resultsToBeSent.getResponses(), responses);
-        assertEquals(resultsToBeSent.getScore(), score);
-        assertEquals(resultsToBeSent.getNumQuestions(), numStages);
+        assertEquals(summaryToBeSent.getResponses(), responses);
+        assertEquals(summaryToBeSent.getScore(), score);
+        assertEquals(summaryToBeSent.getNumQuestions(), numStages);
     }
 
     @Test
@@ -153,10 +212,6 @@ public class GameControllerTest {
 
         verify(mockScavHuntState).isGameOver();
         assertFalse(gameOver);
-    }
-
-    @Test
-    public void startQuestionActivityTest() {
     }
 
     @Test
