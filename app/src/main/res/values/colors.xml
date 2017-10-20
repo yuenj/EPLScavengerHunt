@@ -6,7 +6,7 @@
 
     <color name="black_overlay">#66000000</color>
 
-    <!-- Item Results -->
+    <!-- Item Summary -->
     <color name="colorCorrectResponse">#B2FF59</color>
     <color name="colorIncorrectResponse">#FF5252</color>
 </resources>

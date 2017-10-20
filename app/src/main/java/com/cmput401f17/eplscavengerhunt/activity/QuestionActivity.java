@@ -134,7 +134,6 @@ public class QuestionActivity extends AppCompatActivity {
 
             qController.requestSubmitResponse(editText.getText().toString());
             intentAway();
-
         }
     }
 
