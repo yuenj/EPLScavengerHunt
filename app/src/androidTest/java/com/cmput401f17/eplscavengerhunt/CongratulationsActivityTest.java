@@ -23,10 +23,10 @@ public class CongratulationsActivityTest extends
 
     public void testCongratulationsActivityIsProperlyDisplayed() {
         solo.assertCurrentActivity(ERR_MSG, CongratulationsActivity.class);
-        TextView congratsHeader = solo.getCurrentActivity().findViewById(R.id.title);
-        assertEquals(congratsHeader.getText().toString(), solo.getString(R.string.congrats_msg_header));
-        TextView congratsBody = solo.getCurrentActivity().findViewById(R.id.CongratsMessage);
-        assertEquals(congratsBody.getText().toString(), solo.getString(R.string.congrats_msg_body));
+        TextView congratsMsgHeader = solo.getCurrentActivity().findViewById(R.id.title);
+        assertEquals(congratsMsgHeader.getText().toString(), solo.getString(R.string.congrats_msg_header));
+        TextView congratsMsgBody = solo.getCurrentActivity().findViewById(R.id.CongratsMessage);
+        assertEquals(congratsMsgBody.getText().toString(), solo.getString(R.string.congrats_msg_body));
     }
 
     public void testSummaryButtonShouldGoToSummaryActivity() {
