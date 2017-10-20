@@ -39,7 +39,7 @@ public class QuestionController {
     /**
      * Updates the user's answer for the current question
      *
-     * @param answer The users answer to the current question
+     * @param answer        The users answer to the current question
      */
     public void requestSubmitResponse(String answer) {
         Response response = new Response(answer);
@@ -49,7 +49,7 @@ public class QuestionController {
     /**
      * Skips the current question
      *
-     * @param question The question currently displayed to the user
+     * @param question      The question currently displayed to the user
      */
     public void skip(Question question) {
         question.skip();

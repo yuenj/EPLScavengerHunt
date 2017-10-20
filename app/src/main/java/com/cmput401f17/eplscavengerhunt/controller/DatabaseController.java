@@ -20,6 +20,7 @@ public class DatabaseController {
     /**
      * Uses inputted GPS coordinates to retrieve the name of the branch that
      * the coordinate is inside from the database.
+     *
      * @return String           Library branch name
      */
     public String retrieveBranch() {
@@ -29,22 +30,24 @@ public class DatabaseController {
     /**
      * Retrieves all Zones that are in the inputted library branch name.
      * NOTE: returned list's order is to be randomized in GameController
-     * @see GameController
+     *
      * @param branch            The name of a library branch
      * @return List<Zone>       The zones in the inputted library branch
+     * @see GameController
      */
-    public List<Zone> retrieveZones(String branch){
+    public List<Zone> retrieveZones(String branch) {
         return null;
     }
 
     /**
      * Retrieves all questions relating to inputted zone.
      * Randomized selection handled by GameController
-     * @see GameController
+     *
      * @param zone              A zone object containing beacon ids and questions
      * @return List<Question>   The questions pertaining to the zone
+     * @see GameController
      */
-    public List<Question> retrieveQuestionsinZone (Zone zone) {
+    public List<Question> retrieveQuestionsinZone(Zone zone) {
         return null;
     }
 
@@ -52,6 +55,7 @@ public class DatabaseController {
      * (UNDECIDED FEATURE) Adds player response to Database.
      * Used in case response statistics becomes requirement for
      * system admin application.
+     *
      * @param response          The users response to a specific question
      */
     public void addResponse(Response response) {

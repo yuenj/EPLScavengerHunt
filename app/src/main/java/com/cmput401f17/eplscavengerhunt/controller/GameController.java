@@ -34,7 +34,7 @@ public class GameController {
      * DatabaseController through generateZoneRoute
      * TODO: Call initScav or some other method to create our scavHuntState object
      *
-     * @return Boolean      Returns true or false if the game was initiated correctly
+     * @return Boolean          Returns true or false if the game was initiated correctly
      */
     public Boolean initGame() {
         String branch = scavHuntState.getBranch();
@@ -77,7 +77,7 @@ public class GameController {
      * randomly selects one. Each zone gets one question. Stores this series
      * of questions in ScavHuntState
      *
-     * @param zoneRoute A list of zones a user will go through
+     * @param zoneRoute         A list of zones a user will go through
      */
     private void generateQuestionSet(List<Zone> zoneRoute) {
         List<Question> questionPool;
@@ -105,8 +105,8 @@ public class GameController {
     /**
      * Generates a summary to be used for display
      *
-     * @return Summary      Contains the end-state of a users game
-     * Most importantly, this contains the answers correct and their responses
+     * @return Summary          Contains the end-state of a users game
+     *                          Most importantly, this contains the answers correct and their responses
      */
     private Summary generateSummary() {
         List<Response> responses = scavHuntState.getPlayerResponses();
@@ -124,7 +124,7 @@ public class GameController {
     }
 
     /**
-     * @return Boolean      True if game is over, false otherwise
+     * @return Boolean          True if game is over, false otherwise
      */
     public Boolean requestCheckGameOver() {
         return scavHuntState.isGameOver();
