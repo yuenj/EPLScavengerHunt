@@ -23,5 +23,10 @@
     <string name="about_text">This app is a scavenger hunt where you moving from zone to zone and
     answer questions. (TEMPORARY).</string>
 
+    <!-- Congrats activity -->
+    <string name="congrats_msg_header">Congratulations !</string>
+    <string name="congrats_msg_body">You have completed the EPL Scavenger Hunt</string>
+    <string name="goto_summary_activity_text">Click to see summary</string>
+
 
 </resources>
