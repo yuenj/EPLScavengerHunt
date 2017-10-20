@@ -16,11 +16,12 @@ import javax.inject.Inject;
  */
 public class QuestionController {
 
-    @Inject
-    ScavHuntState scavHuntState;
+    private ScavHuntState scavHuntState;
 
-    public QuestionController() {
+    @Inject
+    public QuestionController(ScavHuntState scavHuntState) {
         ScavengerHuntApplication.getInstance().getAppComponent().inject(this);
+        this.scavHuntState = scavHuntState;
     }
 
     /**

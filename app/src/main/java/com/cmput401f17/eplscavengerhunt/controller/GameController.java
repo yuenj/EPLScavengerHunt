@@ -11,8 +11,6 @@ import java.util.ArrayList;
 import java.util.List;
 import java.util.concurrent.ThreadLocalRandom;
 
-import javax.inject.Inject;
-
 /**
  * Responsible for initializing a new game scenario, game logic
  * such as checking for gameOver and incrementing current stage
@@ -20,15 +18,13 @@ import javax.inject.Inject;
  * of the game upon gameOver.
  */
 public class GameController {
+    private final ScavHuntState scavHuntState;
+    private final DatabaseController databaseController;
 
-    @Inject
-    ScavHuntState scavHuntState;
-
-    @Inject
-    DatabaseController databaseController;
-
-    public GameController() {
+    public GameController(ScavHuntState scavHuntState, DatabaseController databaseController) {
         ScavengerHuntApplication.getInstance().getAppComponent().inject(this);
+        this.scavHuntState = scavHuntState;
+        this.databaseController = databaseController;
     }
 
     /**
