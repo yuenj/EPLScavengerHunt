@@ -20,7 +20,6 @@ public class QuestionController {
 
     @Inject
     public QuestionController(ScavHuntState scavHuntState) {
-        ScavengerHuntApplication.getInstance().getAppComponent().inject(this);
         this.scavHuntState = scavHuntState;
     }
 
