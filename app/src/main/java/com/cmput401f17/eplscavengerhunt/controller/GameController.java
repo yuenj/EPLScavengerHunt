@@ -27,37 +27,32 @@ public class GameController {
     @Inject
     DatabaseController databaseController;
 
-
     public GameController() {
         ScavengerHuntApplication.getInstance().getAppComponent().inject(this);
     }
 
+    /**
+     * Initializes the game when start is pressed
+     * This method is not used for now as initScav is sufficient
+     * for demo purposes and because this method relies on the
+     * DatabaseController through generateZoneRoute
+     * TODO: Call initScav or some other method to create our scavHuntState object
+     * @return
+     */
     public Boolean initGame() {
-        // branch is updated by LocationController
         String branch = scavHuntState.getBranch();
 
-        // Generate zone route for ScavHuntState, but
-        // also keep ZoneRoute for generateQuestionSet to use
         List<Zone> zoneRoute = generateZoneRoute(branch);
 
         generateQuestionSet(zoneRoute);
 
-        // return True if successful, false otherwise
         // TitleActivity uses this boolean to throw a toast
-        // for failure, or start the game if successful
+        // for failure if the initialization is empty
         if (scavHuntState.getZoneRoute().size() == 0
                 || scavHuntState.getNumStages() == 0) {
             return false;
         }
         return true;
-    }
-
-    public Summary requestSummary() {
-        return generateSummary();
-    }
-
-    public Boolean requestCheckGameOver() {
-        return scavHuntState.isGameOver();
     }
 
     /**
@@ -90,7 +85,7 @@ public class GameController {
      * randomly selects one. Each zone gets one question. Stores this series
      * of questions in ScavHuntState
      */
-     void generateQuestionSet(List<Zone> zoneRoute) {
+     private void generateQuestionSet(List<Zone> zoneRoute) {
         List<Question> questionPool;
         List<Question> questionSet = new ArrayList<>();
         Random rand = new Random();
@@ -103,6 +98,12 @@ public class GameController {
         scavHuntState.setQuestions(questionSet);
     }
 
+    /**
+     * Generates a summary containing the questions and
+     * responses received and, most importantly, the amount
+     * of questions answered correctly
+     * @return
+     */
     private Summary generateSummary() {
         List<Response> responses = scavHuntState.getPlayerResponses();
         List<Question> questions = scavHuntState.getQuestions();
@@ -118,8 +119,13 @@ public class GameController {
         return summary;
     }
 
+    public Boolean requestCheckGameOver() {
+        return scavHuntState.isGameOver();
+    }
+
     /**
-     * Hard coded scavHuntState population
+     * Hard coded questions, answers and zones
+     * for demo and testing purposes
      */
     public void initScav() {
 
@@ -130,18 +136,23 @@ public class GameController {
             scavHuntState.clearPreviousGameData();
         }
 
-        scavHuntState.clearPreviousGameData();
         scavHuntState.setBranch("Clareview");
 
+        // Sets a zone with it's specific name and beacon id
         List<Zone> testZoneRoute = new ArrayList<>();
         Zone zone1 = new Zone("[4f8113396f78d23ec78edfb96c79e23a]"); // DJBeet
-        zone1.setName("Zone 1");
+        zone1.setName("1");
         Zone zone2 = new Zone("[ab1d6643c33e5f6ed7c52a062168f137]"); // Candystore
-        zone2.setName("Zone 2");
+        zone2.setName("2");
+        Zone zone3 = new Zone("[9a78af8c1252fcb37abefecbbbe7322a]"); // Lemonade
+
+        // Create the zone route
         testZoneRoute.add(zone1);
         testZoneRoute.add(zone2);
+        testZoneRoute.add(zone3);
         scavHuntState.setZoneRoute(testZoneRoute);
 
+        // Create written answer questions
         String questionStrDummy1 = "Question 1";
         int id1 = 0;
         String solutionStrDummy1 = "Solution 1";
@@ -151,20 +162,28 @@ public class GameController {
         int id2 = 1;
         String solutionStrDummy2 = "Solution 2";
         Question testQuestion2 = new Question(id2, questionStrDummy2, solutionStrDummy2);
+
+        String questionStrDummy3 = "Question 3";
+        int id3 = 2;
+        String solutionStrDummy3 = "Solution 3";
+        Question testQuestion3 = new Question(id2, questionStrDummy2, solutionStrDummy2);
+
+        // Create multiple choice question
         ArrayList<String> testChoices = new ArrayList<String>() {{
             add("Solution 1");
             add("Solution 2");
             add("Solution 3");
         }};
-        testQuestion2.setChoices(testChoices);
+        testQuestion3.setChoices(testChoices);
 
+        // Create the question list
         List<Question> testQuestionList = new ArrayList<>();
         testQuestionList.add(testQuestion1);
         testQuestionList.add(testQuestion2);
+        testQuestionList.add(testQuestion3);
+
         scavHuntState.setQuestions(testQuestionList);
         scavHuntState.setNumStages(testZoneRoute.size());
-
-
     }
 }
 
