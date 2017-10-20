@@ -11,6 +11,8 @@ import com.cmput401f17.eplscavengerhunt.model.ScavHuntState;
 import com.cmput401f17.eplscavengerhunt.model.Zone;
 
 import static org.mockito.Mockito.*;
+
+import org.junit.Before;
 import org.junit.Rule;
 import org.junit.Test;
 import org.junit.runner.RunWith;
@@ -78,6 +80,7 @@ public class GameControllerTest {
     Response response5 = mock(Response.class);
 
 
+    @Before
     public void init() {
         gameController = new GameController(mockScavHuntState,mockDatabaseController);
     }
@@ -99,7 +102,6 @@ public class GameControllerTest {
      * - zoneRoute and questionSet and numStages sent to mock scavHuntState.
      */
     public void initGameTest() {
-        init();
         // mock situation: 5 zones, each zone has question pools of size 2
         List<Zone> zoneRoute = new ArrayList<>();
         Collections.addAll(zoneRoute, zone1, zone2, zone3, zone4, zone5);
@@ -183,7 +185,6 @@ public class GameControllerTest {
 
     @Test
     public void requestSummaryTest() {
-        init();
         List<Response> responses = new ArrayList<>();
         Collections.addAll(responses,
                 response1, response2, response3, response4, response5);
@@ -202,7 +203,6 @@ public class GameControllerTest {
 
     @Test
     public void requestCheckGameOverTestWhenGameOver() {
-        init();
         when(mockScavHuntState.isGameOver()).thenReturn(true);
 
         Boolean gameOver = gameController.requestCheckGameOver();
@@ -212,7 +212,6 @@ public class GameControllerTest {
 
     @Test
     public void requestCheckGameOverTestWhenNotGameOver() {
-        init();
         when(mockScavHuntState.isGameOver()).thenReturn(false);
 
         Boolean gameOver = gameController.requestCheckGameOver();
@@ -223,7 +222,6 @@ public class GameControllerTest {
 
     @Test
     public void requestIncrementCurrentStageTest() {
-        init();
         gameController.requestIncrementCurrentStage();
 
         verify(mockScavHuntState, times(1)).incrementCurrentStage();
