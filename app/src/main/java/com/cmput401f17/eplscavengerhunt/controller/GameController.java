@@ -79,6 +79,7 @@ public class GameController {
      * is done here. For each zone, gets all questions in the question pool, and
      * randomly selects one. Each zone gets one question. Stores this series
      * of questions in ScavHuntState
+     * @param zoneRoute     A list of zones a user will go through
      */
      private void generateQuestionSet(List<Zone> zoneRoute) {
          List<Question> questionPool;
@@ -101,7 +102,7 @@ public class GameController {
 
     /**
      * Generates a summary to be used for display
-     * @return Summary      Contains the end-state of the users game
+     * @return Summary      Contains the end-state of a users game
      *                      Most importantly, this contains the answers correct and their responses
      */
     private Summary generateSummary() {
