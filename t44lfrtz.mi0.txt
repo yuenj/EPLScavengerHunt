@@ -1,0 +1,57 @@
+﻿Merge remote-tracking branch 'refs/remotes/origin/master' into QuestionController
+
+# Conflicts:
+#	app/src/main/java/com/cmput401f17/eplscavengerhunt/activity/QuestionActivity.java
+#	app/src/main/java/com/cmput401f17/eplscavengerhunt/controller/GameController.java
+#
+# It looks like you may be committing a merge.
+# If this is not correct, please remove the file
+#	.git/MERGE_HEAD
+# and try again.
+
+
+# Please enter the commit message for your changes. Lines starting
+# with '#' will be ignored, and an empty message aborts the commit.
+# On branch QuestionController
+# Your branch is up-to-date with 'origin/QuestionController'.
+#
+# All conflicts fixed but you are still merging.
+#
+# Changes to be committed:
+#	modified:   app/build.gradle
+#	new file:   app/src/androidTest/java/com/cmput401f17/eplscavengerhunt/AboutActivityTest.java
+#	new file:   app/src/androidTest/java/com/cmput401f17/eplscavengerhunt/CongratulationsActivityTest.java
+#	new file:   app/src/androidTest/java/com/cmput401f17/eplscavengerhunt/CreditsActivityTest.java
+#	deleted:    app/src/androidTest/java/com/cmput401f17/eplscavengerhunt/ExampleInstrumentedTest.java
+#	new file:   app/src/androidTest/java/com/cmput401f17/eplscavengerhunt/RulesActivityTest.java
+#	new file:   app/src/androidTest/java/com/cmput401f17/eplscavengerhunt/TitleActivityTest.java
+#	modified:   app/src/main/java/com/cmput401f17/eplscavengerhunt/activity/DebugActivity.java
+#	modified:   app/src/main/java/com/cmput401f17/eplscavengerhunt/activity/LocationActivity.java
+#	modified:   app/src/main/java/com/cmput401f17/eplscavengerhunt/activity/QuestionActivity.java
+#	modified:   app/src/main/java/com/cmput401f17/eplscavengerhunt/activity/RulesActivity.java
+#	modified:   app/src/main/java/com/cmput401f17/eplscavengerhunt/activity/SummaryActivity.java
+#	modified:   app/src/main/java/com/cmput401f17/eplscavengerhunt/activity/TitleActivity.java
+#	modified:   app/src/main/java/com/cmput401f17/eplscavengerhunt/controller/GameController.java
+#	modified:   app/src/main/java/com/cmput401f17/eplscavengerhunt/controller/LocationController.java
+#	modified:   app/src/main/java/com/cmput401f17/eplscavengerhunt/controller/QuestionController.java
+#	modified:   app/src/main/java/com/cmput401f17/eplscavengerhunt/custom/SummaryAdapter.java
+#	modified:   app/src/main/java/com/cmput401f17/eplscavengerhunt/dagger/AppComponent.java
+#	modified:   app/src/main/java/com/cmput401f17/eplscavengerhunt/dagger/AppModule.java
+#	modified:   app/src/main/java/com/cmput401f17/eplscavengerhunt/model/ScavHuntState.java
+#	renamed:    app/src/main/java/com/cmput401f17/eplscavengerhunt/model/Results.java -> app/src/main/java/com/cmput401f17/eplscavengerhunt/model/Summary.java
+#	new file:   app/src/main/res/drawable-hdpi/check_circle.png
+#	new file:   app/src/main/res/drawable-hdpi/running_man.png
+#	new file:   app/src/main/res/drawable-mdpi/check_circle.png
+#	new file:   app/src/main/res/drawable-mdpi/running_man.png
+#	new file:   app/src/main/res/drawable-xhdpi/check_circle.png
+#	new file:   app/src/main/res/drawable-xhdpi/running_man.png
+#	new file:   app/src/main/res/drawable-xxhdpi/check_circle.png
+#	new file:   app/src/main/res/drawable-xxhdpi/running_man.png
+#	deleted:    app/src/main/res/drawable/ic_backup_black_24dp.png
+#	modified:   app/src/main/res/layout/activity_congratulations.xml
+#	modified:   app/src/main/res/layout/activity_location.xml
+#	modified:   app/src/main/res/values/colors.xml
+#	modified:   app/src/main/res/values/strings.xml
+#	modified:   app/src/test/java/com/cmput401f17/eplscavengerhunt/GameControllerTest.java
+#
+
