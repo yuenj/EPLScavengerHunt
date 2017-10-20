@@ -13,13 +13,11 @@
     <string name="title_text">EPL\nSCAVENGER HUNT</string>
 
     <!-- DebugActivity -->
+    <string name="debugActivity">DEBUG SCREEN</string>
     <string name="goto_LocationActivity_text">goto LocationActivity</string>
     <string name="goto_QuestionActivity_text">goto QuestionActivity</string>
     <string name="goto_congratulationsActivity_text">goto CongratulationsActivity</string>
     <string name="goto_resultsActivity_text">goto ResultsActivity</string>
-
-    <string name="user_answer">Your Answer:</string>
-    <string name="submit">Submit</string>
 
     <!-- RulesActivity -->
     <string name="rules_text">This app is a scavenger hunt where you moving from zone to zone and
@@ -40,5 +38,13 @@
     <!-- QuestionActivity -->
     <string name="current_zone">Zone : %1$s</string>
     <string name="question_prompt">Task : %1$s</string>
+    <string name="skip_question">Skip</string>
+
+    <!-- SummaryActivity -->
+    <string name="total_score">Your Total: </string>
+    <string name="continue_button">CONTINUE</string>
+    <!-- ActivityWrittenInput -->
+        <string name="user_answer">Your Answer:</string>
+        <string name="submit">Submit</string>
 
 </resources>

@@ -12,8 +12,8 @@
         android:id="@+id/summary_thumbnail_ll"
         android:layout_width="wrap_content"
         android:layout_height="wrap_content"
-        android:layout_alignParentLeft="true"
-        android:layout_marginRight="5dip"
+        android:layout_alignParentStart="true"
+        android:layout_marginEnd="5dip"
         android:padding="3dip">
 
         <ImageView
@@ -29,10 +29,10 @@
         android:layout_width="match_parent"
         android:layout_height="wrap_content"
         android:layout_alignTop="@+id/summary_thumbnail_ll"
-        android:layout_toRightOf="@+id/summary_thumbnail_ll"
+        android:layout_toEndOf="@+id/summary_thumbnail_ll"
         android:text="Which flower is this?"
         android:textColor="#d70d2b"
-        android:textSize="20dip"
+        android:textSize="20sp"
         android:textStyle="bold"
         android:typeface="monospace" />
 
@@ -43,10 +43,10 @@
         android:layout_height="wrap_content"
         android:layout_below="@id/summary_prompt"
         android:layout_marginTop="1dip"
-        android:layout_toRightOf="@+id/summary_thumbnail_ll"
+        android:layout_toEndOf="@+id/summary_thumbnail_ll"
         android:text="Lily"
         android:textColor="#09b900"
-        android:textSize="15dip"
+        android:textSize="15sp"
         android:textStyle="bold" />
 
     <!-- Correct answer -->
@@ -56,10 +56,10 @@
         android:layout_height="wrap_content"
         android:layout_below="@id/summary_response"
         android:layout_marginTop="1dip"
-        android:layout_toRightOf="@+id/summary_thumbnail_ll"
+        android:layout_toEndOf="@+id/summary_thumbnail_ll"
         android:text="Poppy"
         android:textColor="#09b900"
-        android:textSize="15dip"
+        android:textSize="15sp"
         android:textStyle="bold" />
 
 </RelativeLayout>
