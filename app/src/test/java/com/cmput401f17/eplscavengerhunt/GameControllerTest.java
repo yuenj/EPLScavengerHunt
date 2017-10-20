@@ -40,9 +40,6 @@ public class GameControllerTest {
     @Mock
     DatabaseController mockDatabaseController;
 
-    @InjectMocks
-    GameController gameController;
-
     @Captor
     private ArgumentCaptor<List<Question>> QuestionSetCaptor;
 
@@ -54,6 +51,8 @@ public class GameControllerTest {
 
     @Captor
     private ArgumentCaptor<Integer> IntegerCaptor;
+
+    GameController gameController;
 
     Zone zone1 = mock(Zone.class);
     Zone zone2 = mock(Zone.class);
@@ -79,12 +78,16 @@ public class GameControllerTest {
     Response response5 = mock(Response.class);
 
 
+    public void init() {
+        gameController = new GameController(mockScavHuntState,mockDatabaseController);
+    }
+
+
     @Test
     /**
      * retreiveRandomQuestions and generateZoneRoute are private methods
      * so cannot be tested
      * ** ZONE GENERATION related tests already pass **
-     * TODO: Implement generateQuestionSet method to pass this test
      * Verify that:
      * - getBranch() called on ScavHuntState
      * - retreiveZones and retreiveRandomQuestions called on
@@ -96,6 +99,7 @@ public class GameControllerTest {
      * - zoneRoute and questionSet and numStages sent to mock scavHuntState.
      */
     public void initGameTest() {
+        init();
         // mock situation: 5 zones, each zone has question pools of size 2
         List<Zone> zoneRoute = new ArrayList<>();
         Collections.addAll(zoneRoute, zone1, zone2, zone3, zone4, zone5);
@@ -179,6 +183,7 @@ public class GameControllerTest {
 
     @Test
     public void requestSummaryTest() {
+        init();
         List<Response> responses = new ArrayList<>();
         Collections.addAll(responses,
                 response1, response2, response3, response4, response5);
@@ -197,6 +202,7 @@ public class GameControllerTest {
 
     @Test
     public void requestCheckGameOverTestWhenGameOver() {
+        init();
         when(mockScavHuntState.isGameOver()).thenReturn(true);
 
         Boolean gameOver = gameController.requestCheckGameOver();
@@ -206,6 +212,7 @@ public class GameControllerTest {
 
     @Test
     public void requestCheckGameOverTestWhenNotGameOver() {
+        init();
         when(mockScavHuntState.isGameOver()).thenReturn(false);
 
         Boolean gameOver = gameController.requestCheckGameOver();
@@ -216,7 +223,7 @@ public class GameControllerTest {
 
     @Test
     public void requestIncrementCurrentStageTest() {
-
+        init();
         gameController.requestIncrementCurrentStage();
 
         verify(mockScavHuntState, times(1)).incrementCurrentStage();

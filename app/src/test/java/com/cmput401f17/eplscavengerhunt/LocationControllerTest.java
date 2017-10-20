@@ -42,12 +42,11 @@ public class LocationControllerTest {
     @Mock
     ScavHuntState mockScavHuntState;
 
-    @InjectMocks LocationController locationController;
-
     @Captor
     private ArgumentCaptor<List<Zone>> zoneRouteCaptor;
 
 
+    LocationController locationController;
     private Zone zone1;
     private Zone zone2;
     private Zone zone3;
@@ -55,6 +54,7 @@ public class LocationControllerTest {
     List<Zone> zoneRoute;
 
     public void initLocationTest() {
+        locationController = new LocationController(mockScavHuntState);
         zone1 = mock(Zone.class);
         zone2 = mock(Zone.class);
         zone3 = mock(Zone.class);
