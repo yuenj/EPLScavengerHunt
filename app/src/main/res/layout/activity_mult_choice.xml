@@ -46,12 +46,9 @@
             android:id="@+id/skip"
             android:layout_width="wrap_content"
             android:layout_height="wrap_content"
-<<<<<<< HEAD
-            android:text="@string/skip"/>
-=======
             android:text="@string/skip_question"/>
->>>>>>> refs/remotes/origin/master
-    </LinearLayout>
+
+</LinearLayout>
 
 </android.support.v7.widget.LinearLayoutCompat>
 

@@ -20,7 +20,6 @@ import java.util.List;
 public class SummaryAdapter extends BaseAdapter {
 
     private static LayoutInflater inflater = null;
-
     private final Activity activity;
     private final List<Response> responses;
     private final List<Question> questions;

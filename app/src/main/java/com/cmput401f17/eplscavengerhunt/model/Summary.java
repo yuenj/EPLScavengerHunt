@@ -3,7 +3,11 @@ package com.cmput401f17.eplscavengerhunt.model;
 import java.util.ArrayList;
 import java.util.List;
 
+/**
+ * Holds all relevent information for displaying a summary of the game results
+ */
 public class Summary {
+
     private List<Response> responses;
     private List<Question> questions;
     private int score;

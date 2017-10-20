@@ -18,6 +18,7 @@ import dagger.Component;
 @Singleton
 @Component(modules = AppModule.class)
 public interface AppComponent {
+
     void inject(GameController gameController);
     void inject(QuestionController questionController);
     void inject(CongratulationsActivity congratulationsActivity);
@@ -28,5 +29,4 @@ public interface AppComponent {
     void inject(TitleActivity titleActivity);
     void inject(LocationController locationController);
     void inject(RulesActivity rulesActivity);
-
 }

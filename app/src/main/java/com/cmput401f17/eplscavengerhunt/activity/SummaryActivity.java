@@ -72,6 +72,7 @@ public class SummaryActivity extends AppCompatActivity {
     private void displayScore() {
         final int score = summary.getScore();
         final int maxScore = summary.getNumQuestions();
+
         usersScore.setText(Integer.toString(score) + "/" + Integer.toString(maxScore));
     }
 
@@ -79,7 +80,9 @@ public class SummaryActivity extends AppCompatActivity {
         summaryAdapter.notifyDataSetChanged();
     }
 
-    // User click leads them to TitleActivity
+    /**
+     * User click leads them to TitleActivity
+      */
     private void setOnDone() {
         done.setOnClickListener(new View.OnClickListener() {
             public void onClick(View v) {
