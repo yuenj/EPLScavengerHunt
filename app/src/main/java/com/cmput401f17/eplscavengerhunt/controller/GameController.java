@@ -96,7 +96,7 @@ public class GameController {
 
         for (Zone zone : zoneRoute) {
             questionPool = databaseController.retrieveQuestionsinZone(zone);
-            Question randomQuestion = questionPool.get(0);
+            Question randomQuestion = questionPool.get(rand.nextInt(questionPool.size()));
             questionSet.add(randomQuestion);
         }
         scavHuntState.setQuestions(questionSet);
