@@ -30,8 +30,9 @@ public class AppModule {
 
     @Provides
     @Singleton
-    public GameController provideGameController() {
-        return new GameController();
+    public GameController provideGameController(ScavHuntState scavHuntState,
+                                                DatabaseController databaseController) {
+        return new GameController(scavHuntState, databaseController);
     }
 
     @Provides
@@ -48,13 +49,13 @@ public class AppModule {
 
     @Provides
     @Singleton
-    public LocationController provideLocationController() {
-        return new LocationController();
+    public LocationController provideLocationController(ScavHuntState scavHuntState) {
+        return new LocationController(scavHuntState);
     }
 
     @Provides
     @Singleton
-    public QuestionController provideQuestionController() {
-        return new QuestionController();
+    public QuestionController provideQuestionController(ScavHuntState scavHuntState) {
+        return new QuestionController(scavHuntState);
     }
 }
