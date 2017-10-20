@@ -64,14 +64,14 @@ public class LocationActivity extends AppCompatActivity {
                     handler.postDelayed(new Runnable() {
                         @Override
                         public void run() {
-                            //Switch to the activity after 150ms
+                            // Change the colour after 150ms
                             button.setColor(Color.parseColor("#ffa726"));
                         }
                     }, 150);
                     handler.postDelayed(new Runnable() {
                         @Override
                         public void run() {
-                            //Switch to the activity after 7000ms
+                            // Switch to the activity after 7000ms
                             startActivity(intent);
                             finish();
                         }
