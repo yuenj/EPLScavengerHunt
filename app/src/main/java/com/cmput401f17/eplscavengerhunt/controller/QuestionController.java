@@ -6,16 +6,17 @@ import com.cmput401f17.eplscavengerhunt.ScavengerHuntApplication;
 import com.cmput401f17.eplscavengerhunt.model.Question;
 import com.cmput401f17.eplscavengerhunt.model.Response;
 import com.cmput401f17.eplscavengerhunt.model.ScavHuntState;
-import com.cmput401f17.eplscavengerhunt.model.Zone;
+
 import javax.inject.Inject;
 
 
 /**
- * An intermediate class that passes data
+ * QuestionController handles obtaining a question,
+ * passing the users answer to be stored and skipping a question
  */
 public class QuestionController {
 
-    private ScavHuntState scavHuntState;
+    private final ScavHuntState scavHuntState;
 
     @Inject
     public QuestionController(ScavHuntState scavHuntState) {
@@ -25,25 +26,32 @@ public class QuestionController {
 
     /**
      * Gets the data relating to the current question
-     * @return A Question object relating to the current question
+     *
+     * @return Question     A question object containing a prompt and a solution and
+     * other specifics depending on the type of question
      */
     public Question requestQuestion() {
 
-        return(scavHuntState.getCurrentQuestion());
+        return (scavHuntState.getCurrentQuestion());
     }
 
 
     /**
-     *  Passes/ updates the user answer
-     *  @pre User has input an answer
-     *  @param answer
+     * Updates the user's answer for the current question
+     *
+     * @param answer        The users answer to the current question
      */
-    public void requestSubmitResponse(String answer){
+    public void requestSubmitResponse(String answer) {
         Response response = new Response(answer);
         scavHuntState.addResponse(response);
-
     }
-    public void skip(Question question){
+
+    /**
+     * Skips the current question
+     *
+     * @param question      The question currently displayed to the user
+     */
+    public void skip(Question question) {
         question.skip();
     }
 }
