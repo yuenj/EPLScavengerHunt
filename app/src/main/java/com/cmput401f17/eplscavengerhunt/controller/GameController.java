@@ -92,7 +92,7 @@ public class GameController {
         // TODO: Change databaseController to retrieve all questions or limit the amount of database calls
         for (Zone zone : zoneRoute) {
             questionPool = databaseController.retrieveQuestionsinZone(zone);
-            Question randomQuestion = questionPool.get(rand);
+            Question randomQuestion = questionPool.get(rand.nextInt(questionPool.size()));
             questionSet.add(randomQuestion);
         }
         scavHuntState.setQuestions(questionSet);
