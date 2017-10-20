@@ -47,7 +47,7 @@
             android:id="@+id/skip"
             android:layout_width="wrap_content"
             android:layout_height="wrap_content"
-            android:text="Skip"/>
+            android:text="@string/skip"/>
     </LinearLayout>
 
 </android.support.v7.widget.LinearLayoutCompat>

@@ -2,12 +2,10 @@ package com.cmput401f17.eplscavengerhunt.activity;
 
 import android.content.Context;
 import android.content.Intent;
-import android.graphics.Color;
 import android.os.Bundle;
 import android.support.design.widget.TextInputLayout;
 import android.support.v7.app.AppCompatActivity;
 import android.support.v7.widget.LinearLayoutCompat;
-import android.util.Log;
 import android.view.KeyEvent;
 import android.view.View;
 import android.view.inputmethod.EditorInfo;
@@ -17,7 +15,6 @@ import android.widget.EditText;
 import android.widget.LinearLayout;
 import android.widget.RadioButton;
 import android.widget.RadioGroup;
-
 import android.widget.TextView;
 import android.widget.Toast;
 
@@ -28,15 +25,13 @@ import com.cmput401f17.eplscavengerhunt.controller.LocationController;
 import com.cmput401f17.eplscavengerhunt.model.Question;
 import com.cmput401f17.eplscavengerhunt.controller.QuestionController;
 
-
 import java.util.ArrayList;
-
 import javax.inject.Inject;
 
 public class QuestionActivity extends AppCompatActivity {
 
     @Inject
-    QuestionController qController;
+    QuestionController questionController;
 
     @Inject
     GameController gameController;
@@ -50,8 +45,8 @@ public class QuestionActivity extends AppCompatActivity {
      * Displays the current zone
      */
     private void displayZone() {
-        TextView zone = (TextView)findViewById(R.id.zone);
-        zone.setText("Zone: " + locationController.requestZone().getName());
+        TextView zoneView = (TextView)findViewById(R.id.zone);
+        zoneView.setText("Zone: " + locationController.requestZone().getName());
     }
 
     /**
@@ -83,7 +78,6 @@ public class QuestionActivity extends AppCompatActivity {
             Button mcOption = new Button(this);
             mcOption.setText(choices.get(i));
 
-
             LinearLayoutCompat layout = (LinearLayoutCompat) findViewById(R.id.choice_buttons);
             LinearLayoutCompat.LayoutParams parameters = new LinearLayoutCompat.LayoutParams(LinearLayoutCompat.LayoutParams.MATCH_PARENT, LinearLayoutCompat.LayoutParams.WRAP_CONTENT);
             layout.addView(mcOption, parameters);
@@ -95,7 +89,7 @@ public class QuestionActivity extends AppCompatActivity {
                      Toast.makeText(view.getContext(), "Button clicked index = " + id, Toast.LENGTH_SHORT).show();
 
                      //Pass the answer to the controller
-                     qController.requestSubmitResponse(choices.get(id));
+                     questionController.requestSubmitResponse(choices.get(id));
                      intentAway();
                  }
              });
@@ -132,7 +126,7 @@ public class QuestionActivity extends AppCompatActivity {
                         hideSoftInputFromWindow(view.getWindowToken(), InputMethodManager.HIDE_NOT_ALWAYS);
             }
 
-            qController.requestSubmitResponse(editText.getText().toString());
+            questionController.requestSubmitResponse(editText.getText().toString());
             intentAway();
         }
     }
@@ -182,12 +176,12 @@ public class QuestionActivity extends AppCompatActivity {
      */
     private void displayPicInput(){
         setContentView(R.layout.activity_pic_input);
+        final Button submit = (Button) findViewById(R.id.submit);
 
         displayZone();
         displayPrompt();
 
         //TODO
-
         //Link button to camera
 
         //Display photo once taken
@@ -196,24 +190,31 @@ public class QuestionActivity extends AppCompatActivity {
         final ArrayList<String> choices = currentQuestion.getChoices();
 
         /* Create group for radio buttons */
-        RadioGroup rg = new RadioGroup(this);
-        rg.setOrientation(LinearLayout.VERTICAL);
+        RadioGroup radioGroup = new RadioGroup(this);
+        radioGroup.setOrientation(LinearLayout.VERTICAL);
 
         /* Create choice radio button(s) */
         for(int i = 0; i < choices.size(); i++) {
-            final RadioButton radio = new RadioButton(this);
-            radio.setId(i);
-            radio.setText(choices.get(i));
+            final RadioButton radioButton = new RadioButton(this);
+            radioButton.setId(i);
+            radioButton.setText(choices.get(i));
 
-            rg.addView(radio);
+            radioGroup.addView(radioButton);
 
-            /* Listen for a radio button to be selected. */
-            radio.setOnClickListener(new View.OnClickListener() {
+            /* Listen for a radio button to be selected. Once selected show the submit button*/
+            radioButton.setOnClickListener(new View.OnClickListener() {
                 public void onClick(View view) {
-                    Toast.makeText(view.getContext(), "You selected: " + radio.getText().toString(), Toast.LENGTH_SHORT).show();
+                    submit.setVisibility(View.VISIBLE);
+                }
+            });
+
+            /* Submits the response once user clicks. Response is the radio button selected */
+            submit.setOnClickListener(new View.OnClickListener() {
+                public void onClick(View v) {
+                    Toast.makeText(v.getContext(), "You selected: " + radioButton.getText().toString(), Toast.LENGTH_SHORT).show();
 
                     //Pass the answer to the controller
-                    qController.requestSubmitResponse(radio.getText().toString());
+                    questionController.requestSubmitResponse(radioButton.getText().toString());
                     intentAway();
                 }
             });
@@ -222,7 +223,7 @@ public class QuestionActivity extends AppCompatActivity {
         /* Add the radio button group to the view */
         LinearLayoutCompat layout = (LinearLayoutCompat) findViewById(R.id.pic_choice_layout);
         LinearLayoutCompat.LayoutParams parameters = new LinearLayoutCompat.LayoutParams(LinearLayoutCompat.LayoutParams.MATCH_PARENT, LinearLayoutCompat.LayoutParams.WRAP_CONTENT);
-        layout.addView(rg, parameters);
+        layout.addView(radioGroup, parameters);
     }
 
 
@@ -254,7 +255,7 @@ public class QuestionActivity extends AppCompatActivity {
      * Also handles user skipping a question
      *  1. Question is set to skipped
      *  2. Passes a blank response to question controller
-     *  3. Moves to next activity using intent away
+     *  3. Moves to next activity using intent away Location Activity
      * @param savedInstanceState
      */
     @Override
@@ -262,18 +263,21 @@ public class QuestionActivity extends AppCompatActivity {
         super.onCreate(savedInstanceState);
 
         ScavengerHuntApplication.getInstance().getAppComponent().inject(this);
-        currentQuestion = qController.requestQuestion();
 
+        /* Attempt to get current question. If none, throw error */
+        try {
+            currentQuestion = questionController.requestQuestion();
+        } catch (Exception NoQuestionError) {
+            return;
+        }
 
         //TODO Conditional for choosing the view that is less hacky
         if (currentQuestion.isChoicesEmpty())
             displayWrittenInput();
         else{
+            //displayPicInput();
             displayMultChoice();
         }
-
-        //displayPicInput();
-
 
         /* Skip button on all view */
         Button skipButton = (Button) findViewById(R.id.skip);
@@ -281,8 +285,8 @@ public class QuestionActivity extends AppCompatActivity {
         skipButton.setOnClickListener(new View.OnClickListener() {
             public void onClick(View v) {
                 Toast.makeText(v.getContext(), "Question skipped", Toast.LENGTH_SHORT).show();
-                qController.skip(currentQuestion);
-                qController.requestSubmitResponse("");
+                questionController.skip(currentQuestion);
+                questionController.requestSubmitResponse("");
                 intentAway();
 
             }

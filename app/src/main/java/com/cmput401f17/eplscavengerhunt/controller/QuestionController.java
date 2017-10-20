@@ -43,6 +43,11 @@ public class QuestionController {
         scavHuntState.addResponse(response);
 
     }
+
+    /**
+     * User chose to skip question. Pass that along
+     * @param question
+     */
     public void skip(Question question){
         question.skip();
     }
