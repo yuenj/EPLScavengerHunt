@@ -6,7 +6,6 @@ import android.os.Bundle;
 import android.os.Handler;
 import android.support.v7.app.AppCompatActivity;
 import android.util.Log;
-import android.view.View;
 import android.widget.TextView;
 
 import com.cmput401f17.eplscavengerhunt.R;
@@ -27,7 +26,7 @@ public class LocationActivity extends AppCompatActivity {
     @Inject
     LocationController locationController;
 
-    FabButton button;
+    private FabButton button;
 
     @Override
     protected void onCreate(Bundle savedInstanceState) {
@@ -35,7 +34,7 @@ public class LocationActivity extends AppCompatActivity {
         ScavengerHuntApplication.getInstance().getAppComponent().inject(this);
         setContentView(R.layout.activity_location);
 
-        button = (FabButton) findViewById(R.id.loading_indicator);
+        button = findViewById(R.id.loading_indicator);
         button.showProgress(true);
     }
 
@@ -56,7 +55,7 @@ public class LocationActivity extends AppCompatActivity {
                 if (data) {
                     final Intent intent = new Intent(LocationActivity.this, QuestionActivity.class);
 
-                    // Switches to a checkmark to show that the user has
+                    // Switches to a check mark to show that the user has
                     // found the zone
                     button.onProgressCompleted();
 

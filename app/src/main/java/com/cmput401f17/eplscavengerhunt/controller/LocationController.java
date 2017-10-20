@@ -22,8 +22,8 @@ import javax.inject.Inject;
  * to determine if the user is near to a beacon
  */
 public class LocationController {
-    private ScavHuntState scavHuntState;
-    private BeaconManager beaconManager;
+    private final ScavHuntState scavHuntState;
+    private final BeaconManager beaconManager;
 
     /**
      * Instantiates the beacon manager to use beacon technologies

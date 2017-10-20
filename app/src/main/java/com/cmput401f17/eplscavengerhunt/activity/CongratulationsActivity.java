@@ -19,6 +19,7 @@ public class CongratulationsActivity extends AppCompatActivity {
     protected void onCreate(Bundle savedInstanceState) {
         super.onCreate(savedInstanceState);
         setContentView(R.layout.activity_congratulations);
+
         Button startButton = findViewById(R.id.resultsButton);
 
         // User click leads to summary activity - a summary to their game

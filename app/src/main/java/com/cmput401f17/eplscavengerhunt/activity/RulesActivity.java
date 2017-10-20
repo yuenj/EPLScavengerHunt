@@ -25,8 +25,8 @@ public class RulesActivity extends AppCompatActivity {
     protected void onCreate(Bundle savedInstanceState) {
         super.onCreate(savedInstanceState);
         ScavengerHuntApplication.getInstance().getAppComponent().inject(this);
-
         setContentView(R.layout.activity_rules);
+
         Button startButton = findViewById(R.id.rules_start_button);
         Button returnButton = findViewById(R.id.rules_return_button);
 

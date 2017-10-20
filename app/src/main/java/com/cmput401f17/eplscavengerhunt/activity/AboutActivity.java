@@ -19,6 +19,7 @@ public class AboutActivity extends AppCompatActivity {
     protected void onCreate(Bundle savedInstanceState) {
         super.onCreate(savedInstanceState);
         setContentView(R.layout.activity_about);
+
         Button returnButton = findViewById(R.id.about_return_button);
 
         // User click leads them to the previous screen

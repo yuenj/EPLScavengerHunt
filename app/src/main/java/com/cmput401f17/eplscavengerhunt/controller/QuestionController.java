@@ -16,7 +16,7 @@ import javax.inject.Inject;
  */
 public class QuestionController {
 
-    private ScavHuntState scavHuntState;
+    private final ScavHuntState scavHuntState;
 
     @Inject
     public QuestionController(ScavHuntState scavHuntState) {
