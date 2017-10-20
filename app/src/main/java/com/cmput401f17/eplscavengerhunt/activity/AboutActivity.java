@@ -8,13 +8,17 @@ import android.widget.Button;
 
 import com.cmput401f17.eplscavengerhunt.R;
 
+/**
+ * Contains the references and legal information
+ * regarding the game
+ */
 public class AboutActivity extends AppCompatActivity {
 
     @Override
     protected void onCreate(Bundle savedInstanceState) {
         super.onCreate(savedInstanceState);
         setContentView(R.layout.activity_about);
-        Button returnButton = (Button) findViewById(R.id.about_return_button);
+        Button returnButton = findViewById(R.id.about_return_button);
 
         returnButton.setOnClickListener(new View.OnClickListener() {
             public void onClick(View v) {
