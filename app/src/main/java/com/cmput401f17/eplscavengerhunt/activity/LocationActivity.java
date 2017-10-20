@@ -56,9 +56,10 @@ public class LocationActivity extends AppCompatActivity {
                 if (data) {
                     final Intent intent = new Intent(LocationActivity.this, QuestionActivity.class);
 
-                    // Switches to a checkmark photo to show that the user has
+                    // Switches to a checkmark to show that the user has
                     // found the zone
                     button.onProgressCompleted();
+
                     final Handler handler = new Handler();
                     handler.postDelayed(new Runnable() {
                         @Override
@@ -70,7 +71,7 @@ public class LocationActivity extends AppCompatActivity {
                     handler.postDelayed(new Runnable() {
                         @Override
                         public void run() {
-                            //Switch to the activity after 1000ms
+                            //Switch to the activity after 7000ms
                             startActivity(intent);
                             finish();
                         }
