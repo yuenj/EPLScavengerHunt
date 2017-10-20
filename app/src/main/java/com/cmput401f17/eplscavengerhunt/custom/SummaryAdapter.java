@@ -21,9 +21,9 @@ public class SummaryAdapter extends BaseAdapter {
 
     private static LayoutInflater inflater = null;
 
-    private Activity activity;
-    private List<Response> responses;
-    private List<Question> questions;
+    private final Activity activity;
+    private final List<Response> responses;
+    private final List<Question> questions;
 
     public SummaryAdapter(final Activity activity, final List<Response> responses,
                           final List<Question> questions) {
@@ -31,19 +31,22 @@ public class SummaryAdapter extends BaseAdapter {
         this.questions = questions;
         this.responses = responses;
 
-        this.inflater = (LayoutInflater)activity.getSystemService(Context.LAYOUT_INFLATER_SERVICE);
+        inflater = (LayoutInflater)activity.getSystemService(Context.LAYOUT_INFLATER_SERVICE);
     }
 
     public View getView(int position, View convertView, ViewGroup parent) {
         View vi = convertView;
         if (convertView == null)
-            vi = inflater.inflate(R.layout.item_summary, null);
+            // https://stackoverflow.com/questions/24832497/avoid-passing-null-as-the-view-root-need-to-resolve-layout-parameters-on-the-in
+            // 20/10/2017
+            // vi = inflater.inflate(R.layout.item_summary, null);
+            vi = inflater.inflate(R.layout.item_summary, parent, false);
 
-        ImageView thumbnail = (ImageView) vi.findViewById(R.id.summary_thumbnail);
-        TextView prompt = (TextView) vi.findViewById(R.id.summary_prompt);
-        TextView usersResponse = (TextView) vi.findViewById(R.id.summary_response);
-        TextView answer = (TextView) vi.findViewById(R.id.summary_answer);
-        RelativeLayout background = (RelativeLayout) vi.findViewById(R.id.summary_background);
+        ImageView thumbnail = vi.findViewById(R.id.summary_thumbnail);
+        TextView prompt = vi.findViewById(R.id.summary_prompt);
+        TextView usersResponse = vi.findViewById(R.id.summary_response);
+        TextView answer = vi.findViewById(R.id.summary_answer);
+        RelativeLayout background = vi.findViewById(R.id.summary_background);
 
         Question question = questions.get(position);
         Response response = responses.get(position);

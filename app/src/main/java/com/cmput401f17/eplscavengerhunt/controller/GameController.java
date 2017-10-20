@@ -9,9 +9,7 @@ import com.cmput401f17.eplscavengerhunt.model.Zone;
 
 import java.util.ArrayList;
 import java.util.List;
-import java.util.Random;
-
-import javax.inject.Inject;
+import java.util.concurrent.ThreadLocalRandom;
 
 /**
  * Responsible for initializing a new game scenario, game logic
@@ -20,43 +18,33 @@ import javax.inject.Inject;
  * of the game upon gameOver.
  */
 public class GameController {
+    private final ScavHuntState scavHuntState;
+    private final DatabaseController databaseController;
 
-    private ScavHuntState scavHuntState;
-    private DatabaseController databaseController;
-
-    @Inject
     public GameController(ScavHuntState scavHuntState, DatabaseController databaseController) {
         ScavengerHuntApplication.getInstance().getAppComponent().inject(this);
         this.scavHuntState = scavHuntState;
         this.databaseController = databaseController;
     }
 
+    /**
+     * Initializes the game when start is pressed
+     * This method is not used for now as initScav is sufficient
+     * for demo purposes and because this method relies on the
+     * DatabaseController through generateZoneRoute
+     * TODO: Call initScav or some other method to create our scavHuntState object
+     *
+     * @return Boolean          Returns true or false if the game was initiated correctly
+     */
     public Boolean initGame() {
-        // branch is updated by LocationController
         String branch = scavHuntState.getBranch();
 
-        // Generate zone route for ScavHuntState, but
-        // also keep ZoneRoute for generateQuestionSet to use
         List<Zone> zoneRoute = generateZoneRoute(branch);
 
         generateQuestionSet(zoneRoute);
 
-        // return True if successful, false otherwise
-        // TitleActivity uses this boolean to throw a toast
-        // for failure, or start the game if successful
-        if (scavHuntState.getZoneRoute().size() == 0
-                || scavHuntState.getNumStages() == 0) {
-            return false;
-        }
-        return true;
-    }
-
-    public Summary requestSummary() {
-        return generateSummary();
-    }
-
-    public Boolean requestCheckGameOver() {
-        return scavHuntState.isGameOver();
+        // Returns false if the zone route or the number of stages is zero
+        return !(scavHuntState.getZoneRoute().size() == 0 || scavHuntState.getNumStages() == 0);
     }
 
     /**
@@ -72,7 +60,7 @@ public class GameController {
      * ScavHuntApplication. Since num Zones = num Questions, also updates numStages
      * in ScavHuntState
      *
-     * @return the zone route passed to scavHuntState
+     * @return zoneRoute        The current order of zones the user will go to
      */
     private List<Zone> generateZoneRoute(String branch) {
         List<Zone> zoneRoute = databaseController.retrieveZones(branch);
@@ -88,20 +76,38 @@ public class GameController {
      * is done here. For each zone, gets all questions in the question pool, and
      * randomly selects one. Each zone gets one question. Stores this series
      * of questions in ScavHuntState
+     *
+     * @param zoneRoute         A list of zones a user will go through
      */
-     void generateQuestionSet(List<Zone> zoneRoute) {
+    private void generateQuestionSet(List<Zone> zoneRoute) {
         List<Question> questionPool;
         List<Question> questionSet = new ArrayList<>();
-        Random rand = new Random();
 
+        // Min and max refer to the maximum number of questions
+        // int rand = ThreadLocalRandom.current().nextInt(0, max + 1);
+        int rand = 0; // Placeholder
+
+        // Calling for a query for X amount of zones will be
+        // a bottleneck for speed
+        // TODO: Change databaseController to retrieve all questions or limit the amount of database calls
         for (Zone zone : zoneRoute) {
             questionPool = databaseController.retrieveQuestionsinZone(zone);
-            Question randomQuestion = questionPool.get(0);
+            Question randomQuestion = questionPool.get(rand.nextInt(questionPool.size()));
             questionSet.add(randomQuestion);
         }
         scavHuntState.setQuestions(questionSet);
     }
 
+    public Summary requestSummary() {
+        return generateSummary();
+    }
+
+    /**
+     * Generates a summary to be used for display
+     *
+     * @return Summary          Contains the end-state of a users game
+     *                          Most importantly, this contains the answers correct and their responses
+     */
     private Summary generateSummary() {
         List<Response> responses = scavHuntState.getPlayerResponses();
         List<Question> questions = scavHuntState.getQuestions();
@@ -118,7 +124,15 @@ public class GameController {
     }
 
     /**
-     * Hard coded scavHuntState population
+     * @return Boolean          True if game is over, false otherwise
+     */
+    public Boolean requestCheckGameOver() {
+        return scavHuntState.isGameOver();
+    }
+
+    /**
+     * Hard coded questions, answers and zones
+     * for demo and testing purposes
      */
     public void initScav() {
 
@@ -129,18 +143,24 @@ public class GameController {
             scavHuntState.clearPreviousGameData();
         }
 
-        scavHuntState.clearPreviousGameData();
         scavHuntState.setBranch("Clareview");
 
+        // Sets a zone with it's specific name and beacon id
         List<Zone> testZoneRoute = new ArrayList<>();
         Zone zone1 = new Zone("[4f8113396f78d23ec78edfb96c79e23a]"); // DJBeet
-        zone1.setName("Zone 1");
+        zone1.setName("1");
         Zone zone2 = new Zone("[ab1d6643c33e5f6ed7c52a062168f137]"); // Candystore
-        zone2.setName("Zone 2");
+        zone2.setName("2");
+        Zone zone3 = new Zone("[9a78af8c1252fcb37abefecbbbe7322a]"); // Lemonade
+        zone3.setName("3");
+
+        // Create the zone route
         testZoneRoute.add(zone1);
         testZoneRoute.add(zone2);
+        testZoneRoute.add(zone3);
         scavHuntState.setZoneRoute(testZoneRoute);
 
+        // Create written answer questions
         String questionStrDummy1 = "Question 1";
         int id1 = 0;
         String solutionStrDummy1 = "Solution 1";
@@ -150,20 +170,28 @@ public class GameController {
         int id2 = 1;
         String solutionStrDummy2 = "Solution 2";
         Question testQuestion2 = new Question(id2, questionStrDummy2, solutionStrDummy2);
+
+        String questionStrDummy3 = "Question 3";
+        int id3 = 2;
+        String solutionStrDummy3 = "Solution 3";
+        Question testQuestion3 = new Question(id3, questionStrDummy3, solutionStrDummy3);
+
+        // Create multiple choice question
         ArrayList<String> testChoices = new ArrayList<String>() {{
             add("Solution 1");
             add("Solution 2");
             add("Solution 3");
         }};
-        testQuestion2.setChoices(testChoices);
+        testQuestion3.setChoices(testChoices);
 
+        // Create the question list
         List<Question> testQuestionList = new ArrayList<>();
-        testQuestionList.add(testQuestion2);
         testQuestionList.add(testQuestion1);
+        testQuestionList.add(testQuestion2);
+        testQuestionList.add(testQuestion3);
+
         scavHuntState.setQuestions(testQuestionList);
         scavHuntState.setNumStages(testZoneRoute.size());
-
-
     }
 }
 

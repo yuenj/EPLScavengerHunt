@@ -21,6 +21,10 @@ import java.util.List;
 
 import javax.inject.Inject;
 
+/**
+ * Displays the users results and overall score
+ * Also displays which questions a user answered right or wrong
+ */
 public class SummaryActivity extends AppCompatActivity {
 
     private SummaryAdapter summaryAdapter;
@@ -50,6 +54,9 @@ public class SummaryActivity extends AppCompatActivity {
         displayScore();
     }
 
+    /**
+     * Displays the questions and responses
+     */
     private void displaySummary() {
         final List<Question> questions = summary.getQuestions();
         final List<Response> responses = summary.getResponses();
@@ -58,6 +65,10 @@ public class SummaryActivity extends AppCompatActivity {
         summaryListView.setAdapter(summaryAdapter);
     }
 
+    /**
+     * Displays the users score with respect to the
+     * total questions played
+     */
     private void displayScore() {
         final int score = summary.getScore();
         final int maxScore = summary.getNumQuestions();
@@ -68,6 +79,7 @@ public class SummaryActivity extends AppCompatActivity {
         summaryAdapter.notifyDataSetChanged();
     }
 
+    // User click leads them to TitleActivity
     private void setOnDone() {
         done.setOnClickListener(new View.OnClickListener() {
             public void onClick(View v) {
@@ -79,9 +91,9 @@ public class SummaryActivity extends AppCompatActivity {
     }
 
     private void findViews() {
-        summaryListView = (ListView) findViewById(R.id.summaryLV);
-        usersScore = (TextView) findViewById(R.id.summary_total);
-        done = (Button) findViewById(R.id.summary_next);
+        summaryListView = findViewById(R.id.summaryLV);
+        usersScore = findViewById(R.id.summary_total);
+        done = findViewById(R.id.summary_next);
     }
 
     @Override

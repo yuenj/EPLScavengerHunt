@@ -17,15 +17,13 @@ import java.util.List;
 import javax.inject.Inject;
 
 /**
- * Location controller handles finding beacons and
- * requesting the prize location
- * It also increments the current stage so the game can
- * know which zone it is on
+ * Location controller handles finding beacons
+ * and requesting the current zone. It uses estimote api
+ * to determine if the user is near to a beacon
  */
 public class LocationController {
-
-    private ScavHuntState scavHuntState;
-    private BeaconManager beaconManager;
+    private final ScavHuntState scavHuntState;
+    private final BeaconManager beaconManager;
 
     /**
      * Instantiates the beacon manager to use beacon technologies
@@ -40,7 +38,9 @@ public class LocationController {
     }
 
     /**
-     * Starts beacon discovery
+     * Starts beacon discovery.
+     * We call this method multiple times to
+     * restart beacon discovery after it has ended.
      */
     public void startDiscovery() {
 
@@ -54,11 +54,11 @@ public class LocationController {
     }
 
     /**
-     * https://stackoverflow.com/questions/42128909/return-value-from-valueeventlistener-java 06/10/2017
-     * Hacky method to get a return value
      * Sets a listener for proximity to see if the user has
      * entered the zone of the current beacon
-     * @param finishedCallback
+     *
+     * https://stackoverflow.com/questions/42128909/return-value-from-valueeventlistener-java 06/10/2017
+     * Hacky method to get a return value
      */
     public void verifyLocation(@NonNull final SimpleCallback<Boolean> finishedCallback) {
         beaconManager.setLocationListener(new BeaconManager.LocationListener() {
@@ -81,8 +81,9 @@ public class LocationController {
     }
 
     /**
-     * Requests the next zone from scavHuntState
-     * @return
+     * Requests the next zone along the zone route
+     * from the singleton scavHuntState
+     * @return Zone         A zone in a branch of a library
      */
     public Zone requestZone() {
         int currentStage = scavHuntState.getCurrentStage();
