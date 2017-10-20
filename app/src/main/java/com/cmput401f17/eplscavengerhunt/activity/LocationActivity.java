@@ -1,9 +1,12 @@
 package com.cmput401f17.eplscavengerhunt.activity;
 
 import android.content.Intent;
+import android.graphics.Color;
 import android.os.Bundle;
+import android.os.Handler;
 import android.support.v7.app.AppCompatActivity;
 import android.util.Log;
+import android.view.View;
 import android.widget.TextView;
 
 import com.cmput401f17.eplscavengerhunt.R;
@@ -12,6 +15,8 @@ import com.cmput401f17.eplscavengerhunt.controller.LocationController;
 import com.cmput401f17.eplscavengerhunt.controller.SimpleCallback;
 
 import javax.inject.Inject;
+
+import mbanje.kurt.fabbutton.FabButton;
 
 /**
  * Tells the user to go to their next zone
@@ -22,11 +27,16 @@ public class LocationActivity extends AppCompatActivity {
     @Inject
     LocationController locationController;
 
+    FabButton button;
+
     @Override
     protected void onCreate(Bundle savedInstanceState) {
         super.onCreate(savedInstanceState);
         ScavengerHuntApplication.getInstance().getAppComponent().inject(this);
         setContentView(R.layout.activity_location);
+
+        button = (FabButton) findViewById(R.id.loading_indicator);
+        button.showProgress(true);
     }
 
     @Override
@@ -44,9 +54,28 @@ public class LocationActivity extends AppCompatActivity {
             @Override
             public void callback(Boolean data) {
                 if (data) {
-                    Intent intent = new Intent(LocationActivity.this, QuestionActivity.class);
-                    startActivity(intent);
-                    finish();
+                    final Intent intent = new Intent(LocationActivity.this, QuestionActivity.class);
+
+                    // Switches to a checkmark photo to show that the user has
+                    // found the zone
+                    button.onProgressCompleted();
+                    final Handler handler = new Handler();
+                    handler.postDelayed(new Runnable() {
+                        @Override
+                        public void run() {
+                            //Switch to the activity after 150ms
+                            button.setColor(Color.parseColor("#ffa726"));
+                        }
+                    }, 150);
+                    handler.postDelayed(new Runnable() {
+                        @Override
+                        public void run() {
+                            //Switch to the activity after 1000ms
+                            startActivity(intent);
+                            finish();
+                        }
+                    }, 700);
+
                 } else { // This shouldn't go off
                     Log.d("LocationListener", "false return");
                 }
