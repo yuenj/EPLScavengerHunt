@@ -9,7 +9,7 @@ import com.cmput401f17.eplscavengerhunt.model.Zone;
 
 import java.util.ArrayList;
 import java.util.List;
-import java.util.Random;
+import java.util.concurrent.ThreadLocalRandom;
 
 import javax.inject.Inject;
 
@@ -37,7 +37,7 @@ public class GameController {
      * for demo purposes and because this method relies on the
      * DatabaseController through generateZoneRoute
      * TODO: Call initScav or some other method to create our scavHuntState object
-     * @return
+     * @return Boolean      Returns true or false if the game was initiated correctly
      */
     public Boolean initGame() {
         String branch = scavHuntState.getBranch();
@@ -46,13 +46,8 @@ public class GameController {
 
         generateQuestionSet(zoneRoute);
 
-        // TitleActivity uses this boolean to throw a toast
-        // for failure if the initialization is empty
-        if (scavHuntState.getZoneRoute().size() == 0
-                || scavHuntState.getNumStages() == 0) {
-            return false;
-        }
-        return true;
+        // Returns false if the zone route or the number of stages is zero
+        return !(scavHuntState.getZoneRoute().size() == 0 || scavHuntState.getNumStages() == 0);
     }
 
     /**
@@ -68,7 +63,7 @@ public class GameController {
      * ScavHuntApplication. Since num Zones = num Questions, also updates numStages
      * in ScavHuntState
      *
-     * @return the zone route passed to scavHuntState
+     * @return zoneRoute        The current order of zones the user will go to
      */
     private List<Zone> generateZoneRoute(String branch) {
         List<Zone> zoneRoute = databaseController.retrieveZones(branch);
@@ -86,23 +81,28 @@ public class GameController {
      * of questions in ScavHuntState
      */
      private void generateQuestionSet(List<Zone> zoneRoute) {
-        List<Question> questionPool;
-        List<Question> questionSet = new ArrayList<>();
-        Random rand = new Random();
+         List<Question> questionPool;
+         List<Question> questionSet = new ArrayList<>();
 
-        for (Zone zone : zoneRoute) {
-            questionPool = databaseController.retrieveQuestionsinZone(zone);
-            Question randomQuestion = questionPool.get(0);
-            questionSet.add(randomQuestion);
-        }
-        scavHuntState.setQuestions(questionSet);
-    }
+         // Min and max refer to the maximum number of questions
+         // int rand = ThreadLocalRandom.current().nextInt(0, max + 1);
+         int rand = 0; // Placeholder
+
+         // Calling for a query for X amount of zones will be
+         // a bottleneck for speed
+         // TODO: Change databaseController to retrieve all questions or limit the amount of database calls
+         for (Zone zone : zoneRoute) {
+             questionPool = databaseController.retrieveQuestionsinZone(zone);
+             Question randomQuestion = questionPool.get(rand);
+             questionSet.add(randomQuestion);
+         }
+         scavHuntState.setQuestions(questionSet);
+     }
 
     /**
-     * Generates a summary containing the questions and
-     * responses received and, most importantly, the amount
-     * of questions answered correctly
-     * @return
+     * Generates a summary to be used for display
+     * @return Summary      Contains the end-state of the users game
+     *                      Most importantly, this contains the answers correct and their responses
      */
     private Summary generateSummary() {
         List<Response> responses = scavHuntState.getPlayerResponses();
@@ -119,6 +119,9 @@ public class GameController {
         return summary;
     }
 
+    /**
+     * @return Boolean      True if game is over, false otherwise
+     */
     public Boolean requestCheckGameOver() {
         return scavHuntState.isGameOver();
     }
@@ -166,7 +169,7 @@ public class GameController {
         String questionStrDummy3 = "Question 3";
         int id3 = 2;
         String solutionStrDummy3 = "Solution 3";
-        Question testQuestion3 = new Question(id2, questionStrDummy2, solutionStrDummy2);
+        Question testQuestion3 = new Question(id3, questionStrDummy3, solutionStrDummy3);
 
         // Create multiple choice question
         ArrayList<String> testChoices = new ArrayList<String>() {{
