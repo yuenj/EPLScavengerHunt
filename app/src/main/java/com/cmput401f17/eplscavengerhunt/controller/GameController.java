@@ -21,15 +21,14 @@ import javax.inject.Inject;
  */
 public class GameController {
 
-    @Inject
-    ScavHuntState scavHuntState;
+    private ScavHuntState scavHuntState;
+    private DatabaseController databaseController;
 
     @Inject
-    DatabaseController databaseController;
-
-
-    public GameController() {
+    public GameController(ScavHuntState scavHuntState, DatabaseController databaseController) {
         ScavengerHuntApplication.getInstance().getAppComponent().inject(this);
+        this.scavHuntState = scavHuntState;
+        this.databaseController = databaseController;
     }
 
     public Boolean initGame() {

@@ -23,18 +23,19 @@ import javax.inject.Inject;
  * know which zone it is on
  */
 public class LocationController {
-    @Inject
-    ScavHuntState scavHuntState;
 
+    private ScavHuntState scavHuntState;
     private BeaconManager beaconManager;
 
     /**
      * Instantiates the beacon manager to use beacon technologies
      */
-    public LocationController() {
+    @Inject
+    public LocationController(ScavHuntState scavHuntState) {
         ScavengerHuntApplication.getInstance().getAppComponent().inject(this);
 
         Context appContext = ScavengerHuntApplication.getInstance();
+        this.scavHuntState = scavHuntState;
         beaconManager = new BeaconManager(appContext);
     }
 
