@@ -6,7 +6,6 @@ import android.support.v7.app.AppCompatActivity;
 import android.util.Log;
 import android.view.View;
 import android.widget.Button;
-import android.widget.TextView;
 
 import com.cmput401f17.eplscavengerhunt.R;
 import com.cmput401f17.eplscavengerhunt.ScavengerHuntApplication;
@@ -14,6 +13,10 @@ import com.cmput401f17.eplscavengerhunt.controller.GameController;
 
 import javax.inject.Inject;
 
+/**
+ * Used for testing purposes, especially for instances in which
+ * no physical beacon is possessed
+ */
 public class DebugActivity extends AppCompatActivity {
 
     @Inject
@@ -25,44 +28,47 @@ public class DebugActivity extends AppCompatActivity {
         setContentView(R.layout.activity_debug);
         ScavengerHuntApplication.getInstance().getAppComponent().inject(this);
 
-        Button goto_QuestionActivity = (Button) findViewById(R.id.goto_questionactivity_button);
-        Button goto_LocationActivity = (Button) findViewById(R.id.goto_locationactivity_button);
-        Button goto_congratulationsActivity = (Button) findViewById(R.id.goto_congratulationsactivity_button);
-        Button goto_resultsActivity = (Button) findViewById(R.id.goto_resultsactivity_button);
-        TextView dagger = (TextView) findViewById(R.id.dagger);
+        Button goto_QuestionActivity = findViewById(R.id.goto_questionactivity_button);
+        Button goto_LocationActivity = findViewById(R.id.goto_locationactivity_button);
+        Button goto_congratulationsActivity = findViewById(R.id.goto_congratulationsactivity_button);
+        Button goto_resultsActivity = findViewById(R.id.goto_resultsactivity_button);
 
+        // User click leads them to QuestionActivity
         goto_QuestionActivity.setOnClickListener(new View.OnClickListener() {
             public void onClick(View v) {
-                Log.d("DebugActivity", "going to QuestionActivity");
+                Log.d("DebugActivity", "Going to QuestionActivity");
                 Intent intent = new Intent(DebugActivity.this, QuestionActivity.class);
                 startActivity(intent);
             }
         });
 
+        // User click leads them to LocationActivity
         goto_LocationActivity.setOnClickListener(new View.OnClickListener() {
             public void onClick(View v) {
-                Log.d("DebugActivity", "going to LocationActivity");
+                Log.d("DebugActivity", "Going to LocationActivity");
                 Intent intent = new Intent(DebugActivity.this, LocationActivity.class);
                 startActivity(intent);
             }
         });
-
+        // User click leads them to CongratulationsActivity
         goto_congratulationsActivity.setOnClickListener(new View.OnClickListener() {
             public void onClick(View v) {
-                Log.d("DebugActivity", "going to CongratulationsActivity");
+                Log.d("DebugActivity", "Going to CongratulationsActivity");
                 Intent intent = new Intent(DebugActivity.this, CongratulationsActivity.class);
                 startActivity(intent);
             }
         });
 
+        // User click leads them to SummaryActivity
         goto_resultsActivity.setOnClickListener(new View.OnClickListener() {
             public void onClick(View v) {
-                Log.d("DebugActivity", "going to SummaryActivity");
+                Log.d("DebugActivity", "Going to SummaryActivity");
                 Intent intent = new Intent(DebugActivity.this, SummaryActivity.class);
                 startActivity(intent);
             }
         });
 
-         // dagger.setText(gameController.initGame());
+        // TextView dagger = findViewById(R.id.dagger);
+        // dagger.setText(gameController.initGame());
     }
 }

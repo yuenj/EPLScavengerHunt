@@ -105,7 +105,7 @@ public class GameController {
      * @return Summary      Contains the end-state of a users game
      *                      Most importantly, this contains the answers correct and their responses
      */
-    private Summary generateSummary() {
+    public Summary generateSummary() {
         List<Response> responses = scavHuntState.getPlayerResponses();
         List<Question> questions = scavHuntState.getQuestions();
         int score = scavHuntState.getNumCorrect();
@@ -149,6 +149,7 @@ public class GameController {
         Zone zone2 = new Zone("[ab1d6643c33e5f6ed7c52a062168f137]"); // Candystore
         zone2.setName("2");
         Zone zone3 = new Zone("[9a78af8c1252fcb37abefecbbbe7322a]"); // Lemonade
+        zone3.setName("3");
 
         // Create the zone route
         testZoneRoute.add(zone1);

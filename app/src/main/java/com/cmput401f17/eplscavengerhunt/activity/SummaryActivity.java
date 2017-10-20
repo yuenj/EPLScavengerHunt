@@ -38,7 +38,7 @@ public class SummaryActivity extends AppCompatActivity {
         setContentView(R.layout.activity_summary);
         ScavengerHuntApplication.getInstance().getAppComponent().inject(this);
 
-        summary = gameController.requestSummary();
+        summary = gameController.generateSummary();
         String str = summary.getQuestions().toString();
         Log.i("SUMMARY:", str);
 
@@ -79,9 +79,9 @@ public class SummaryActivity extends AppCompatActivity {
     }
 
     private void findViews() {
-        summaryListView = (ListView) findViewById(R.id.summaryLV);
-        usersScore = (TextView) findViewById(R.id.summary_total);
-        done = (Button) findViewById(R.id.summary_next);
+        summaryListView = findViewById(R.id.summaryLV);
+        usersScore = findViewById(R.id.summary_total);
+        done = findViewById(R.id.summary_next);
     }
 
     @Override
