@@ -43,7 +43,7 @@
     <!-- SummaryActivity -->
     <string name="total_score">Your Total: </string>
     <string name="continue_button">CONTINUE</string>
-    <!-- ActivityWrittenInput -->
+        <!-- ActivityWrittenInput -->
         <string name="user_answer">Your Answer:</string>
         <string name="submit">Submit</string>
 
