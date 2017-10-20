@@ -26,29 +26,32 @@ public class QuestionController {
 
     /**
      * Gets the data relating to the current question
+     *
      * @return Question     A question object containing a prompt and a solution and
-     *                      other specifics depending on the type of question
+     * other specifics depending on the type of question
      */
     public Question requestQuestion() {
 
-        return(scavHuntState.getCurrentQuestion());
+        return (scavHuntState.getCurrentQuestion());
     }
 
 
     /**
-     *  Updates the user's answer for the current question
-     *  @param answer       The users answer to the current question
+     * Updates the user's answer for the current question
+     *
+     * @param answer The users answer to the current question
      */
-    public void requestSubmitResponse(String answer){
+    public void requestSubmitResponse(String answer) {
         Response response = new Response(answer);
         scavHuntState.addResponse(response);
     }
 
     /**
      * Skips the current question
-     * @param question      The question currently displayed to the user
+     *
+     * @param question The question currently displayed to the user
      */
-    public void skip(Question question){
+    public void skip(Question question) {
         question.skip();
     }
 }

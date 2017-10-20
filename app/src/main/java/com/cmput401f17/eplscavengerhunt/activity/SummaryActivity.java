@@ -42,7 +42,7 @@ public class SummaryActivity extends AppCompatActivity {
         setContentView(R.layout.activity_summary);
         ScavengerHuntApplication.getInstance().getAppComponent().inject(this);
 
-        summary = gameController.generateSummary();
+        summary = gameController.requestSummary();
         String str = summary.getQuestions().toString();
         Log.i("SUMMARY:", str);
 

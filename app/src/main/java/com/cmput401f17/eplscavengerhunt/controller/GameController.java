@@ -33,6 +33,7 @@ public class GameController {
      * for demo purposes and because this method relies on the
      * DatabaseController through generateZoneRoute
      * TODO: Call initScav or some other method to create our scavHuntState object
+     *
      * @return Boolean      Returns true or false if the game was initiated correctly
      */
     public Boolean initGame() {
@@ -75,33 +76,39 @@ public class GameController {
      * is done here. For each zone, gets all questions in the question pool, and
      * randomly selects one. Each zone gets one question. Stores this series
      * of questions in ScavHuntState
-     * @param zoneRoute     A list of zones a user will go through
+     *
+     * @param zoneRoute A list of zones a user will go through
      */
-     private void generateQuestionSet(List<Zone> zoneRoute) {
-         List<Question> questionPool;
-         List<Question> questionSet = new ArrayList<>();
+    private void generateQuestionSet(List<Zone> zoneRoute) {
+        List<Question> questionPool;
+        List<Question> questionSet = new ArrayList<>();
 
-         // Min and max refer to the maximum number of questions
-         // int rand = ThreadLocalRandom.current().nextInt(0, max + 1);
-         int rand = 0; // Placeholder
+        // Min and max refer to the maximum number of questions
+        // int rand = ThreadLocalRandom.current().nextInt(0, max + 1);
+        int rand = 0; // Placeholder
 
-         // Calling for a query for X amount of zones will be
-         // a bottleneck for speed
-         // TODO: Change databaseController to retrieve all questions or limit the amount of database calls
-         for (Zone zone : zoneRoute) {
-             questionPool = databaseController.retrieveQuestionsinZone(zone);
-             Question randomQuestion = questionPool.get(rand);
-             questionSet.add(randomQuestion);
-         }
-         scavHuntState.setQuestions(questionSet);
-     }
+        // Calling for a query for X amount of zones will be
+        // a bottleneck for speed
+        // TODO: Change databaseController to retrieve all questions or limit the amount of database calls
+        for (Zone zone : zoneRoute) {
+            questionPool = databaseController.retrieveQuestionsinZone(zone);
+            Question randomQuestion = questionPool.get(rand);
+            questionSet.add(randomQuestion);
+        }
+        scavHuntState.setQuestions(questionSet);
+    }
+
+    public Summary requestSummary() {
+        return generateSummary();
+    }
 
     /**
      * Generates a summary to be used for display
+     *
      * @return Summary      Contains the end-state of a users game
-     *                      Most importantly, this contains the answers correct and their responses
+     * Most importantly, this contains the answers correct and their responses
      */
-    public Summary generateSummary() {
+    private Summary generateSummary() {
         List<Response> responses = scavHuntState.getPlayerResponses();
         List<Question> questions = scavHuntState.getQuestions();
         int score = scavHuntState.getNumCorrect();
