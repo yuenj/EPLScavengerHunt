@@ -4,44 +4,41 @@ import java.util.ArrayList;
 
 public class Question {
 
-    private int questionID, zone;
-    private String prompt, image_link, solution,sound_link;
+    private int questionID;
+    private String prompt, imageLink, solution,soundLink;
     private ArrayList<String> choices;
-    private boolean take_pic, skipped;
+    private boolean takePic, skipped;
 
     public Question() {
         this.questionID = 0;
-        this.zone = 0;
         this.prompt = "";
-        this.choices = new ArrayList<String>();
+        this.choices = new ArrayList<>();
         this.solution = "";
-        this.image_link = "";
-        this.sound_link = "";
-        this.take_pic = false;
+        this.imageLink = "";
+        this.soundLink = "";
+        this.takePic = false;
         this.skipped = false;
     }
 
     public Question(int questionID, String questionText, String solution) {
         this.questionID = questionID;
-        this.zone = zone;
         this.prompt = questionText;
-        this.choices = new ArrayList<String>();
+        this.choices = new ArrayList<>();
         this.solution = solution;
-        this.image_link = "";
-        this.sound_link = "";
-        this.take_pic = false;
+        this.imageLink = "";
+        this.soundLink = "";
+        this.takePic = false;
         this.skipped = false;
     }
 
-    public Question(int questionID, int zone, String questionText, String solution, String q_link, String s_link, boolean take_pic) {
+    public Question(int questionID, String questionText, String solution, String iLink, String sLink, boolean takePic) {
         this.questionID = questionID;
-        this.zone = zone;
         this.prompt = questionText;
-        this.choices = new ArrayList<String>();
+        this.choices = new ArrayList<>();
         this.solution = solution;
-        this.image_link = q_link;
-        this.sound_link = s_link;
-        this.take_pic = take_pic;
+        this.imageLink = iLink;
+        this.soundLink = sLink;
+        this.takePic = takePic;
         this.skipped = false;
     }
 
@@ -51,14 +48,6 @@ public class Question {
 
     public void setQuestionID(int questionID) {
         this.questionID = questionID;
-    }
-
-    public int getZone() {
-        return zone;
-    }
-
-    public void setZone(int zone) {
-        this.zone = zone;
     }
 
     public String getQuestionPrompt() {
@@ -83,17 +72,17 @@ public class Question {
         this.solution = solution;
     }
 
-    public String getQ_link() { return image_link; }
+    public String getImageLink () { return imageLink; }
 
-    public void setQ_link(String q_link) { this.image_link = q_link; }
+    public void setImageLink(String iLink) { this.imageLink = iLink; }
 
-    public String getS_link() { return sound_link; }
+    public String getSoundLink() { return soundLink; }
 
-    public void setS_link(String s_link) { this.sound_link = s_link; }
+    public void setSoundLink(String sLink) { this.soundLink = sLink; }
 
-    public boolean isTake_pic() { return take_pic; }
+    public boolean isTakePic() { return takePic; }
 
-    public void setTake_pic(boolean take_pic) { this.take_pic = take_pic; }
+    public void setTakePic(boolean takePic) { this.takePic = takePic; }
 
     public Boolean isSkipped() {
         return skipped;

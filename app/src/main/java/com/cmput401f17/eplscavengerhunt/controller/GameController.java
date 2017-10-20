@@ -9,7 +9,10 @@ import com.cmput401f17.eplscavengerhunt.model.Zone;
 
 import java.util.ArrayList;
 import java.util.List;
+import java.util.Random;
 import java.util.concurrent.ThreadLocalRandom;
+
+import javax.inject.Inject;
 
 /**
  * Responsible for initializing a new game scenario, game logic
@@ -21,8 +24,8 @@ public class GameController {
     private final ScavHuntState scavHuntState;
     private final DatabaseController databaseController;
 
+    @Inject
     public GameController(ScavHuntState scavHuntState, DatabaseController databaseController) {
-        ScavengerHuntApplication.getInstance().getAppComponent().inject(this);
         this.scavHuntState = scavHuntState;
         this.databaseController = databaseController;
     }
@@ -85,7 +88,7 @@ public class GameController {
 
         // Min and max refer to the maximum number of questions
         // int rand = ThreadLocalRandom.current().nextInt(0, max + 1);
-        int rand = 0; // Placeholder
+        Random rand = new Random();
 
         // Calling for a query for X amount of zones will be
         // a bottleneck for speed
