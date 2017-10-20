@@ -9,7 +9,7 @@ import java.util.List;
 /**
  * Currently, DatabaseController handles retrieving the branch,
  * zones and questions in zones. It will possibly handle
- * adding respones to a qusetion to the database as well.
+ * adding responses to a question to the database as well.
  * TODO: Make DatabaseController act as a client connecting to an api middleware
  */
 public class DatabaseController {
@@ -18,11 +18,11 @@ public class DatabaseController {
     }
 
     /**
-     * Uses inputted GPS coordinates to retreive the name of the branch that
+     * Uses inputted GPS coordinates to retrieve the name of the branch that
      * the coordinate is inside from the database.
      * @return String           Library branch name
      */
-    public String retreiveBranch() {
+    public String retrieveBranch() {
         return null;
     }
 
