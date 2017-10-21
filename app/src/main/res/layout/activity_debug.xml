@@ -10,39 +10,36 @@
         android:layout_width="wrap_content"
         android:layout_height="wrap_content"
         android:text="@string/debugActivity"
-        android:textSize="30sp"/>
+        android:textSize="30sp" />
 
     <Button
-    android:id="@+id/goto_locationactivity_button"
+    android:id="@+id/debug_goto_locationactivity_button"
     android:layout_width="wrap_content"
     android:layout_height="wrap_content"
-    android:text="@string/goto_LocationActivity_text"/>
+    android:text="@string/goto_LocationActivity_text" />
 
     <Button
-        android:id="@+id/goto_questionactivity_button"
+        android:id="@+id/debug_goto_questionactivity_button"
         android:layout_width="wrap_content"
         android:layout_height="wrap_content"
-        android:text="@string/goto_QuestionActivity_text"/>
+        android:text="@string/goto_QuestionActivity_text" />
+
     <Button
-        android:id="@+id/goto_congratulationsactivity_button"
+        android:id="@+id/debug_goto_congratulationsactivity_button"
         android:layout_width="wrap_content"
         android:layout_height="wrap_content"
-        android:text="@string/goto_congratulationsActivity_text"/>
+        android:text="@string/goto_congratulationsActivity_text" />
+
     <Button
-        android:id="@+id/goto_resultsactivity_button"
+        android:id="@+id/debug_goto_resultsactivity_button"
         android:layout_width="wrap_content"
         android:layout_height="wrap_content"
-        android:text="@string/goto_resultsActivity_text"/>
+        android:text="@string/goto_resultsActivity_text" />
 
     <TextView
-        android:id="@+id/dagger"
+        android:id="@+id/debug_dagger_text_view"
         android:layout_width="wrap_content"
         android:layout_height="wrap_content"
         android:textSize="30sp" />
-
-
-
-
-
 
 </android.support.v7.widget.LinearLayoutCompat>

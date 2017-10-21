@@ -1,7 +1,5 @@
 package com.cmput401f17.eplscavengerhunt.controller;
 
-import com.cmput401f17.eplscavengerhunt.ScavengerHuntApplication;
-
 import com.cmput401f17.eplscavengerhunt.model.Question;
 import com.cmput401f17.eplscavengerhunt.model.Response;
 import com.cmput401f17.eplscavengerhunt.model.ScavHuntState;
@@ -23,7 +21,7 @@ public class QuestionController {
     /**
      *  Passes/ updates the user answer
      *  @pre User has input an answer
-     *  @param answer
+     *  @param answer       The user's answer
      */
     public void requestSubmitResponse(String answer){
         Response response = new Response(answer);
@@ -38,7 +36,7 @@ public class QuestionController {
 
     /**
      * User chose to skip question. Pass that along
-     * @param question
+     * @param question      The current question
      */
     public void skip(Question question){
         question.skip();

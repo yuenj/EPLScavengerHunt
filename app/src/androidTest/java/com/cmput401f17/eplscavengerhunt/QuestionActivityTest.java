@@ -7,9 +7,6 @@ import android.widget.TextView;
 import com.cmput401f17.eplscavengerhunt.activity.QuestionActivity;
 import com.robotium.solo.Solo;
 
-import java.util.ArrayList;
-import java.util.List;
-
 /**
  * Tests QuestionActivityTest
  */
@@ -30,11 +27,11 @@ public class QuestionActivityTest extends ActivityInstrumentationTestCase2<com.c
         solo.assertCurrentActivity(ERR_MSG, QuestionActivity.class);
 
         /* Find skip button as all views/layouts displayed by QuestionActivityTest contain a skip button */
-        Button skipButton = solo.getCurrentActivity().findViewById(R.id.skip);
+        Button skipButton = solo.getCurrentActivity().findViewById(R.id.question_skip_button);
 
         /* Views/ layouts displayed by QuestionActivityTest all contain textviews, but content is different */
-        TextView congratsMsgHeader = solo.getCurrentActivity().findViewById(R.id.zone);
-        TextView congratsMsgBody = solo.getCurrentActivity().findViewById(R.id.question_prompt);
+        TextView congratsMsgHeader = solo.getCurrentActivity().findViewById(R.id.question_zone_text_view);
+        TextView congratsMsgBody = solo.getCurrentActivity().findViewById(R.id.question_prompt_text_view);
     }
 
     public void tearDown() {

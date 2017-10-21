@@ -19,7 +19,7 @@ public class CongratulationsActivity extends AppCompatActivity {
         super.onCreate(savedInstanceState);
         setContentView(R.layout.activity_congratulations);
 
-        Button startButton = findViewById(R.id.results_button);
+        Button startButton = findViewById(R.id.congrats_results_button);
 
         // User click leads to summary activity - a summary to their game
         startButton.setOnClickListener(new View.OnClickListener() {

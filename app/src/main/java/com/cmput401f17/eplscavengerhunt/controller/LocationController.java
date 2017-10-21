@@ -42,7 +42,6 @@ public class LocationController {
      * restart beacon discovery after it has ended.
      */
     public void startDiscovery() {
-
         // Connect to scanning service
         beaconManager.connect(new BeaconManager.ServiceReadyCallback() {
 

@@ -1,33 +1,33 @@
 <?xml version="1.0" encoding="utf-8"?>
 
 <android.support.v7.widget.LinearLayoutCompat xmlns:android="http://schemas.android.com/apk/res/android"
-    android:id="@+id/pic_input_layout"
+    android:id="@+id/pic_input_llc"
     android:layout_width="match_parent"
     android:layout_height="match_parent"
     android:orientation="vertical">
 
     <TextView
-        android:id="@+id/zone"
+        android:id="@+id/question_zone_text_view"
         android:layout_width="wrap_content"
         android:layout_height="wrap_content"
         android:text="@string/question_temp_text"
-        android:textSize="30sp"/>
+        android:textSize="30sp" />
 
     <TextView
-        android:id="@+id/question_prompt"
+        android:id="@+id/question_prompt_text_view"
         android:layout_width="wrap_content"
         android:layout_height="wrap_content"
         android:text="@string/question_temp_text"
-        android:textSize="30sp"/>
+        android:textSize="30sp" />
 
     <ImageView
-        android:id="@+id/user_image"
+        android:id="@+id/pic_user_image_image_view"
         android:layout_width="wrap_content"
-        android:layout_height="wrap_content"/>
+        android:layout_height="wrap_content" />
 
     <!-- Layout as placeholder -->
     <android.support.v7.widget.LinearLayoutCompat xmlns:android="http://schemas.android.com/apk/res/android"
-        android:id="@+id/pic_choice_layout"
+        android:id="@+id/pic_choices_llc"
         android:layout_width="match_parent"
         android:layout_height="wrap_content"
         android:orientation="vertical">
@@ -69,23 +69,26 @@
     </android.support.v7.widget.LinearLayoutCompat>
 
     <Button
-        android:id="@+id/submit"
+        android:id="@+id/question_submit_button"
         android:layout_width="wrap_content"
         android:layout_height="wrap_content"
         android:visibility="invisible"
-        android:text="Submit"/>
+        android:text="Submit" />
 
+    <!-- Forces skip button to be at the very bottom as long as this layout is last in XML -->
     <LinearLayout
         android:layout_width="match_parent"
         android:layout_height="0dip"
         android:layout_weight="1"
         android:gravity="center|bottom"
         android:orientation="vertical">
+
         <Button
-            android:id="@+id/skip"
+            android:id="@+id/question_skip_button"
             android:layout_width="wrap_content"
             android:layout_height="wrap_content"
-            android:text="@string/skip_question"/>
+            android:text="@string/skip_question" />
+
     </LinearLayout>
 
 </android.support.v7.widget.LinearLayoutCompat>

@@ -71,7 +71,7 @@ public class SummaryActivity extends AppCompatActivity {
      */
     private void displayScore() {
         final int score = summary.getScore();
-        final int maxScore = summary.getNumQuestions();
+           final int maxScore = summary.getNumQuestions();
 
         usersScore.setText(Integer.toString(score) + "/" + Integer.toString(maxScore));
     }
@@ -94,9 +94,9 @@ public class SummaryActivity extends AppCompatActivity {
     }
 
     private void findViews() {
-        summaryListView = findViewById(R.id.summaryLV);
-        usersScore = findViewById(R.id.summary_total);
-        done = findViewById(R.id.summary_next);
+        summaryListView = findViewById(R.id.summary_lv);
+        usersScore = findViewById(R.id.summary_total_text_view);
+        done = findViewById(R.id.summary_next_button);
     }
 
     @Override

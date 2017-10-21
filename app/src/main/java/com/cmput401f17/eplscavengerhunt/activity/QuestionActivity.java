@@ -45,7 +45,7 @@ public class QuestionActivity extends AppCompatActivity {
      * Displays the current zone
      */
     private void displayZone() {
-        TextView zoneView = (TextView)findViewById(R.id.zone);
+        TextView zoneView = (TextView)findViewById(R.id.question_zone_text_view);
         zoneView.setText("Zone: " + locationController.requestZone().getName());
     }
 
@@ -53,7 +53,7 @@ public class QuestionActivity extends AppCompatActivity {
      * Displays the current question prompt
      */
     private void displayPrompt() {
-        TextView prompt = (TextView)findViewById(R.id.question_prompt);
+        TextView prompt = (TextView)findViewById(R.id.question_prompt_text_view);
         prompt.setText("Task: " + currentQuestion.getQuestionPrompt());
     }
 
@@ -78,7 +78,7 @@ public class QuestionActivity extends AppCompatActivity {
             Button mcOption = new Button(this);
             mcOption.setText(choices.get(i));
 
-            LinearLayoutCompat layout = (LinearLayoutCompat) findViewById(R.id.choice_buttons);
+            LinearLayoutCompat layout = (LinearLayoutCompat) findViewById(R.id.mult_choices_llc);
             LinearLayoutCompat.LayoutParams parameters = new LinearLayoutCompat.LayoutParams(LinearLayoutCompat.LayoutParams.MATCH_PARENT, LinearLayoutCompat.LayoutParams.WRAP_CONTENT);
             layout.addView(mcOption, parameters);
 
@@ -111,7 +111,7 @@ public class QuestionActivity extends AppCompatActivity {
      *  @param view, editText
      */
     private void writtenAnswerChecker(View view, EditText editText) {
-        TextInputLayout userAnswerLayout = (TextInputLayout) findViewById(R.id.userAnswerWrapper);
+        TextInputLayout userAnswerLayout = (TextInputLayout) findViewById(R.id.written_user_answer_wrapper_til);
 
         if(editText.getText().length() == 0){
             userAnswerLayout.setError("Answer is too short.");
@@ -144,7 +144,7 @@ public class QuestionActivity extends AppCompatActivity {
 
         /* Modified code whose original is from https://developer.android.com/training/keyboard-input/style.html */
         /* User's keyboard has a send button, which when pressed will submit the answer the user typed in */
-        final EditText editText = (EditText) findViewById(R.id.userAnswer);
+        final EditText editText = (EditText) findViewById(R.id.written_user_answer_edit_text);
         editText.setOnEditorActionListener(new TextView.OnEditorActionListener() {
             @Override
             public boolean onEditorAction(TextView v, int actionId, KeyEvent event) {
@@ -161,7 +161,7 @@ public class QuestionActivity extends AppCompatActivity {
         });
 
         /* Listens for when button is pressed. When it is pressed, answer is submitted */
-        Button submit = (Button) findViewById(R.id.submit);
+        Button submit = (Button) findViewById(R.id.question_submit_button);
         submit.setOnClickListener(new View.OnClickListener() {
             public void onClick(View view) {
                 writtenAnswerChecker(view, editText);
@@ -176,7 +176,7 @@ public class QuestionActivity extends AppCompatActivity {
      */
     private void displayPicInput(){
         setContentView(R.layout.activity_pic_input);
-        final Button submit = (Button) findViewById(R.id.submit);
+        final Button submit = (Button) findViewById(R.id.question_submit_button);
 
         displayZone();
         displayPrompt();
@@ -221,7 +221,7 @@ public class QuestionActivity extends AppCompatActivity {
         }
 
         /* Add the radio button group to the view */
-        LinearLayoutCompat layout = (LinearLayoutCompat) findViewById(R.id.pic_choice_layout);
+        LinearLayoutCompat layout = (LinearLayoutCompat) findViewById(R.id.pic_choices_llc);
         LinearLayoutCompat.LayoutParams parameters = new LinearLayoutCompat.LayoutParams(LinearLayoutCompat.LayoutParams.MATCH_PARENT, LinearLayoutCompat.LayoutParams.WRAP_CONTENT);
         layout.addView(radioGroup, parameters);
     }
@@ -280,7 +280,7 @@ public class QuestionActivity extends AppCompatActivity {
         }
 
         /* Skip button on all view */
-        Button skipButton = (Button) findViewById(R.id.skip);
+        Button skipButton = (Button) findViewById(R.id.question_skip_button);
 
         skipButton.setOnClickListener(new View.OnClickListener() {
             public void onClick(View v) {
