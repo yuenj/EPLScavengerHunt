@@ -2,37 +2,27 @@ package com.cmput401f17.eplscavengerhunt;
 
 import com.cmput401f17.eplscavengerhunt.controller.DatabaseController;
 import com.cmput401f17.eplscavengerhunt.controller.QuestionController;
-import com.cmput401f17.eplscavengerhunt.controller.GameController;
 import com.cmput401f17.eplscavengerhunt.model.Question;
 import com.cmput401f17.eplscavengerhunt.model.Response;
 import com.cmput401f17.eplscavengerhunt.model.ScavHuntState;
-import com.cmput401f17.eplscavengerhunt.model.Summary;
-import com.cmput401f17.eplscavengerhunt.model.Zone;
 
+import org.junit.Before;
 import org.junit.Rule;
 import org.junit.Test;
-import org.junit.runner.RunWith;
 import org.mockito.ArgumentCaptor;
 import org.mockito.Captor;
-import org.mockito.InjectMocks;
 import org.mockito.Mock;
 import org.mockito.junit.MockitoJUnit;
-import org.mockito.junit.MockitoJUnitRunner;
 import org.mockito.junit.MockitoRule;
 
-import java.util.ArrayList;
-import java.util.Collections;
-import java.util.List;
-
-import static org.junit.Assert.assertEquals;
-import static org.junit.Assert.assertFalse;
-import static org.junit.Assert.assertTrue;
 import static org.mockito.Mockito.mock;
 import static org.mockito.Mockito.times;
 import static org.mockito.Mockito.verify;
 import static org.mockito.Mockito.when;
+import static org.junit.Assert.*;
 
-@RunWith(MockitoJUnitRunner.class)
+
+
 public class QuestionControllerTest {
     @Rule
     public MockitoRule mockitoRule = MockitoJUnit.rule();
@@ -40,30 +30,52 @@ public class QuestionControllerTest {
     @Mock
     ScavHuntState mockScavHuntState;
 
-    @InjectMocks
+    @Captor
+    private ArgumentCaptor<Response> responseCaptor;
+
     QuestionController questionController;
+
+    Question question1;
+    Response response1;
+    String answer1;
+
+    @Before
+    public void init() {
+        questionController = new QuestionController(mockScavHuntState);
+
+        question1 = mock(Question.class);
+        response1 = mock(Response.class);
+        answer1 = "ANSWER1";
+    }
 
     @Test
     public void requestQuestionTest() {
-        /*
-        Question question = questionController.requestQuestion();
+        when(mockScavHuntState.getCurrentQuestion()).thenReturn(question1);
 
-        assertEquals(question.getQuestionID(), id);
-        assertEquals(question.getQuestionPrompt(), prompt);
-        */
+        Question returnedQuestion = questionController.requestQuestion();
+
+        verify(mockScavHuntState, times(1)).getCurrentQuestion();
+        assertEquals(question1, returnedQuestion);
     }
-
 
     @Test
     public void requestSubmitResponseTest() {
+        questionController.requestSubmitResponse(answer1);
 
+        verify(mockScavHuntState,times(1)).addResponse(responseCaptor.capture());
+
+        Response responseSentToScavHuntState = responseCaptor.getValue();
+
+        assertEquals(responseSentToScavHuntState.getResponseStr(), answer1);
     }
 
     @Test
     public void skipTest() {
-        Question question = questionController.requestQuestion();
 
-        assertFalse(question.isSkipped());
+        questionController.skip(question1);
+        verify(question1,times(1)).skip();
+
     }
+
 
 }
