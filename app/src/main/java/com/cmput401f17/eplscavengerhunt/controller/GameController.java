@@ -189,9 +189,9 @@ public class GameController {
 
         // Create the question list
         List<Question> testQuestionList = new ArrayList<>();
-        testQuestionList.add(testQuestion3);
-        testQuestionList.add(testQuestion2);
         testQuestionList.add(testQuestion1);
+        testQuestionList.add(testQuestion2);
+        testQuestionList.add(testQuestion3);
 
         scavHuntState.setQuestions(testQuestionList);
         scavHuntState.setNumStages(testZoneRoute.size());
