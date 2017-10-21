@@ -14,8 +14,7 @@ import com.cmput401f17.eplscavengerhunt.controller.GameController;
 import javax.inject.Inject;
 
 /**
- * Used for testing purposes, especially for instances in which
- * no physical beacon is possessed
+ * Used for testing purposes, especially for instances in which no physical beacon is possessed
  */
 public class DebugActivity extends AppCompatActivity {
 
@@ -28,10 +27,10 @@ public class DebugActivity extends AppCompatActivity {
         setContentView(R.layout.activity_debug);
         ScavengerHuntApplication.getInstance().getAppComponent().inject(this);
 
-        Button goto_QuestionActivity = findViewById(R.id.goto_questionactivity_button);
-        Button goto_LocationActivity = findViewById(R.id.goto_locationactivity_button);
-        Button goto_congratulationsActivity = findViewById(R.id.goto_congratulationsactivity_button);
-        Button goto_resultsActivity = findViewById(R.id.goto_resultsactivity_button);
+        Button goto_QuestionActivity = findViewById(R.id.debug_goto_questionactivity_button);
+        Button goto_LocationActivity = findViewById(R.id.debug_goto_locationactivity_button);
+        Button goto_congratulationsActivity = findViewById(R.id.debug_goto_congratulationsactivity_button);
+        Button goto_resultsActivity = findViewById(R.id.debug_goto_resultsactivity_button);
 
         // User click leads them to QuestionActivity
         goto_QuestionActivity.setOnClickListener(new View.OnClickListener() {

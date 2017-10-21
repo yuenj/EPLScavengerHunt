@@ -27,8 +27,8 @@ public class TitleActivity extends AppCompatActivity {
     @Override
     protected void onCreate(Bundle savedInstanceState) {
         super.onCreate(savedInstanceState);
-        ScavengerHuntApplication.getInstance().getAppComponent().inject(this);
         setContentView(R.layout.activity_title);
+        ScavengerHuntApplication.getInstance().getAppComponent().inject(this);
 
         Button startButton = findViewById(R.id.title_start_button);
         Button rulesButton = findViewById(R.id.title_rules_button);
@@ -79,7 +79,9 @@ public class TitleActivity extends AppCompatActivity {
 
     }
 
-    // Checks permissions, specifically bluetooth, for location beacons
+    /**
+     * Checks permissions, specifically bluetooth, for location beacons
+     */
     @Override
     protected void onResume() {
         super.onResume();

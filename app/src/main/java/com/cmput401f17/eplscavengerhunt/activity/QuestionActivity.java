@@ -15,7 +15,6 @@ import android.widget.EditText;
 import android.widget.LinearLayout;
 import android.widget.RadioButton;
 import android.widget.RadioGroup;
-
 import android.widget.TextView;
 import android.widget.Toast;
 
@@ -27,18 +26,12 @@ import com.cmput401f17.eplscavengerhunt.model.Question;
 import com.cmput401f17.eplscavengerhunt.controller.QuestionController;
 
 import java.util.ArrayList;
-
 import javax.inject.Inject;
 
-/**
- * Displays the current zone and question for the user.
- * The user is prompted to answer depending on the type of question
- * When the user responds, the activity routes them to LocationActivity
- */
 public class QuestionActivity extends AppCompatActivity {
 
     @Inject
-    QuestionController qController;
+    QuestionController questionController;
 
     @Inject
     GameController gameController;
@@ -52,100 +45,98 @@ public class QuestionActivity extends AppCompatActivity {
      * Displays the current zone
      */
     private void displayZone() {
-        TextView zone = findViewById(R.id.zone);
-        zone.setText(getString(R.string.current_zone, locationController.requestZone().getName()));
+        TextView zoneView = (TextView)findViewById(R.id.question_zone_text_view);
+        zoneView.setText("Zone: " + locationController.requestZone().getName());
     }
 
     /**
      * Displays the current question prompt
      */
     private void displayPrompt() {
-        TextView prompt = findViewById(R.id.question_prompt);
-        prompt.setText(getString(R.string.question_prompt, currentQuestion.getQuestionPrompt()));
+        TextView prompt = (TextView)findViewById(R.id.question_prompt_text_view);
+        prompt.setText("Task: " + currentQuestion.getQuestionPrompt());
     }
 
     /**
-     * Displays the view for a multiple choice question
-     * 1. Display Zone, and Prompt
-     * 2. Add buttons according to the number of choices in the question
-     * 3. Listen for user to press button. When pressed pass on answer to controller.
-     * 4. Use intentAway to move to next activity
+     * Displays the view for a mulitple choice question
+     *  1. Display Zone, and Prompt
+     *  2. Add buttons according to the number of choices in the question
+     *  3. Listen for user to press button. When pressed pass on answer to controller.
+     *  4. Use intentAway to move to next activity
      */
-    private void displayMultChoice() {
+    private void displayMultChoice(){
         setContentView(R.layout.activity_mult_choice);
 
         displayZone();
         displayPrompt();
 
-        // Get the MC choices
-        final ArrayList<String> choices = currentQuestion.getChoices();
+        /* Get the MC choices */
+         final ArrayList<String> choices = currentQuestion.getChoices();
 
-        // Create choice button(s)
-        for (int i = 0; i < choices.size(); i++) {
+        /* Create choice button(s) */
+        for(int i = 0; i < choices.size(); i++) {
             Button mcOption = new Button(this);
             mcOption.setText(choices.get(i));
 
-
-            LinearLayoutCompat layout = findViewById(R.id.choice_buttons);
+            LinearLayoutCompat layout = (LinearLayoutCompat) findViewById(R.id.mult_choices_llc);
             LinearLayoutCompat.LayoutParams parameters = new LinearLayoutCompat.LayoutParams(LinearLayoutCompat.LayoutParams.MATCH_PARENT, LinearLayoutCompat.LayoutParams.WRAP_CONTENT);
             layout.addView(mcOption, parameters);
 
             /* Listen for button click. If clicked, make a toast telling which button was clicked */
-            final int id = i;
-            mcOption.setOnClickListener(new View.OnClickListener() {
-                public void onClick(View view) {
-                    Toast.makeText(view.getContext(), "Button clicked index = " + id, Toast.LENGTH_SHORT).show();
+             final int id = i;
+             mcOption.setOnClickListener(new View.OnClickListener() {
+                 public void onClick(View view) {
+                     Toast.makeText(view.getContext(), "Button clicked index = " + id, Toast.LENGTH_SHORT).show();
 
-                    //Pass the answer to the controller
-                    qController.requestSubmitResponse(choices.get(id));
-                    intentAway();
-                }
-            });
-        }
+                     //Pass the answer to the controller
+                     questionController.requestSubmitResponse(choices.get(id));
+                     intentAway();
+                 }
+             });
+         }
     }
 
     /**
-     * Ensure that an answer is entered (>0 characters)
-     * <p>
-     * If answer is entered:
-     * 1.Makes a toast to inform user answer has been received.
-     * 2.Gets the user input nad changes to string.
-     * 3.Hide the on-screen/ soft keyboard
-     * 4.Pass the answer to the controller for further use.
-     * 5.Use intentAway to move to next activity
-     * <p>
-     * Modified code originally from https://code.tutsplus.com/tutorials/creating-a-login-screen-using-textinputlayout--cms-24168
-     * <p>
-     * // TODO: Add javadoc descriptions for these parameters
+     *  Ensure that an answer is entered (>0 characters)
      *
-     * @param view
-     * @param editText
+     *  If answer is entered:
+     *      1.Makes a toast to inform user answer has been received.
+     *      2.Gets the user input nad changes to string.
+     *      3.Hide the on-screen/ soft keyboard
+     *      4.Pass the answer to the controller for further use.
+     *      5.Use intentAway to move to next activity
+     *
+     *  Modified code originally from https://code.tutsplus.com/tutorials/creating-a-login-screen-using-textinputlayout--cms-24168
+     *
+     *  @param view, editText
      */
     private void writtenAnswerChecker(View view, EditText editText) {
-        TextInputLayout userAnswerLayout = findViewById(R.id.userAnswerWrapper);
+        TextInputLayout userAnswerLayout = (TextInputLayout) findViewById(R.id.written_user_answer_wrapper_til);
 
-        if (editText.getText().length() == 0) {
+        if(editText.getText().length() == 0){
             userAnswerLayout.setError("Answer is too short.");
         } else {
             userAnswerLayout.setErrorEnabled(false);
 
             Toast.makeText(view.getContext(), "Answer Submitted!", Toast.LENGTH_SHORT).show();
 
-            // Hides the on-screen (soft) keyboard
-            ((InputMethodManager) getSystemService(Context.INPUT_METHOD_SERVICE)).
-                    hideSoftInputFromWindow(view.getWindowToken(), InputMethodManager.HIDE_NOT_ALWAYS);
+            /* Hides the on-screen (soft) keyboard */
+            if (view != null) {
+                ((InputMethodManager) getSystemService(Context.INPUT_METHOD_SERVICE)).
+                        hideSoftInputFromWindow(view.getWindowToken(), InputMethodManager.HIDE_NOT_ALWAYS);
+            }
 
-            qController.requestSubmitResponse(editText.getText().toString());
+            questionController.requestSubmitResponse(editText.getText().toString());
             intentAway();
         }
     }
 
     /**
      * Displays view for a written input question
-     * 1. Display zone and prompt text
-     * 2. Listen for user input, through the on-screen keyboard send, or by pressing the button
+     *  1. Display zone and prompt text
+     *  2. Listen for user input, through the on-screen keyboard send, or by pressing the button
      */
-    private void displayWrittenInput() {
+    private void displayWrittenInput(){
         setContentView(R.layout.activity_written_input);
 
         displayZone();
@@ -153,7 +144,7 @@ public class QuestionActivity extends AppCompatActivity {
 
         /* Modified code whose original is from https://developer.android.com/training/keyboard-input/style.html */
         /* User's keyboard has a send button, which when pressed will submit the answer the user typed in */
-        final EditText editText = findViewById(R.id.userAnswer);
+        final EditText editText = (EditText) findViewById(R.id.written_user_answer_edit_text);
         editText.setOnEditorActionListener(new TextView.OnEditorActionListener() {
             @Override
             public boolean onEditorAction(TextView v, int actionId, KeyEvent event) {
@@ -170,7 +161,7 @@ public class QuestionActivity extends AppCompatActivity {
         });
 
         /* Listens for when button is pressed. When it is pressed, answer is submitted */
-        Button submit = findViewById(R.id.submit);
+        Button submit = (Button) findViewById(R.id.question_submit_button);
         submit.setOnClickListener(new View.OnClickListener() {
             public void onClick(View view) {
                 writtenAnswerChecker(view, editText);
@@ -180,48 +171,59 @@ public class QuestionActivity extends AppCompatActivity {
 
     /**
      * Displays view for a picture input question
-     * 1. Display zone and prompt text
-     * 2.
+     *  1. Display zone and prompt text
+     *  2.
      */
-    private void displayPicInput() {
+    private void displayPicInput(){
         setContentView(R.layout.activity_pic_input);
+        final Button submit = (Button) findViewById(R.id.question_submit_button);
 
         displayZone();
         displayPrompt();
 
-        // TODO: Link the button to the camera and display a photo once taken
+        //TODO
+        //Link button to camera
 
-        // Display the choices
+        //Display photo once taken
+
+        /* Display the choices */
         final ArrayList<String> choices = currentQuestion.getChoices();
 
-        // Create group for radio buttons
-        RadioGroup rg = new RadioGroup(this);
-        rg.setOrientation(LinearLayout.VERTICAL);
+        /* Create group for radio buttons */
+        RadioGroup radioGroup = new RadioGroup(this);
+        radioGroup.setOrientation(LinearLayout.VERTICAL);
 
-        // Create choice radio button(s)
-        for (int i = 0; i < choices.size(); i++) {
-            final RadioButton radio = new RadioButton(this);
-            radio.setId(i);
-            radio.setText(choices.get(i));
+        /* Create choice radio button(s) */
+        for(int i = 0; i < choices.size(); i++) {
+            final RadioButton radioButton = new RadioButton(this);
+            radioButton.setId(i);
+            radioButton.setText(choices.get(i));
 
-            rg.addView(radio);
+            radioGroup.addView(radioButton);
 
-            // Listen for a radio button to be selected.
-            radio.setOnClickListener(new View.OnClickListener() {
+            /* Listen for a radio button to be selected. Once selected show the submit button*/
+            radioButton.setOnClickListener(new View.OnClickListener() {
                 public void onClick(View view) {
-                    Toast.makeText(view.getContext(), "You selected: " + radio.getText().toString(), Toast.LENGTH_SHORT).show();
+                    submit.setVisibility(View.VISIBLE);
+                }
+            });
+
+            /* Submits the response once user clicks. Response is the radio button selected */
+            submit.setOnClickListener(new View.OnClickListener() {
+                public void onClick(View v) {
+                    Toast.makeText(v.getContext(), "You selected: " + radioButton.getText().toString(), Toast.LENGTH_SHORT).show();
 
                     //Pass the answer to the controller
-                    qController.requestSubmitResponse(radio.getText().toString());
+                    questionController.requestSubmitResponse(radioButton.getText().toString());
                     intentAway();
                 }
             });
         }
 
         /* Add the radio button group to the view */
-        LinearLayoutCompat layout = findViewById(R.id.pic_choice_layout);
+        LinearLayoutCompat layout = (LinearLayoutCompat) findViewById(R.id.pic_choices_llc);
         LinearLayoutCompat.LayoutParams parameters = new LinearLayoutCompat.LayoutParams(LinearLayoutCompat.LayoutParams.MATCH_PARENT, LinearLayoutCompat.LayoutParams.WRAP_CONTENT);
-        layout.addView(rg, parameters);
+        layout.addView(radioGroup, parameters);
     }
 
 
@@ -231,14 +233,14 @@ public class QuestionActivity extends AppCompatActivity {
      * If this is the last question we need to intent to the Congrats Activity
      * If this is not the last question we need to intent to the
      */
-    private void intentAway() {
+    private void intentAway () {
         if (!gameController.requestCheckGameOver()) {
             gameController.requestIncrementCurrentStage();
             Intent intent = new Intent(QuestionActivity.this, LocationActivity.class);
             startActivity(intent);
             finish();
 
-        } else {
+        } else{
             Intent intent = new Intent(QuestionActivity.this, CongratulationsActivity.class);
             startActivity(intent);
             finish();
@@ -251,36 +253,40 @@ public class QuestionActivity extends AppCompatActivity {
      * Gets the current question and all info to display the question on user interface
      * Determines type of question and how to display based on aspects of the question
      * Also handles user skipping a question
-     * 1. Question is set to skipped
-     * 2. Passes a blank response to question controller
-     * 3. Moves to next activity using intent away
+     *  1. Question is set to skipped
+     *  2. Passes a blank response to question controller
+     *  3. Moves to next activity using intent away Location Activity
+     * @param savedInstanceState
      */
     @Override
     protected void onCreate(Bundle savedInstanceState) {
         super.onCreate(savedInstanceState);
 
         ScavengerHuntApplication.getInstance().getAppComponent().inject(this);
-        currentQuestion = qController.requestQuestion();
 
+        /* Attempt to get current question. If none, throw error */
+        try {
+            currentQuestion = questionController.requestQuestion();
+        } catch (Exception NoQuestionError) {
+            return;
+        }
 
         //TODO Conditional for choosing the view that is less hacky
         if (currentQuestion.isChoicesEmpty())
             displayWrittenInput();
-        else {
+        else{
+            //displayPicInput();
             displayMultChoice();
         }
 
-        //displayPicInput();
-
-
         /* Skip button on all view */
-        Button skipButton = findViewById(R.id.skip);
+        Button skipButton = (Button) findViewById(R.id.question_skip_button);
 
         skipButton.setOnClickListener(new View.OnClickListener() {
             public void onClick(View v) {
                 Toast.makeText(v.getContext(), "Question skipped", Toast.LENGTH_SHORT).show();
-                qController.skip(currentQuestion);
-                qController.requestSubmitResponse("");
+                questionController.skip(currentQuestion);
+                questionController.requestSubmitResponse("");
                 intentAway();
 
             }

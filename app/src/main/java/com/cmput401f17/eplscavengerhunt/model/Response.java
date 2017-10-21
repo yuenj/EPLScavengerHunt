@@ -1,10 +1,12 @@
 package com.cmput401f17.eplscavengerhunt.model;
 
-
+/**
+ * Holds information for the user response
+ */
 public class Response {
+
     private String responseStr;
     private Boolean correct;
-
 
     public Response() {
         this.responseStr = "";
