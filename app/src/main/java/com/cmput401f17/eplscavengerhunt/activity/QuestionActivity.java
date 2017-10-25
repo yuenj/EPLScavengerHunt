@@ -6,6 +6,7 @@ import android.graphics.Bitmap;
 import android.graphics.BitmapFactory;
 import android.graphics.drawable.BitmapDrawable;
 import android.graphics.drawable.Drawable;
+import android.media.ThumbnailUtils;
 import android.os.Bundle;
 import android.support.annotation.NonNull;
 import android.support.design.widget.TextInputLayout;
@@ -51,12 +52,9 @@ public class QuestionActivity extends AppCompatActivity {
     private Question currentQuestion;
 
     // Attributes related to user picture input
-    private Bitmap imageBitmap;
     private ImageView picTakenImageView;
-    private Boolean hasImg;
     static final int REQUEST_IMAGE_CAPTURE = 1;
-    private File image;
-    private String imagePath = "";
+    private File imageFile;
     CameraHandler cameraHandler = new CameraHandler(this);
 
     /**
@@ -204,7 +202,7 @@ public class QuestionActivity extends AppCompatActivity {
         //Link gotoCamera button to camera
         gotoCamera.setOnClickListener(new View.OnClickListener() {
             public void onClick(View view) {
-                image = cameraHandler.dispatchTakePictureIntent(REQUEST_IMAGE_CAPTURE);
+                imageFile = cameraHandler.dispatchTakePictureIntent(REQUEST_IMAGE_CAPTURE);
             }
         });
 
@@ -277,7 +275,7 @@ public class QuestionActivity extends AppCompatActivity {
     }
 
     /**
-     * Checks if inputted ImageView contains an image.
+     * Checks if inputted ImageView contains an imageFile.
      * From http://stackoverflow.com/questions/9113895/how-to-check-if-an-imageview-is-attached-with-image-in-android
      * accessed 10-24-2017
      * @param view
@@ -295,20 +293,29 @@ public class QuestionActivity extends AppCompatActivity {
 
     @Override
     /**
-     * Display taken image on imageView, and **FOR NOW** delete the fullsize photo
-     * https://developer.android.com/training/camera/photobasics.html
+     * Display taken imageFile on imageView, and **FOR NOW** delete the fullsize photo
+     * from storage.
+     * From https://developer.android.com/training/camera/photobasics.html
+     * accessed 10-24-2017
      */
     protected void onActivityResult(int requestCode, int resultCode, Intent data) {
         if (requestCode == REQUEST_IMAGE_CAPTURE && resultCode == RESULT_OK) {
 
-            // if photo taken, then displays fullsize photo to activity's
+            // if photo taken, then displays photo to activity's
             // imageview. Deletes photo from storage immediately unless
-            // processing photo (image matching, store to database) becomes
+            // processing photo (imageFile matching, store to database) becomes
             // a requirement.
-            if (image.exists()) {
-                Bitmap bitmap = BitmapFactory.decodeFile(image.getAbsolutePath());
+            if (imageFile.exists()) {
+
+                // Displaying full size photos causes performance issues,
+                // so fullsize photo is downscaled in the bitmap before
+                // displaying it in imageView. Note actual imageFile remains untouched.
+                BitmapFactory.Options opts = new BitmapFactory.Options();
+                opts.inSampleSize = 2;
+                Bitmap bitmap = BitmapFactory.decodeFile(imageFile.getAbsolutePath(),opts);
                 picTakenImageView.setImageBitmap(bitmap);
-                image.delete();
+
+                imageFile.delete();
             }
         }
     }
