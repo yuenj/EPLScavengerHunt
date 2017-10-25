@@ -28,7 +28,7 @@
     </style>
 
     <style name="ButtonStyle" parent="@android:style/Widget.Button">
-        <item name="android:textColor">@color/colorWhiteText</item>
+        <item name="android:textColor">@color/colorLightText</item>
         <item name="android:background">@drawable/rounded_button</item>
 
     </style>
