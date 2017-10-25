@@ -335,7 +335,7 @@ public class QuestionActivity extends AppCompatActivity {
     /**
      * Create fullsize Image File
      * which is used to display photo
-     * referenced from https://developer.android.com/training/permissions/requesting.html
+     * referenced from https://developer.android.com/training/camera/photobasics.html
      * accessed 10-24-2017
      */
     private File createImageFile() throws IOException {
