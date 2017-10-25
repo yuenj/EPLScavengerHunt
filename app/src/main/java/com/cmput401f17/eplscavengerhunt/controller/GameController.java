@@ -15,6 +15,8 @@ import java.util.Random;
 
 import javax.inject.Inject;
 
+import javax.inject.Inject;
+
 /**
  * Responsible for initializing a new game scenario, game logic
  * such as checking for gameOver and incrementing current stage
@@ -27,7 +29,7 @@ public class GameController {
     private final DatabaseController databaseController;
 
     @Inject
-    public GameController(ScavHuntState scavHuntState, DatabaseController databaseController) {
+    public GameController(final ScavHuntState scavHuntState, final DatabaseController databaseController) {
         this.scavHuntState = scavHuntState;
         this.databaseController = databaseController;
     }
