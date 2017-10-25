@@ -27,4 +27,11 @@
     <style name="NoActionBar" parent="@android:style/Theme.Holo.Light">
     </style>
 
+    <style name="ButtonStyle" parent="@android:style/Widget.Button">
+        <item name="android:textColor">@color/colorWhiteText</item>
+        <item name="android:background">@drawable/rounded_button</item>
+
+    </style>
+
+
 </resources>
