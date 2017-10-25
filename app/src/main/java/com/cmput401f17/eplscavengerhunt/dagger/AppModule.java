@@ -18,7 +18,7 @@ import dagger.Provides;
 public class AppModule {
     private final ScavengerHuntApplication app;
 
-    public AppModule(ScavengerHuntApplication app) {
+    public AppModule(final ScavengerHuntApplication app) {
         this.app = app;
     }
 
@@ -30,8 +30,8 @@ public class AppModule {
 
     @Provides
     @Singleton
-    public GameController provideGameController(ScavHuntState scavHuntState,
-                                                DatabaseController databaseController) {
+    public GameController provideGameController(final ScavHuntState scavHuntState,
+                                                final DatabaseController databaseController) {
         return new GameController(scavHuntState, databaseController);
     }
 
@@ -49,13 +49,13 @@ public class AppModule {
 
     @Provides
     @Singleton
-    public LocationController provideLocationController(ScavHuntState scavHuntState) {
+    public LocationController provideLocationController(final ScavHuntState scavHuntState) {
         return new LocationController(scavHuntState);
     }
 
     @Provides
     @Singleton
-    public QuestionController provideQuestionController(ScavHuntState scavHuntState) {
+    public QuestionController provideQuestionController(final ScavHuntState scavHuntState) {
         return new QuestionController(scavHuntState);
     }
 }
