@@ -2,44 +2,28 @@ package com.cmput401f17.eplscavengerhunt.model;
 
 import java.util.ArrayList;
 
-public class Question {
+public abstract class Question {
 
     private int questionID;
-    private String prompt, imageLink, solution,soundLink;
-    private ArrayList<String> choices;
-    private boolean takePic, skipped;
+    private String prompt;
+    private String imageLink;
+    private String soundLink;
+    private boolean skipped;
 
     public Question() {
         this.questionID = 0;
         this.prompt = "";
-        this.choices = new ArrayList<>();
-        this.solution = "";
         this.imageLink = "";
         this.soundLink = "";
-        this.takePic = false;
         this.skipped = false;
     }
 
-    public Question(int questionID, String questionText, String solution) {
+    public Question(int questionID, String prompt, String imageLink, String soundLink, boolean skipped) {
         this.questionID = questionID;
-        this.prompt = questionText;
-        this.choices = new ArrayList<>();
-        this.solution = solution;
-        this.imageLink = "";
-        this.soundLink = "";
-        this.takePic = false;
-        this.skipped = false;
-    }
-
-    public Question(int questionID, String questionText, String solution, String iLink, String sLink, boolean takePic) {
-        this.questionID = questionID;
-        this.prompt = questionText;
-        this.choices = new ArrayList<>();
-        this.solution = solution;
-        this.imageLink = iLink;
-        this.soundLink = sLink;
-        this.takePic = takePic;
-        this.skipped = false;
+        this.prompt = prompt;
+        this.imageLink = imageLink;
+        this.soundLink = soundLink;
+        this.skipped = skipped;
     }
 
     public int getQuestionID() {
@@ -50,39 +34,29 @@ public class Question {
         this.questionID = questionID;
     }
 
-    public String getQuestionPrompt() {
+    public String getPrompt() {
         return prompt;
     }
 
-    public void setQuestionText(String questionText) {
-        this.prompt = questionText;
+    public void setPrompt(String prompt) {
+        this.prompt = prompt;
     }
 
-    public ArrayList<String> getChoices() { return(this.choices); }
-
-    public void setChoices(ArrayList<String> choices) { this.choices = choices;}
-
-    public boolean isChoicesEmpty(){ return(this.choices.isEmpty());}
-
-    public String getSolution() {
-        return solution;
+    public String getImageLink() {
+        return imageLink;
     }
 
-    public void setSolution(String solution) {
-        this.solution = solution;
+    public void setImageLink(String imageLink) {
+        this.imageLink = imageLink;
     }
 
-    public String getImageLink () { return imageLink; }
+    public String getSoundLink() {
+        return soundLink;
+    }
 
-    public void setImageLink(String iLink) { this.imageLink = iLink; }
-
-    public String getSoundLink() { return soundLink; }
-
-    public void setSoundLink(String sLink) { this.soundLink = sLink; }
-
-    public boolean isTakePic() { return takePic; }
-
-    public void setTakePic(boolean takePic) { this.takePic = takePic; }
+    public void setSoundLink(String soundLink) {
+        this.soundLink = soundLink;
+    }
 
     public Boolean isSkipped() {
         return skipped;
