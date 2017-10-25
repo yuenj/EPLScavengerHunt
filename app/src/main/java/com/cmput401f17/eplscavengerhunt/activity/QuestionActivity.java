@@ -1,9 +1,22 @@
 package com.cmput401f17.eplscavengerhunt.activity;
 
+import android.Manifest;
 import android.content.Context;
 import android.content.Intent;
+import android.content.pm.PackageManager;
+import android.graphics.Bitmap;
+import android.graphics.BitmapFactory;
+import android.graphics.drawable.BitmapDrawable;
+import android.graphics.drawable.Drawable;
+import android.net.Uri;
 import android.os.Bundle;
+import android.os.Environment;
+import android.provider.MediaStore;
+import android.support.annotation.NonNull;
 import android.support.design.widget.TextInputLayout;
+import android.support.v4.app.ActivityCompat;
+import android.support.v4.content.ContextCompat;
+import android.support.v4.content.FileProvider;
 import android.support.v7.app.AppCompatActivity;
 import android.support.v7.widget.LinearLayoutCompat;
 import android.view.KeyEvent;
@@ -12,6 +25,7 @@ import android.view.inputmethod.EditorInfo;
 import android.view.inputmethod.InputMethodManager;
 import android.widget.Button;
 import android.widget.EditText;
+import android.widget.ImageView;
 import android.widget.LinearLayout;
 import android.widget.RadioButton;
 import android.widget.RadioGroup;
@@ -25,7 +39,12 @@ import com.cmput401f17.eplscavengerhunt.controller.LocationController;
 import com.cmput401f17.eplscavengerhunt.model.Question;
 import com.cmput401f17.eplscavengerhunt.controller.QuestionController;
 
+import java.io.File;
+import java.io.IOException;
+import java.text.SimpleDateFormat;
 import java.util.ArrayList;
+import java.util.Date;
+
 import javax.inject.Inject;
 
 public class QuestionActivity extends AppCompatActivity {
@@ -40,6 +59,16 @@ public class QuestionActivity extends AppCompatActivity {
     LocationController locationController;
 
     private Question currentQuestion;
+
+    // Attributes related to user picture input
+    private Bitmap imageBitmap;
+    private ImageView picTakenImageView;
+    private Boolean hasImg;
+    static final int REQUEST_IMAGE_CAPTURE = 1;
+    private File photoFile;
+    private String imagePath = "";
+    private String mCurrentPhotoPath;
+
 
     /**
      * Displays the current zone
@@ -177,14 +206,18 @@ public class QuestionActivity extends AppCompatActivity {
     private void displayPicInput(){
         setContentView(R.layout.activity_pic_input);
         final Button submit = (Button) findViewById(R.id.question_submit_button);
+        final Button gotoCamera = findViewById(R.id.goto_camera_button);
+        picTakenImageView = findViewById(R.id.pic_taken_imageview);
 
         displayZone();
         displayPrompt();
 
-        //TODO
-        //Link button to camera
-
-        //Display photo once taken
+        //Link gotoCamera button to camera
+        gotoCamera.setOnClickListener(new View.OnClickListener() {
+            public void onClick(View view) {
+                dispatchTakePictureIntent();
+            }
+        });
 
         /* Display the choices */
         final ArrayList<String> choices = currentQuestion.getChoices();
@@ -213,9 +246,15 @@ public class QuestionActivity extends AppCompatActivity {
                 public void onClick(View v) {
                     Toast.makeText(v.getContext(), "You selected: " + radioButton.getText().toString(), Toast.LENGTH_SHORT).show();
 
-                    //Pass the answer to the controller
-                    questionController.requestSubmitResponse(radioButton.getText().toString());
-                    intentAway();
+                    // Does not proceed unless they take a photo with camera
+                    if (hasImage(picTakenImageView)) {
+                        //Pass the answer to the controller
+                        questionController.requestSubmitResponse(radioButton.getText().toString());
+                        intentAway();
+                    }
+                    else {
+                        Toast.makeText(v.getContext(), "Take a photo!", Toast.LENGTH_SHORT).show();
+                    }
                 }
             });
         }
@@ -248,6 +287,92 @@ public class QuestionActivity extends AppCompatActivity {
 
     }
 
+
+    /**
+     * Sends intent to system camera for a photo
+     * https://developer.android.com/training/camera/photobasics.html
+     */
+    private void dispatchTakePictureIntent() {
+        Intent takePictureIntent = new Intent(MediaStore.ACTION_IMAGE_CAPTURE);
+        if (takePictureIntent.resolveActivity(getPackageManager()) != null) {
+            // Create the File where the photo should go
+            try {
+                photoFile = createImageFile();
+            } catch (IOException ex) {
+                // Error occurred while creating the File
+            }
+            if (photoFile != null) {
+                Uri photoURI = FileProvider.getUriForFile(this,
+                        "com.cmput401f17.fileprovider",
+                        photoFile);
+                takePictureIntent.putExtra(MediaStore.EXTRA_OUTPUT, photoURI);
+                startActivityForResult(takePictureIntent, REQUEST_IMAGE_CAPTURE);
+            }
+        }
+
+    }
+
+    @Override
+    /**
+     * Display taken image on imageView, and **FOR NOW** delete the fullsize photo
+     * https://developer.android.com/training/camera/photobasics.html
+     */
+    protected void onActivityResult(int requestCode, int resultCode, Intent data) {
+        if (requestCode == REQUEST_IMAGE_CAPTURE && resultCode == RESULT_OK) {
+
+            // if photo taken, then displays fullsize photo to activity's
+            // imageview. Deletes photo from storage immediately unless
+            // processing photo (image matching, store to database) becomes
+            // a requirement.
+            if (photoFile.exists()) {
+                Bitmap bitmap = BitmapFactory.decodeFile(photoFile.getAbsolutePath());
+                picTakenImageView.setImageBitmap(bitmap);
+                photoFile.delete();
+            }
+        }
+    }
+
+    /**
+     * Create fullsize Image File
+     * which is used to display photo
+     * referenced from https://developer.android.com/training/permissions/requesting.html
+     * accessed 10-24-2017
+     */
+    private File createImageFile() throws IOException {
+        // Create an image file name
+        String timeStamp = new SimpleDateFormat("yyyyMMdd_HHmmss").format(new Date());
+        String imageFileName = "JPEG_" + timeStamp + "_";
+        File storageDir = getExternalFilesDir(Environment.DIRECTORY_PICTURES);
+        File image = File.createTempFile(
+                imageFileName,  /* prefix */
+                ".jpg",         /* suffix */
+                storageDir      /* directory */
+        );
+
+        // Save a file: path for use with ACTION_VIEW intents
+        mCurrentPhotoPath = image.getAbsolutePath();
+        return image;
+    }
+
+    /**
+     * Checks if inputted ImageView contains an image.
+     * From http://stackoverflow.com/questions/9113895/how-to-check-if-an-imageview-is-attached-with-image-in-android
+     * accessed 10-24-2017
+     * @param view
+     * @return Bool, whether ImageView is empty
+     */
+    private boolean hasImage(@NonNull ImageView view) {
+        Drawable drawable = view.getDrawable();
+        boolean hasImage = (drawable != null);
+
+        if (hasImage && (drawable instanceof BitmapDrawable)) {
+            hasImage = ((BitmapDrawable)drawable).getBitmap() != null;
+        }
+
+        return hasImage;
+    }
+
+
     /**
      * Choose which view to display
      * Gets the current question and all info to display the question on user interface
@@ -275,8 +400,8 @@ public class QuestionActivity extends AppCompatActivity {
         if (currentQuestion.isChoicesEmpty())
             displayWrittenInput();
         else{
-            //displayPicInput();
-            displayMultChoice();
+            displayPicInput();
+            //displayMultChoice();
         }
 
         /* Skip button on all view */
@@ -291,6 +416,7 @@ public class QuestionActivity extends AppCompatActivity {
 
             }
         });
+
 
     }
 }
