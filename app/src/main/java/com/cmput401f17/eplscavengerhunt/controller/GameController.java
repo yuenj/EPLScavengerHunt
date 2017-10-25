@@ -1,6 +1,5 @@
 package com.cmput401f17.eplscavengerhunt.controller;
 
-import com.cmput401f17.eplscavengerhunt.ScavengerHuntApplication;
 import com.cmput401f17.eplscavengerhunt.model.Question;
 import com.cmput401f17.eplscavengerhunt.model.Response;
 import com.cmput401f17.eplscavengerhunt.model.Summary;
@@ -10,7 +9,8 @@ import com.cmput401f17.eplscavengerhunt.model.Zone;
 import java.util.ArrayList;
 import java.util.List;
 import java.util.Random;
-import java.util.concurrent.ThreadLocalRandom;
+
+import javax.inject.Inject;
 
 import javax.inject.Inject;
 
@@ -21,6 +21,7 @@ import javax.inject.Inject;
  * of the game upon gameOver.
  */
 public class GameController {
+
     private final ScavHuntState scavHuntState;
     private final DatabaseController databaseController;
 
@@ -98,6 +99,7 @@ public class GameController {
             Question randomQuestion = questionPool.get(rand.nextInt(questionPool.size()));
             questionSet.add(randomQuestion);
         }
+
         scavHuntState.setQuestions(questionSet);
     }
 

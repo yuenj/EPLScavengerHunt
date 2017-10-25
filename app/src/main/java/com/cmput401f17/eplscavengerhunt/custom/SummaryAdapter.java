@@ -20,7 +20,6 @@ import java.util.List;
 public class SummaryAdapter extends BaseAdapter {
 
     private static LayoutInflater inflater = null;
-
     private final Activity activity;
     private final List<Response> responses;
     private final List<Question> questions;
@@ -42,10 +41,10 @@ public class SummaryAdapter extends BaseAdapter {
             // vi = inflater.inflate(R.layout.item_summary, null);
             vi = inflater.inflate(R.layout.item_summary, parent, false);
 
-        ImageView thumbnail = vi.findViewById(R.id.summary_thumbnail);
-        TextView prompt = vi.findViewById(R.id.summary_prompt);
-        TextView usersResponse = vi.findViewById(R.id.summary_response);
-        TextView answer = vi.findViewById(R.id.summary_answer);
+        ImageView thumbnail = vi.findViewById(R.id.summary_thumbnail_image_view);
+        TextView prompt = vi.findViewById(R.id.summary_prompt_text_view);
+        TextView usersResponse = vi.findViewById(R.id.summary_response_text_view);
+        TextView answer = vi.findViewById(R.id.summary_answer_text_view);
         RelativeLayout background = vi.findViewById(R.id.summary_background);
 
         Question question = questions.get(position);

@@ -1,5 +1,4 @@
 <?xml version="1.0" encoding="utf-8"?>
-
 <RelativeLayout xmlns:android="http://schemas.android.com/apk/res/android"
     android:id="@+id/summary_background"
     android:layout_width="match_parent"
@@ -17,7 +16,7 @@
         android:padding="3dip">
 
         <ImageView
-            android:id="@+id/summary_thumbnail"
+            android:id="@+id/summary_thumbnail_image_view"
             android:layout_width="50dip"
             android:layout_height="50dip" />
 
@@ -25,7 +24,7 @@
 
     <!-- Question prompt -->
     <TextView
-        android:id="@+id/summary_prompt"
+        android:id="@+id/summary_prompt_text_view"
         android:layout_width="match_parent"
         android:layout_height="wrap_content"
         android:layout_alignTop="@+id/summary_thumbnail_ll"
@@ -38,10 +37,10 @@
 
     <!-- Users response -->
     <TextView
-        android:id="@+id/summary_response"
+        android:id="@+id/summary_response_text_view"
         android:layout_width="fill_parent"
         android:layout_height="wrap_content"
-        android:layout_below="@id/summary_prompt"
+        android:layout_below="@id/summary_prompt_text_view"
         android:layout_marginTop="1dip"
         android:layout_toEndOf="@+id/summary_thumbnail_ll"
         android:text="Lily"
@@ -51,10 +50,10 @@
 
     <!-- Correct answer -->
     <TextView
-        android:id="@+id/summary_answer"
+        android:id="@+id/summary_answer_text_view"
         android:layout_width="fill_parent"
         android:layout_height="wrap_content"
-        android:layout_below="@id/summary_response"
+        android:layout_below="@id/summary_response_text_view"
         android:layout_marginTop="1dip"
         android:layout_toEndOf="@+id/summary_thumbnail_ll"
         android:text="Poppy"

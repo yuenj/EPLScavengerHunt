@@ -1,16 +1,14 @@
 package com.cmput401f17.eplscavengerhunt.model;
 
-
-import android.util.Log;
-
 import java.util.ArrayList;
 import java.util.List;
 
 /**
- * persistent application game state. stores game progress and contains
- * game logic.
+ * Persistent application game state.
+ * Stores game progress and contains game logic.
  */
 public class ScavHuntState {
+
     private String branch;
     private List<Question> questions;
     private List<Zone> zoneRoute;
@@ -18,7 +16,6 @@ public class ScavHuntState {
     private List<Response> playerResponses;
     private int numCorrect;
     private int numStages = 0;
-
 
     public ScavHuntState() {
         this.branch = "";
@@ -39,13 +36,12 @@ public class ScavHuntState {
         this.numCorrect = numCorrect;
     }
 
-
     private void incrementNumCorrect() {
         this.numCorrect += 1;
     }
 
     /**
-     * private method for checking response correctness.
+     * Private method for checking response correctness.
      * If correct, mark it correct and increment numCorrect.
      * @param question
      * @param response
@@ -61,8 +57,7 @@ public class ScavHuntState {
     }
 
     /**
-     * Checks response correctness and adds
-     * to playerResponses.
+     * Checks response correctness and adds to playerResponses.
      * @param response
      */
     public void addResponse(Response response) {
@@ -96,7 +91,6 @@ public class ScavHuntState {
         this.numCorrect = 0;
         this.numStages = 0;
     }
-
 
     // Getters and Setters
     public String getBranch() {

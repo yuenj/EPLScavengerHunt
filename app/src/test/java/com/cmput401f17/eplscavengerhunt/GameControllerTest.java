@@ -11,6 +11,8 @@ import com.cmput401f17.eplscavengerhunt.model.ScavHuntState;
 import com.cmput401f17.eplscavengerhunt.model.Zone;
 
 import static org.mockito.Mockito.*;
+
+import org.junit.Before;
 import org.junit.Rule;
 import org.junit.Test;
 import org.junit.runner.RunWith;
@@ -37,9 +39,6 @@ public class GameControllerTest {
     @Mock
     DatabaseController mockDatabaseController;
 
-    @InjectMocks
-    GameController gameController;
-
     @Captor
     private ArgumentCaptor<List<Question>> QuestionSetCaptor;
 
@@ -51,6 +50,8 @@ public class GameControllerTest {
 
     @Captor
     private ArgumentCaptor<Integer> IntegerCaptor;
+
+    GameController gameController;
 
     Zone zone1 = mock(Zone.class);
     Zone zone2 = mock(Zone.class);
@@ -76,12 +77,17 @@ public class GameControllerTest {
     Response response5 = mock(Response.class);
 
 
+    @Before
+    public void init() {
+        gameController = new GameController(mockScavHuntState,mockDatabaseController);
+    }
+
+
     @Test
     /**
      * retreiveRandomQuestions and generateZoneRoute are private methods
      * so cannot be tested
      * ** ZONE GENERATION related tests already pass **
-     * TODO: Implement generateQuestionSet method to pass this test
      * Verify that:
      * - getBranch() called on ScavHuntState
      * - retreiveZones and retreiveRandomQuestions called on
@@ -213,7 +219,6 @@ public class GameControllerTest {
 
     @Test
     public void requestIncrementCurrentStageTest() {
-
         gameController.requestIncrementCurrentStage();
 
         verify(mockScavHuntState, times(1)).incrementCurrentStage();

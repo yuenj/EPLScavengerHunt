@@ -13,6 +13,7 @@ import com.cmput401f17.eplscavengerhunt.model.Zone;
 import com.estimote.coresdk.common.requirements.SystemRequirementsHelper;
 import com.estimote.coresdk.service.BeaconService;
 
+import org.junit.Before;
 import org.junit.Rule;
 import org.junit.Test;
 import org.mockito.ArgumentCaptor;
@@ -42,19 +43,20 @@ public class LocationControllerTest {
     @Mock
     ScavHuntState mockScavHuntState;
 
-    @InjectMocks LocationController locationController;
-
     @Captor
     private ArgumentCaptor<List<Zone>> zoneRouteCaptor;
 
 
+    LocationController locationController;
     private Zone zone1;
     private Zone zone2;
     private Zone zone3;
     private Zone zone4;
     List<Zone> zoneRoute;
 
+    @Before
     public void initLocationTest() {
+        locationController = new LocationController(mockScavHuntState);
         zone1 = mock(Zone.class);
         zone2 = mock(Zone.class);
         zone3 = mock(Zone.class);
@@ -69,7 +71,6 @@ public class LocationControllerTest {
 
     @Test
     public void requestZoneTest() {
-        initLocationTest();
 
         when(mockScavHuntState.getZoneRoute()).thenReturn(zoneRoute);
         Zone returnedZone = locationController.requestZone();

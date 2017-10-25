@@ -16,6 +16,7 @@ import dagger.Provides;
 
 @Module
 public class AppModule {
+
     private final ScavengerHuntApplication app;
 
     public AppModule(final ScavengerHuntApplication app) {

@@ -22,6 +22,7 @@ import javax.inject.Inject;
  * to determine if the user is near to a beacon
  */
 public class LocationController {
+
     private final ScavHuntState scavHuntState;
     private final BeaconManager beaconManager;
 
@@ -41,13 +42,14 @@ public class LocationController {
      * restart beacon discovery after it has ended.
      */
     public void startDiscovery() {
-
         // Connect to scanning service
         beaconManager.connect(new BeaconManager.ServiceReadyCallback() {
+
             @Override
             public void onServiceReady() {
                 beaconManager.startLocationDiscovery();
             }
+
         });
     }
 
@@ -60,9 +62,11 @@ public class LocationController {
      */
     public void verifyLocation(@NonNull final SimpleCallback<Boolean> finishedCallback) {
         beaconManager.setLocationListener(new BeaconManager.LocationListener() {
+
             @Override
             public void onLocationsFound(List<EstimoteLocation> beacons) {
                 Log.d("LocationListener", "Nearby beacons: " + beacons);
+
                 for (EstimoteLocation beacon : beacons) {
                     // If the user is close or very close to the beacon
                     // we stop discovery and return true via callback
@@ -74,7 +78,9 @@ public class LocationController {
                         finishedCallback.callback(true);
                     }
                 }
+
             }
+
         });
     }
 

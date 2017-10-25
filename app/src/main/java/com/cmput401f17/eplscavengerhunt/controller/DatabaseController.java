@@ -58,6 +58,5 @@ public class DatabaseController {
      *
      * @param response          The users response to a specific question
      */
-    public void addResponse(Response response) {
-    }
+    public void addResponse(Response response) {}
 }

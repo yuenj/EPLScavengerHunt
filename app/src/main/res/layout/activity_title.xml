@@ -2,53 +2,73 @@
     xmlns:tools="http://schemas.android.com/tools"
     android:layout_width="match_parent"
     android:layout_height="match_parent"
-    android:background="#0099cc"
+    xmlns:app="http://schemas.android.com/apk/res-auto"
+    android:background="@color/colorBackground"
     tools:context="com.cmput401f17.eplscavengerhunt.activity.TitleActivity">
+
+    <ImageView
+        android:id="@+id/logo"
+        android:paddingTop="30sp"
+        android:paddingStart="30sp"
+
+        android:layout_width="200sp"
+        android:layout_height="100sp"
+        android:src="@drawable/epl_logo"/>
+
+
     <TextView
-        android:id="@+id/title_text_view"
+        android:id="@+id/title_text"
+        android:layout_width="wrap_content"
+        android:layout_height="wrap_content"
+        android:textSize="50sp"
+        android:text="Scavenger Hunt"
+        android:textColor="@color/colorWhiteText"
+        android:layout_below="@+id/logo"
+        android:layout_centerHorizontal="true"
+        android:fontFamily="sans-serif-condensed"/>
+
+
+    <LinearLayout
+        android:layout_below="@id/title_text"
         android:layout_width="match_parent"
         android:layout_height="match_parent"
-        android:gravity="center|top"
-        android:layout_marginTop="30dp"
-        android:keepScreenOn="true"
-        android:text="@string/title_text"
-        android:textColor="#33b5e5"
-        android:textSize="50sp"
-        android:textStyle="bold"
-        />
+        android:orientation="vertical"
+        android:gravity="center"
+        >
 
-    <Button
-        android:id="@+id/title_start_button"
-        android:layout_width="wrap_content"
-        android:layout_height="wrap_content"
-        android:text="@string/start_button_text"
-        android:layout_marginBottom="300dp"
-        android:layout_alignParentBottom="true"
-        android:layout_centerHorizontal="true" />
-    <Button
-        android:id="@+id/title_rules_button"
-        android:layout_width="wrap_content"
-        android:layout_height="wrap_content"
-        android:text="@string/rules_button_text"
-        android:layout_marginBottom="250dp"
-        android:layout_alignParentBottom="true"
-        android:layout_centerHorizontal="true" />
-    <Button
-        android:id="@+id/title_about_button"
-        android:layout_width="wrap_content"
-        android:layout_height="wrap_content"
-        android:text="@string/about_button_text"
-        android:layout_marginBottom="200dp"
-        android:layout_alignParentBottom="true"
-        android:layout_centerHorizontal="true" />
-    <Button
-        android:id="@+id/title_credits_button"
-        android:layout_width="wrap_content"
-        android:layout_height="wrap_content"
-        android:text="@string/credits_button_text"
-        android:layout_marginBottom="150dp"
-        android:layout_alignParentBottom="true"
-        android:layout_centerHorizontal="true" />
+        <Button
+            style="@style/ButtonStyle"
+            android:id="@+id/title_start_button"
+            android:layout_width="wrap_content"
+            android:layout_height="wrap_content"
+            android:text="@string/start_button_text"
+            android:layout_margin="10sp"/>
 
+        <Button
+            style="@style/ButtonStyle"
+            android:id="@+id/title_rules_button"
+            android:layout_width="wrap_content"
+            android:layout_height="wrap_content"
+            android:text="@string/rules_button_text"
+            android:layout_margin="10sp"/>
+
+        <Button
+            style="@style/ButtonStyle"
+
+            android:id="@+id/title_about_button"
+            android:layout_width="wrap_content"
+            android:layout_height="wrap_content"
+            android:text="@string/about_button_text"
+            android:layout_margin="10sp"/>
+
+        <Button
+            style="@style/ButtonStyle"
+            android:id="@+id/title_credits_button"
+            android:layout_width="wrap_content"
+            android:layout_height="wrap_content"
+            android:layout_marginBottom="150dp"
+            android:text="@string/credits_button_text"
+            android:layout_margin="10sp"/>
+    </LinearLayout>
 
 </RelativeLayout>

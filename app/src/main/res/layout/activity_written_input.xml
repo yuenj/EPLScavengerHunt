@@ -6,55 +6,58 @@
     android:layout_height="match_parent">
 
     <TextView
-        android:id="@+id/zone"
+        android:id="@+id/question_zone_text_view"
         android:layout_width="wrap_content"
         android:layout_height="wrap_content"
         android:text="@string/question_temp_text"
-        android:textSize="30sp"/>
+        android:textSize="30sp" />
 
     <TextView
-        android:id="@+id/question_prompt"
+        android:id="@+id/question_prompt_text_view"
         android:layout_width="wrap_content"
         android:layout_height="wrap_content"
         android:text="@string/question_temp_text"
-        android:textSize="30sp"/>
+        android:textSize="30sp" />
 
 
     <!-- An editable text field with a prompt. Prompt will float above field if user is typing -->
 
     <android.support.design.widget.TextInputLayout
-        android:id="@+id/userAnswerWrapper"
+        android:id="@+id/written_user_answer_wrapper_til"
         android:layout_width="match_parent"
         android:layout_height="wrap_content">
 
         <EditText
-            android:id="@+id/userAnswer"
+            android:id="@+id/written_user_answer_edit_text"
             android:layout_width="match_parent"
             android:layout_height="wrap_content"
             android:inputType= "textAutoCorrect"
             android:hint="@string/user_answer"
-            android:imeOptions="actionSend"/>
+            android:imeOptions="actionSend" />
 
     </android.support.design.widget.TextInputLayout>
 
     <Button
-        android:id="@+id/submit"
+        android:id="@+id/question_submit_button"
         android:layout_marginTop="4dp"
         android:layout_width="match_parent"
         android:layout_height="wrap_content"
-        android:text="@string/submit"/>
+        android:text="@string/submit" />
 
+    <!-- Forces skip button to be at the very bottom as long as this layout is last in XML -->
     <LinearLayout
         android:layout_width="match_parent"
         android:layout_height="0dip"
         android:layout_weight="1"
         android:gravity="center|bottom"
         android:orientation="vertical">
+
         <Button
-            android:id="@+id/skip"
+            android:id="@+id/question_skip_button"
             android:layout_width="wrap_content"
             android:layout_height="wrap_content"
-            android:text="@string/skip_question"/>
+            android:text="@string/skip_question" />
+
     </LinearLayout>
 
 </android.support.v7.widget.LinearLayoutCompat>
