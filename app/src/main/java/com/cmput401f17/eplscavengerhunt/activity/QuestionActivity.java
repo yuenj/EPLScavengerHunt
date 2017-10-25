@@ -1,22 +1,14 @@
 package com.cmput401f17.eplscavengerhunt.activity;
 
-import android.Manifest;
 import android.content.Context;
 import android.content.Intent;
-import android.content.pm.PackageManager;
 import android.graphics.Bitmap;
 import android.graphics.BitmapFactory;
 import android.graphics.drawable.BitmapDrawable;
 import android.graphics.drawable.Drawable;
-import android.net.Uri;
 import android.os.Bundle;
-import android.os.Environment;
-import android.provider.MediaStore;
 import android.support.annotation.NonNull;
 import android.support.design.widget.TextInputLayout;
-import android.support.v4.app.ActivityCompat;
-import android.support.v4.content.ContextCompat;
-import android.support.v4.content.FileProvider;
 import android.support.v7.app.AppCompatActivity;
 import android.support.v7.widget.LinearLayoutCompat;
 import android.view.KeyEvent;
@@ -36,14 +28,12 @@ import com.cmput401f17.eplscavengerhunt.R;
 import com.cmput401f17.eplscavengerhunt.ScavengerHuntApplication;
 import com.cmput401f17.eplscavengerhunt.controller.GameController;
 import com.cmput401f17.eplscavengerhunt.controller.LocationController;
+import com.cmput401f17.eplscavengerhunt.custom.CameraHandler;
 import com.cmput401f17.eplscavengerhunt.model.Question;
 import com.cmput401f17.eplscavengerhunt.controller.QuestionController;
 
 import java.io.File;
-import java.io.IOException;
-import java.text.SimpleDateFormat;
 import java.util.ArrayList;
-import java.util.Date;
 
 import javax.inject.Inject;
 
@@ -65,10 +55,9 @@ public class QuestionActivity extends AppCompatActivity {
     private ImageView picTakenImageView;
     private Boolean hasImg;
     static final int REQUEST_IMAGE_CAPTURE = 1;
-    private File photoFile;
+    private File image;
     private String imagePath = "";
-    private String mCurrentPhotoPath;
-
+    CameraHandler cameraHandler = new CameraHandler(this);
 
     /**
      * Displays the current zone
@@ -215,7 +204,7 @@ public class QuestionActivity extends AppCompatActivity {
         //Link gotoCamera button to camera
         gotoCamera.setOnClickListener(new View.OnClickListener() {
             public void onClick(View view) {
-                dispatchTakePictureIntent();
+                image = cameraHandler.dispatchTakePictureIntent(REQUEST_IMAGE_CAPTURE);
             }
         });
 
@@ -287,29 +276,21 @@ public class QuestionActivity extends AppCompatActivity {
 
     }
 
-
     /**
-     * Sends intent to system camera for a photo
-     * https://developer.android.com/training/camera/photobasics.html
+     * Checks if inputted ImageView contains an image.
+     * From http://stackoverflow.com/questions/9113895/how-to-check-if-an-imageview-is-attached-with-image-in-android
+     * accessed 10-24-2017
+     * @param view
+     * @return Bool, whether ImageView is empty
      */
-    private void dispatchTakePictureIntent() {
-        Intent takePictureIntent = new Intent(MediaStore.ACTION_IMAGE_CAPTURE);
-        if (takePictureIntent.resolveActivity(getPackageManager()) != null) {
-            // Create the File where the photo should go
-            try {
-                photoFile = createImageFile();
-            } catch (IOException ex) {
-                // Error occurred while creating the File
-            }
-            if (photoFile != null) {
-                Uri photoURI = FileProvider.getUriForFile(this,
-                        "com.cmput401f17.fileprovider",
-                        photoFile);
-                takePictureIntent.putExtra(MediaStore.EXTRA_OUTPUT, photoURI);
-                startActivityForResult(takePictureIntent, REQUEST_IMAGE_CAPTURE);
-            }
-        }
+    public boolean hasImage(@NonNull ImageView view) {
+        Drawable drawable = view.getDrawable();
+        boolean hasImage = (drawable != null);
 
+        if (hasImage && (drawable instanceof BitmapDrawable)) {
+            hasImage = ((BitmapDrawable)drawable).getBitmap() != null;
+        }
+        return hasImage;
     }
 
     @Override
@@ -324,54 +305,13 @@ public class QuestionActivity extends AppCompatActivity {
             // imageview. Deletes photo from storage immediately unless
             // processing photo (image matching, store to database) becomes
             // a requirement.
-            if (photoFile.exists()) {
-                Bitmap bitmap = BitmapFactory.decodeFile(photoFile.getAbsolutePath());
+            if (image.exists()) {
+                Bitmap bitmap = BitmapFactory.decodeFile(image.getAbsolutePath());
                 picTakenImageView.setImageBitmap(bitmap);
-                photoFile.delete();
+                image.delete();
             }
         }
     }
-
-    /**
-     * Create fullsize Image File
-     * which is used to display photo
-     * referenced from https://developer.android.com/training/camera/photobasics.html
-     * accessed 10-24-2017
-     */
-    private File createImageFile() throws IOException {
-        // Create an image file name
-        String timeStamp = new SimpleDateFormat("yyyyMMdd_HHmmss").format(new Date());
-        String imageFileName = "JPEG_" + timeStamp + "_";
-        File storageDir = getExternalFilesDir(Environment.DIRECTORY_PICTURES);
-        File image = File.createTempFile(
-                imageFileName,  /* prefix */
-                ".jpg",         /* suffix */
-                storageDir      /* directory */
-        );
-
-        // Save a file: path for use with ACTION_VIEW intents
-        mCurrentPhotoPath = image.getAbsolutePath();
-        return image;
-    }
-
-    /**
-     * Checks if inputted ImageView contains an image.
-     * From http://stackoverflow.com/questions/9113895/how-to-check-if-an-imageview-is-attached-with-image-in-android
-     * accessed 10-24-2017
-     * @param view
-     * @return Bool, whether ImageView is empty
-     */
-    private boolean hasImage(@NonNull ImageView view) {
-        Drawable drawable = view.getDrawable();
-        boolean hasImage = (drawable != null);
-
-        if (hasImage && (drawable instanceof BitmapDrawable)) {
-            hasImage = ((BitmapDrawable)drawable).getBitmap() != null;
-        }
-
-        return hasImage;
-    }
-
 
     /**
      * Choose which view to display
