@@ -13,8 +13,9 @@ public class MultipleChoiceQuestion extends Question {
         this.multipleChoiceSolution = "";
     }
 
-    public MultipleChoiceQuestion(List<String> choices, String multipleChoiceSolution) {
-        super();
+    public MultipleChoiceQuestion(int questionID, String prompt, String imageLink,
+                                  List<String> choices, String multipleChoiceSolution) {
+        super(questionID, prompt, imageLink);
         this.choices = choices;
         this.multipleChoiceSolution = multipleChoiceSolution;
     }

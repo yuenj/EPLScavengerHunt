@@ -21,8 +21,9 @@ public class PicInputQuestion extends Question {
 
     }
 
-    public PicInputQuestion(List<String> choices, String picInputSolution) {
-        super();
+    public PicInputQuestion(int questionID, String prompt, String imageLink,
+                            List<String> choices, String picInputSolution) {
+        super(questionID, prompt, imageLink);
         this.choices = choices;
         this.picInputSolution = picInputSolution;
     }

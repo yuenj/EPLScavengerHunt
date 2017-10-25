@@ -5,6 +5,7 @@ package com.cmput401f17.eplscavengerhunt;
 import com.cmput401f17.eplscavengerhunt.model.Question;
 import com.cmput401f17.eplscavengerhunt.model.Response;
 import com.cmput401f17.eplscavengerhunt.model.ScavHuntState;
+import com.cmput401f17.eplscavengerhunt.model.WrittenInputQuestion;
 import com.cmput401f17.eplscavengerhunt.model.Zone;
 
 import org.junit.Rule;
@@ -29,9 +30,9 @@ public class ScavHuntStateModelTest {
     // increments player score & response corresponds to question's solution
     public void addCorrectResponseTest() {
         ScavHuntState testScavHuntState = new ScavHuntState();
-        Question testQuestion = mock(Question.class);
+        WrittenInputQuestion testQuestion = mock(WrittenInputQuestion.class);
         Response testResponse = mock(Response.class);
-        when(testQuestion.getSolution()).thenReturn("Dog!");
+        when(testQuestion.getWrittenInputSolution()).thenReturn("Dog!");
         when(testResponse.getResponseStr()).thenReturn("Dog!");
         List<Question> testQuestionList = new ArrayList<>();
         testQuestionList.add(testQuestion);
@@ -43,15 +44,15 @@ public class ScavHuntStateModelTest {
         List<Question> stateQList = testScavHuntState.getQuestions();
         List<Response> stateRList = testScavHuntState.getPlayerResponses();
 
-        assertTrue((score == 1) && (stateQList.get(0).getSolution()==stateRList.get(0).getResponseStr()));
+        assertTrue((score == 1) && (((WrittenInputQuestion)stateQList.get(0)).getWrittenInputSolution()==stateRList.get(0).getResponseStr()));
     }
 
     @Test
     public void addIncorrectResponseTest() {
         ScavHuntState testScavHuntState = new ScavHuntState();
-        Question testQuestion = mock(Question.class);
+        WrittenInputQuestion testQuestion = mock(WrittenInputQuestion.class);
         Response testResponse = mock(Response.class);
-        when(testQuestion.getSolution()).thenReturn("Dog!");
+        when(testQuestion.getWrittenInputSolution()).thenReturn("Dog!");
         when(testResponse.getResponseStr()).thenReturn("Cat!");
         List<Question> testQuestionList = new ArrayList<>();
         testQuestionList.add(testQuestion);

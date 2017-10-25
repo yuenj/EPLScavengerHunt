@@ -18,12 +18,13 @@ public abstract class Question {
         this.skipped = false;
     }
 
-    public Question(int questionID, String prompt, String imageLink, String soundLink, boolean skipped) {
+    // Every question will have an image associated with it
+    public Question(int questionID, String prompt, String imageLink) {
         this.questionID = questionID;
         this.prompt = prompt;
         this.imageLink = imageLink;
-        this.soundLink = soundLink;
-        this.skipped = skipped;
+        this.soundLink = "";
+        this.skipped = false;
     }
 
     public int getQuestionID() {

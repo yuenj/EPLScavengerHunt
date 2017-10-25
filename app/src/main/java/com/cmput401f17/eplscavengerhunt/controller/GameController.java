@@ -1,9 +1,11 @@
 package com.cmput401f17.eplscavengerhunt.controller;
 
+import com.cmput401f17.eplscavengerhunt.model.MultipleChoiceQuestion;
 import com.cmput401f17.eplscavengerhunt.model.Question;
 import com.cmput401f17.eplscavengerhunt.model.Response;
 import com.cmput401f17.eplscavengerhunt.model.Summary;
 import com.cmput401f17.eplscavengerhunt.model.ScavHuntState;
+import com.cmput401f17.eplscavengerhunt.model.WrittenInputQuestion;
 import com.cmput401f17.eplscavengerhunt.model.Zone;
 
 import java.util.ArrayList;
@@ -167,17 +169,16 @@ public class GameController {
         String questionStrDummy1 = "Question 1";
         int id1 = 0;
         String solutionStrDummy1 = "Solution 1";
-        Question testQuestion1 = new Question(id1, questionStrDummy1, solutionStrDummy1);
+        Question testQuestion1 = new WrittenInputQuestion(id1, questionStrDummy1, "www.image1.com", solutionStrDummy1);
 
         String questionStrDummy2 = "Question 2";
         int id2 = 1;
         String solutionStrDummy2 = "Solution 2";
-        Question testQuestion2 = new Question(id2, questionStrDummy2, solutionStrDummy2);
+        Question testQuestion2 = new WrittenInputQuestion(id2, questionStrDummy2, "www.image2.com", solutionStrDummy2);
 
         String questionStrDummy3 = "Question 3";
         int id3 = 2;
         String solutionStrDummy3 = "Solution 3";
-        Question testQuestion3 = new Question(id3, questionStrDummy3, solutionStrDummy3);
 
         // Create multiple choice question
         ArrayList<String> testChoices = new ArrayList<String>() {{
@@ -185,7 +186,8 @@ public class GameController {
             add("Solution 2");
             add("Solution 3");
         }};
-        testQuestion3.setChoices(testChoices);
+
+        Question testQuestion3 = new MultipleChoiceQuestion(id3, questionStrDummy3, "www.image3.com", testChoices, solutionStrDummy3);
 
         // Create the question list
         List<Question> testQuestionList = new ArrayList<>();
@@ -197,4 +199,3 @@ public class GameController {
         scavHuntState.setNumStages(testZoneRoute.size());
     }
 }
-

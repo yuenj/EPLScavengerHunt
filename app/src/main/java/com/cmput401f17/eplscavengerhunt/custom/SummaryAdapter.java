@@ -12,8 +12,11 @@ import android.widget.RelativeLayout;
 import android.widget.TextView;
 
 import com.cmput401f17.eplscavengerhunt.R;
+import com.cmput401f17.eplscavengerhunt.model.MultipleChoiceQuestion;
+import com.cmput401f17.eplscavengerhunt.model.PicInputQuestion;
 import com.cmput401f17.eplscavengerhunt.model.Question;
 import com.cmput401f17.eplscavengerhunt.model.Response;
+import com.cmput401f17.eplscavengerhunt.model.WrittenInputQuestion;
 
 import java.util.List;
 
@@ -50,9 +53,20 @@ public class SummaryAdapter extends BaseAdapter {
         Question question = questions.get(position);
         Response response = responses.get(position);
 
-        prompt.setText(question.getQuestionPrompt());
+        prompt.setText(question.getPrompt());
         usersResponse.setText(response.getResponseStr());
-        answer.setText(question.getSolution());
+
+        if (question instanceof WrittenInputQuestion) {
+            answer.setText(((WrittenInputQuestion) question).getWrittenInputSolution());
+        }
+
+        if (question instanceof MultipleChoiceQuestion) {
+            answer.setText(((MultipleChoiceQuestion) question).getMultipleChoiceSolution());
+        }
+
+        if (question instanceof PicInputQuestion) {
+            answer.setText(((MultipleChoiceQuestion) question).getMultipleChoiceSolution());
+        }
 
         int correctColor = ContextCompat.getColor(activity.getApplicationContext(), R.color.colorCorrectResponse);
         int incorrectColor = ContextCompat.getColor(activity.getApplicationContext(), R.color.colorIncorrectResponse);

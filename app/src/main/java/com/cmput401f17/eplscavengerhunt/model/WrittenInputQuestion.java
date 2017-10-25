@@ -1,7 +1,7 @@
 package com.cmput401f17.eplscavengerhunt.model;
 
 
-public class WrittenInputQuestion {
+public class WrittenInputQuestion extends Question {
     String writtenInputSolution;
 
     public WrittenInputQuestion() {
@@ -9,8 +9,9 @@ public class WrittenInputQuestion {
         this.writtenInputSolution = "";
     }
 
-    public WrittenInputQuestion(String writtenInputSolution) {
-        super();
+    public WrittenInputQuestion(int questionID, String prompt, String imageLink,
+                                String writtenInputSolution) {
+        super(questionID, prompt, imageLink);
         this.writtenInputSolution = writtenInputSolution;
     }
 
