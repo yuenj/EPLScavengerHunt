@@ -1,7 +1,5 @@
 package com.cmput401f17.eplscavengerhunt;
 
-
-
 import com.cmput401f17.eplscavengerhunt.model.Question;
 import com.cmput401f17.eplscavengerhunt.model.Response;
 import com.cmput401f17.eplscavengerhunt.model.ScavHuntState;
@@ -18,8 +16,6 @@ import java.util.ArrayList;
 import java.util.List;
 
 import static org.junit.Assert.*;
-
-
 
 public class ScavHuntStateModelTest {
     @Rule
@@ -64,7 +60,7 @@ public class ScavHuntStateModelTest {
         List<Question> stateQList = testScavHuntState.getQuestions();
         List<Response> stateRList = testScavHuntState.getPlayerResponses();
 
-        assertTrue((score == 0) && (stateQList.get(0).getSolution()!=stateRList.get(0).getResponseStr()));
+        assertTrue((score == 0) && (((WrittenInputQuestion)stateQList.get(0)).getWrittenInputSolution()!=stateRList.get(0).getResponseStr()));
     }
 
 
