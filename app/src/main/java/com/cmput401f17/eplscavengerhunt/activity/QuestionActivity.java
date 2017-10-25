@@ -276,20 +276,9 @@ public class QuestionActivity extends AppCompatActivity {
             return;
         }
 
-        if (currentQuestion instanceof WrittenInputQuestion) {
-            displayWrittenInput();
-        }
+        displayLayout();
 
-        if (currentQuestion instanceof MultipleChoiceQuestion) {
-            displayMultChoice();
-        }
-
-        if (currentQuestion instanceof PicInputQuestion) {
-            displayPicInput();
-        }
-
-
-        /* Skip button on all view */
+        /* Skip button on all views */
         Button skipButton = (Button) findViewById(R.id.question_skip_button);
 
         skipButton.setOnClickListener(new View.OnClickListener() {
@@ -302,5 +291,23 @@ public class QuestionActivity extends AppCompatActivity {
             }
         });
 
+    }
+
+    /**
+     * Displays the appropriate layout depending on
+     * type of question recieved.
+     */
+    private void displayLayout() {
+        if (currentQuestion instanceof WrittenInputQuestion) {
+            displayWrittenInput();
+        }
+
+        if (currentQuestion instanceof MultipleChoiceQuestion) {
+            displayMultChoice();
+        }
+
+        if (currentQuestion instanceof PicInputQuestion) {
+            displayPicInput();
+        }
     }
 }

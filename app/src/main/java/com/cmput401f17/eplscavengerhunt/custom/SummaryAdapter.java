@@ -65,7 +65,7 @@ public class SummaryAdapter extends BaseAdapter {
         }
 
         if (question instanceof PicInputQuestion) {
-            answer.setText(((MultipleChoiceQuestion) question).getMultipleChoiceSolution());
+            answer.setText(((PicInputQuestion) question).getPicInputSolution());
         }
 
         int correctColor = ContextCompat.getColor(activity.getApplicationContext(), R.color.colorCorrectResponse);

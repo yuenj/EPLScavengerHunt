@@ -1,6 +1,7 @@
 package com.cmput401f17.eplscavengerhunt.controller;
 
 import com.cmput401f17.eplscavengerhunt.model.MultipleChoiceQuestion;
+import com.cmput401f17.eplscavengerhunt.model.PicInputQuestion;
 import com.cmput401f17.eplscavengerhunt.model.Question;
 import com.cmput401f17.eplscavengerhunt.model.Response;
 import com.cmput401f17.eplscavengerhunt.model.Summary;
@@ -187,7 +188,7 @@ public class GameController {
             add("Solution 3");
         }};
 
-        Question testQuestion3 = new MultipleChoiceQuestion(id3, questionStrDummy3, "www.image3.com", testChoices, solutionStrDummy3);
+        Question testQuestion3 = new PicInputQuestion(id3, questionStrDummy3, "www.image3.com", testChoices, solutionStrDummy3);
 
         // Create the question list
         List<Question> testQuestionList = new ArrayList<>();
