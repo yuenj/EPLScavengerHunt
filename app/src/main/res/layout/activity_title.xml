@@ -22,7 +22,7 @@
         android:layout_height="wrap_content"
         android:textSize="50sp"
         android:text="Scavenger Hunt"
-        android:textColor="@color/colorWhiteText"
+        android:textColor="@color/colorLightText"
         android:layout_below="@+id/logo"
         android:layout_centerHorizontal="true"
         android:fontFamily="sans-serif-condensed"/>
