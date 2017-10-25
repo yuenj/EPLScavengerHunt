@@ -3,6 +3,8 @@ package com.cmput401f17.eplscavengerhunt.custom;
 import android.app.Activity;
 import android.content.Context;
 import android.content.Intent;
+import android.graphics.Bitmap;
+import android.graphics.BitmapFactory;
 import android.net.Uri;
 import android.os.Environment;
 import android.provider.MediaStore;
@@ -16,6 +18,7 @@ import java.util.Date;
 
 /**
  * Class that has the task of Requesting the device's system Camera app for a photo
+ * and modifications to the image the camera returned.
  */
 public class CameraHandler {
     private File imageFile;
@@ -51,6 +54,19 @@ public class CameraHandler {
             }
         }
         return imageFile;
+    }
+
+    /**
+     * so fullsize imageFile is downscaled in the bitmap.
+     * Note actual imageFile remains untouched
+     * @param imageFile
+     * @return
+     */
+    public Bitmap downScaleBitMap(File imageFile) {
+        BitmapFactory.Options opts = new BitmapFactory.Options();
+        opts.inSampleSize = 2;
+        String absolutePath = imageFile.getAbsolutePath();
+        return BitmapFactory.decodeFile(absolutePath,opts);
     }
 
     /**

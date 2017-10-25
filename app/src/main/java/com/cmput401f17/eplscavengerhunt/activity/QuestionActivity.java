@@ -301,19 +301,10 @@ public class QuestionActivity extends AppCompatActivity {
     protected void onActivityResult(int requestCode, int resultCode, Intent data) {
         if (requestCode == REQUEST_IMAGE_CAPTURE && resultCode == RESULT_OK) {
 
-            // if photo taken, then displays photo to activity's
-            // imageview. Deletes photo from storage immediately unless
-            // processing photo (imageFile matching, store to database) becomes
-            // a requirement.
             if (imageFile.exists()) {
 
-                // Displaying full size photos causes performance issues,
-                // so fullsize photo is downscaled in the bitmap before
-                // displaying it in imageView. Note actual imageFile remains untouched.
-                BitmapFactory.Options opts = new BitmapFactory.Options();
-                opts.inSampleSize = 2;
-                Bitmap bitmap = BitmapFactory.decodeFile(imageFile.getAbsolutePath(),opts);
-                picTakenImageView.setImageBitmap(bitmap);
+                Bitmap downScaledBitMap = cameraHandler.downScaleBitMap(imageFile);
+                picTakenImageView.setImageBitmap(downScaledBitMap);
 
                 imageFile.delete();
             }
