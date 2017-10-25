@@ -29,9 +29,7 @@ public class LocationController {
      * Instantiates the beacon manager to use beacon technologies
      */
     @Inject
-    public LocationController(ScavHuntState scavHuntState) {
-        ScavengerHuntApplication.getInstance().getAppComponent().inject(this);
-
+    public LocationController(final ScavHuntState scavHuntState) {
         Context appContext = ScavengerHuntApplication.getInstance();
         this.scavHuntState = scavHuntState;
         beaconManager = new BeaconManager(appContext);
