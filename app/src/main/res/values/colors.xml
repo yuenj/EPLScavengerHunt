@@ -4,15 +4,16 @@
     <color name="colorPrimary">#3F51B5</color>
     <color name="colorPrimaryDark">#303F9F</color>
     <color name="colorAccent">#FF4081</color>
+
     <color name="colorButton">#FF473A</color>
+    <color name="colorBackground">#333333</color>
+    <color name="colorLightText">#FCFCFC</color>
 
     <color name="black_overlay">#66000000</color>
 
     <!-- Item Summary -->
     <color name="colorCorrectResponse">#B2FF59</color>
     <color name="colorIncorrectResponse">#FF5252</color>
-    <color name="background">#333333</color>
-    <color name="white">#FCFCFC</color>
 
 
 </resources>

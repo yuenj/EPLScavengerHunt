@@ -3,7 +3,7 @@
     android:layout_width="match_parent"
     android:layout_height="match_parent"
     xmlns:app="http://schemas.android.com/apk/res-auto"
-    android:background="@color/background"
+    android:background="@color/colorBackground"
     tools:context="com.cmput401f17.eplscavengerhunt.activity.TitleActivity">
 
     <ImageView
@@ -22,7 +22,7 @@
         android:layout_height="wrap_content"
         android:textSize="50sp"
         android:text="Scavenger Hunt"
-        android:textColor="@color/white"
+        android:textColor="@color/colorWhiteText"
         android:layout_below="@+id/logo"
         android:layout_centerHorizontal="true"
         android:fontFamily="sans-serif-condensed"/>
