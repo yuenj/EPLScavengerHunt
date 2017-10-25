@@ -2,7 +2,7 @@ package com.cmput401f17.eplscavengerhunt.model;
 
 
 public class WrittenInputQuestion extends Question {
-    String writtenInputSolution;
+    private String writtenInputSolution;
 
     public WrittenInputQuestion() {
         super();

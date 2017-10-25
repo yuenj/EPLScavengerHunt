@@ -11,8 +11,8 @@ import java.util.List;
  * @see Question
  */
 public class PicInputQuestion extends Question {
-    List<String> choices;
-    String picInputSolution;
+    private List<String> choices;
+    private String picInputSolution;
 
     public PicInputQuestion() {
         super();

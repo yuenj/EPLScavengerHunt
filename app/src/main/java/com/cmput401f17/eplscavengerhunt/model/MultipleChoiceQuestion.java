@@ -4,8 +4,8 @@ import java.util.ArrayList;
 import java.util.List;
 
 public class MultipleChoiceQuestion extends Question {
-    List<String> choices;
-    String multipleChoiceSolution;
+    private List<String> choices;
+    private String multipleChoiceSolution;
 
     public MultipleChoiceQuestion() {
         super();
