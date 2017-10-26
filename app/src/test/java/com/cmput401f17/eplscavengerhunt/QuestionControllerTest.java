@@ -1,6 +1,5 @@
 package com.cmput401f17.eplscavengerhunt;
 
-import com.cmput401f17.eplscavengerhunt.controller.DatabaseController;
 import com.cmput401f17.eplscavengerhunt.controller.QuestionController;
 import com.cmput401f17.eplscavengerhunt.model.Question;
 import com.cmput401f17.eplscavengerhunt.model.Response;
@@ -20,8 +19,6 @@ import static org.mockito.Mockito.times;
 import static org.mockito.Mockito.verify;
 import static org.mockito.Mockito.when;
 import static org.junit.Assert.*;
-
-
 
 public class QuestionControllerTest {
     @Rule
