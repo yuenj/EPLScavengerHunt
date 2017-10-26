@@ -30,11 +30,15 @@ import com.cmput401f17.eplscavengerhunt.ScavengerHuntApplication;
 import com.cmput401f17.eplscavengerhunt.controller.GameController;
 import com.cmput401f17.eplscavengerhunt.controller.LocationController;
 import com.cmput401f17.eplscavengerhunt.custom.CameraHandler;
+import com.cmput401f17.eplscavengerhunt.model.MultipleChoiceQuestion;
+import com.cmput401f17.eplscavengerhunt.model.PicInputQuestion;
 import com.cmput401f17.eplscavengerhunt.model.Question;
 import com.cmput401f17.eplscavengerhunt.controller.QuestionController;
+import com.cmput401f17.eplscavengerhunt.model.WrittenInputQuestion;
 
 import java.io.File;
 import java.util.ArrayList;
+import java.util.List;
 
 import javax.inject.Inject;
 
@@ -70,7 +74,7 @@ public class QuestionActivity extends AppCompatActivity {
      */
     private void displayPrompt() {
         TextView prompt = (TextView)findViewById(R.id.question_prompt_text_view);
-        prompt.setText("Task: " + currentQuestion.getQuestionPrompt());
+        prompt.setText("Task: " + currentQuestion.getPrompt());
     }
 
     /**
@@ -87,7 +91,7 @@ public class QuestionActivity extends AppCompatActivity {
         displayPrompt();
 
         /* Get the MC choices */
-         final ArrayList<String> choices = currentQuestion.getChoices();
+         final List<String> choices = ((MultipleChoiceQuestion) currentQuestion).getChoices();
 
         /* Create choice button(s) */
         for(int i = 0; i < choices.size(); i++) {
@@ -207,7 +211,7 @@ public class QuestionActivity extends AppCompatActivity {
         });
 
         /* Display the choices */
-        final ArrayList<String> choices = currentQuestion.getChoices();
+        final List<String> choices = ((PicInputQuestion) currentQuestion).getChoices();
 
         /* Create group for radio buttons */
         RadioGroup radioGroup = new RadioGroup(this);
@@ -334,15 +338,9 @@ public class QuestionActivity extends AppCompatActivity {
             return;
         }
 
-        //TODO Conditional for choosing the view that is less hacky
-        if (currentQuestion.isChoicesEmpty())
-            displayWrittenInput();
-        else{
-            displayPicInput();
-            //displayMultChoice();
-        }
+        displayLayout();
 
-        /* Skip button on all view */
+        /* Skip button on all views */
         Button skipButton = (Button) findViewById(R.id.question_skip_button);
 
         skipButton.setOnClickListener(new View.OnClickListener() {
@@ -356,5 +354,23 @@ public class QuestionActivity extends AppCompatActivity {
         });
 
 
+    }
+
+    /**
+     * Displays the appropriate layout depending on
+     * type of question recieved.
+     */
+    private void displayLayout() {
+        if (currentQuestion instanceof WrittenInputQuestion) {
+            displayWrittenInput();
+        }
+
+        if (currentQuestion instanceof MultipleChoiceQuestion) {
+            displayMultChoice();
+        }
+
+        if (currentQuestion instanceof PicInputQuestion) {
+            displayPicInput();
+        }
     }
 }

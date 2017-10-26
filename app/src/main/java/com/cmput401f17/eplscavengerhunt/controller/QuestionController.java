@@ -14,7 +14,7 @@ public class QuestionController {
     private ScavHuntState scavHuntState;
 
     @Inject
-    public QuestionController(ScavHuntState scavHuntState) {
+    public QuestionController(final ScavHuntState scavHuntState) {
         this.scavHuntState = scavHuntState;
     }
 

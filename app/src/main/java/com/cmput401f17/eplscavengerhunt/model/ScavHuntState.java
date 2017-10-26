@@ -47,7 +47,23 @@ public class ScavHuntState {
      * @param response
      */
     private void validateResponse(Question question, Response response) {
-        if (question.getSolution().equals(response.getResponseStr())) {
+        String solution = "";
+
+        if (question instanceof MultipleChoiceQuestion) {
+            solution = ((MultipleChoiceQuestion) question).getMultipleChoiceSolution();
+        }
+
+        if (question instanceof PicInputQuestion) {
+            solution = ((PicInputQuestion) question).getPicInputSolution();
+        }
+
+        if (question instanceof WrittenInputQuestion) {
+            solution = ((WrittenInputQuestion) question).getWrittenInputSolution();
+        }
+
+        // Compare solution and response and update score and response
+        // accordingly
+        if (solution.equals(response.getResponseStr())) {
             response.markCorrect();
             incrementNumCorrect();
         }

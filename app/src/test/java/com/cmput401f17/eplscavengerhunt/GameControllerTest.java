@@ -1,13 +1,12 @@
 package com.cmput401f17.eplscavengerhunt;
 
-import android.util.Log;
-
 import com.cmput401f17.eplscavengerhunt.controller.DatabaseController;
 import com.cmput401f17.eplscavengerhunt.controller.GameController;
 import com.cmput401f17.eplscavengerhunt.model.Question;
 import com.cmput401f17.eplscavengerhunt.model.Response;
 import com.cmput401f17.eplscavengerhunt.model.Summary;
 import com.cmput401f17.eplscavengerhunt.model.ScavHuntState;
+import com.cmput401f17.eplscavengerhunt.model.WrittenInputQuestion;
 import com.cmput401f17.eplscavengerhunt.model.Zone;
 
 import static org.mockito.Mockito.*;
@@ -18,7 +17,6 @@ import org.junit.Test;
 import org.junit.runner.RunWith;
 import org.mockito.ArgumentCaptor;
 import org.mockito.Captor;
-import org.mockito.InjectMocks;
 import org.mockito.Mock;
 import org.mockito.junit.MockitoJUnit;
 import org.mockito.junit.MockitoJUnitRunner;
@@ -30,12 +28,8 @@ import java.util.List;
 
 import static org.junit.Assert.*;
 
-
 @RunWith(MockitoJUnitRunner.class)
 public class GameControllerTest {
-    @Rule
-    public MockitoRule mockitoRule = MockitoJUnit.rule();
-
     @Mock
     ScavHuntState mockScavHuntState;
 
@@ -56,28 +50,28 @@ public class GameControllerTest {
 
     GameController gameController;
 
-    Zone zone1 = mock(Zone.class);
-    Zone zone2 = mock(Zone.class);
-    Zone zone3 = mock(Zone.class);
-    Zone zone4 = mock(Zone.class);
-    Zone zone5 = mock(Zone.class);
+    private Zone zone1 = mock(Zone.class);
+    private Zone zone2 = mock(Zone.class);
+    private Zone zone3 = mock(Zone.class);
+    private Zone zone4 = mock(Zone.class);
+    private Zone zone5 = mock(Zone.class);
 
-    Question question1 = mock(Question.class);
-    Question question2 = mock(Question.class);
-    Question question3 = mock(Question.class);
-    Question question4 = mock(Question.class);
-    Question question5 = mock(Question.class);
-    Question question6 = mock(Question.class);
-    Question question7 = mock(Question.class);
-    Question question8 = mock(Question.class);
-    Question question9 = mock(Question.class);
-    Question question10 = mock(Question.class);
+    private WrittenInputQuestion question1 = mock(WrittenInputQuestion.class);
+    private WrittenInputQuestion question2 = mock(WrittenInputQuestion.class);
+    private WrittenInputQuestion question3 = mock(WrittenInputQuestion.class);
+    private WrittenInputQuestion question4 = mock(WrittenInputQuestion.class);
+    private WrittenInputQuestion question5 = mock(WrittenInputQuestion.class);
+    private WrittenInputQuestion question6 = mock(WrittenInputQuestion.class);
+    private WrittenInputQuestion question7 = mock(WrittenInputQuestion.class);
+    private WrittenInputQuestion question8 = mock(WrittenInputQuestion.class);
+    private WrittenInputQuestion question9 = mock(WrittenInputQuestion.class);
+    private WrittenInputQuestion question10 = mock(WrittenInputQuestion.class);
 
-    Response response1 = mock(Response.class);
-    Response response2 = mock(Response.class);
-    Response response3 = mock(Response.class);
-    Response response4 = mock(Response.class);
-    Response response5 = mock(Response.class);
+    private Response response1 = mock(Response.class);
+    private Response response2 = mock(Response.class);
+    private Response response3 = mock(Response.class);
+    private Response response4 = mock(Response.class);
+    private Response response5 = mock(Response.class);
 
 
     @Before
