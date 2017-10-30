@@ -19,6 +19,13 @@
         android:text="@string/question_temp_text"
         android:textSize="30sp" />
 
+    <ImageView
+        android:id="@+id/question_image"
+        android:layout_width="wrap_content"
+        android:layout_height="wrap_content"
+        android:gravity="center"
+        android:contentDescription="imageView" />
+
 
     <!-- An editable text field with a prompt. Prompt will float above field if user is typing -->
 

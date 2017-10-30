@@ -8,7 +8,7 @@ repositories {
 
 android {
     compileSdkVersion 26
-    buildToolsVersion "26.0.1"
+    buildToolsVersion '26.0.2'
     defaultConfig {
         applicationId "com.cmput401f17.eplscavengerhunt"
         minSdkVersion 21
@@ -43,6 +43,9 @@ dependencies {
 
     // Estimote Beacons
     compile 'com.estimote:sdk:1.3.0'
+
+    //Picasso : URL Image download
+    compile 'com.squareup.picasso:picasso:2.5.2'
 
     // JUnit
     testCompile 'junit:junit:4.12'

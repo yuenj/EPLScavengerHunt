@@ -12,6 +12,7 @@ import android.support.annotation.NonNull;
 import android.support.design.widget.TextInputLayout;
 import android.support.v7.app.AppCompatActivity;
 import android.support.v7.widget.LinearLayoutCompat;
+import android.util.Log;
 import android.view.KeyEvent;
 import android.view.View;
 import android.view.inputmethod.EditorInfo;
@@ -35,8 +36,13 @@ import com.cmput401f17.eplscavengerhunt.model.PicInputQuestion;
 import com.cmput401f17.eplscavengerhunt.model.Question;
 import com.cmput401f17.eplscavengerhunt.controller.QuestionController;
 import com.cmput401f17.eplscavengerhunt.model.WrittenInputQuestion;
+import com.squareup.picasso.Picasso;
 
 import java.io.File;
+import java.io.IOException;
+import java.io.InputStream;
+import java.net.MalformedURLException;
+import java.net.URL;
 import java.util.ArrayList;
 import java.util.List;
 
@@ -78,6 +84,17 @@ public class QuestionActivity extends AppCompatActivity {
     }
 
     /**
+     * Uses Picasso to display the relate image for a question.
+     */
+    private void displayImage(){
+        ImageView image = (ImageView)findViewById(R.id.question_image);
+        Log.d("Image debug",currentQuestion.getImageLink());
+        Picasso.with(getApplicationContext()).load(currentQuestion.getImageLink()).into(image);
+
+    }
+
+
+    /**
      * Displays the view for a mulitple choice question
      *  1. Display Zone, and Prompt
      *  2. Add buttons according to the number of choices in the question
@@ -89,6 +106,7 @@ public class QuestionActivity extends AppCompatActivity {
 
         displayZone();
         displayPrompt();
+        displayImage();
 
         /* Get the MC choices */
          final List<String> choices = ((MultipleChoiceQuestion) currentQuestion).getChoices();
@@ -161,6 +179,7 @@ public class QuestionActivity extends AppCompatActivity {
 
         displayZone();
         displayPrompt();
+        displayImage();
 
         /* Modified code whose original is from https://developer.android.com/training/keyboard-input/style.html */
         /* User's keyboard has a send button, which when pressed will submit the answer the user typed in */
@@ -202,6 +221,7 @@ public class QuestionActivity extends AppCompatActivity {
 
         displayZone();
         displayPrompt();
+        displayImage();
 
         //Link gotoCamera button to camera
         gotoCamera.setOnClickListener(new View.OnClickListener() {

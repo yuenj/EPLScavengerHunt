@@ -182,7 +182,7 @@ public class GameController {
         String questionStrDummy2 = "Question 2";
         int id2 = 1;
         String solutionStrDummy2 = "Solution 2";
-        Question testQuestion2 = new WrittenInputQuestion(id2, questionStrDummy2, "www.image2.com", solutionStrDummy2);
+        Question testQuestion2 = new WrittenInputQuestion(id2, questionStrDummy2, "https://upload.wikimedia.org/wikipedia/commons/5/5d/Restless_flycatcher04.jpg", solutionStrDummy2);
 
         String questionStrDummy3 = "Question 3";
         int id3 = 2;
@@ -195,7 +195,7 @@ public class GameController {
             add("Solution 3");
         }};
 
-        Question testQuestion3 = new PicInputQuestion(id3, questionStrDummy3, "www.image3.com", testChoices, solutionStrDummy3);
+        Question testQuestion3 = new PicInputQuestion(id3, questionStrDummy3, "https://i.pinimg.com/736x/8b/91/5b/8b915b06d3319f5c38656ded5e7bb355--cute-baby-owl-baby-owls.jpg", testChoices, solutionStrDummy3);
 
         // Create the question list
         List<Question> testQuestionList = new ArrayList<>();
