@@ -8,6 +8,7 @@
     <color name="colorButton">#FF473A</color>
     <color name="colorBackground">#333333</color>
     <color name="colorLightText">#FCFCFC</color>
+    <color name="cardBackGround">#66000000</color>
 
     <color name="black_overlay">#66000000</color>
 

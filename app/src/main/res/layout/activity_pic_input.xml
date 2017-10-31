@@ -30,7 +30,7 @@
         android:layout_height="wrap_content"
         android:gravity="center"
         android:contentDescription="imageView" />
-    
+
     <ImageView
         android:id="@+id/pic_taken_imageview"
         android:layout_width="match_parent"

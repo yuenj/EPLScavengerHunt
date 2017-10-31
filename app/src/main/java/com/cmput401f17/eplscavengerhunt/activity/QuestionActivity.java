@@ -4,6 +4,7 @@ import android.content.Context;
 import android.content.Intent;
 import android.graphics.Bitmap;
 import android.graphics.BitmapFactory;
+import android.graphics.Color;
 import android.graphics.drawable.BitmapDrawable;
 import android.graphics.drawable.Drawable;
 import android.media.ThumbnailUtils;
@@ -68,11 +69,14 @@ public class QuestionActivity extends AppCompatActivity {
     CameraHandler cameraHandler = new CameraHandler(this);
 
     /**
-     * Displays the current zone
+     * Displays the name of the current zone
+     * Change the background colour to match that of the current zone
      */
     private void displayZone() {
         TextView zoneView = (TextView)findViewById(R.id.question_zone_text_view);
         zoneView.setText("Zone: " + locationController.requestZone().getName());
+        View view = this.getWindow().getDecorView();
+        view.setBackgroundColor(Color.parseColor(locationController.requestZone().getColour()));
     }
 
     /**

@@ -157,8 +157,10 @@ public class GameController {
         List<Zone> testZoneRoute = new ArrayList<>();
         Zone zone1 = new Zone("[751928d83a65b08296715acc49a52220]"); // DJBeet2
         zone1.setName("1");
+        zone1.setColour("#2196f3");
         Zone zone2 = new Zone("[08a819724b9dabd0ca9e64c0fcb2722e]"); // DJBeet3
         zone2.setName("2");
+        zone2.setColour("#ffc107");
 
 //        Zone zone1 = new Zone("[4f8113396f78d23ec78edfb96c79e23a]"); // DJBeet
 //        zone1.setName("1");
