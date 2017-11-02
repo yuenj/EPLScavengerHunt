@@ -9,8 +9,9 @@ public class Zone {
     private String beaconID;
     private String name;
 
-    public Zone(String beaconID) {
+    public Zone(final String beaconID, final String name) {
         this.beaconID = beaconID;
+        this.name = name;
     }
 
     public String getBeaconID() {

@@ -5,19 +5,14 @@ import java.util.List;
 
 public class MultipleChoiceQuestion extends Question {
     private List<String> choices;
-    private String multipleChoiceSolution;
 
-    public MultipleChoiceQuestion() {
-        super();
-        this.choices = new ArrayList<>();
-        this.multipleChoiceSolution = "";
-    }
-
-    public MultipleChoiceQuestion(int questionID, String prompt, String imageLink,
-                                  List<String> choices, String multipleChoiceSolution) {
-        super(questionID, prompt, imageLink);
+    public MultipleChoiceQuestion(final int questionID,
+                                  final String prompt,
+                                  final String imageLink,
+                                  final List<String> choices,
+                                  final String multipleChoiceSolution) {
+        super(questionID, prompt, multipleChoiceSolution, imageLink);
         this.choices = choices;
-        this.multipleChoiceSolution = multipleChoiceSolution;
     }
 
     public List<String> getChoices() {
@@ -26,13 +21,5 @@ public class MultipleChoiceQuestion extends Question {
 
     public void setChoices(List<String> choices) {
         this.choices = choices;
-    }
-
-    public String getMultipleChoiceSolution() {
-        return multipleChoiceSolution;
-    }
-
-    public void setMultipleChoiceSolution(String multipleChoiceSolution) {
-        this.multipleChoiceSolution = multipleChoiceSolution;
     }
 }

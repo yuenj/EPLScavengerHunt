@@ -1,27 +1,21 @@
 package com.cmput401f17.eplscavengerhunt.model;
 
-import java.util.ArrayList;
-
 public abstract class Question {
 
     private int questionID;
     private String prompt;
+    private String answer;
     private String imageLink;
     private String soundLink;
     private boolean skipped;
 
-    public Question() {
-        this.questionID = 0;
-        this.prompt = "";
-        this.imageLink = "";
-        this.soundLink = "";
-        this.skipped = false;
-    }
-
-    // Every question will have an image associated with it
-    public Question(int questionID, String prompt, String imageLink) {
+    public Question(final int questionID,
+                    final String prompt,
+                    final String answer,
+                    final String imageLink) {
         this.questionID = questionID;
         this.prompt = prompt;
+        this.answer = answer;
         this.imageLink = imageLink;
         this.soundLink = "";
         this.skipped = false;
@@ -41,6 +35,14 @@ public abstract class Question {
 
     public void setPrompt(String prompt) {
         this.prompt = prompt;
+    }
+
+    public String getAnswer() {
+        return answer;
+    }
+
+    public void setAnswer(final String answer) {
+        this.answer = answer;
     }
 
     public String getImageLink() {

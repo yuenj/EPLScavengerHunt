@@ -15,55 +15,27 @@ public class ScavHuntState {
     private int currentStage;
     private List<Response> playerResponses;
     private int numCorrect;
-    private int numStages = 0;
+    private int numStages;
 
     public ScavHuntState() {
-        this.branch = "";
-        this.questions = new ArrayList<>();
-        this.zoneRoute = new ArrayList<>();
-        this.currentStage = 0;
-        this.playerResponses = new ArrayList<>();
-        this.numCorrect = 0;
-        this.numStages = 0;
-    }
-
-    public ScavHuntState(String branch, List<Question> questions, List<Zone> zoneRoute, int currentStage, List<Response> playerResponses, int numCorrect) {
-        this.branch = branch;
-        this.questions = questions;
-        this.zoneRoute = zoneRoute;
-        this.currentStage = currentStage;
-        this.playerResponses = playerResponses;
-        this.numCorrect = numCorrect;
+        cleanState();
     }
 
     private void incrementNumCorrect() {
-        this.numCorrect += 1;
+        this.numCorrect++;
     }
 
     /**
-     * Private method for checking response correctness.
+     * Checks response correctness.
      * If correct, mark it correct and increment numCorrect.
      * @param question
      * @param response
      */
-    private void validateResponse(Question question, Response response) {
-        String solution = "";
+    private void validateResponse(final Question question, final Response response) {
+        final String answer = question.getAnswer();
 
-        if (question instanceof MultipleChoiceQuestion) {
-            solution = ((MultipleChoiceQuestion) question).getMultipleChoiceSolution();
-        }
-
-        if (question instanceof PicInputQuestion) {
-            solution = ((PicInputQuestion) question).getPicInputSolution();
-        }
-
-        if (question instanceof WrittenInputQuestion) {
-            solution = ((WrittenInputQuestion) question).getWrittenInputSolution();
-        }
-
-        // Compare solution and response and update score and response
-        // accordingly
-        if (solution.equals(response.getResponseStr())) {
+        // Compare answer and response and update score and response accordingly
+        if (answer.equals(response.getResponseStr())) {
             response.markCorrect();
             incrementNumCorrect();
         }
@@ -76,7 +48,7 @@ public class ScavHuntState {
      * Checks response correctness and adds to playerResponses.
      * @param response
      */
-    public void addResponse(Response response) {
+    public void addResponse(final Response response) {
         // check correctness of response.
         // by comparing the response with the question of the current stage
         validateResponse(questions.get(currentStage), response);
@@ -87,7 +59,7 @@ public class ScavHuntState {
      * Used by LocationController whenever player arrives in the correct zone
      */
     public void incrementCurrentStage() {
-        this.currentStage += 1;
+        this.currentStage++;
     }
 
     /**
@@ -98,7 +70,7 @@ public class ScavHuntState {
         return playerResponses.size() == numStages;
     }
 
-    public void clearPreviousGameData() {
+    public void cleanState() {
         this.branch = "";
         this.questions = new ArrayList<>();
         this.zoneRoute = new ArrayList<>();
@@ -113,7 +85,7 @@ public class ScavHuntState {
         return branch;
     }
 
-    public void setBranch(String branch) {
+    public void setBranch(final String branch) {
         this.branch = branch;
     }
 
@@ -125,7 +97,7 @@ public class ScavHuntState {
         return questions.get(currentStage);
     }
 
-    public void setQuestions(List<Question> questions) {
+    public void setQuestions(final List<Question> questions) {
         this.questions = questions;
     }
 
@@ -137,7 +109,7 @@ public class ScavHuntState {
         return zoneRoute.get(currentStage);
     }
 
-    public void setZoneRoute(List<Zone> zoneRoute) {
+    public void setZoneRoute(final List<Zone> zoneRoute) {
         this.zoneRoute = zoneRoute;
     }
 
@@ -145,7 +117,7 @@ public class ScavHuntState {
         return currentStage;
     }
 
-    public void setCurrentStage(int currentStage) {
+    public void setCurrentStage(final int currentStage) {
         this.currentStage = currentStage;
     }
 
@@ -153,7 +125,11 @@ public class ScavHuntState {
         return playerResponses;
     }
 
-    public void setPlayerResponses(List<Response> playerResponses) {
+    public Response getCurrentResponse() {
+        return playerResponses.get(currentStage);
+    }
+
+    public void setPlayerResponses(final List<Response> playerResponses) {
         this.playerResponses = playerResponses;
     }
 
@@ -161,7 +137,7 @@ public class ScavHuntState {
         return numCorrect;
     }
 
-    public void setNumCorrect(int numCorrect) {
+    public void setNumCorrect(final int numCorrect) {
         this.numCorrect = numCorrect;
     }
 
@@ -169,7 +145,7 @@ public class ScavHuntState {
         return numStages;
     }
 
-    public void setNumStages(int numStages) {
+    public void setNumStages(final int numStages) {
         this.numStages = numStages;
     }
 }

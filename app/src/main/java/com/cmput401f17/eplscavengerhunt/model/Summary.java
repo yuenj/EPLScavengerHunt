@@ -1,10 +1,9 @@
 package com.cmput401f17.eplscavengerhunt.model;
 
-import java.util.ArrayList;
 import java.util.List;
 
 /**
- * Holds all relevent information for displaying a summary of the game results
+ * Holds all relevant information for displaying a summary of the game results
  */
 public class Summary {
 
@@ -13,11 +12,14 @@ public class Summary {
     private int score;
     private int numQuestions;
 
-    public Summary() {
-        this.responses = new ArrayList<>();
-        this.score = 0;
-        this.numQuestions = 0;
-        this.questions = new ArrayList<>();
+    public Summary(final List<Response> responses,
+                   final List<Question> questions,
+                   final int score,
+                   final int numQuestions) {
+        this.responses = responses;
+        this.questions = questions;
+        this.score = score;
+        this.numQuestions = numQuestions;
     }
 
     public List<Response> getResponses() {

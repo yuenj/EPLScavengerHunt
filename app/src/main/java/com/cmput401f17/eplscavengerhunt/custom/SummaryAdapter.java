@@ -55,18 +55,7 @@ public class SummaryAdapter extends BaseAdapter {
 
         prompt.setText(question.getPrompt());
         usersResponse.setText(response.getResponseStr());
-
-        if (question instanceof WrittenInputQuestion) {
-            answer.setText(((WrittenInputQuestion) question).getWrittenInputSolution());
-        }
-
-        if (question instanceof MultipleChoiceQuestion) {
-            answer.setText(((MultipleChoiceQuestion) question).getMultipleChoiceSolution());
-        }
-
-        if (question instanceof PicInputQuestion) {
-            answer.setText(((PicInputQuestion) question).getPicInputSolution());
-        }
+        answer.setText(question.getAnswer());
 
         int correctColor = ContextCompat.getColor(activity.getApplicationContext(), R.color.colorCorrectResponse);
         int incorrectColor = ContextCompat.getColor(activity.getApplicationContext(), R.color.colorIncorrectResponse);
