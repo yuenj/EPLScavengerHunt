@@ -21,8 +21,13 @@
     <string name="goto_resultsActivity_text">goto ResultsActivity</string>
 
     <!-- RulesActivity -->
-    <string name="rules_text">This app is a scavenger hunt where you moving from zone to zone and
-    answer questions. Zones are different section of the library (TEMPORARY).</string>
+    <string name="rules_text">Welcome to the EPL scavenger hunt game!  In this game, you will be traveling to different locations within the library and answering questions related to [Alberta nature].
+    \n1. When the game starts, visit the location shown on the screen
+    \n2. Use the environment to help you answer the question on the screen
+    \n3. If you’re really stuck, you can choose to skip the question
+    \n4. Proceed to the next location indicated on the screen
+\nVisit all [5] locations!
+</string>
 
     <!-- CreditsActivity -->
     <string name="credits_text">Credits due to those who deserve credits. (TEMPORARY).</string>
