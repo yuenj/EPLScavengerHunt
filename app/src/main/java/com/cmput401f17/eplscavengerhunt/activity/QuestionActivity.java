@@ -74,7 +74,7 @@ public class QuestionActivity extends AppCompatActivity {
      */
     private void displayZone() {
         TextView zoneView = (TextView)findViewById(R.id.question_zone_text_view);
-        zoneView.setText("Zone: " + locationController.requestZone().getName());
+        zoneView.setText("Location: " + locationController.requestZone().getName());
         View view = this.getWindow().getDecorView();
         view.setBackgroundColor(Color.parseColor(locationController.requestZone().getColour()));
     }
@@ -84,7 +84,7 @@ public class QuestionActivity extends AppCompatActivity {
      */
     private void displayPrompt() {
         TextView prompt = (TextView)findViewById(R.id.question_prompt_text_view);
-        prompt.setText("Task: " + currentQuestion.getPrompt());
+        prompt.setText("Question: " + currentQuestion.getPrompt());
     }
 
     /**

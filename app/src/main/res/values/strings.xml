@@ -40,6 +40,7 @@
     <string name="current_zone">Zone : %1$s</string>
     <string name="question_prompt">Task : %1$s</string>
     <string name="skip_question">Skip</string>
+    <string name="hint"><font size="30">Your Answer :</font></string>
 
     <!-- SummaryActivity -->
     <string name="total_score">Your Total: </string>
