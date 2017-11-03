@@ -36,8 +36,7 @@ public class QuestionAnswerActivity extends AppCompatActivity {
     QuestionController questionController;
 
     private TextView resultTextView;
-    private TextView zoneTextView;
-    private Button viewSummaryButton;
+    private Button doneButton;
 
     @Override
     protected void onCreate(Bundle savedInstanceState) {
@@ -46,8 +45,7 @@ public class QuestionAnswerActivity extends AppCompatActivity {
         ScavengerHuntApplication.getInstance().getAppComponent().inject(this);
 
         resultTextView = findViewById(R.id.TV_QuestionAnswer_result);
-        zoneTextView = findViewById(R.id.TV_QuestionAnswer_zone);
-        viewSummaryButton = findViewById(R.id.Button_QuestionAnswer_done);
+        doneButton = findViewById(R.id.Button_QuestionAnswer_done);
 
         final Question question = questionController.requestQuestion();
         final Response response = questionController.requestResponse();
@@ -61,35 +59,19 @@ public class QuestionAnswerActivity extends AppCompatActivity {
             resultTextView.setText("Wrong answer. The correct answer is " +  question.getAnswer());
         }
 
-        // start polling players position if the game is not over
+        final Intent intent;
+        doneButton.setText("Next");
+        // allow the player to go to the next screen if the game is not over
         if (!gameController.requestCheckGameOver()) {
-            pollPosition();
-            zoneTextView.setText("Go to Zone " + locationController.requestZone().getName());
-            viewSummaryButton.setVisibility(View.GONE);
-        } else { // otherwise, allow the player to go to the next screen
-            zoneTextView.setText("You have completed the game!");
-            viewSummaryButton.setVisibility(View.VISIBLE);
-            viewSummaryButton.setOnClickListener(new View.OnClickListener() {
-                public void onClick(View v) {
-                    Log.d("QuestionAnswerActivity", "Going to CongratulationsActivity");
-                    Intent intent = new Intent(QuestionAnswerActivity.this, CongratulationsActivity.class);
-                    startActivity(intent);
-                }
-            });
+            intent = new Intent(QuestionAnswerActivity.this, LocationActivity.class);
+        // otherwise, allow the player to view results
+        } else {
+            intent = new Intent(QuestionAnswerActivity.this, CongratulationsActivity.class);
         }
-    }
-
-    void pollPosition() {
-        // If the location is verified go to Question activity
-        locationController.verifyLocation(new SimpleCallback<Boolean>() {
-            @Override
-            public void callback(Boolean data) {
-                if (data) {
-                    final Intent intent = new Intent(QuestionAnswerActivity.this, QuestionActivity.class);
-                } else {
-                    // This shouldn't go off
-                    Log.d("LocationListener", "False Return");
-                }
+        doneButton.setOnClickListener(new View.OnClickListener() {
+            public void onClick(View v) {
+                startActivity(intent);
+                finish();
             }
         });
     }
