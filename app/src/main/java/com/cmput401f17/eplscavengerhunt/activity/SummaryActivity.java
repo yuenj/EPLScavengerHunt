@@ -7,7 +7,6 @@ import android.util.Log;
 import android.view.View;
 import android.widget.Button;
 import android.widget.ListView;
-import android.widget.TextView;
 
 import com.cmput401f17.eplscavengerhunt.R;
 import com.cmput401f17.eplscavengerhunt.ScavengerHuntApplication;
@@ -22,18 +21,13 @@ import java.util.List;
 import javax.inject.Inject;
 
 /**
- * Displays the users results and overall score
- * Also displays which questions a user answered right or wrong
+ * Displays a summary of the game results
  */
 public class SummaryActivity extends AppCompatActivity {
 
-    private SummaryAdapter summaryAdapter;
-    private ListView summaryListView;
-    private TextView usersScore;
-    private Button done;
-
     @Inject
     GameController gameController;
+    private SummaryAdapter summaryAdapter;
 
     @Override
     protected void onCreate(Bundle savedInstanceState) {
@@ -44,46 +38,15 @@ public class SummaryActivity extends AppCompatActivity {
         final Summary summary = gameController.requestSummary();
         Log.i("SUMMARY:", summary.getQuestions().toString());
 
-        // set up
-        findViews();
-        setOnDone();
+        final ListView summaryContentLV = findViewById(R.id.LV_summary_content);
+        final Button replayButton = findViewById(R.id.button_summary_replay);
 
-        displaySummary(summary);
-        displayScore(summary);
-    }
-
-    /**
-     * Displays the questions and responses
-     */
-    private void displaySummary(final Summary summary) {
         final List<Question> questions = summary.getQuestions();
         final List<Zone> zones = summary.getZones();
-
         summaryAdapter = new SummaryAdapter(this, questions, zones);
-        summaryListView.setAdapter(summaryAdapter);
-    }
+        summaryContentLV.setAdapter(summaryAdapter);
 
-    /**
-     * Displays the users score with respect to the
-     * total questions played
-     */
-    private void displayScore(final Summary summary) {
-        final int score = summary.getScore();
-        final int maxScore = summary.getNumQuestions();
-
-        // TODO display score and maxScore in two different textviews
-        usersScore.setText(Integer.toString(score) + "/" + Integer.toString(maxScore));
-    }
-
-    private void refreshDisplay() {
-        summaryAdapter.notifyDataSetChanged();
-    }
-
-    /**
-     * User click leads them to TitleActivity
-      */
-    private void setOnDone() {
-        done.setOnClickListener(new View.OnClickListener() {
+        replayButton.setOnClickListener(new View.OnClickListener() {
             public void onClick(View v) {
                 Log.d("SummaryActivity", "going to TitleActivity");
                 Intent intent = new Intent(SummaryActivity.this, TitleActivity.class);
@@ -92,23 +55,15 @@ public class SummaryActivity extends AppCompatActivity {
         });
     }
 
-    private void findViews() {
-        summaryListView = findViewById(R.id.summary_lv);
-        usersScore = findViewById(R.id.summary_total_text_view);
-        done = findViewById(R.id.summary_next_button);
-    }
-
     @Override
     protected void onStart() {
         super.onStart();
-
-        refreshDisplay();
+        summaryAdapter.notifyDataSetChanged();
     }
 
     @Override
     protected void onResume() {
         super.onResume();
-
-        refreshDisplay();
+        summaryAdapter.notifyDataSetChanged();
     }
 }
