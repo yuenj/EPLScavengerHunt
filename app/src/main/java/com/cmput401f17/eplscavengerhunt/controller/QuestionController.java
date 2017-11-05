@@ -23,7 +23,7 @@ public class QuestionController {
      *  @pre User has input an answer
      *  @param answer       The user's answer
      */
-    public void requestSubmitResponse(String answer){
+    public void requestSubmitResponse(final String answer){
         Response response = new Response(answer);
         scavHuntState.addResponse(response);
     }
@@ -32,7 +32,9 @@ public class QuestionController {
      * Gets the data relating to the current question
      * @return A Question object relating to the current question
      */
-    public Question requestQuestion() { return(scavHuntState.getCurrentQuestion()); }
+    public Question requestQuestion() {
+        return scavHuntState.getCurrentQuestion();
+    }
 
     /**
      * User chose to skip question. Pass that along
@@ -40,5 +42,10 @@ public class QuestionController {
      */
     public void skip(Question question){
         question.skip();
+    }
+
+    /** Gets the response to the current question */
+    public Response requestResponse() {
+        return scavHuntState.getCurrentResponse();
     }
 }

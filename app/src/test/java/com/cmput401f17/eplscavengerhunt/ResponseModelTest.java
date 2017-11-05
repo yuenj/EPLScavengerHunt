@@ -22,16 +22,14 @@ public class ResponseModelTest {
     @Test
     public void setResponseTest() {
         String strDummy = "Response!!";
-        Response testResponse = new Response();
-
-        testResponse.setResponseStr(strDummy);
+        Response testResponse = new Response(strDummy);
 
         assertEquals(strDummy, testResponse.getResponseStr());
     }
 
     @Test
     public void isCorrectTestOnCorrect() {
-        Response testResponse = new Response();
+        Response testResponse = new Response("testResponse");
 
         testResponse.markCorrect();
 
@@ -40,7 +38,7 @@ public class ResponseModelTest {
 
     @Test
     public void isCorrectTestOnIncorrect() {
-        Response testResponse = new Response();
+        Response testResponse = new Response("testResponse");
 
         testResponse.markIncorrect();
 
@@ -49,7 +47,7 @@ public class ResponseModelTest {
 
     @Test
     public void markCorrectTest() {
-        Response testResponse = new Response();
+        Response testResponse = new Response("testResponse");
 
         testResponse.markCorrect();
 
@@ -58,7 +56,7 @@ public class ResponseModelTest {
 
     @Test
     public void markIncorrectTest() {
-        Response testResponse = new Response();
+        Response testResponse = new Response("testResponse");
 
         testResponse.markIncorrect();
 

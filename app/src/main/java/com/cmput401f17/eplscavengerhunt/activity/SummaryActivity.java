@@ -31,7 +31,6 @@ public class SummaryActivity extends AppCompatActivity {
     private ListView summaryListView;
     private TextView usersScore;
     private Button done;
-    private Summary summary;
 
     @Inject
     GameController gameController;
@@ -42,7 +41,7 @@ public class SummaryActivity extends AppCompatActivity {
         setContentView(R.layout.activity_summary);
         ScavengerHuntApplication.getInstance().getAppComponent().inject(this);
 
-        summary = gameController.requestSummary();
+        final Summary summary = gameController.requestSummary();
         String str = summary.getQuestions().toString();
         Log.i("SUMMARY:", str);
 
@@ -50,14 +49,14 @@ public class SummaryActivity extends AppCompatActivity {
         findViews();
         setOnDone();
 
-        displaySummary();
-        displayScore();
+        displaySummary(summary);
+        displayScore(summary);
     }
 
     /**
      * Displays the questions and responses
      */
-    private void displaySummary() {
+    private void displaySummary(final Summary summary) {
         final List<Question> questions = summary.getQuestions();
         final List<Response> responses = summary.getResponses();
 
@@ -69,10 +68,11 @@ public class SummaryActivity extends AppCompatActivity {
      * Displays the users score with respect to the
      * total questions played
      */
-    private void displayScore() {
+    private void displayScore(final Summary summary) {
         final int score = summary.getScore();
-           final int maxScore = summary.getNumQuestions();
+        final int maxScore = summary.getNumQuestions();
 
+        // TODO display score and maxScore in two different textviews
         usersScore.setText(Integer.toString(score) + "/" + Integer.toString(maxScore));
     }
 

@@ -90,7 +90,7 @@ public class LocationController {
      * @return Zone         A zone in a branch of a library
      */
     public Zone requestZone() {
-        int currentStage = scavHuntState.getCurrentStage();
+        final int currentStage = scavHuntState.getCurrentStage();
         return scavHuntState.getZoneRoute().get(currentStage);
     }
 }
