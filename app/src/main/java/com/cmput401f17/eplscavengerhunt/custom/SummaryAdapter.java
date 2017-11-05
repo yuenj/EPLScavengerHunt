@@ -60,7 +60,6 @@ public class SummaryAdapter extends BaseAdapter {
         zoneTV.setBackgroundColor(Color.parseColor(zone.getColor()));
         areaTV.setText(zone.getArea());
         summaryContentRL.setBackgroundColor(Color.parseColor(zone.getColor()));
-
         final int resourceId = parent.getResources()
                 .getIdentifier(question.getImageLink(), "drawable", activity.getPackageName());
         final Drawable drawable = parent.getResources().getDrawable(resourceId);
