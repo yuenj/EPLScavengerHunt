@@ -1,5 +1,6 @@
 <?xml version="1.0" encoding="utf-8"?>
 <android.support.v7.widget.LinearLayoutCompat xmlns:android="http://schemas.android.com/apk/res/android"
+    xmlns:app="http://schemas.android.com/apk/res-auto"
     xmlns:tools="http://schemas.android.com/tools"
     android:id="@+id/mult_question_llc"
     android:layout_width="match_parent"
@@ -9,18 +10,12 @@
 
     <TextView
         android:id="@+id/question_zone_text_view"
-        android:layout_width="wrap_content"
+        android:layout_width="match_parent"
         android:layout_height="wrap_content"
         android:text="@string/question_temp_text"
-        android:textSize="20sp"
-        android:textColor="#33b5e5" />
-
-    <TextView
-        android:id="@+id/question_prompt_text_view"
-        android:layout_width="wrap_content"
-        android:layout_height="wrap_content"
-        android:text="@string/question_temp_text"
-        android:textSize="30sp" />
+        android:textAlignment="center"
+        android:textColor="#33b5e5"
+        android:textSize="20sp" />
 
     <!-- Layout as placeholder -->
     <android.support.v7.widget.LinearLayoutCompat xmlns:android="http://schemas.android.com/apk/res/android"
@@ -41,7 +36,23 @@
         android:layout_height="0dip"
         android:layout_weight="1"
         android:gravity="center|bottom"
-        android:orientation="vertical">
+        android:orientation="vertical"
+        android:weightSum="1">
+
+        <ImageView
+            android:id="@+id/imageView"
+            android:layout_width="match_parent"
+            android:layout_height="wrap_content"
+            android:layout_weight="0.84"
+            app:srcCompat="?android:attr/textSelectHandle" />
+
+        <TextView
+            android:id="@+id/question_prompt_text_view"
+            android:layout_width="match_parent"
+            android:layout_height="wrap_content"
+            android:text="W"
+            android:textAlignment="center"
+            android:textSize="30sp" />
 
         <Button
             android:id="@+id/question_skip_button"

@@ -20,12 +20,12 @@
         android:id="@+id/title_text"
         android:layout_width="wrap_content"
         android:layout_height="wrap_content"
-        android:textSize="50sp"
-        android:text="Scavenger Hunt"
-        android:textColor="@color/colorLightText"
         android:layout_below="@+id/logo"
         android:layout_centerHorizontal="true"
-        android:fontFamily="sans-serif-condensed"/>
+        android:fontFamily="sans_serif"
+        android:text="Scavenger Hunt"
+        android:textColor="@color/colorLightText"
+        android:textSize="50sp" />
 
 
     <LinearLayout

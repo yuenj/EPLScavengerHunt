@@ -70,8 +70,8 @@ public class GameControllerTest {
     public void initGameShouldInitializeScavHuntState() {
         // GIVEN
         final String branch = "testBranch";
-        final Zone zone1 = new Zone("testBeaconId", "testZoneName");
-        final Zone zone2 = new Zone("testBeaconId2", "testZoneName2");
+        final Zone zone1 = new Zone("testBeaconId", "testZoneName", "testZoneArea");
+        final Zone zone2 = new Zone("testBeaconId2", "testZoneName2", "testZoneArea");
         final List<Zone> zoneRoute = Arrays.asList(zone1, zone2);
         final Question question1 = new WrittenInputQuestion(0, "Question 1", "www.image1.com", "Solution 1");
         final Question question2 = new WrittenInputQuestion(1, "Question 2", "www.image2.com", "Solution 2");

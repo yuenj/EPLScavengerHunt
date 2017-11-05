@@ -14,8 +14,8 @@ import com.cmput401f17.eplscavengerhunt.ScavengerHuntApplication;
 import com.cmput401f17.eplscavengerhunt.controller.GameController;
 import com.cmput401f17.eplscavengerhunt.custom.SummaryAdapter;
 import com.cmput401f17.eplscavengerhunt.model.Question;
-import com.cmput401f17.eplscavengerhunt.model.Response;
 import com.cmput401f17.eplscavengerhunt.model.Summary;
+import com.cmput401f17.eplscavengerhunt.model.Zone;
 
 import java.util.List;
 
@@ -42,8 +42,7 @@ public class SummaryActivity extends AppCompatActivity {
         ScavengerHuntApplication.getInstance().getAppComponent().inject(this);
 
         final Summary summary = gameController.requestSummary();
-        String str = summary.getQuestions().toString();
-        Log.i("SUMMARY:", str);
+        Log.i("SUMMARY:", summary.getQuestions().toString());
 
         // set up
         findViews();
@@ -58,9 +57,9 @@ public class SummaryActivity extends AppCompatActivity {
      */
     private void displaySummary(final Summary summary) {
         final List<Question> questions = summary.getQuestions();
-        final List<Response> responses = summary.getResponses();
+        final List<Zone> zones = summary.getZones();
 
-        summaryAdapter = new SummaryAdapter(this, responses, questions);
+        summaryAdapter = new SummaryAdapter(this, questions, zones);
         summaryListView.setAdapter(summaryAdapter);
     }
 

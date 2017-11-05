@@ -78,7 +78,6 @@ public class GameController {
         final List<Zone> zoneRoute =
                 databaseController.retrieveRandomZonesInBranch(branch, numZones);
         scavHuntState.setZoneRoute(zoneRoute);
-
         scavHuntState.setNumStages(zoneRoute.size());
 
         return zoneRoute;
@@ -108,10 +107,11 @@ public class GameController {
     private Summary generateSummary() {
         final List<Response> responses = scavHuntState.getPlayerResponses();
         final List<Question> questions = scavHuntState.getQuestions();
+        final List<Zone> zones = scavHuntState.getZoneRoute();
         final int score = scavHuntState.getNumCorrect();
         final int numQuestions = scavHuntState.getNumStages();
 
-        final Summary summary = new Summary(responses, questions, score, numQuestions);
+        final Summary summary = new Summary(responses, questions, zones, score, numQuestions);
 
         return summary;
     }
@@ -131,9 +131,13 @@ public class GameController {
         scavHuntState.setBranch("Clareview");
 
         // Sets a zone with it's specific name and beacon id
-        Zone zone1 = new Zone("[4f8113396f78d23ec78edfb96c79e23a]", "1"); // DJBeet
-        Zone zone2 = new Zone("[ab1d6643c33e5f6ed7c52a062168f137]", "2"); // CandyStore
-        Zone zone3 = new Zone("[9a78af8c1252fcb37abefecbbbe7322a]", "3"); // Lemonade
+        Zone zone1 = new Zone("[4f8113396f78d23ec78edfb96c79e23a]", "1", "Children's area"); // DJBeet
+        Zone zone2 = new Zone("[ab1d6643c33e5f6ed7c52a062168f137]", "2", "Nonfiction area"); // CandyStore
+        Zone zone3 = new Zone("[9a78af8c1252fcb37abefecbbbe7322a]", "3", "Science fiction area"); // Lemonade
+        // Give each zone a color
+        zone1.setColor("#AA00AA00");
+        zone2.setColor("#AAFFAA00");
+        zone3.setColor("#CC00CC00");
 
         // Create the zone route
         List<Zone> zoneRoute = Arrays.asList(zone1, zone2, zone3);
@@ -141,11 +145,17 @@ public class GameController {
         scavHuntState.setNumStages(3);
 
         // Create written answer questions
-        Question question1 = new WrittenInputQuestion(0, "Question 1", "www.image1.com", "Solution One");
-        Question question2 = new WrittenInputQuestion(1, "Question 2", "www.image2.com", "Solution Two");
+        String question1Prompt = "This bird is 24 centimetres (9 inches) long and is easily identified by its long legs and short, barred tail. What bird am I?";
+        String question2Prompt = "Great rivers that flowed here 75 million years ago left sand and mud deposits. What landscape of Alberta is this?";
+        String question3Prompt = "Located in the Southwestern edge of Alberta, the ________________ are perhaps the best known and most well visited of Alberta's six natural regions.";
+        String question1Solution = "burrowing owl";
+        String question2Solution = "badlands";
+        String question3Solution = "rocky mountains";
+        Question question1 = new WrittenInputQuestion(0, question1Prompt, "www.image1.com", question1Solution);
+        Question question2 = new WrittenInputQuestion(1, question2Prompt, "www.image2.com", question2Solution);
         // Create pic multiple choice question
-        List<String> choices = Arrays.asList("Solution 1", "Solution 2", "Solution 3");
-        Question question3 = new PicInputQuestion(2, "Question 3", "www.image3.com", choices, "Solution Three");
+        List<String> choices = Arrays.asList("Mount Everest", question3Solution, "Grand Canyon");
+        Question question3 = new PicInputQuestion(2, question3Prompt, "www.image3.com", choices, question3Solution);
 
         // Create the question list
         List<Question> questionList = Arrays.asList(question1, question2, question3);
