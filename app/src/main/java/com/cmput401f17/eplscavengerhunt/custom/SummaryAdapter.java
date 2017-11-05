@@ -3,6 +3,7 @@ package com.cmput401f17.eplscavengerhunt.custom;
 import android.app.Activity;
 import android.content.Context;
 import android.graphics.Color;
+import android.graphics.drawable.Drawable;
 import android.view.LayoutInflater;
 import android.view.View;
 import android.view.ViewGroup;
@@ -59,8 +60,12 @@ public class SummaryAdapter extends BaseAdapter {
         zoneTV.setBackgroundColor(Color.parseColor(zone.getColor()));
         areaTV.setText(zone.getArea());
         summaryContentRL.setBackgroundColor(Color.parseColor(zone.getColor()));
-        // TODO replace with question image
-        pictureIV.setImageDrawable(parent.getResources().getDrawable(R.drawable.rocky_mountains));
+
+        final int resourceId = parent.getResources()
+                .getIdentifier(question.getImageLink(), "drawable", activity.getPackageName());
+        final Drawable drawable = parent.getResources().getDrawable(resourceId);
+        pictureIV.setImageDrawable(drawable);
+
         // TODO seeMoreButton should open a dialog with more info
         // about e.g. question prompt, users response, detailed answer (see Lydia's
         // examples in google drive
