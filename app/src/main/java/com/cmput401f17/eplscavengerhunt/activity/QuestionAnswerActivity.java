@@ -47,7 +47,8 @@ public class QuestionAnswerActivity extends AppCompatActivity {
 
         final Question question = questionController.requestQuestion();
         final Response response = questionController.requestResponse();
-        final boolean playerIsCorrect = question.getAnswer().equals(response.getResponseStr());
+        final boolean playerIsCorrect = question.getAnswer().toLowerCase().replaceAll("\\s+","").
+                equals(response.getResponseStr().toLowerCase().replaceAll("\\s+",""));
 
         // TODO move hardcoded string values into string.xml
         // Display feedback for the player
