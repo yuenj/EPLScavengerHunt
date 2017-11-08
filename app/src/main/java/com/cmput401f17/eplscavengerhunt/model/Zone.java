@@ -10,8 +10,9 @@ public class Zone {
     private String name;
     private String colour;
 
-    public Zone(String beaconID) {
+    public Zone(final String beaconID, final String name) {
         this.beaconID = beaconID;
+        this.name = name;
     }
 
     public String getBeaconID() {

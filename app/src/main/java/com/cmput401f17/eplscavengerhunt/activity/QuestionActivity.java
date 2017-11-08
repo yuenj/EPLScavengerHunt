@@ -3,11 +3,13 @@ package com.cmput401f17.eplscavengerhunt.activity;
 import android.content.Context;
 import android.content.Intent;
 import android.graphics.Bitmap;
+<<<<<<< HEAD
 import android.graphics.BitmapFactory;
 import android.graphics.Color;
+=======
+>>>>>>> 86cf7a53ef48e6a05c28a1f02ec50a14858d685a
 import android.graphics.drawable.BitmapDrawable;
 import android.graphics.drawable.Drawable;
-import android.media.ThumbnailUtils;
 import android.os.Bundle;
 import android.support.annotation.NonNull;
 import android.support.design.widget.TextInputLayout;
@@ -29,22 +31,24 @@ import android.widget.Toast;
 
 import com.cmput401f17.eplscavengerhunt.R;
 import com.cmput401f17.eplscavengerhunt.ScavengerHuntApplication;
-import com.cmput401f17.eplscavengerhunt.controller.GameController;
 import com.cmput401f17.eplscavengerhunt.controller.LocationController;
+import com.cmput401f17.eplscavengerhunt.controller.QuestionController;
 import com.cmput401f17.eplscavengerhunt.custom.CameraHandler;
 import com.cmput401f17.eplscavengerhunt.model.MultipleChoiceQuestion;
 import com.cmput401f17.eplscavengerhunt.model.PicInputQuestion;
 import com.cmput401f17.eplscavengerhunt.model.Question;
-import com.cmput401f17.eplscavengerhunt.controller.QuestionController;
 import com.cmput401f17.eplscavengerhunt.model.WrittenInputQuestion;
 import com.squareup.picasso.Picasso;
 
 import java.io.File;
+<<<<<<< HEAD
 import java.io.IOException;
 import java.io.InputStream;
 import java.net.MalformedURLException;
 import java.net.URL;
 import java.util.ArrayList;
+=======
+>>>>>>> 86cf7a53ef48e6a05c28a1f02ec50a14858d685a
 import java.util.List;
 
 import javax.inject.Inject;
@@ -55,9 +59,6 @@ public class QuestionActivity extends AppCompatActivity {
     QuestionController questionController;
 
     @Inject
-    GameController gameController;
-
-    @Inject
     LocationController locationController;
 
     private Question currentQuestion;
@@ -66,7 +67,7 @@ public class QuestionActivity extends AppCompatActivity {
     private ImageView picTakenImageView;
     static final int REQUEST_IMAGE_CAPTURE = 1;
     private File imageFile;
-    CameraHandler cameraHandler = new CameraHandler(this);
+    final CameraHandler cameraHandler = new CameraHandler(this);
 
     /**
      * Displays the name of the current zone
@@ -77,12 +78,10 @@ public class QuestionActivity extends AppCompatActivity {
         zoneView.setText("Location: " + locationController.requestZone().getName());
         View view = this.getWindow().getDecorView();
         view.setBackgroundColor(Color.parseColor(locationController.requestZone().getColour()));
-    }
 
-    /**
-     * Displays the current question prompt
-     */
+    /** Displays the current question prompt */
     private void displayPrompt() {
+
         TextView prompt = (TextView)findViewById(R.id.question_prompt_text_view);
         prompt.setText("Question: " + currentQuestion.getPrompt());
     }
@@ -97,13 +96,13 @@ public class QuestionActivity extends AppCompatActivity {
 
     }
 
-
+    
     /**
-     * Displays the view for a mulitple choice question
+     * Displays the view for a multiple choice question
      *  1. Display Zone, and Prompt
      *  2. Add buttons according to the number of choices in the question
      *  3. Listen for user to press button. When pressed pass on answer to controller.
-     *  4. Use intentAway to move to next activity
+     *  4. Use startQuestionAnswerActivity to move to next activity
      */
     private void displayMultChoice(){
         setContentView(R.layout.activity_mult_choice);
@@ -112,10 +111,10 @@ public class QuestionActivity extends AppCompatActivity {
         displayPrompt();
         displayImage();
 
-        /* Get the MC choices */
-         final List<String> choices = ((MultipleChoiceQuestion) currentQuestion).getChoices();
+        // Get the MC choices 
+        final List<String> choices = ((MultipleChoiceQuestion) currentQuestion).getChoices();
 
-        /* Create choice button(s) */
+        // Create choice button(s) 
         for(int i = 0; i < choices.size(); i++) {
             Button mcOption = new Button(this);
             mcOption.setText(choices.get(i));
@@ -124,7 +123,7 @@ public class QuestionActivity extends AppCompatActivity {
             LinearLayoutCompat.LayoutParams parameters = new LinearLayoutCompat.LayoutParams(LinearLayoutCompat.LayoutParams.MATCH_PARENT, LinearLayoutCompat.LayoutParams.WRAP_CONTENT);
             layout.addView(mcOption, parameters);
 
-            /* Listen for button click. If clicked, make a toast telling which button was clicked */
+            // Listen for button click. If clicked, make a toast telling which button was clicked 
              final int id = i;
              mcOption.setOnClickListener(new View.OnClickListener() {
                  public void onClick(View view) {
@@ -132,7 +131,7 @@ public class QuestionActivity extends AppCompatActivity {
 
                      //Pass the answer to the controller
                      questionController.requestSubmitResponse(choices.get(id));
-                     intentAway();
+                     startQuestionAnswerActivity();
                  }
              });
          }
@@ -146,14 +145,14 @@ public class QuestionActivity extends AppCompatActivity {
      *      2.Gets the user input nad changes to string.
      *      3.Hide the on-screen/ soft keyboard
      *      4.Pass the answer to the controller for further use.
-     *      5.Use intentAway to move to next activity
+     *      5.Use startQuestionAnswerActivity to move to next activity
      *
      *  Modified code originally from https://code.tutsplus.com/tutorials/creating-a-login-screen-using-textinputlayout--cms-24168
      *
      *  @param view, editText
      */
     private void writtenAnswerChecker(View view, EditText editText) {
-        TextInputLayout userAnswerLayout = (TextInputLayout) findViewById(R.id.written_user_answer_wrapper_til);
+        TextInputLayout userAnswerLayout = findViewById(R.id.written_user_answer_wrapper_til);
 
         if(editText.getText().length() == 0){
             userAnswerLayout.setError("Answer is too short.");
@@ -162,14 +161,14 @@ public class QuestionActivity extends AppCompatActivity {
 
             Toast.makeText(view.getContext(), "Answer Submitted!", Toast.LENGTH_SHORT).show();
 
-            /* Hides the on-screen (soft) keyboard */
+            // Hides the on-screen (soft) keyboard 
             if (view != null) {
                 ((InputMethodManager) getSystemService(Context.INPUT_METHOD_SERVICE)).
                         hideSoftInputFromWindow(view.getWindowToken(), InputMethodManager.HIDE_NOT_ALWAYS);
             }
 
             questionController.requestSubmitResponse(editText.getText().toString());
-            intentAway();
+            startQuestionAnswerActivity();
         }
     }
 
@@ -185,15 +184,15 @@ public class QuestionActivity extends AppCompatActivity {
         displayPrompt();
         displayImage();
 
-        /* Modified code whose original is from https://developer.android.com/training/keyboard-input/style.html */
-        /* User's keyboard has a send button, which when pressed will submit the answer the user typed in */
-        final EditText editText = (EditText) findViewById(R.id.written_user_answer_edit_text);
+        // Modified code whose original is from https://developer.android.com/training/keyboard-input/style.html 
+        // User's keyboard has a send button, which when pressed will submit the answer the user typed in 
+        final EditText editText = findViewById(R.id.written_user_answer_edit_text);
         editText.setOnEditorActionListener(new TextView.OnEditorActionListener() {
             @Override
             public boolean onEditorAction(TextView v, int actionId, KeyEvent event) {
                 boolean handled = false;
 
-                /* Answer sent through keyboard send button */
+                // Answer sent through keyboard send button 
                 if (actionId == EditorInfo.IME_ACTION_SEND) {
                     writtenAnswerChecker(v, editText);
                     handled = true;
@@ -203,7 +202,7 @@ public class QuestionActivity extends AppCompatActivity {
             }
         });
 
-        /* Listens for when button is pressed. When it is pressed, answer is submitted */
+        // Listens for when button is pressed. When it is pressed, answer is submitted 
         Button submit = (Button) findViewById(R.id.question_submit_button);
         submit.setOnClickListener(new View.OnClickListener() {
             public void onClick(View view) {
@@ -215,7 +214,6 @@ public class QuestionActivity extends AppCompatActivity {
     /**
      * Displays view for a picture input question
      *  1. Display zone and prompt text
-     *  2.
      */
     private void displayPicInput(){
         setContentView(R.layout.activity_pic_input);
@@ -234,14 +232,14 @@ public class QuestionActivity extends AppCompatActivity {
             }
         });
 
-        /* Display the choices */
+        // Display the choices 
         final List<String> choices = ((PicInputQuestion) currentQuestion).getChoices();
 
-        /* Create group for radio buttons */
+        // Create group for radio buttons 
         RadioGroup radioGroup = new RadioGroup(this);
         radioGroup.setOrientation(LinearLayout.VERTICAL);
 
-        /* Create choice radio button(s) */
+        // Create choice radio button(s) 
         for(int i = 0; i < choices.size(); i++) {
             final RadioButton radioButton = new RadioButton(this);
             radioButton.setId(i);
@@ -249,14 +247,14 @@ public class QuestionActivity extends AppCompatActivity {
 
             radioGroup.addView(radioButton);
 
-            /* Listen for a radio button to be selected. Once selected show the submit button*/
+            // Listen for a radio button to be selected. Once selected show the submit button
             radioButton.setOnClickListener(new View.OnClickListener() {
                 public void onClick(View view) {
                     submit.setVisibility(View.VISIBLE);
                 }
             });
 
-            /* Submits the response once user clicks. Response is the radio button selected */
+            // Submits the response once user clicks. Response is the radio button selected 
             submit.setOnClickListener(new View.OnClickListener() {
                 public void onClick(View v) {
                     Toast.makeText(v.getContext(), "You selected: " + radioButton.getText().toString(), Toast.LENGTH_SHORT).show();
@@ -265,7 +263,7 @@ public class QuestionActivity extends AppCompatActivity {
                     if (hasImage(picTakenImageView)) {
                         //Pass the answer to the controller
                         questionController.requestSubmitResponse(radioButton.getText().toString());
-                        intentAway();
+                        startQuestionAnswerActivity();
                     }
                     else {
                         Toast.makeText(v.getContext(), "Take a photo!", Toast.LENGTH_SHORT).show();
@@ -274,32 +272,17 @@ public class QuestionActivity extends AppCompatActivity {
             });
         }
 
-        /* Add the radio button group to the view */
-        LinearLayoutCompat layout = (LinearLayoutCompat) findViewById(R.id.pic_choices_llc);
+        // Add the radio button group to the view 
+        LinearLayoutCompat layout = findViewById(R.id.pic_choices_llc);
         LinearLayoutCompat.LayoutParams parameters = new LinearLayoutCompat.LayoutParams(LinearLayoutCompat.LayoutParams.MATCH_PARENT, LinearLayoutCompat.LayoutParams.WRAP_CONTENT);
         layout.addView(radioGroup, parameters);
     }
 
-
-    /**
-     * Used to intent to the next activity
-     * Need to increase the Scavenger Hunt stage before we leave the activity to advance the game.
-     * If this is the last question we need to intent to the Congrats Activity
-     * If this is not the last question we need to intent to the
-     */
-    private void intentAway () {
-        if (!gameController.requestCheckGameOver()) {
-            gameController.requestIncrementCurrentStage();
-            Intent intent = new Intent(QuestionActivity.this, LocationActivity.class);
-            startActivity(intent);
-            finish();
-
-        } else{
-            Intent intent = new Intent(QuestionActivity.this, CongratulationsActivity.class);
-            startActivity(intent);
-            finish();
-        }
-
+    /** Starts the Question Answer Activity to display immediate results to the user. */
+    private void startQuestionAnswerActivity () {
+        Intent intent = new Intent(QuestionActivity.this, QuestionAnswerActivity.class);
+        startActivity(intent);
+        finish();
     }
 
     /**
@@ -352,10 +335,8 @@ public class QuestionActivity extends AppCompatActivity {
     @Override
     protected void onCreate(Bundle savedInstanceState) {
         super.onCreate(savedInstanceState);
-
         ScavengerHuntApplication.getInstance().getAppComponent().inject(this);
-
-        /* Attempt to get current question. If none, throw error */
+        
         try {
             currentQuestion = questionController.requestQuestion();
         } catch (Exception NoQuestionError) {
@@ -364,37 +345,25 @@ public class QuestionActivity extends AppCompatActivity {
 
         displayLayout();
 
-        /* Skip button on all views */
-        Button skipButton = (Button) findViewById(R.id.question_skip_button);
-
+        // Skip the question when the skip button is pressed
+        Button skipButton = findViewById(R.id.question_skip_button);
         skipButton.setOnClickListener(new View.OnClickListener() {
             public void onClick(View v) {
                 Toast.makeText(v.getContext(), "Question skipped", Toast.LENGTH_SHORT).show();
                 questionController.skip(currentQuestion);
                 questionController.requestSubmitResponse("");
-                intentAway();
-
+                startQuestionAnswerActivity();
             }
         });
-
-
     }
 
-    /**
-     * Displays the appropriate layout depending on
-     * type of question recieved.
-     */
+    /** Displays the appropriate layout depending on type of question received. */
     private void displayLayout() {
-        if (currentQuestion instanceof WrittenInputQuestion) {
+        if (currentQuestion instanceof WrittenInputQuestion) 
             displayWrittenInput();
-        }
-
-        if (currentQuestion instanceof MultipleChoiceQuestion) {
+        else if (currentQuestion instanceof MultipleChoiceQuestion) 
             displayMultChoice();
-        }
-
-        if (currentQuestion instanceof PicInputQuestion) {
+        else if (currentQuestion instanceof PicInputQuestion) 
             displayPicInput();
-        }
     }
 }

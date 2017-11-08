@@ -12,20 +12,14 @@ import java.util.List;
  */
 public class PicInputQuestion extends Question {
     private List<String> choices;
-    private String picInputSolution;
 
-    public PicInputQuestion() {
-        super();
-        this.choices = new ArrayList<>();
-        this.picInputSolution = "";
-
-    }
-
-    public PicInputQuestion(int questionID, String prompt, String imageLink,
-                            List<String> choices, String picInputSolution) {
-        super(questionID, prompt, imageLink);
+    public PicInputQuestion(final int questionID,
+                            final String prompt,
+                            final String imageLink,
+                            final List<String> choices,
+                            final String picInputSolution) {
+        super(questionID, prompt, picInputSolution, imageLink);
         this.choices = choices;
-        this.picInputSolution = picInputSolution;
     }
 
     public List<String> getChoices() {
@@ -34,13 +28,5 @@ public class PicInputQuestion extends Question {
 
     public void setChoices(List<String> choices) {
         this.choices = choices;
-    }
-
-    public String getPicInputSolution() {
-        return picInputSolution;
-    }
-
-    public void setPicInputSolution(String picInputSolution) {
-        this.picInputSolution = picInputSolution;
     }
 }

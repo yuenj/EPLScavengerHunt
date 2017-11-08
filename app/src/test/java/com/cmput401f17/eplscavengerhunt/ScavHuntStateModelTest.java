@@ -28,7 +28,7 @@ public class ScavHuntStateModelTest {
         ScavHuntState testScavHuntState = new ScavHuntState();
         WrittenInputQuestion testQuestion = mock(WrittenInputQuestion.class);
         Response testResponse = mock(Response.class);
-        when(testQuestion.getWrittenInputSolution()).thenReturn("Dog!");
+        when(testQuestion.getAnswer()).thenReturn("Dog!");
         when(testResponse.getResponseStr()).thenReturn("Dog!");
         List<Question> testQuestionList = new ArrayList<>();
         testQuestionList.add(testQuestion);
@@ -40,7 +40,7 @@ public class ScavHuntStateModelTest {
         List<Question> stateQList = testScavHuntState.getQuestions();
         List<Response> stateRList = testScavHuntState.getPlayerResponses();
 
-        assertTrue((score == 1) && (((WrittenInputQuestion)stateQList.get(0)).getWrittenInputSolution()==stateRList.get(0).getResponseStr()));
+        assertTrue((score == 1) && (((WrittenInputQuestion)stateQList.get(0)).getAnswer()==stateRList.get(0).getResponseStr()));
     }
 
     @Test
@@ -48,7 +48,7 @@ public class ScavHuntStateModelTest {
         ScavHuntState testScavHuntState = new ScavHuntState();
         WrittenInputQuestion testQuestion = mock(WrittenInputQuestion.class);
         Response testResponse = mock(Response.class);
-        when(testQuestion.getWrittenInputSolution()).thenReturn("Dog!");
+        when(testQuestion.getAnswer()).thenReturn("Dog!");
         when(testResponse.getResponseStr()).thenReturn("Cat!");
         List<Question> testQuestionList = new ArrayList<>();
         testQuestionList.add(testQuestion);
@@ -60,7 +60,7 @@ public class ScavHuntStateModelTest {
         List<Question> stateQList = testScavHuntState.getQuestions();
         List<Response> stateRList = testScavHuntState.getPlayerResponses();
 
-        assertTrue((score == 0) && (((WrittenInputQuestion)stateQList.get(0)).getWrittenInputSolution()!=stateRList.get(0).getResponseStr()));
+        assertTrue((score == 0) && (((WrittenInputQuestion)stateQList.get(0)).getAnswer()!=stateRList.get(0).getResponseStr()));
     }
 
 
