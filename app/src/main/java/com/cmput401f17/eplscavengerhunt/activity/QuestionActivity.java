@@ -76,7 +76,6 @@ public class QuestionActivity extends AppCompatActivity {
 
     /** Displays the current question prompt */
     private void displayPrompt() {
-
         TextView prompt = (TextView)findViewById(R.id.question_prompt_text_view);
         prompt.setText("Question: " + currentQuestion.getPrompt());
     }

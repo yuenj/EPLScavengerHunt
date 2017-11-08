@@ -131,61 +131,6 @@ public class GameController {
         scavHuntState.setBranch("Clareview");
 
         // Sets a zone with it's specific name and beacon id
-<<<<<<< HEAD
-        List<Zone> testZoneRoute = new ArrayList<>();
-        Zone zone1 = new Zone("[751928d83a65b08296715acc49a52220]"); // DJBeet2
-        zone1.setName("1");
-        zone1.setColour("#2196f3");
-        Zone zone2 = new Zone("[08a819724b9dabd0ca9e64c0fcb2722e]"); // DJBeet3
-        zone2.setName("2");
-        zone2.setColour("#ffc107");
-
-//        Zone zone1 = new Zone("[4f8113396f78d23ec78edfb96c79e23a]"); // DJBeet
-//        zone1.setName("1");
-//        Zone zone2 = new Zone("[ab1d6643c33e5f6ed7c52a062168f137]"); // Candystore
-//        zone2.setName("2");
-//        Zone zone3 = new Zone("[9a78af8c1252fcb37abefecbbbe7322a]"); // Lemonade
-//        zone3.setName("3");
-
-        // Create the zone route
-        testZoneRoute.add(zone1);
-        testZoneRoute.add(zone2);
-        //testZoneRoute.add(zone3);
-        scavHuntState.setZoneRoute(testZoneRoute);
-
-//        // Create written answer questions
-//        String questionStrDummy1 = "Question 1";
-//        int id1 = 0;
-//        String solutionStrDummy1 = "Solution 1";
-//        Question testQuestion1 = new WrittenInputQuestion(id1, questionStrDummy1, "www.image1.com", solutionStrDummy1);
-
-        String questionStrDummy2 = "Question 2";
-        int id2 = 1;
-        String solutionStrDummy2 = "Solution 2";
-        Question testQuestion2 = new WrittenInputQuestion(id2, questionStrDummy2, "https://upload.wikimedia.org/wikipedia/commons/5/5d/Restless_flycatcher04.jpg", solutionStrDummy2);
-
-        String questionStrDummy3 = "Question 3";
-        int id3 = 2;
-        String solutionStrDummy3 = "Solution 3";
-
-        // Create multiple choice question
-        ArrayList<String> testChoices = new ArrayList<String>() {{
-            add("Solution 1");
-            add("Solution 2");
-            add("Solution 3");
-        }};
-
-        Question testQuestion3 = new PicInputQuestion(id3, questionStrDummy3, "https://i.pinimg.com/736x/8b/91/5b/8b915b06d3319f5c38656ded5e7bb355--cute-baby-owl-baby-owls.jpg", testChoices, solutionStrDummy3);
-
-        // Create the question list
-        List<Question> testQuestionList = new ArrayList<>();
-        //testQuestionList.add(testQuestion1);
-        testQuestionList.add(testQuestion2);
-        testQuestionList.add(testQuestion3);
-
-        scavHuntState.setQuestions(testQuestionList);
-        scavHuntState.setNumStages(testZoneRoute.size());
-=======
         Zone zone1 = new Zone("[4f8113396f78d23ec78edfb96c79e23a]", "1"); // DJBeet
         Zone zone2 = new Zone("[ab1d6643c33e5f6ed7c52a062168f137]", "2"); // CandyStore
         Zone zone3 = new Zone("[9a78af8c1252fcb37abefecbbbe7322a]", "3"); // Lemonade
@@ -205,6 +150,6 @@ public class GameController {
         // Create the question list
         List<Question> questionList = Arrays.asList(question1, question2, question3);
         scavHuntState.setQuestions(questionList);
->>>>>>> 86cf7a53ef48e6a05c28a1f02ec50a14858d685a
+
     }
 }

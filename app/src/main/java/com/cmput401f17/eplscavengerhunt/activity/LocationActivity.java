@@ -51,7 +51,10 @@ public class LocationActivity extends AppCompatActivity {
         TextView message = findViewById(R.id.location_next_zone_text_view);
         message.setText("Go to " + locationController.requestZone().getName() + "!");
 
-        //Set background colour of activity to be zone specific colour
+        //Set Card colour of activity to be zone specific colour
+
+
+
         View view = this.getWindow().getDecorView();
         view.setBackgroundColor(Color.parseColor(locationController.requestZone().getColour()));
 
