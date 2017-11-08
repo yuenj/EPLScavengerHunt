@@ -3,11 +3,8 @@ package com.cmput401f17.eplscavengerhunt.activity;
 import android.content.Context;
 import android.content.Intent;
 import android.graphics.Bitmap;
-<<<<<<< HEAD
 import android.graphics.BitmapFactory;
 import android.graphics.Color;
-=======
->>>>>>> 86cf7a53ef48e6a05c28a1f02ec50a14858d685a
 import android.graphics.drawable.BitmapDrawable;
 import android.graphics.drawable.Drawable;
 import android.os.Bundle;
@@ -41,14 +38,11 @@ import com.cmput401f17.eplscavengerhunt.model.WrittenInputQuestion;
 import com.squareup.picasso.Picasso;
 
 import java.io.File;
-<<<<<<< HEAD
 import java.io.IOException;
 import java.io.InputStream;
 import java.net.MalformedURLException;
 import java.net.URL;
 import java.util.ArrayList;
-=======
->>>>>>> 86cf7a53ef48e6a05c28a1f02ec50a14858d685a
 import java.util.List;
 
 import javax.inject.Inject;
@@ -74,10 +68,11 @@ public class QuestionActivity extends AppCompatActivity {
      * Change the background colour to match that of the current zone
      */
     private void displayZone() {
-        TextView zoneView = (TextView)findViewById(R.id.question_zone_text_view);
+        TextView zoneView = (TextView) findViewById(R.id.question_zone_text_view);
         zoneView.setText("Location: " + locationController.requestZone().getName());
         View view = this.getWindow().getDecorView();
         view.setBackgroundColor(Color.parseColor(locationController.requestZone().getColour()));
+    }
 
     /** Displays the current question prompt */
     private void displayPrompt() {
@@ -96,7 +91,7 @@ public class QuestionActivity extends AppCompatActivity {
 
     }
 
-    
+
     /**
      * Displays the view for a multiple choice question
      *  1. Display Zone, and Prompt
