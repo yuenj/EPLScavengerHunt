@@ -126,7 +126,6 @@ public class GameController {
 
     /** Hard coded questions, answers and zones for demo purposes */
     public void initScav() {
-
         scavHuntState.cleanState();
 
         scavHuntState.setBranch("Clareview");
