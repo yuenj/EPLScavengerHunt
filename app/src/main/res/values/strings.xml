@@ -32,9 +32,10 @@
     answer questions. (TEMPORARY).</string>
 
     <!-- CongratsActivity -->
-    <string name="congrats_msg_header">Congratulations !</string>
-    <string name="congrats_msg_body">You have completed the EPL Scavenger Hunt</string>
-    <string name="goto_summary_activity_text">Click to see summary</string>
+    <string name="congrats_msg_header">Congratulations!</string>
+    <string name="congrats_msg_body">You have completed the Scavenger hunt!</string>
+    <string name="goto_summary_activity_text">view summary</string>
+    <string name="congrats_trophy_content_description">trophy</string>
 
     <!-- QuestionActivity -->
     <string name="current_zone">Zone : %1$s</string>
