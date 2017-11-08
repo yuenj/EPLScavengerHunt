@@ -1,5 +1,6 @@
 package com.cmput401f17.eplscavengerhunt.controller;
 
+import com.cmput401f17.eplscavengerhunt.model.MultipleChoiceQuestion;
 import com.cmput401f17.eplscavengerhunt.model.PicInputQuestion;
 import com.cmput401f17.eplscavengerhunt.model.Question;
 import com.cmput401f17.eplscavengerhunt.model.Response;
@@ -78,7 +79,6 @@ public class GameController {
         final List<Zone> zoneRoute =
                 databaseController.retrieveRandomZonesInBranch(branch, numZones);
         scavHuntState.setZoneRoute(zoneRoute);
-
         scavHuntState.setNumStages(zoneRoute.size());
 
         return zoneRoute;
@@ -108,10 +108,11 @@ public class GameController {
     private Summary generateSummary() {
         final List<Response> responses = scavHuntState.getPlayerResponses();
         final List<Question> questions = scavHuntState.getQuestions();
+        final List<Zone> zones = scavHuntState.getZoneRoute();
         final int score = scavHuntState.getNumCorrect();
         final int numQuestions = scavHuntState.getNumStages();
 
-        final Summary summary = new Summary(responses, questions, score, numQuestions);
+        final Summary summary = new Summary(responses, questions, zones, score, numQuestions);
 
         return summary;
     }
@@ -125,27 +126,38 @@ public class GameController {
 
     /** Hard coded questions, answers and zones for demo purposes */
     public void initScav() {
-
         scavHuntState.cleanState();
 
         scavHuntState.setBranch("Clareview");
 
         // Sets a zone with it's specific name and beacon id
-        Zone zone1 = new Zone("[4f8113396f78d23ec78edfb96c79e23a]", "1"); // DJBeet
-        Zone zone2 = new Zone("[ab1d6643c33e5f6ed7c52a062168f137]", "2"); // CandyStore
-        Zone zone3 = new Zone("[9a78af8c1252fcb37abefecbbbe7322a]", "3"); // Lemonade
+        Zone zone1 = new Zone("[4f8113396f78d23ec78edfb96c79e23a]", "1", "Children's area: Birds"); // DJBeet
+        Zone zone2 = new Zone("[ab1d6643c33e5f6ed7c52a062168f137]", "2", "Nature area"); // CandyStore
+        Zone zone3 = new Zone("[9a78af8c1252fcb37abefecbbbe7322a]", "3", "Nature area"); // Lemonade
+        // Give each zone a color
+        zone1.setColor("#AA00AA00");
+        zone2.setColor("#AAFFAA00");
+        zone3.setColor("#84FFFF00");
 
         // Create the zone route
         List<Zone> zoneRoute = Arrays.asList(zone1, zone2, zone3);
         scavHuntState.setZoneRoute(zoneRoute);
         scavHuntState.setNumStages(3);
 
-        // Create written answer questions
-        Question question1 = new WrittenInputQuestion(0, "Question 1", "www.image1.com", "Solution One");
-        Question question2 = new WrittenInputQuestion(1, "Question 2", "www.image2.com", "Solution Two");
-        // Create pic multiple choice question
-        List<String> choices = Arrays.asList("Solution 1", "Solution 2", "Solution 3");
-        Question question3 = new PicInputQuestion(2, "Question 3", "www.image3.com", choices, "Solution Three");
+        // Create multiple choice question
+        String question1Prompt = "This bird is 24 centimetres (9 inches) long and is easily identified by its long legs and short, barred tail. What bird am I?";
+        String question1Solution = "Burrowing Owl";
+        List<String> question1Choices = Arrays.asList("Peregrine Falcon", "Burrowing Owl", "Humming Bird", "Barn Owl");
+        Question question1 = new MultipleChoiceQuestion(0, question1Prompt, "burrowing_owl", question1Choices, question1Solution);
+        // Create written answer question
+        String question2Prompt = "Great rivers that flowed here 75 million years ago left sand and mud deposits. What landscape of Alberta is this?";
+        String question2Solution = "Badlands";
+        Question question2 = new WrittenInputQuestion(1, question2Prompt, "badlands", question2Solution);
+        // Create Picture with multiple choice question
+        String question3Prompt = "Located in the Southwestern edge of Alberta, the ________________ are perhaps the best known and most well visited of Alberta's six natural regions.";
+        String question3Solution = "Rocky Mountains";
+        List<String> choices = Arrays.asList("Mount Everest", question3Solution, "Grand Canyon");
+        Question question3 = new PicInputQuestion(3, question3Prompt, "rocky_mountains", choices, question3Solution);
 
         // Create the question list
         List<Question> questionList = Arrays.asList(question1, question2, question3);
