@@ -44,8 +44,10 @@ public class GameController {
      * @return Boolean          Returns true or false if the game was initiated correctly
      */
     public Boolean initGame() {
-        String branch = scavHuntState.getBranch();
+        //FOR TESTING
+        scavHuntState.setBranch("Clareview");
 
+        String branch = scavHuntState.getBranch();
         List<Zone> zoneRoute = generateZoneRoute(branch);
 
         generateQuestionSet(zoneRoute);

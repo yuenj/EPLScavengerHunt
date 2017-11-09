@@ -12,6 +12,7 @@ import android.support.annotation.NonNull;
 import android.support.design.widget.TextInputLayout;
 import android.support.v7.app.AppCompatActivity;
 import android.support.v7.widget.LinearLayoutCompat;
+import android.util.Log;
 import android.view.KeyEvent;
 import android.view.View;
 import android.view.inputmethod.EditorInfo;
@@ -362,14 +363,19 @@ public class QuestionActivity extends AppCompatActivity {
      */
     private void displayLayout() {
         if (currentQuestion instanceof WrittenInputQuestion) {
+            Log.i("@@@@QACTIVITY@@@@","WrittenInput@@@");
             displayWrittenInput();
         }
 
         if (currentQuestion instanceof MultipleChoiceQuestion) {
+            Log.i("@@@@QACTIVITY@@@@","MULTCHOICE@@@");
+
             displayMultChoice();
         }
 
         if (currentQuestion instanceof PicInputQuestion) {
+            Log.i("@@@@QACTIVITY@@@@","S> PICINPUT 50k @@@@@@@@@");
+
             displayPicInput();
         }
     }

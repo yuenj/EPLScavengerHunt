@@ -47,7 +47,8 @@ public class TitleActivity extends AppCompatActivity {
                 Log.d("TitleActivity", "Start Button Pressed");
                 //Intent intent = new Intent(RulesActivity.this, LocationActivity.class);
                 Intent intent = new Intent(TitleActivity.this, DebugActivity.class);
-                gameController.initScav();
+                //gameController.initScav();
+                gameController.initGame();
                 startActivity(intent);
                 finish();
             }

@@ -1,10 +1,28 @@
 package com.cmput401f17.eplscavengerhunt.controller;
 
+import android.os.AsyncTask;
+import android.util.JsonReader;
+import android.util.Log;
+
+import com.cmput401f17.eplscavengerhunt.model.MultipleChoiceQuestion;
+import com.cmput401f17.eplscavengerhunt.model.PicInputQuestion;
 import com.cmput401f17.eplscavengerhunt.model.Question;
 import com.cmput401f17.eplscavengerhunt.model.Response;
+import com.cmput401f17.eplscavengerhunt.model.WrittenInputQuestion;
 import com.cmput401f17.eplscavengerhunt.model.Zone;
 
+import java.io.BufferedReader;
+import java.io.IOException;
+import java.io.InputStreamReader;
+import java.net.HttpURLConnection;
+import java.net.MalformedURLException;
+import java.net.URL;
+import java.util.ArrayList;
+import java.util.Arrays;
 import java.util.List;
+import java.util.concurrent.ExecutionException;
+import java.util.logging.Level;
+import java.util.logging.Logger;
 
 /**
  * Currently, DatabaseController handles retrieving the branch,
@@ -36,7 +54,21 @@ public class DatabaseController {
      * @see GameController
      */
     public List<Zone> retrieveZones(String branch) {
+        // http://162.246.156.95:5000/getQuestion
+        // http://localhost:5000/getQuestion
+        Zone zone = new Zone();
+        zone.setBranch(branch);
+        taskParams responseParams = new taskParams(zone, null, "http://162.246.156.95:5000/getZone");
+        try {
+            System.out.println(responseParams.zone.getBranch());
+            return new GetZone().execute(responseParams).get();
+        } catch (InterruptedException e) {
+            e.printStackTrace();
+        } catch (ExecutionException e) {
+            e.printStackTrace();
+        }
         return null;
+
     }
 
     /**
@@ -48,6 +80,18 @@ public class DatabaseController {
      * @see GameController
      */
     public List<Question> retrieveQuestionsinZone(Zone zone) {
+        // http://162.246.156.95:5000/getQuestion
+        // http://localhost:5000/getQuestion
+        taskParams responseParams = new taskParams(zone, null, "http://162.246.156.95:5000/getQuestion");
+        try {
+            List<Question> testList = new Test().execute(responseParams).get();
+            Log.i("@@@DatabaseController", testList.toString());
+            return testList;
+        } catch (InterruptedException e) {
+            e.printStackTrace();
+        } catch (ExecutionException e) {
+            e.printStackTrace();
+        }
         return null;
     }
 
@@ -59,4 +103,257 @@ public class DatabaseController {
      * @param response          The users response to a specific question
      */
     public void addResponse(Response response) {}
+
+    public class taskParams {
+        // zone will be used in both apps.
+        // question will be used in web app.
+        Zone zone;
+        Question question;
+        String url;
+
+        taskParams(Zone zone, Question question, String url) {
+            this.zone = zone;
+            this.question = question;
+            this.url = url;
+        }
+
+    }
+
+    public class GetZone extends AsyncTask<taskParams, List<Zone>, List<Zone>> {
+
+        @Override
+        protected List<Zone> doInBackground(taskParams... params) {
+            HttpURLConnection c = null;
+            taskParams taskInfo = params[0];
+            try {
+                // url must point to flask endpoint. "http://162.246.156.95:5000/..."
+                URL u = new URL(taskInfo.url);
+                c = (HttpURLConnection) u.openConnection();
+
+                // this setrequest stuff tells the api to GET something,
+                // and gives it variables it will need.
+                c.setRequestMethod("GET");
+                c.setRequestProperty("branch", taskInfo.zone.getBranch());
+
+                c.setUseCaches(false);
+                c.setAllowUserInteraction(false);
+
+                // if it lags for 5 seconds while connecting, backout.
+                c.setConnectTimeout(5000);
+                c.setReadTimeout(5000);
+                // connect!
+                c.connect();
+
+                // After it connects, the api does its thing, and
+                // this will resume when it retrieves data.
+
+                // This gets the connection status of the api.
+                int status = c.getResponseCode();
+
+                switch (status) {
+                    case 200:
+                    case 201:
+                        // reads what api returned, converts it into json format
+                        JsonReader jsonReader = new JsonReader (new BufferedReader(new InputStreamReader(c.getInputStream())));
+                        try {
+                            //questions =  jsonQuestionArray(jsonReader);
+                            return jsonZoneArray(jsonReader);
+
+                        } finally {
+                            jsonReader.close();
+                        }
+                }
+            } catch (MalformedURLException e) {
+                Logger.getLogger(getClass().getName()).log(Level.SEVERE, null, e);
+            } catch (IOException e) {
+                Logger.getLogger(getClass().getName()).log(Level.SEVERE, null, e);
+            } finally {
+                if (c != null) {
+                    try {
+                        c.disconnect();
+                    } catch (Exception ex) {
+                        Logger.getLogger(getClass().getName()).log(Level.SEVERE, null, ex);
+                    }
+                }
+            }
+            return null;
+        }
+
+        @Override
+        protected void onPostExecute(List<Zone> q) {
+            super.onPostExecute(q);
+        }
+
+        private List<Zone> jsonZoneArray (JsonReader jsonReader) throws IOException {
+            List<Zone> zones = new ArrayList<>();
+            jsonReader.beginArray();
+            while (jsonReader.hasNext()) {
+                zones.add(readZone(jsonReader));
+            }
+            jsonReader.endArray();
+            return zones;
+        }
+
+        private Zone readZone (JsonReader jsonReader) throws IOException {
+            String key;
+            Zone zone = new Zone();
+            jsonReader.beginObject(); // start reading each sql row entry
+            while (jsonReader.hasNext()) {
+                key = jsonReader.nextName();
+                if (key.equals("beaconID")) {
+                    zone.setBeaconID(jsonReader.nextString());
+                } else if (key.equals("zone")) {
+                    zone.setName(jsonReader.nextString());
+                } else  if (key.equals("branch")) {
+                    zone.setBranch(jsonReader.nextString());
+                } else {
+                    jsonReader.skipValue();
+                }
+            }
+            jsonReader.endObject();
+            return zone;
+        }
+    }
+
+    public class Test extends AsyncTask<taskParams, List<Question>, List<Question>> /*implements ClientIF */{
+
+        @Override
+        protected List<Question> doInBackground(taskParams... params) {
+            HttpURLConnection c = null;
+            taskParams taskInfo = params[0];
+            try {
+                // url must point to flask endpoint. "http://162.246.156.95:5000/..."
+                URL u = new URL(taskInfo.url);
+                c = (HttpURLConnection) u.openConnection();
+
+                // this setrequest stuff tells the api to GET something,
+                // and gives it variables it will need.
+                c.setRequestMethod("GET");
+                c.setRequestProperty("zone", taskInfo.zone.getName());
+                c.setRequestProperty("branch", taskInfo.zone.getBranch());
+
+                c.setUseCaches(false);
+                c.setAllowUserInteraction(false);
+
+                // if it lags for 5 seconds while connecting, backout.
+                c.setConnectTimeout(5000);
+                c.setReadTimeout(5000);
+                // connect!
+                c.connect();
+
+                // After it connects, the api does its thing, and
+                // this will resume when it retrieves data.
+
+                // This gets the connection status of the api.
+                int status = c.getResponseCode();
+
+                switch (status) {
+                    case 200:
+                    case 201:
+                        // reads what api returned, converts it into json format
+                        JsonReader jsonReader = new JsonReader (new BufferedReader(new InputStreamReader(c.getInputStream())));
+                        try {
+                            //questions =  jsonQuestionArray(jsonReader);
+                            return jsonQuestionArray(jsonReader);
+
+                        } finally {
+                            jsonReader.close();
+                        }
+                }
+            } catch (MalformedURLException e) {
+                Logger.getLogger(getClass().getName()).log(Level.SEVERE, null, e);
+            } catch (IOException e) {
+                Logger.getLogger(getClass().getName()).log(Level.SEVERE, null, e);
+            } finally {
+                if (c != null) {
+                    try {
+                        c.disconnect();
+                    } catch (Exception ex) {
+                        Logger.getLogger(getClass().getName()).log(Level.SEVERE, null, ex);
+                    }
+                }
+            }
+            return null;
+        }
+
+        @Override
+        protected void onPostExecute(List<Question> q) {
+            super.onPostExecute(q);
+        }
+
+        private List<Question> jsonQuestionArray (JsonReader jsonReader) throws IOException {
+            List<Question> questions = new ArrayList<>();
+            jsonReader.beginArray();
+            while (jsonReader.hasNext()) {
+                questions.add(readQuestion(jsonReader));
+            }
+            jsonReader.endArray();
+            return questions;
+        }
+
+        private Question readQuestion (JsonReader jsonReader) throws IOException {
+            String key;
+            int questionID   = 0;
+            String prompt    = "";
+            String solution  = "";
+            String zone      = "";
+            String branch    = "";
+            String type      = ""; // the type of input for question.
+            String iLink     = "";
+            String sLink     = "";
+            List<String> choiceList = null;
+            Question question;
+            // Question question = new Question();
+
+            // initial read to figure out question type
+            jsonReader.beginObject(); // start reading each sql row entry
+            while (jsonReader.hasNext()) {
+                key = jsonReader.nextName();
+                if (key.equals("Prompt")) {
+                    prompt = jsonReader.nextString();
+                } else if (key.equals("Choices")) {
+                    String choices = jsonReader.nextString();
+                    choiceList = new ArrayList<>(Arrays.asList(choices.split("\\|_\\|")));
+                } else  if (key.equals("Solution")) {
+                    solution = jsonReader.nextString();
+                } else if (key.equals("zone")) {
+                    zone = jsonReader.nextString();
+                } else if (key.equals("branch")) {
+                    branch = jsonReader.nextString();
+                } else if (key.equals("qType")) {
+                    type = jsonReader.nextString();
+                } else if (key.equals("iLink")) {
+                    iLink = jsonReader.nextString();
+                } else if (key.equals("sLink")) {
+                    sLink = jsonReader.nextString();
+                } else {
+                    jsonReader.skipValue();
+                }
+            }
+            jsonReader.endObject();
+
+            if (type.equals("writInput")) {
+                question = new WrittenInputQuestion(questionID, prompt, iLink, type);
+                question.setZone(zone);
+                question.setBranch(branch);
+                question.setChoices(choiceList);
+                question.setSoundLink(sLink);
+            } else if (type.equals("picInput")) {
+                question = new PicInputQuestion(questionID, prompt, iLink, choiceList, solution);
+                question.setSoundLink(sLink);
+                question.setZone(zone);
+                question.setBranch(branch);
+            } else {
+
+                question = new MultipleChoiceQuestion(questionID, prompt, iLink, choiceList, solution);
+                question.setZone(zone);
+                question.setBranch(branch);
+                question.setSoundLink(sLink);
+            }
+            // after we figure out the question type, instantiate
+            // the correct model. then re-parse the
+
+            return question;
+        }
+    }
 }
