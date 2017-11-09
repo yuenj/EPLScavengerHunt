@@ -3,7 +3,6 @@ package com.cmput401f17.eplscavengerhunt.activity;
 import android.content.Intent;
 import android.os.Bundle;
 import android.support.v7.app.AppCompatActivity;
-import android.util.Log;
 import android.view.View;
 import android.widget.Button;
 import android.widget.TextView;
@@ -13,7 +12,6 @@ import com.cmput401f17.eplscavengerhunt.ScavengerHuntApplication;
 import com.cmput401f17.eplscavengerhunt.controller.GameController;
 import com.cmput401f17.eplscavengerhunt.controller.LocationController;
 import com.cmput401f17.eplscavengerhunt.controller.QuestionController;
-import com.cmput401f17.eplscavengerhunt.controller.SimpleCallback;
 import com.cmput401f17.eplscavengerhunt.model.Question;
 import com.cmput401f17.eplscavengerhunt.model.Response;
 
@@ -36,8 +34,7 @@ public class QuestionAnswerActivity extends AppCompatActivity {
     QuestionController questionController;
 
     private TextView resultTextView;
-    private TextView zoneTextView;
-    private Button viewSummaryButton;
+    private Button doneButton;
 
     @Override
     protected void onCreate(Bundle savedInstanceState) {
@@ -46,12 +43,12 @@ public class QuestionAnswerActivity extends AppCompatActivity {
         ScavengerHuntApplication.getInstance().getAppComponent().inject(this);
 
         resultTextView = findViewById(R.id.TV_QuestionAnswer_result);
-        zoneTextView = findViewById(R.id.TV_QuestionAnswer_zone);
-        viewSummaryButton = findViewById(R.id.Button_QuestionAnswer_done);
+        doneButton = findViewById(R.id.Button_QuestionAnswer_done);
 
         final Question question = questionController.requestQuestion();
         final Response response = questionController.requestResponse();
-        final boolean playerIsCorrect = question.getAnswer().equals(response.getResponseStr());
+        final boolean playerIsCorrect = question.getAnswer().toLowerCase().replaceAll("\\s+","").
+                equals(response.getResponseStr().toLowerCase().replaceAll("\\s+",""));
 
         // TODO move hardcoded string values into string.xml
         // Display feedback for the player
@@ -61,35 +58,19 @@ public class QuestionAnswerActivity extends AppCompatActivity {
             resultTextView.setText("Wrong answer. The correct answer is " +  question.getAnswer());
         }
 
-        // start polling players position if the game is not over
+        final Intent intent;
+        doneButton.setText("Next");
+        // allow the player to go to the next screen if the game is not over
         if (!gameController.requestCheckGameOver()) {
-            pollPosition();
-            zoneTextView.setText("Go to Zone " + locationController.requestZone().getName());
-            viewSummaryButton.setVisibility(View.GONE);
-        } else { // otherwise, allow the player to go to the next screen
-            zoneTextView.setText("You have completed the game!");
-            viewSummaryButton.setVisibility(View.VISIBLE);
-            viewSummaryButton.setOnClickListener(new View.OnClickListener() {
-                public void onClick(View v) {
-                    Log.d("QuestionAnswerActivity", "Going to CongratulationsActivity");
-                    Intent intent = new Intent(QuestionAnswerActivity.this, CongratulationsActivity.class);
-                    startActivity(intent);
-                }
-            });
+            intent = new Intent(QuestionAnswerActivity.this, LocationActivity.class);
+        // otherwise, allow the player to view results
+        } else {
+            intent = new Intent(QuestionAnswerActivity.this, CongratulationsActivity.class);
         }
-    }
-
-    void pollPosition() {
-        // If the location is verified go to Question activity
-        locationController.verifyLocation(new SimpleCallback<Boolean>() {
-            @Override
-            public void callback(Boolean data) {
-                if (data) {
-                    final Intent intent = new Intent(QuestionAnswerActivity.this, QuestionActivity.class);
-                } else {
-                    // This shouldn't go off
-                    Log.d("LocationListener", "False Return");
-                }
+        doneButton.setOnClickListener(new View.OnClickListener() {
+            public void onClick(View v) {
+                startActivity(intent);
+                finish();
             }
         });
     }

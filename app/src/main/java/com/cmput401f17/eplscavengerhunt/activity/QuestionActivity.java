@@ -36,15 +36,10 @@ import com.cmput401f17.eplscavengerhunt.model.PicInputQuestion;
 import com.cmput401f17.eplscavengerhunt.model.Question;
 import com.cmput401f17.eplscavengerhunt.model.WrittenInputQuestion;
 import com.squareup.picasso.Picasso;
-
 import java.io.File;
-import java.io.IOException;
-import java.io.InputStream;
-import java.net.MalformedURLException;
-import java.net.URL;
-import java.util.ArrayList;
+import com.cmput401f17.eplscavengerhunt.model.Zone;
+import java.util.Arrays;
 import java.util.List;
-
 import javax.inject.Inject;
 
 public class QuestionActivity extends AppCompatActivity {
@@ -71,7 +66,7 @@ public class QuestionActivity extends AppCompatActivity {
         TextView zoneView = (TextView) findViewById(R.id.question_zone_text_view);
         zoneView.setText("Location: " + locationController.requestZone().getName());
         View view = this.getWindow().getDecorView();
-        view.setBackgroundColor(Color.parseColor(locationController.requestZone().getColour()));
+        view.setBackgroundColor(Color.parseColor(locationController.requestZone().getColor()));
     }
 
     /** Displays the current question prompt */
@@ -99,36 +94,78 @@ public class QuestionActivity extends AppCompatActivity {
      *  4. Use startQuestionAnswerActivity to move to next activity
      */
     private void displayMultChoice(){
-        setContentView(R.layout.activity_mult_choice);
+        setContentView(R.layout.activity_multiple_choice);
 
-        displayZone();
-        displayPrompt();
-        displayImage();
+        // find views
+        final TextView zoneTV = findViewById(R.id.TV_mc_zone);
+        final TextView areaTV = findViewById(R.id.TV_mc_area);
+        final ImageView pictureIV = findViewById(R.id.RIV_mc_picture);
+        final TextView promptTV = findViewById(R.id.TV_mc_prompt);
+        final RadioButton choiceOneRB = findViewById(R.id.RB_mc_choice_one);
+        final RadioButton choiceTwoRB = findViewById(R.id.RB_mc_choice_two);
+        final RadioButton choiceThreeRB = findViewById(R.id.RB_mc_choice_three);
+        final RadioButton choiceFourRB = findViewById(R.id.RB_mc_choice_four);
+        final Button confirmButton = findViewById(R.id.button_mc_confirm);
 
-        // Get the MC choices 
-        final List<String> choices = ((MultipleChoiceQuestion) currentQuestion).getChoices();
+        // get the current zone and question
+        final Zone zone = locationController.requestZone();
+        final MultipleChoiceQuestion question = (MultipleChoiceQuestion) questionController.requestQuestion();
+        final List<String> choices = question.getChoices();
+        final List<RadioButton> choiceRadioButtons = Arrays.asList(choiceOneRB, choiceTwoRB,
+                choiceThreeRB, choiceFourRB);
 
-        // Create choice button(s) 
-        for(int i = 0; i < choices.size(); i++) {
-            Button mcOption = new Button(this);
-            mcOption.setText(choices.get(i));
+        // set up the view displays
+        zoneTV.setText("Zone " + zone.getName());
+        areaTV.setText(zone.getArea()); // TODO capitalize every word with a util function
+        final int resourceId = this.getResources()
+                .getIdentifier(question.getImageLink(), "drawable", this.getPackageName());
+        final Drawable drawable = this.getResources().getDrawable(resourceId);
+        pictureIV.setImageDrawable(drawable);
+        promptTV.setText(question.getPrompt());
 
-            LinearLayoutCompat layout = (LinearLayoutCompat) findViewById(R.id.mult_choices_llc);
-            LinearLayoutCompat.LayoutParams parameters = new LinearLayoutCompat.LayoutParams(LinearLayoutCompat.LayoutParams.MATCH_PARENT, LinearLayoutCompat.LayoutParams.WRAP_CONTENT);
-            layout.addView(mcOption, parameters);
+        // TODO in multiplechoicequestion model - create a guard against setting more than four choices when we retrieve from DB
+        // and validate theres at least min num of choices
+        // or simply discard the rest
+        int i;
+        for (i = 0; i < choices.size(); ++i) {
+            final RadioButton radioButton = choiceRadioButtons.get(i);
+            radioButton.setText(choices.get(i));
+            final int id = i;
+            radioButton.setOnClickListener(new View.OnClickListener() {
+                public void onClick(View view) {
+                    radioButton.setChecked(true);
+                    // un-check other choices
+                    for (int j = 0; j < choices.size(); ++j) {
+                        if (j != id) {
+                            choiceRadioButtons.get(j).setChecked(false);
+                        }
+                    }
+                }
+            });
+        }
+        // hide the extra radio buttons if there are less choices than buttons
+        while (i < choiceRadioButtons.size()) {
+            choiceRadioButtons.get(i).setVisibility(View.GONE);
+        }
 
-            // Listen for button click. If clicked, make a toast telling which button was clicked 
-             final int id = i;
-             mcOption.setOnClickListener(new View.OnClickListener() {
-                 public void onClick(View view) {
-                     Toast.makeText(view.getContext(), "Button clicked index = " + id, Toast.LENGTH_SHORT).show();
 
-                     //Pass the answer to the controller
-                     questionController.requestSubmitResponse(choices.get(id));
-                     startQuestionAnswerActivity();
-                 }
-             });
-         }
+        confirmButton.setOnClickListener(new View.OnClickListener() {
+            public void onClick(View view) {
+                // get the selected choice
+                String choice = null;
+                for (int i = 0; i < choices.size(); ++i) {
+                    if (choiceRadioButtons.get(i).isChecked()) {
+                        choice = choices.get(i);
+                        break;
+                    }
+                }
+                // display correctness of the response in the next screen
+                if (choice != null) {
+                    questionController.requestSubmitResponse(choice);
+                    startQuestionAnswerActivity();
+                }
+            }
+        });
     }
 
     /**

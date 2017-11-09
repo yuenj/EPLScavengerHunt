@@ -46,33 +46,33 @@
         </android.support.v7.widget.CardView>
 
 
-    <!--<ImageView-->
-        <!--android:id="@+id/question_image"-->
-        <!--android:layout_width="wrap_content"-->
-        <!--android:layout_height="wrap_content"-->
-        <!--android:gravity="center"-->
-        <!--android:layout_marginHorizontal="10dp"-->
-        <!--android:contentDescription="imageView" />-->
-    <LinearLayout
-        android:layout_width="match_parent"
+    <ImageView
+        android:id="@+id/question_image"
+        android:layout_width="wrap_content"
         android:layout_height="wrap_content"
-        android:orientation="vertical"
-        android:weightSum="100">
-    <android.support.v7.widget.CardView
-        android:layout_width="match_parent"
-        android:layout_height="0dp"
-        android:layout_margin="10dp"
-        android:layout_weight="65"
-        card_view:cardCornerRadius="20dp">
-        <com.makeramen.roundedimageview.RoundedImageView
-            android:id="@+id/RIV_w_picture"
-            android:layout_width="match_parent"
-            android:layout_height="match_parent"
-            android:scaleType="fitXY"
-            app:riv_corner_radius="20dp"
-            app:riv_mutate_background="true"
-            />
-    </android.support.v7.widget.CardView>
+        android:gravity="center"
+        android:layout_marginHorizontal="10dp"
+        android:contentDescription="imageView" />
+    <!--<LinearLayout-->
+        <!--android:layout_width="match_parent"-->
+        <!--android:layout_height="wrap_content"-->
+        <!--android:orientation="vertical"-->
+        <!--android:weightSum="100">-->
+    <!--<android.support.v7.widget.CardView-->
+        <!--android:layout_width="match_parent"-->
+        <!--android:layout_height="0dp"-->
+        <!--android:layout_margin="10dp"-->
+        <!--android:layout_weight="65"-->
+        <!--card_view:cardCornerRadius="20dp">-->
+        <!--<com.makeramen.roundedimageview.RoundedImageView-->
+            <!--android:id="@+id/question_picture"-->
+            <!--android:layout_width="match_parent"-->
+            <!--android:layout_height="match_parent"-->
+            <!--android:scaleType="fitXY"-->
+            <!--app:riv_corner_radius="20dp"-->
+            <!--app:riv_mutate_background="true"-->
+            <!--/>-->
+    <!--</android.support.v7.widget.CardView>-->
         <TextView
             android:id = "@+id/urlLink_question"
             android:layout_width="wrap_content"
@@ -104,7 +104,6 @@
 
     </android.support.design.widget.TextInputLayout>
 
-    </LinearLayout>
 
     <!-- Forces skip button to be at the very bottom as long as this layout is last in XML -->
     <RelativeLayout

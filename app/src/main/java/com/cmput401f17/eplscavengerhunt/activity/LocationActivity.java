@@ -56,7 +56,7 @@ public class LocationActivity extends AppCompatActivity {
 
 
         View view = this.getWindow().getDecorView();
-        view.setBackgroundColor(Color.parseColor(locationController.requestZone().getColour()));
+        view.setBackgroundColor(Color.parseColor(locationController.requestZone().getColor()));
 
 
         // If the location is verified go to Question activity

@@ -8,11 +8,13 @@ public class Zone {
 
     private String beaconID;
     private String name;
-    private String colour;
+    private String area;
+    private String color;
 
-    public Zone(final String beaconID, final String name) {
+    public Zone(final String beaconID, final String name, final String area) {
         this.beaconID = beaconID;
         this.name = name;
+        this.area = area;
     }
 
     public String getBeaconID() {
@@ -23,11 +25,23 @@ public class Zone {
         return name;
     }
 
-    public void setName(String name) {
+    public void setName(final String name) {
         this.name = name;
     }
 
-    public String getColour() {return colour;}
+    public String getArea() {
+        return area;
+    }
 
-    public void setColour(String colour) {this.colour = colour;}
+    public void setArea(final String area) {
+        this.area = area;
+    }
+
+    public String getColor() {
+        return color;
+    }
+
+    public void setColor(final String color) {
+        this.color = color;
+    }
 }
