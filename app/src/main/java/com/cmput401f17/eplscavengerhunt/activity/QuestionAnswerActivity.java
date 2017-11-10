@@ -2,7 +2,6 @@ package com.cmput401f17.eplscavengerhunt.activity;
 
 import android.content.Intent;
 import android.graphics.Color;
-import android.graphics.drawable.Drawable;
 import android.os.Bundle;
 import android.support.v7.app.AppCompatActivity;
 import android.support.v7.widget.CardView;
@@ -56,8 +55,8 @@ public class QuestionAnswerActivity extends AppCompatActivity {
         // determine player correctness
         final Question question = questionController.requestQuestion();
         final Response response = questionController.requestResponse();
-        final boolean playerIsCorrect = question.getAnswer().toLowerCase().replaceAll("\\s+","").
-                equals(response.getResponseStr().toLowerCase().replaceAll("\\s+",""));
+        final boolean playerIsCorrect = question.getAnswer().toLowerCase().replaceAll("\\s+", "").
+                equals(response.getResponseStr().toLowerCase().replaceAll("\\s+", ""));
 
         // Display feedback for the player
         if (playerIsCorrect) {
@@ -89,7 +88,7 @@ public class QuestionAnswerActivity extends AppCompatActivity {
             doneButton.setText("VISIT NEXT LOCATION");
             gameController.requestIncrementCurrentStage();
             intent = new Intent(QuestionAnswerActivity.this, LocationActivity.class);
-        // otherwise, display congratulations
+            // otherwise, display congratulations
         } else {
             doneButton.setText("YOU'RE DONE!");
             intent = new Intent(QuestionAnswerActivity.this, CongratulationsActivity.class);
