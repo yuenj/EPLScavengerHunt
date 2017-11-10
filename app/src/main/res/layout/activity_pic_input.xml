@@ -1,111 +1,267 @@
 <?xml version="1.0" encoding="utf-8"?>
-
-<android.support.v7.widget.LinearLayoutCompat xmlns:android="http://schemas.android.com/apk/res/android"
-    android:id="@+id/pic_input_llc"
+<LinearLayout xmlns:android="http://schemas.android.com/apk/res/android"
+    xmlns:card_view="http://schemas.android.com/apk/res-auto"
     android:layout_width="match_parent"
     android:layout_height="match_parent"
+    android:background="#ffffff"
     android:orientation="vertical">
 
-    <TextView
-        android:id="@+id/question_zone_text_view"
-        android:layout_width="wrap_content"
-        android:layout_height="wrap_content"
-        android:text="@string/question_temp_text"
-        android:textSize="30sp" />
-
-    <TextView
-        android:id="@+id/question_prompt_text_view"
-        android:layout_width="wrap_content"
-        android:layout_height="wrap_content"
-        android:text="@string/question_temp_text"
-        android:textSize="30sp" />
-
-    <ImageView
-        android:id="@+id/pic_user_image_image_view"
-        android:layout_width="wrap_content"
-        android:layout_height="wrap_content" />
-
-    <ImageView
-        android:id="@+id/pic_taken_imageview"
-        android:layout_width="match_parent"
-        android:layout_height="300sp" />
-
-    <Button
-        android:id="@+id/goto_camera_button"
-        android:layout_width="wrap_content"
-        android:layout_height="wrap_content"
-        android:text="goto Camera" />
-
-    <TextView
-        android:layout_width="wrap_content"
-        android:layout_height="wrap_content"
-        android:text="What did you capture?"
-        android:textSize="20sp"/>
-
-    <!-- Layout as placeholder -->
-    <android.support.v7.widget.LinearLayoutCompat xmlns:android="http://schemas.android.com/apk/res/android"
-        android:id="@+id/pic_choices_llc"
-        android:layout_width="match_parent"
-        android:layout_height="wrap_content"
-        android:orientation="vertical">
-
-        <!-- Radio buttons are dynamically generated in code. See QuestionActivity.java, displayPicInput() -->
-
-        <!--
-        <RadioGroup
-            android:id="@+id/rg"
-            android:layout_width="wrap_content"
-            android:layout_height="wrap_content">
-
-            <RadioButton
-                android:id="@+id/radio1"
-                android:layout_width="match_parent"
-                android:layout_height="match_parent"
-                android:text="@string/temp_text"/>
-
-            <RadioButton
-                android:id="@+id/radio2"
-                android:layout_width="match_parent"
-                android:layout_height="match_parent"
-                android:text="@string/temp_text"/>
-
-            <RadioButton
-                android:id="@+id/radio3"
-                android:layout_width="match_parent"
-                android:layout_height="match_parent"
-                android:text="@string/temp_text"/>
-
-            <RadioButton
-                android:id="@+id/radio4"
-                android:layout_width="match_parent"
-                android:layout_height="match_parent"
-                android:text="@string/temp_text"/>
-
-        </RadioGroup>
-        -->
-    </android.support.v7.widget.LinearLayoutCompat>
-
-    <Button
-        android:id="@+id/question_submit_button"
-        android:layout_width="wrap_content"
-        android:layout_height="wrap_content"
-        android:visibility="invisible"
-        android:text="Submit" />
-
-    <!-- Forces skip button to be at the very bottom as long as this layout is last in XML -->
     <LinearLayout
         android:layout_width="match_parent"
-        android:layout_height="0dip"
-        android:layout_weight="1"
-        android:gravity="center|bottom"
+        android:layout_height="wrap_content"
+        android:background="#AA00AA00"
         android:orientation="vertical">
 
-        <Button
-            android:id="@+id/question_skip_button"
-            android:layout_width="wrap_content"
+        <TextView
+            android:id="@+id/TV_pic_zone"
+            android:layout_width="match_parent"
             android:layout_height="wrap_content"
-            android:text="@string/skip_question" />
+            android:fontFamily="@font/roboto_medium"
+            android:paddingHorizontal="16dp"
+            android:paddingTop="24dp"
+            android:text="Zone 1"
+            android:textColor="#ffffffff"
+            android:textSize="24sp" />
+
+        <TextView
+            android:id="@+id/TV_pic_area"
+            android:layout_width="match_parent"
+            android:layout_height="wrap_content"
+            android:fontFamily="@font/roboto_regular"
+            android:paddingBottom="16dp"
+            android:paddingHorizontal="16dp"
+            android:text="Children's area: Birds"
+            android:textColor="#ffffffff"
+            android:textSize="16sp" />
 
     </LinearLayout>
 
-</android.support.v7.widget.LinearLayoutCompat>
+    <LinearLayout
+        android:layout_width="match_parent"
+        android:layout_height="match_parent"
+        android:orientation="vertical"
+        android:weightSum="100">
+
+        <android.support.v7.widget.CardView
+            android:layout_width="match_parent"
+            android:layout_height="0dp"
+            android:layout_margin="10dp"
+            android:layout_weight="65"
+            card_view:cardBackgroundColor="#000000"
+            card_view:cardCornerRadius="20dp">
+
+            <android.support.v7.widget.CardView
+                android:id="@+id/CV_pic_take_a_picture"
+                android:layout_width="wrap_content"
+                android:layout_height="wrap_content"
+                android:layout_gravity="center"
+                card_view:cardCornerRadius="30dp"
+                card_view:cardElevation="20dp">
+
+                <LinearLayout
+                    android:layout_width="wrap_content"
+                    android:layout_height="wrap_content"
+                    android:orientation="horizontal"
+                    android:padding="5dp">
+
+                    <ImageView
+                        android:id="@+id/IV_pic_camera_icon"
+                        android:layout_width="wrap_content"
+                        android:layout_height="wrap_content"
+                        android:layout_gravity="center"
+                        android:scaleType="center"
+                        android:src="@drawable/camera" />
+
+                    <TextView
+                        android:id="@+id/TV_pic_camera_prompt"
+                        android:layout_width="wrap_content"
+                        android:layout_height="wrap_content"
+                        android:layout_gravity="center"
+                        android:fontFamily="@font/roboto_bold"
+                        android:paddingRight="5dp"
+                        android:text="Take a picture of me!"
+                        android:textAllCaps="true" />
+
+                </LinearLayout>
+            </android.support.v7.widget.CardView>
+
+            <com.makeramen.roundedimageview.RoundedImageView
+                android:id="@+id/RIV_pic_picture"
+                android:layout_width="match_parent"
+                android:layout_height="match_parent"
+                android:scaleType="fitXY"
+                card_view:riv_corner_radius="20dp"
+                card_view:riv_mutate_background="true" />
+
+        </android.support.v7.widget.CardView>
+
+        <TextView
+            android:id="@+id/TV_pic_prompt"
+            android:layout_width="match_parent"
+            android:layout_height="wrap_content"
+            android:layout_gravity="center"
+            android:fontFamily="@font/roboto_regular"
+            android:paddingHorizontal="16dp"
+            android:text="This bird is 24 centimetres (9 inches) long and is easily identified by its long legs and short, barred tail. What bird am I?"
+            android:textColor="#000000"
+            android:textSize="16sp" />
+
+        <LinearLayout
+            android:id="@+id/LL_pic_radio_container"
+            android:layout_width="match_parent"
+            android:layout_height="0dp"
+            android:layout_weight="35"
+            android:orientation="vertical"
+            android:weightSum="100">
+
+            <LinearLayout
+                android:layout_width="match_parent"
+                android:layout_height="0dp"
+                android:layout_weight="50"
+                android:weightSum="100">
+
+                <android.support.v7.widget.CardView
+                    android:id="@+id/CV_pic_choice_one"
+                    android:layout_width="0dp"
+                    android:layout_height="match_parent"
+                    android:layout_marginBottom="5dp"
+                    android:layout_marginLeft="10dp"
+                    android:layout_marginRight="5dp"
+                    android:layout_marginTop="10dp"
+                    android:layout_weight="50"
+                    card_view:cardBackgroundColor="#F44336"
+                    card_view:cardCornerRadius="20dp">
+
+                    <RadioButton
+                        android:id="@+id/RB_pic_choice_one"
+                        android:layout_width="match_parent"
+                        android:layout_height="match_parent"
+                        android:layout_gravity="center"
+                        android:layout_marginHorizontal="16dp"
+                        android:buttonTint="#ffffff"
+                        android:fontFamily="@font/roboto_regular"
+                        android:text="Peregrine Falcon"
+                        android:textAlignment="center"
+                        android:textColor="#ffffff"
+                        android:textSize="16sp" />
+
+                </android.support.v7.widget.CardView>
+
+                <android.support.v7.widget.CardView
+                    android:id="@+id/CV_pic_choice_two"
+                    android:layout_width="0dp"
+                    android:layout_height="match_parent"
+                    android:layout_marginBottom="5dp"
+                    android:layout_marginLeft="5dp"
+                    android:layout_marginRight="10dp"
+                    android:layout_marginTop="10dp"
+                    android:layout_weight="50"
+                    card_view:cardBackgroundColor="#673AB7"
+                    card_view:cardCornerRadius="20dp">
+
+                    <RadioButton
+                        android:id="@+id/RB_pic_choice_two"
+                        android:layout_width="match_parent"
+                        android:layout_height="match_parent"
+                        android:layout_gravity="center"
+                        android:layout_marginHorizontal="16dp"
+                        android:buttonTint="#ffffff"
+                        android:fontFamily="@font/roboto_regular"
+                        android:text="Burrowing Owl"
+                        android:textAlignment="center"
+                        android:textColor="#ffffff"
+                        android:textSize="16sp" />
+
+                </android.support.v7.widget.CardView>
+
+            </LinearLayout>
+
+            <LinearLayout
+                android:layout_width="match_parent"
+                android:layout_height="0dp"
+                android:layout_weight="50"
+                android:weightSum="100">
+
+                <android.support.v7.widget.CardView
+                    android:id="@+id/CV_pic_choice_three"
+                    android:layout_width="0dp"
+                    android:layout_height="match_parent"
+                    android:layout_marginBottom="10dp"
+                    android:layout_marginLeft="10dp"
+                    android:layout_marginRight="5dp"
+                    android:layout_marginTop="5dp"
+                    android:layout_weight="50"
+                    card_view:cardBackgroundColor="#03A9F4"
+                    card_view:cardCornerRadius="20dp">
+
+                    <RadioButton
+                        android:id="@+id/RB_pic_choice_three"
+                        android:layout_width="match_parent"
+                        android:layout_height="match_parent"
+                        android:layout_gravity="center"
+                        android:layout_marginHorizontal="16dp"
+                        android:buttonTint="#ffffff"
+                        android:fontFamily="@font/roboto_regular"
+                        android:text="Humming Bird"
+                        android:textAlignment="center"
+                        android:textColor="#ffffff"
+                        android:textSize="16sp" />
+
+                </android.support.v7.widget.CardView>
+
+                <android.support.v7.widget.CardView
+                    android:id="@+id/CV_pic_choice_four"
+                    android:layout_width="0dp"
+                    android:layout_height="match_parent"
+                    android:layout_marginBottom="10dp"
+                    android:layout_marginLeft="5dp"
+                    android:layout_marginRight="10dp"
+                    android:layout_marginTop="5dp"
+                    android:layout_weight="50"
+                    card_view:cardBackgroundColor="#4CAF50"
+                    card_view:cardCornerRadius="20dp">
+
+                    <RadioButton
+                        android:id="@+id/RB_pic_choice_four"
+                        android:layout_width="match_parent"
+                        android:layout_height="match_parent"
+                        android:layout_gravity="center"
+                        android:layout_marginHorizontal="16dp"
+                        android:buttonTint="#ffffff"
+                        android:fontFamily="@font/roboto_regular"
+                        android:text="Barn Owl"
+                        android:textAlignment="center"
+                        android:textColor="#ffffff"
+                        android:textSize="16sp" />
+
+                </android.support.v7.widget.CardView>
+
+            </LinearLayout>
+        </LinearLayout>
+
+        <RelativeLayout
+            android:layout_width="match_parent"
+            android:layout_height="wrap_content">
+
+            <Button
+                android:id="@+id/button_pic_confirm"
+                android:layout_width="wrap_content"
+                android:layout_height="wrap_content"
+                android:layout_centerHorizontal="true"
+                android:background="#00000000"
+                android:text="confirm"
+                android:textAllCaps="true" />
+
+            <Button
+                android:id="@+id/question_skip_button"
+                android:layout_width="wrap_content"
+                android:layout_height="wrap_content"
+                android:layout_alignParentRight="true"
+                android:layout_gravity="right"
+                android:background="#00000000"
+                android:text="skip"
+                android:textAllCaps="true" />
+
+        </RelativeLayout>
+    </LinearLayout>
+</LinearLayout>

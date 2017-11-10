@@ -1,29 +1,103 @@
 <?xml version="1.0" encoding="utf-8"?>
 <LinearLayout xmlns:android="http://schemas.android.com/apk/res/android"
-    android:orientation="vertical" android:layout_width="match_parent"
+    xmlns:card_view="http://schemas.android.com/apk/res-auto"
+    android:id="@+id/LL_question_answer_background"
+    android:layout_width="match_parent"
     android:layout_height="match_parent"
-    android:weightSum="1">
+    android:background="#CCFF90"
+    android:orientation="vertical"
+    android:padding="20dp">
 
-    <TextView
-        android:id="@+id/TV_QuestionAnswer_result"
+    <android.support.v7.widget.CardView
+        android:id="@+id/CV_question_answer_card"
         android:layout_width="match_parent"
-        android:layout_height="wrap_content"
-        android:text="Good job!"
-        android:textAlignment="center"
-        android:textSize="30sp" />
+        android:layout_height="match_parent"
+        android:layout_margin="10dp"
+        card_view:cardBackgroundColor="#E040FB"
+        card_view:cardCornerRadius="30dp"
+        card_view:cardElevation="10dp">
 
-    <TextView
-        android:id="@+id/TV_QuestionAnswer_zone"
-        android:layout_width="match_parent"
-        android:layout_height="wrap_content"
-        android:text="Go to Zone Y"
-        android:textAlignment="center"
-        android:textSize="30sp" />
+        <LinearLayout
+            android:layout_width="match_parent"
+            android:layout_height="match_parent"
+            android:orientation="vertical"
+            android:padding="10dp"
+            android:weightSum="100">
 
-    <Button
-        android:id="@+id/Button_QuestionAnswer_done"
-        android:layout_width="match_parent"
-        android:layout_height="wrap_content"
-        android:text="View Results" />
+            <ImageView
+                android:id="@+id/IV_question_answer_image"
+                android:layout_width="match_parent"
+                android:layout_height="0dp"
+                android:layout_weight="50"
+                android:padding="10dp"
+                android:src="@drawable/correct" />
 
+            <LinearLayout
+                android:layout_width="match_parent"
+                android:layout_height="0dp"
+                android:layout_weight="50"
+                android:orientation="vertical"
+                android:weightSum="70">
+
+                <TextView
+                    android:id="@+id/TV_question_answer_message"
+                    android:layout_width="wrap_content"
+                    android:layout_height="0dp"
+                    android:layout_gravity="center"
+                    android:layout_weight="30"
+                    android:fontFamily="@font/roboto_regular"
+                    android:padding="5dp"
+                    android:text="Good Job!"
+                    android:textColor="#ffffff"
+                    android:textSize="48sp" />
+
+                <TextView
+                    android:layout_width="wrap_content"
+                    android:layout_height="wrap_content"
+                    android:layout_gravity="center"
+                    android:fontFamily="@font/roboto_regular"
+                    android:text="The answer is"
+                    android:textAlignment="center"
+                    android:textColor="#000000"
+                    android:textSize="24sp" />
+
+                <TextView
+                    android:id="@+id/TV_question_answer_answer"
+                    android:layout_width="wrap_content"
+                    android:layout_height="0dp"
+                    android:layout_gravity="center"
+                    android:layout_weight="20"
+                    android:fontFamily="@font/roboto_regular"
+                    android:text="Burrowing Owl"
+                    android:textAlignment="center"
+                    android:textColor="#000000"
+                    android:textSize="30sp" />
+
+                <android.support.v7.widget.CardView
+                    android:id="@+id/CV_question_answer_done_card"
+                    android:layout_width="wrap_content"
+                    android:layout_height="0dp"
+                    android:layout_gravity="center"
+                    android:layout_margin="10dp"
+                    android:layout_weight="20"
+                    card_view:cardBackgroundColor="#F3E5F5"
+                    card_view:cardCornerRadius="10dp">
+
+                    <Button
+                        android:id="@+id/button_question_answer_done"
+                        android:layout_width="wrap_content"
+                        android:layout_height="wrap_content"
+                        android:layout_gravity="center"
+                        android:background="#00000000"
+                        android:fontFamily="@font/roboto_bold"
+                        android:padding="15dp"
+                        android:text="visit next location"
+                        android:textAllCaps="true"
+                        android:textColor="#000000"
+                        android:textSize="14sp" />
+
+                </android.support.v7.widget.CardView>
+            </LinearLayout>
+        </LinearLayout>
+    </android.support.v7.widget.CardView>
 </LinearLayout>
