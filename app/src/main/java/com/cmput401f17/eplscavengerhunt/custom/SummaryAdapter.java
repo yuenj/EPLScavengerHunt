@@ -2,36 +2,37 @@ package com.cmput401f17.eplscavengerhunt.custom;
 
 import android.app.Activity;
 import android.content.Context;
-import android.support.v4.content.ContextCompat;
+import android.graphics.Color;
+import android.graphics.drawable.Drawable;
 import android.view.LayoutInflater;
 import android.view.View;
 import android.view.ViewGroup;
 import android.widget.BaseAdapter;
+import android.widget.Button;
 import android.widget.ImageView;
 import android.widget.RelativeLayout;
 import android.widget.TextView;
 
 import com.cmput401f17.eplscavengerhunt.R;
-import com.cmput401f17.eplscavengerhunt.model.MultipleChoiceQuestion;
-import com.cmput401f17.eplscavengerhunt.model.PicInputQuestion;
 import com.cmput401f17.eplscavengerhunt.model.Question;
-import com.cmput401f17.eplscavengerhunt.model.Response;
-import com.cmput401f17.eplscavengerhunt.model.WrittenInputQuestion;
+import com.cmput401f17.eplscavengerhunt.model.Zone;
 
 import java.util.List;
 
 public class SummaryAdapter extends BaseAdapter {
 
     private static LayoutInflater inflater = null;
-    private final Activity activity;
-    private final List<Response> responses;
-    private final List<Question> questions;
 
-    public SummaryAdapter(final Activity activity, final List<Response> responses,
-                          final List<Question> questions) {
+    private final Activity activity;
+    private final List<Question> questions;
+    private final List<Zone> zones;
+
+    public SummaryAdapter(final Activity activity,
+                          final List<Question> questions,
+                          final List<Zone> zones) {
         this.activity = activity;
         this.questions = questions;
-        this.responses = responses;
+        this.zones = zones;
 
         inflater = (LayoutInflater)activity.getSystemService(Context.LAYOUT_INFLATER_SERVICE);
     }
@@ -44,43 +45,35 @@ public class SummaryAdapter extends BaseAdapter {
             // vi = inflater.inflate(R.layout.item_summary, null);
             vi = inflater.inflate(R.layout.item_summary, parent, false);
 
-        ImageView thumbnail = vi.findViewById(R.id.summary_thumbnail_image_view);
-        TextView prompt = vi.findViewById(R.id.summary_prompt_text_view);
-        TextView usersResponse = vi.findViewById(R.id.summary_response_text_view);
-        TextView answer = vi.findViewById(R.id.summary_answer_text_view);
-        RelativeLayout background = vi.findViewById(R.id.summary_background);
+        final ImageView pictureIV = vi.findViewById(R.id.IV_summary_picture);
+        final TextView zoneTV = vi.findViewById(R.id.TV_summary_zone);
+        final TextView areaTV = vi.findViewById(R.id.TV_summary_area);
+        final TextView answerTV = vi.findViewById(R.id.TV_summary_answer);
+        final Button seeMoreButton = vi.findViewById(R.id.button_summary_seemore);
+        final RelativeLayout summaryContentRL = vi.findViewById(R.id.RL_summary_content);
 
-        Question question = questions.get(position);
-        Response response = responses.get(position);
+        final Question question = questions.get(position);
+        final Zone zone = zones.get(position);
 
-        prompt.setText(question.getPrompt());
-        usersResponse.setText(response.getResponseStr());
+        answerTV.setText(question.getAnswer());
+        zoneTV.setText("Zone " + zone.getName());
+        zoneTV.setBackgroundColor(Color.parseColor(zone.getColor()));
+        areaTV.setText(zone.getArea());
+        summaryContentRL.setBackgroundColor(Color.parseColor(zone.getColor()));
+        final int resourceId = parent.getResources()
+                .getIdentifier(question.getImageLink(), "drawable", activity.getPackageName());
+        final Drawable drawable = parent.getResources().getDrawable(resourceId);
+        pictureIV.setImageDrawable(drawable);
 
-        if (question instanceof WrittenInputQuestion) {
-            answer.setText(((WrittenInputQuestion) question).getWrittenInputSolution());
-        }
-
-        if (question instanceof MultipleChoiceQuestion) {
-            answer.setText(((MultipleChoiceQuestion) question).getMultipleChoiceSolution());
-        }
-
-        if (question instanceof PicInputQuestion) {
-            answer.setText(((PicInputQuestion) question).getPicInputSolution());
-        }
-
-        int correctColor = ContextCompat.getColor(activity.getApplicationContext(), R.color.colorCorrectResponse);
-        int incorrectColor = ContextCompat.getColor(activity.getApplicationContext(), R.color.colorIncorrectResponse);
-
-        if (response.isCorrect())
-            background.setBackgroundColor(correctColor);
-        else
-            background.setBackgroundColor(incorrectColor);
+        // TODO seeMoreButton should open a dialog with more info
+        // about e.g. question prompt, users response, detailed answer (see Lydia's
+        // examples in google drive
 
         return vi;
     }
 
     public int getCount() {
-        return responses.size();
+        return questions.size();
     }
 
     public Object getItem(int position) {

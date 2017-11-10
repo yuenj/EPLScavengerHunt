@@ -5,17 +5,20 @@ package com.cmput401f17.eplscavengerhunt.model;
  * You need to go to estimote.cloud.com to see a given beacons ID.
  */
 public class Zone {
-    private String beaconID, name, branch, backGrColour;
+    private String beaconID, name, branch, backGrColour, color, area;
 
     public Zone () {
         beaconID = "";
         name = "";
+        area = "";
         branch = "";
         backGrColour = "";
     }
 
-    public Zone(String beaconID) {
+    public Zone(final String beaconID, final String name, final String area) {
         this.beaconID = beaconID;
+        this.name = name;
+        this.area = name;
     }
 
     public String getBeaconID() {
@@ -28,7 +31,7 @@ public class Zone {
         return name;
     }
 
-    public void setName(String name) {
+    public void setName(final String name) {
         this.name = name;
     }
 
@@ -42,5 +45,21 @@ public class Zone {
 
     public void setBackGrColour(String backGrColour) {
         this.backGrColour = backGrColour;
+    }
+
+    public String getArea() {
+        return name;
+    }
+
+    public void setArea(final String area) {
+        this.name = area;
+    }
+
+    public String getColor() {
+        return color;
+    }
+
+    public void setColor(final String color) {
+        this.color = color;
     }
 }

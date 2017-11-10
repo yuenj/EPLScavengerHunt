@@ -8,12 +8,7 @@ public class Response {
     private String responseStr;
     private Boolean correct;
 
-    public Response() {
-        this.responseStr = "";
-        this.correct = true;
-    }
-
-    public Response(String responseStr) {
+    public Response(final String responseStr) {
         this.responseStr = responseStr;
         this.correct = true;
     }

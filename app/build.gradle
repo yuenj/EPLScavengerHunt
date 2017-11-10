@@ -8,7 +8,7 @@ repositories {
 
 android {
     compileSdkVersion 26
-    buildToolsVersion "26.0.1"
+    buildToolsVersion '26.0.2'
     defaultConfig {
         applicationId "com.cmput401f17.eplscavengerhunt"
         minSdkVersion 21
@@ -58,8 +58,10 @@ dependencies {
 
     // User Interface
     compile 'com.android.support.constraint:constraint-layout:1.0.2'
+    compile 'com.android.support:cardview-v7:25.3.1'
     compile 'com.android.support:design:25.3.1'
     compile 'com.android.support:design:26.+'
+    compile 'com.makeramen:roundedimageview:2.3.0'
 
     // Loading Button
     compile 'mbanje.kurt:fabbutton:1.2.4@aar'

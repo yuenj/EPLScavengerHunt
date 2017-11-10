@@ -35,6 +35,18 @@ public class DatabaseController {
     public DatabaseController() {
     }
 
+    /*** Returns a random list of unique [numZones] zones belonging to a library [branch)] */
+    public List<Zone> retrieveRandomZonesInBranch(final String branch, final int numQuestions) {
+        return null;
+    }
+
+    /** Given a list of [zones], returns a random list of unique questions
+     *  belonging to that zone.
+     */
+    public List<Question> retrieveRandomQuestionsForZones(final List<Zone> zones) {
+        return null;
+    }
+
     /**
      * Uses inputted GPS coordinates to retrieve the name of the branch that
      * the coordinate is inside from the database.
@@ -53,6 +65,7 @@ public class DatabaseController {
      * @return List<Zone>       The zones in the inputted library branch
      * @see GameController
      */
+
     public List<Zone> retrieveZones(String branch) {
         // http://162.246.156.95:5000/getQuestion
         // http://localhost:5000/getQuestion
@@ -68,7 +81,6 @@ public class DatabaseController {
             e.printStackTrace();
         }
         return null;
-
     }
 
     /**
@@ -344,7 +356,6 @@ public class DatabaseController {
                 question.setZone(zone);
                 question.setBranch(branch);
             } else {
-
                 question = new MultipleChoiceQuestion(questionID, prompt, iLink, choiceList, solution);
                 question.setZone(zone);
                 question.setBranch(branch);

@@ -4,16 +4,15 @@ import com.cmput401f17.eplscavengerhunt.model.MultipleChoiceQuestion;
 import com.cmput401f17.eplscavengerhunt.model.PicInputQuestion;
 import com.cmput401f17.eplscavengerhunt.model.Question;
 import com.cmput401f17.eplscavengerhunt.model.Response;
-import com.cmput401f17.eplscavengerhunt.model.Summary;
 import com.cmput401f17.eplscavengerhunt.model.ScavHuntState;
+import com.cmput401f17.eplscavengerhunt.model.Summary;
 import com.cmput401f17.eplscavengerhunt.model.WrittenInputQuestion;
 import com.cmput401f17.eplscavengerhunt.model.Zone;
 
 import java.util.ArrayList;
+import java.util.Arrays;
 import java.util.List;
 import java.util.Random;
-
-import javax.inject.Inject;
 
 import javax.inject.Inject;
 
@@ -29,7 +28,8 @@ public class GameController {
     private final DatabaseController databaseController;
 
     @Inject
-    public GameController(final ScavHuntState scavHuntState, final DatabaseController databaseController) {
+    public GameController(final ScavHuntState scavHuntState,
+                          final DatabaseController databaseController) {
         this.scavHuntState = scavHuntState;
         this.databaseController = databaseController;
     }
@@ -48,10 +48,20 @@ public class GameController {
         scavHuntState.setBranch("Clareview");
 
         String branch = scavHuntState.getBranch();
-        List<Zone> zoneRoute = generateZoneRoute(branch);
+        final List<Zone> zoneRoute = generateZoneRoute(branch,5);
 
+        // TODO place 5 in a config file or somwhere else, don't hardcode it
+        //final List<Zone> zoneRoute = generateZoneRoute(branch, 5);
         generateQuestionSet(zoneRoute);
 
+        // TODO catch BranchNotFoundException (see below TODO)
+        // exception before doing this or .clear() in cleanState() will throw
+        // Clear previous game data if user just completed a game,
+        // gets sent back to the TitleActivity and chooses to start the game again.
+        //scavHuntState.cleanState();
+
+        // TODO can DatabaseController throw a BranchNotFoundException
+        // TODO instead of checking the return value like this
         // Returns false if the zone route or the number of stages is zero
         return !(scavHuntState.getZoneRoute().size() == 0 || scavHuntState.getNumStages() == 0);
     }
@@ -71,24 +81,23 @@ public class GameController {
      *
      * @return zoneRoute        The current order of zones the user will go to
      */
-    private List<Zone> generateZoneRoute(String branch) {
+    private List<Zone> generateZoneRoute(final String branch, final int numZones) {
+        //final List<Zone> zoneRoute = databaseController.retrieveRandomZonesInBranch(branch, numZones);
         List<Zone> zoneRoute = databaseController.retrieveZones(branch);
         scavHuntState.setZoneRoute(zoneRoute);
-
         scavHuntState.setNumStages(zoneRoute.size());
 
         return zoneRoute;
     }
 
     /**
-     * Generates a sequence of questions. Randomization of question selection
-     * is done here. For each zone, gets all questions in the question pool, and
-     * randomly selects one. Each zone gets one question. Stores this series
-     * of questions in ScavHuntState
+     * Generates a sequence of questions.
      *
-     * @param zoneRoute         A list of zones a user will go through
+     * @param zoneRoute A list of zones a user will go through
      */
-    private void generateQuestionSet(List<Zone> zoneRoute) {
+    private void generateQuestionSet(final List<Zone> zoneRoute) {
+        //final List<Question> questions = databaseController.retrieveRandomQuestionsForZones(zoneRoute);
+        //scavHuntState.setQuestions(questions);
         List<Question> questionPool;
         List<Question> questionSet = new ArrayList<>();
 
@@ -116,19 +125,16 @@ public class GameController {
      * Generates a summary to be used for display
      *
      * @return Summary          Contains the end-state of a users game
-     *                          Most importantly, this contains the answers correct and their responses
+     * Most importantly, this contains the answers correct and their responses
      */
     private Summary generateSummary() {
-        List<Response> responses = scavHuntState.getPlayerResponses();
-        List<Question> questions = scavHuntState.getQuestions();
-        int score = scavHuntState.getNumCorrect();
-        int numQuestions = scavHuntState.getNumStages();
+        final List<Response> responses = scavHuntState.getPlayerResponses();
+        final List<Question> questions = scavHuntState.getQuestions();
+        final List<Zone> zones = scavHuntState.getZoneRoute();
+        final int score = scavHuntState.getNumCorrect();
+        final int numQuestions = scavHuntState.getNumStages();
 
-        Summary summary = new Summary();
-        summary.setResponses(responses);
-        summary.setScore(score);
-        summary.setNumQuestions(numQuestions);
-        summary.setQuestions(questions);
+        final Summary summary = new Summary(responses, questions, zones, score, numQuestions);
 
         return summary;
     }
@@ -140,67 +146,43 @@ public class GameController {
         return scavHuntState.isGameOver();
     }
 
-    /**
-     * Hard coded questions, answers and zones
-     * for demo and testing purposes
-     */
+    /** Hard coded questions, answers and zones for demo purposes */
     public void initScav() {
-
-        // Clear previous game data if user just
-        // completed a game, gets sent back to the TitleActivity
-        // and chooses to start the game again.
-        if (!scavHuntState.getBranch().equals("")) {
-            scavHuntState.clearPreviousGameData();
-        }
+        scavHuntState.cleanState();
 
         scavHuntState.setBranch("Clareview");
 
         // Sets a zone with it's specific name and beacon id
-        List<Zone> testZoneRoute = new ArrayList<>();
-        Zone zone1 = new Zone("[4f8113396f78d23ec78edfb96c79e23a]"); // DJBeet
-        zone1.setName("1");
-        Zone zone2 = new Zone("[ab1d6643c33e5f6ed7c52a062168f137]"); // Candystore
-        zone2.setName("2");
-        Zone zone3 = new Zone("[9a78af8c1252fcb37abefecbbbe7322a]"); // Lemonade
-        zone3.setName("3");
+        Zone zone1 = new Zone("[4f8113396f78d23ec78edfb96c79e23a]", "1", "Children's area: Birds"); // DJBeet
+        Zone zone2 = new Zone("[ab1d6643c33e5f6ed7c52a062168f137]", "2", "Nature area"); // CandyStore
+        Zone zone3 = new Zone("[9a78af8c1252fcb37abefecbbbe7322a]", "3", "Nature area"); // Lemonade
+        // Give each zone a color
+        zone1.setColor("#AA00AA00");
+        zone2.setColor("#AAFFAA00");
+        zone3.setColor("#84FFFF00");
 
         // Create the zone route
-        testZoneRoute.add(zone1);
-        testZoneRoute.add(zone2);
-        testZoneRoute.add(zone3);
-        scavHuntState.setZoneRoute(testZoneRoute);
-
-        // Create written answer questions
-        String questionStrDummy1 = "Question 1";
-        int id1 = 0;
-        String solutionStrDummy1 = "Solution 1";
-        Question testQuestion1 = new WrittenInputQuestion(id1, questionStrDummy1, "www.image1.com", solutionStrDummy1);
-
-        String questionStrDummy2 = "Question 2";
-        int id2 = 1;
-        String solutionStrDummy2 = "Solution 2";
-        Question testQuestion2 = new WrittenInputQuestion(id2, questionStrDummy2, "www.image2.com", solutionStrDummy2);
-
-        String questionStrDummy3 = "Question 3";
-        int id3 = 2;
-        String solutionStrDummy3 = "Solution 3";
+        List<Zone> zoneRoute = Arrays.asList(zone1, zone2, zone3);
+        scavHuntState.setZoneRoute(zoneRoute);
+        scavHuntState.setNumStages(3);
 
         // Create multiple choice question
-        ArrayList<String> testChoices = new ArrayList<String>() {{
-            add("Solution 1");
-            add("Solution 2");
-            add("Solution 3");
-        }};
-
-        Question testQuestion3 = new PicInputQuestion(id3, questionStrDummy3, "www.image3.com", testChoices, solutionStrDummy3);
+        String question1Prompt = "This bird is 24 centimetres (9 inches) long and is easily identified by its long legs and short, barred tail. What bird am I?";
+        String question1Solution = "Burrowing Owl";
+        List<String> question1Choices = Arrays.asList("Peregrine Falcon", "Burrowing Owl", "Humming Bird", "Barn Owl");
+        Question question1 = new MultipleChoiceQuestion(0, question1Prompt, "burrowing_owl", question1Choices, question1Solution);
+        // Create written answer question
+        String question2Prompt = "Great rivers that flowed here 75 million years ago left sand and mud deposits. What landscape of Alberta is this?";
+        String question2Solution = "Badlands";
+        Question question2 = new WrittenInputQuestion(1, question2Prompt, "badlands", question2Solution);
+        // Create Picture with multiple choice question
+        String question3Prompt = "Located in the Southwestern edge of Alberta, the ________________ are perhaps the best known and most well visited of Alberta's six natural regions.";
+        String question3Solution = "Rocky Mountains";
+        List<String> choices = Arrays.asList("Mount Everest", question3Solution, "Grand Canyon");
+        Question question3 = new PicInputQuestion(3, question3Prompt, "rocky_mountains", choices, question3Solution);
 
         // Create the question list
-        List<Question> testQuestionList = new ArrayList<>();
-        testQuestionList.add(testQuestion1);
-        testQuestionList.add(testQuestion2);
-        testQuestionList.add(testQuestion3);
-
-        scavHuntState.setQuestions(testQuestionList);
-        scavHuntState.setNumStages(testZoneRoute.size());
+        List<Question> questionList = Arrays.asList(question1, question2, question3);
+        scavHuntState.setQuestions(questionList);
     }
 }

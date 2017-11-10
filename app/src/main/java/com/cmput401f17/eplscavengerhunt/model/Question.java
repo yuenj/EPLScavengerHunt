@@ -6,7 +6,7 @@ import java.util.List;
 public abstract class Question {
 
     private int questionID;
-    private String zone, prompt, solution, imageLink, soundLink, branch;
+    private String zone, prompt, solution, answer, imageLink, soundLink, branch;
     private boolean takePic, skipped;
     private List<String> choices;
 
@@ -19,12 +19,15 @@ public abstract class Question {
         this.zone = "";
         this.choices = null;
         this.solution = "";
+        this.answer = "";
         this.takePic = false;
     }
 
-    public Question(int questionID, String prompt, String imageLink) {
+    public Question(int questionID, String prompt, String answer, String imageLink) {
         this.questionID = questionID;
         this.prompt = prompt;
+        this.answer = answer;
+        this.solution = answer;
         this.imageLink = imageLink;
     }
     // Every question will have an image associated with it
@@ -34,6 +37,7 @@ public abstract class Question {
         this.prompt = prompt;
         this.choices = choices;
         this.solution = solution;
+        this.answer = solution;
         this.imageLink = imageLink;
         this.soundLink = soundLink;
         this.takePic = takePic;
@@ -94,6 +98,14 @@ public abstract class Question {
 
     public void setPrompt(String prompt) {
         this.prompt = prompt;
+    }
+
+    public String getAnswer() {
+        return answer;
+    }
+
+    public void setAnswer(final String answer) {
+        this.answer = answer;
     }
 
     public String getImageLink() {
