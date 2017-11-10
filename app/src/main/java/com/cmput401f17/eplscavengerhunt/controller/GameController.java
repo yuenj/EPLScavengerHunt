@@ -131,16 +131,16 @@ public class GameController {
         scavHuntState.setBranch("Clareview");
 
         // Sets a zone with it's specific name and beacon id
-        Zone zone1 = new Zone("[4f8113396f78d23ec78edfb96c79e23a]", "1", "Children's area: Birds"); // DJBeet
-        Zone zone2 = new Zone("[ab1d6643c33e5f6ed7c52a062168f137]", "2", "Nature area"); // CandyStore
-        Zone zone3 = new Zone("[9a78af8c1252fcb37abefecbbbe7322a]", "3", "Nature area"); // Lemonade
+        Zone zone1 = new Zone("[751928d83a65b08296715acc49a52220]", "Birds", "Children's area"); // DJBeet3
+        Zone zone2 = new Zone("[08a819724b9dabd0ca9e64c0fcb2722e]", "Landscape", "Non-fiction"); // DJBeet2
+        //Zone zone3 = new Zone("[9a78af8c1252fcb37abefecbbbe7322a]", "3", "Nature area"); // Lemonade
         // Give each zone a color
-        zone1.setColor("#AA00AA00");
-        zone2.setColor("#AAFFAA00");
-        zone3.setColor("#84FFFF00");
+        zone1.setColor("#60CE41");
+        zone2.setColor("#EF005D");
+        //zone3.setColor("#84FFFF00");
 
         // Create the zone route
-        List<Zone> zoneRoute = Arrays.asList(zone1, zone2, zone3);
+        List<Zone> zoneRoute = Arrays.asList(zone1, zone2);
         scavHuntState.setZoneRoute(zoneRoute);
         scavHuntState.setNumStages(3);
 
@@ -154,13 +154,13 @@ public class GameController {
         String question2Solution = "Badlands";
         Question question2 = new WrittenInputQuestion(1, question2Prompt, "badlands", question2Solution);
         // Create Picture with multiple choice question
-        String question3Prompt = "Located in the Southwestern edge of Alberta, the ________________ are perhaps the best known and most well visited of Alberta's six natural regions.";
-        String question3Solution = "Rocky Mountains";
-        List<String> choices = Arrays.asList("Mount Everest", question3Solution, "Grand Canyon");
-        Question question3 = new PicInputQuestion(3, question3Prompt, "rocky_mountains", choices, question3Solution);
+//        String question3Prompt = "Located in the Southwestern edge of Alberta, the ________________ are perhaps the best known and most well visited of Alberta's six natural regions.";
+//        String question3Solution = "Rocky Mountains";
+//        List<String> choices = Arrays.asList("Mount Everest", question3Solution, "Grand Canyon");
+//        Question question3 = new PicInputQuestion(3, question3Prompt, "rocky_mountains", choices, question3Solution);
 
         // Create the question list
-        List<Question> questionList = Arrays.asList(question1, question2, question3);
+        List<Question> questionList = Arrays.asList(question2, question1);
         scavHuntState.setQuestions(questionList);
 
     }

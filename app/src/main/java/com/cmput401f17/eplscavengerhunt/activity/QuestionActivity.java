@@ -11,6 +11,7 @@ import android.os.Bundle;
 import android.support.annotation.NonNull;
 import android.support.design.widget.TextInputLayout;
 import android.support.v7.app.AppCompatActivity;
+import android.support.v7.widget.CardView;
 import android.support.v7.widget.LinearLayoutCompat;
 import android.util.Log;
 import android.view.KeyEvent;
@@ -35,6 +36,7 @@ import com.cmput401f17.eplscavengerhunt.model.MultipleChoiceQuestion;
 import com.cmput401f17.eplscavengerhunt.model.PicInputQuestion;
 import com.cmput401f17.eplscavengerhunt.model.Question;
 import com.cmput401f17.eplscavengerhunt.model.WrittenInputQuestion;
+import com.makeramen.roundedimageview.RoundedImageView;
 import com.squareup.picasso.Picasso;
 import java.io.File;
 import com.cmput401f17.eplscavengerhunt.model.Zone;
@@ -65,8 +67,9 @@ public class QuestionActivity extends AppCompatActivity {
     private void displayZone() {
         TextView zoneView = (TextView) findViewById(R.id.question_zone_text_view);
         zoneView.setText("Location: " + locationController.requestZone().getName());
-        View view = this.getWindow().getDecorView();
-        view.setBackgroundColor(Color.parseColor(locationController.requestZone().getColor()));
+
+        CardView locationCard = (CardView)findViewById(R.id.card_view_written_question);
+        locationCard.setCardBackgroundColor(Color.parseColor(locationController.requestZone().getColor()));
     }
 
     /** Displays the current question prompt */
@@ -213,7 +216,15 @@ public class QuestionActivity extends AppCompatActivity {
 
         displayZone();
         displayPrompt();
-        displayImage();
+        //displayImage();
+
+
+        final ImageView pictureIV = findViewById(R.id.question_picture);
+        final WrittenInputQuestion question = (WrittenInputQuestion) questionController.requestQuestion();
+        final int resourceId = this.getResources()
+                .getIdentifier(question.getImageLink(), "drawable", this.getPackageName());
+        final Drawable drawable = this.getResources().getDrawable(resourceId);
+        pictureIV.setImageDrawable(drawable);
 
         // Modified code whose original is from https://developer.android.com/training/keyboard-input/style.html 
         // User's keyboard has a send button, which when pressed will submit the answer the user typed in 

@@ -9,7 +9,13 @@
     <color name="colorBackground">#FCFCFC</color>
     <color name="colorDarkText">#000000</color>
     <color name="colorLightText">#FCFCFC</color>
-    <color name="cardBackGround">#424242</color>
+    <color name="cardBackGround">#083d87</color>
+    <color name="colorButtonPink">#EF005D</color>
+    <color name="colorButtonPurple">#870099</color>
+    <color name="colorButtonBlue">#1D93DC</color>
+    <color name="colorButtonGreen">#60CE41</color>
+    <color name="colorButtonYellow">#FDC10F</color>
+
 
     <color name="black_overlay">#66000000</color>
 

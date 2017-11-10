@@ -5,6 +5,7 @@ import android.graphics.Color;
 import android.os.Bundle;
 import android.os.Handler;
 import android.support.v7.app.AppCompatActivity;
+import android.support.v7.widget.CardView;
 import android.util.Log;
 import android.view.View;
 import android.widget.TextView;
@@ -49,14 +50,18 @@ public class LocationActivity extends AppCompatActivity {
         // I've put the message setting here because we need to call requestZone only after
         // the current stage has been incremented from -1 to 0
         TextView message = findViewById(R.id.location_next_zone_text_view);
-        message.setText("Go to " + locationController.requestZone().getName() + "!");
+        message.setText("Go to " + locationController.requestZone().getArea() + "!");
 
         //Set Card colour of activity to be zone specific colour
 
 
 
-        View view = this.getWindow().getDecorView();
-        view.setBackgroundColor(Color.parseColor(locationController.requestZone().getColor()));
+        //View view = this.getWindow().getDecorView();
+        //view.setBackgroundColor(Color.parseColor(locationController.requestZone().getColor()));
+
+        CardView locationCard = (CardView)findViewById(R.id.card_view_location);
+        locationCard.setCardBackgroundColor(Color.parseColor(locationController.requestZone().getColor()));
+        button.setColor(Color.parseColor(locationController.requestZone().getColor()));
 
 
         // If the location is verified go to Question activity

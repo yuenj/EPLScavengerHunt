@@ -6,6 +6,7 @@
     xmlns:card_view="http://schemas.android.com/apk/res-auto"
     android:orientation="vertical"
     android:layout_width="match_parent"
+    android:weightSum="100"
     android:layout_height="match_parent">
 
 
@@ -37,59 +38,65 @@
                 android:layout_width="wrap_content"
                 android:layout_height="wrap_content"
                 android:layout_below="@id/question_zone_text_view"
-                android:text="Hello and welcome to the wonderful world of magic"
-                android:layout_marginVertical="10dp"
+                android:text="Hello and welcome to the wonderful world of magic and myster , and wonder, I'll be your guide to this world of terror
+and hatered"
+                android:layout_marginBottom="10dp"
                 android:layout_marginHorizontal="10dp"
                 android:textColor="@color/colorLightText"
-                android:textSize="20sp" />
+                android:textSize="15sp" />
             </RelativeLayout>
         </android.support.v7.widget.CardView>
 
 
-    <ImageView
-        android:id="@+id/question_image"
-        android:layout_width="wrap_content"
-        android:layout_height="wrap_content"
-        android:gravity="center"
-        android:layout_marginHorizontal="10dp"
-        android:contentDescription="imageView" />
-    <!--<LinearLayout-->
-        <!--android:layout_width="match_parent"-->
-        <!--android:layout_height="wrap_content"-->
-        <!--android:orientation="vertical"-->
-        <!--android:weightSum="100">-->
-    <!--<android.support.v7.widget.CardView-->
-        <!--android:layout_width="match_parent"-->
-        <!--android:layout_height="0dp"-->
-        <!--android:layout_margin="10dp"-->
-        <!--android:layout_weight="65"-->
-        <!--card_view:cardCornerRadius="20dp">-->
+    <LinearLayout
+        android:layout_width="match_parent"
+        android:layout_height="0dp"
+        android:layout_weight="90"
+        android:orientation="vertical"
+        android:weightSum="100">
+
+    <android.support.v7.widget.CardView
+        android:layout_width="match_parent"
+        android:layout_height="0dp"
+        android:layout_margin="10dp"
+        android:layout_weight="80"
+        card_view:cardCornerRadius="0dp">
+
+        <ImageView
+            android:id="@+id/question_picture"
+            android:layout_width="wrap_content"
+            android:layout_height="wrap_content"
+            android:contentDescription="imageView"
+            android:src="@drawable/burrowing_owl"
+            />
         <!--<com.makeramen.roundedimageview.RoundedImageView-->
             <!--android:id="@+id/question_picture"-->
             <!--android:layout_width="match_parent"-->
             <!--android:layout_height="match_parent"-->
             <!--android:scaleType="fitXY"-->
+            <!--android:src="@drawable/burrowing_owl"-->
             <!--app:riv_corner_radius="20dp"-->
             <!--app:riv_mutate_background="true"-->
             <!--/>-->
-    <!--</android.support.v7.widget.CardView>-->
+    </android.support.v7.widget.CardView>
         <TextView
             android:id = "@+id/urlLink_question"
             android:layout_width="wrap_content"
-            android:layout_height="wrap_content"
-            android:layout_marginVertical="10dp"
-            android:layout_marginHorizontal="10dp"
+            android:layout_height="0dp"
+            android:layout_weight="5"
             android:text="@string/question_temp_text"
             android:textColor="@color/colorLightText"
             android:textSize="30sp" />
+
 
 
     <!-- An editable text field with a prompt. Prompt will float above field if user is typing -->
     <android.support.design.widget.TextInputLayout
         android:id="@+id/written_user_answer_wrapper_til"
         android:layout_width="match_parent"
-        android:layout_height="wrap_content"
+        android:layout_height="0dp"
         android:backgroundTint="@color/colorDarkText"
+        android:layout_weight="15"
         android:textSize="30sp">
 
         <EditText
@@ -98,21 +105,25 @@
             android:layout_height="wrap_content"
             android:inputType= "textAutoCorrect"
             android:hint="@string/hint"
-            android:textSize="30sp"
+            android:textSize="20sp"
             android:textColor="@color/colorDarkText"
             android:imeOptions="actionSend" />
 
     </android.support.design.widget.TextInputLayout>
-
+    </LinearLayout>
 
     <!-- Forces skip button to be at the very bottom as long as this layout is last in XML -->
     <RelativeLayout
         android:layout_width="match_parent"
         android:layout_height="wrap_content"
-        android:layout_weight="1"
         android:gravity="bottom"
+        android:layout_marginHorizontal="5dp"
+        android:layout_marginVertical="5dp"
+        android:layout_weight="10"
         android:orientation="vertical">
         <Button
+            style="@style/ButtonStyle"
+
             android:id="@+id/question_submit_button"
             android:layout_width="wrap_content"
             android:layout_height="wrap_content"
@@ -122,6 +133,7 @@
             android:text="@string/submit" />
 
         <Button
+            style="@style/ButtonStyle"
             android:id="@+id/question_skip_button"
             android:layout_width="wrap_content"
             android:layout_height="wrap_content"
@@ -130,5 +142,6 @@
             android:text="@string/skip_question" />
 
     </RelativeLayout>
+
 
 </android.support.v7.widget.LinearLayoutCompat>

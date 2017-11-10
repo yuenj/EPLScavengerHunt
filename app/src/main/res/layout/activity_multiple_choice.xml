@@ -94,7 +94,7 @@
                     android:layout_marginRight="5dp"
                     android:layout_marginTop="10dp"
                     android:layout_weight="50"
-                    card_view:cardBackgroundColor="#F44336"
+                    card_view:cardBackgroundColor="@color/colorButtonPink"
                     card_view:cardCornerRadius="20dp">
 
                     <RadioButton
@@ -120,7 +120,7 @@
                     android:layout_marginRight="10dp"
                     android:layout_marginTop="10dp"
                     android:layout_weight="50"
-                    card_view:cardBackgroundColor="#673AB7"
+                    card_view:cardBackgroundColor="@color/colorButtonPurple"
                     card_view:cardCornerRadius="20dp">
 
                     <RadioButton
@@ -154,7 +154,7 @@
                     android:layout_marginRight="5dp"
                     android:layout_marginTop="5dp"
                     android:layout_weight="50"
-                    card_view:cardBackgroundColor="#03A9F4"
+                    card_view:cardBackgroundColor="@color/colorButtonBlue"
                     card_view:cardCornerRadius="20dp">
 
                     <RadioButton
@@ -180,7 +180,7 @@
                     android:layout_marginRight="10dp"
                     android:layout_marginTop="5dp"
                     android:layout_weight="50"
-                    card_view:cardBackgroundColor="#4CAF50"
+                    card_view:cardBackgroundColor="@color/colorButtonGreen"
                     card_view:cardCornerRadius="20dp">
 
                     <RadioButton
@@ -206,22 +206,29 @@
             android:layout_height="wrap_content">
 
             <Button
+                style="@style/ButtonStyle"
+                android:layout_marginHorizontal="5dp"
+                android:layout_marginVertical="5dp"
                 android:id="@+id/button_mc_confirm"
                 android:layout_width="wrap_content"
                 android:layout_height="wrap_content"
-                android:layout_centerHorizontal="true"
-                android:background="#00000000"
-                android:text="confirm"
+                android:layout_alignParentRight="true"
+                android:backgroundTint="@color/cardBackGround"
+                android:textColor="@color/colorLightText"
+                android:text="@string/submit"
                 android:textAllCaps="true" />
 
             <Button
+                style="@style/ButtonStyle"
+                android:layout_marginHorizontal="5dp"
+                android:layout_marginVertical="5dp"
                 android:id="@+id/question_skip_button"
                 android:layout_width="wrap_content"
                 android:layout_height="wrap_content"
-                android:layout_alignParentRight="true"
                 android:layout_gravity="right"
-                android:background="#00000000"
-                android:text="skip"
+                android:backgroundTint="@color/cardBackGround"
+                android:textColor="@color/colorLightText"
+                android:text="@string/skip_question"
                 android:textAllCaps="true" />
 
         </RelativeLayout>
