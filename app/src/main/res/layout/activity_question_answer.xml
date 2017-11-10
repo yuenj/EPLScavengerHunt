@@ -45,11 +45,11 @@
                     android:layout_height="0dp"
                     android:layout_gravity="center"
                     android:layout_weight="30"
-                    android:fontFamily="@font/roboto_regular"
+                    android:fontFamily="@font/roboto_bolditalic"
                     android:padding="5dp"
-                    android:text="@string/wrong_answer_text"
-                    android:textColor="#ffffff"
-                    android:textSize="20sp" />
+                    android:text="@string/correct_answer_text"
+                    android:textColor="@color/colorDarkText"
+                    android:textSize="48sp" />
 
                 <TextView
                     android:layout_width="wrap_content"

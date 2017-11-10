@@ -57,7 +57,7 @@
     <string name="submit">Submit</string>
 
     <string name="correct_answer_text">Good Job!</string>
-    <string name="wrong_answer_text">Opps, That Answer\nWas Incorrect</string>
+    <string name="wrong_answer_text">Oops, That Answer\nWas Incorrect</string>
     <string name="skipped_answer_text">You Skipped\nThe Question</string>
 
 </resources>
