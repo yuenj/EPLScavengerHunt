@@ -2,7 +2,7 @@
 <LinearLayout xmlns:android="http://schemas.android.com/apk/res/android"
     android:layout_width="match_parent"
     android:layout_height="match_parent"
-    android:background="#000000"
+    android:background="#ffffff"
     android:orientation="vertical"
     android:weightSum="100">
 
@@ -21,7 +21,7 @@
         android:background="#00000000"
         android:fontFamily="@font/roboto_regular"
         android:text="REPLAY"
-        android:textColor="#ffffffff"
+        android:textColor="#000000"
         android:textSize="14sp" />
 
 </LinearLayout>
