@@ -64,8 +64,8 @@ and hatered"
 
         <ImageView
             android:id="@+id/question_picture"
-            android:layout_width="wrap_content"
-            android:layout_height="wrap_content"
+            android:layout_width="match_parent"
+            android:layout_height="match_parent"
             android:contentDescription="imageView"
             android:src="@drawable/burrowing_owl"
             />

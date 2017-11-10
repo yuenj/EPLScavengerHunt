@@ -4,8 +4,8 @@
     android:id="@+id/LL_question_answer_background"
     android:layout_width="match_parent"
     android:layout_height="match_parent"
-    android:background="#CCFF90"
     android:orientation="vertical"
+    android:background="@drawable/texture_background"
     android:padding="20dp">
 
     <android.support.v7.widget.CardView
@@ -13,7 +13,7 @@
         android:layout_width="match_parent"
         android:layout_height="match_parent"
         android:layout_margin="10dp"
-        card_view:cardBackgroundColor="#E040FB"
+        card_view:cardBackgroundColor="@color/colorButtonYellow"
         card_view:cardCornerRadius="30dp"
         card_view:cardElevation="10dp">
 
@@ -30,7 +30,7 @@
                 android:layout_height="0dp"
                 android:layout_weight="50"
                 android:padding="10dp"
-                android:src="@drawable/correct" />
+                android:src="@drawable/ic_dolphin" />
 
             <LinearLayout
                 android:layout_width="match_parent"
@@ -47,18 +47,18 @@
                     android:layout_weight="30"
                     android:fontFamily="@font/roboto_regular"
                     android:padding="5dp"
-                    android:text="Good Job!"
+                    android:text="@string/wrong_answer_text"
                     android:textColor="#ffffff"
-                    android:textSize="48sp" />
+                    android:textSize="20sp" />
 
                 <TextView
                     android:layout_width="wrap_content"
                     android:layout_height="wrap_content"
                     android:layout_gravity="center"
                     android:fontFamily="@font/roboto_regular"
-                    android:text="The answer is"
+                    android:text="The answer is :"
                     android:textAlignment="center"
-                    android:textColor="#000000"
+                    android:textColor="@color/colorDarkText"
                     android:textSize="24sp" />
 
                 <TextView
@@ -67,36 +67,26 @@
                     android:layout_height="0dp"
                     android:layout_gravity="center"
                     android:layout_weight="20"
-                    android:fontFamily="@font/roboto_regular"
+                    android:fontFamily="@font/roboto_bold"
                     android:text="Burrowing Owl"
                     android:textAlignment="center"
-                    android:textColor="#000000"
-                    android:textSize="30sp" />
-
-                <android.support.v7.widget.CardView
-                    android:id="@+id/CV_question_answer_done_card"
-                    android:layout_width="wrap_content"
-                    android:layout_height="0dp"
-                    android:layout_gravity="center"
-                    android:layout_margin="10dp"
-                    android:layout_weight="20"
-                    card_view:cardBackgroundColor="#F3E5F5"
-                    card_view:cardCornerRadius="10dp">
+                    android:textColor="@color/colorDarkText"
+                    android:textSize="20sp" />
 
                     <Button
+                        style="@style/ButtonStyle"
                         android:id="@+id/button_question_answer_done"
+                        android:backgroundTint="@color/cardBackGround"
                         android:layout_width="wrap_content"
                         android:layout_height="wrap_content"
                         android:layout_gravity="center"
-                        android:background="#00000000"
                         android:fontFamily="@font/roboto_bold"
                         android:padding="15dp"
                         android:text="visit next location"
                         android:textAllCaps="true"
-                        android:textColor="#000000"
+                        android:textColor="@color/colorLightText"
                         android:textSize="14sp" />
 
-                </android.support.v7.widget.CardView>
             </LinearLayout>
         </LinearLayout>
     </android.support.v7.widget.CardView>
