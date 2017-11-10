@@ -1,5 +1,7 @@
 package com.cmput401f17.eplscavengerhunt.model;
 
+import android.util.Log;
+
 import java.util.ArrayList;
 import java.util.List;
 
@@ -67,6 +69,7 @@ public class ScavHuntState {
      * @return Boolean True if gameOver, False if not
      */
     public Boolean isGameOver() {
+        Log.d("Number of User Res",Integer.toString(playerResponses.size()));
         return playerResponses.size() == numStages;
     }
 

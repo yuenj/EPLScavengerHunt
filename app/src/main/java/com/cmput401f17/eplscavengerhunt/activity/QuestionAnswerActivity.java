@@ -49,7 +49,7 @@ public class QuestionAnswerActivity extends AppCompatActivity {
         final ImageView imageIV = findViewById(R.id.IV_question_answer_image);
         final TextView messageTV = findViewById(R.id.TV_question_answer_message);
         final TextView answerTV = findViewById(R.id.TV_question_answer_answer);
-        final CardView doneCV = findViewById(R.id.CV_question_answer_done_card);
+        //final CardView doneCV = findViewById(R.id.CV_question_answer_done_card);
         final Button doneButton = findViewById(R.id.button_question_answer_done);
 
         // determine player correctness
@@ -61,31 +61,35 @@ public class QuestionAnswerActivity extends AppCompatActivity {
         // Display feedback for the player
         if (playerIsCorrect) {
             final int resourceId = this.getResources().getIdentifier(
-                    "correct", "drawable", this.getPackageName());
+                    "ic_dolphin", "drawable", this.getPackageName());
             imageIV.setImageDrawable(this.getResources().getDrawable(resourceId));
-            messageTV.setText("Good Job!");
-            backgroundLL.setBackgroundColor(Color.parseColor("#CCFF90"));
-            cardCV.setCardBackgroundColor(Color.parseColor("#E040FB"));
-            doneCV.setCardBackgroundColor(Color.parseColor("#F3E5F5"));
+            messageTV.setText(getResources().getText(R.string.correct_answer_text));
+            //backgroundLL.setBackgroundColor(Color.parseColor("#CCFF90"));
+            //cardCV.setCardBackgroundColor(Color.parseColor("#60CE41"));
+            //doneCV.setCardBackgroundColor(Color.parseColor("#F3E5F5"));
         } else {
             final int resourceId = this.getResources().getIdentifier(
-                    "wrong", "drawable", this.getPackageName());
+                    "ic_monkey_wrong", "drawable", this.getPackageName());
             imageIV.setImageDrawable(this.getResources().getDrawable(resourceId));
             if (question.isSkipped()) {
-                messageTV.setText("You Skipped.");
+
+                messageTV.setText(getResources().getText(R.string.skipped_answer_text));
+
             } else {
-                messageTV.setText("Incorrect.");
+                messageTV.setText(getResources().getText(R.string.wrong_answer_text));
+                messageTV.setTextSize(30);
             }
-            backgroundLL.setBackgroundColor(Color.parseColor("#FF8A80"));
-            cardCV.setCardBackgroundColor(Color.parseColor("#536DFE"));
-            doneCV.setCardBackgroundColor(Color.parseColor("#E8EAF6"));
+            //backgroundLL.setBackgroundColor(Color.parseColor("#FF8A80"));
+            cardCV.setCardBackgroundColor(Color.parseColor("#EF005D"));
+            //doneCV.setCardBackgroundColor(Color.parseColor("#E8EAF6"));
         }
         answerTV.setText(question.getAnswer());
 
         final Intent intent;
         // allow the player to visit the next location if the game is not over
         if (!gameController.requestCheckGameOver()) {
-            doneButton.setText("VISIT NEXT LOCATION");
+
+            doneButton.setText("VISIT NEXT LOCATION!");
             gameController.requestIncrementCurrentStage();
             intent = new Intent(QuestionAnswerActivity.this, LocationActivity.class);
             // otherwise, display congratulations

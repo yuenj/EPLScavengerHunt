@@ -3,6 +3,8 @@ package com.cmput401f17.eplscavengerhunt.activity;
 import android.content.Context;
 import android.content.Intent;
 import android.graphics.Bitmap;
+import android.graphics.BitmapFactory;
+import android.graphics.Color;
 import android.graphics.drawable.BitmapDrawable;
 import android.graphics.drawable.Drawable;
 import android.os.Bundle;
@@ -10,6 +12,8 @@ import android.support.annotation.NonNull;
 import android.support.design.widget.TextInputLayout;
 import android.support.v7.app.AppCompatActivity;
 import android.support.v7.widget.CardView;
+import android.support.v7.widget.LinearLayoutCompat;
+import android.util.Log;
 import android.view.KeyEvent;
 import android.view.View;
 import android.view.inputmethod.EditorInfo;
@@ -30,12 +34,12 @@ import com.cmput401f17.eplscavengerhunt.model.MultipleChoiceQuestion;
 import com.cmput401f17.eplscavengerhunt.model.PicInputQuestion;
 import com.cmput401f17.eplscavengerhunt.model.Question;
 import com.cmput401f17.eplscavengerhunt.model.WrittenInputQuestion;
-import com.cmput401f17.eplscavengerhunt.model.Zone;
-
+import com.makeramen.roundedimageview.RoundedImageView;
+import com.squareup.picasso.Picasso;
 import java.io.File;
+import com.cmput401f17.eplscavengerhunt.model.Zone;
 import java.util.Arrays;
 import java.util.List;
-
 import javax.inject.Inject;
 
 public class QuestionActivity extends AppCompatActivity {
@@ -52,20 +56,35 @@ public class QuestionActivity extends AppCompatActivity {
     private File imageFile;
 
     /**
-     * Displays the current zone
+     * Displays the name of the current zone
+     * Change the background colour to match that of the current zone
      */
     private void displayZone() {
-        TextView zoneView = findViewById(R.id.question_zone_text_view);
-        zoneView.setText("Zone: " + locationController.requestZone().getName());
+        TextView zoneView = (TextView) findViewById(R.id.question_zone_text_view);
+        zoneView.setText("Location: " + locationController.requestZone().getName());
+
+        CardView locationCard = (CardView)findViewById(R.id.card_view_written_question);
+        locationCard.setCardBackgroundColor(Color.parseColor(locationController.requestZone().getColor()));
     }
 
     /**
      * Displays the current question prompt
      */
     private void displayPrompt() {
-        TextView prompt = findViewById(R.id.question_prompt_text_view);
-        prompt.setText("Task: " + currentQuestion.getPrompt());
+        TextView prompt = (TextView)findViewById(R.id.question_prompt_text_view);
+        prompt.setText("Question: " + currentQuestion.getPrompt());
     }
+
+    /**
+     * Uses Picasso to display the relate image for a question.
+     */
+    private void displayImage(){
+        //ImageView image = (ImageView)findViewById(R.id.question_image);
+        Log.d("Image debug",currentQuestion.getImageLink());
+        //Picasso.with(getApplicationContext()).load(currentQuestion.getImageLink()).into(image);
+
+    }
+
 
     /**
      * Displays the view for a multiple choice question
@@ -78,10 +97,9 @@ public class QuestionActivity extends AppCompatActivity {
         setContentView(R.layout.activity_multiple_choice);
 
         // find views
-        final TextView zoneTV = findViewById(R.id.TV_mc_zone);
-        final TextView areaTV = findViewById(R.id.TV_mc_area);
+        final TextView zoneTV = findViewById(R.id.question_zone_text_view);
         final ImageView pictureIV = findViewById(R.id.RIV_mc_picture);
-        final TextView promptTV = findViewById(R.id.TV_mc_prompt);
+        final TextView promptTV = findViewById(R.id.question_prompt_text_view);
         final RadioButton choiceOneRB = findViewById(R.id.RB_mc_choice_one);
         final RadioButton choiceTwoRB = findViewById(R.id.RB_mc_choice_two);
         final RadioButton choiceThreeRB = findViewById(R.id.RB_mc_choice_three);
@@ -96,13 +114,14 @@ public class QuestionActivity extends AppCompatActivity {
                 choiceThreeRB, choiceFourRB);
 
         // set up the view displays
-        zoneTV.setText("Zone " + zone.getName());
-        areaTV.setText(zone.getArea()); // TODO capitalize every word with a util function
+        zoneTV.setText(zone.getName());
+        CardView locationCard = (CardView)findViewById(R.id.card_view_multi_question);
+        locationCard.setCardBackgroundColor(Color.parseColor(zone.getColor()));
         final int resourceId = this.getResources()
                 .getIdentifier(question.getImageLink(), "drawable", this.getPackageName());
         final Drawable drawable = this.getResources().getDrawable(resourceId);
         pictureIV.setImageDrawable(drawable);
-        promptTV.setText(question.getPrompt());
+        promptTV.setText("Question: " +question.getPrompt());
 
         // TODO in multiplechoicequestion model - create a guard against setting more than four choices when we retrieve from DB
         // and validate theres at least min num of choices
@@ -197,6 +216,15 @@ public class QuestionActivity extends AppCompatActivity {
 
         displayZone();
         displayPrompt();
+        //displayImage();
+
+
+        final ImageView pictureIV = findViewById(R.id.question_picture);
+        final WrittenInputQuestion question = (WrittenInputQuestion) questionController.requestQuestion();
+        final int resourceId = this.getResources()
+                .getIdentifier(question.getImageLink(), "drawable", this.getPackageName());
+        final Drawable drawable = this.getResources().getDrawable(resourceId);
+        pictureIV.setImageDrawable(drawable);
 
         // Modified code whose original is from https://developer.android.com/training/keyboard-input/style.html 
         // User's keyboard has a send button, which when pressed will submit the answer the user typed in 
@@ -233,10 +261,9 @@ public class QuestionActivity extends AppCompatActivity {
 
         // find views
         picTakenIV = findViewById(R.id.RIV_pic_picture);
-        final TextView zoneTV = findViewById(R.id.TV_pic_zone);
-        final TextView areaTV = findViewById(R.id.TV_pic_area);
+        final TextView zoneTV = findViewById(R.id.question_zone_text_view);
         takeAPicCV = findViewById(R.id.CV_pic_take_a_picture);
-        final TextView promptTV = findViewById(R.id.TV_pic_prompt);
+        final TextView promptTV = findViewById(R.id.question_prompt_text_view);
         final RadioButton choiceOneRB = findViewById(R.id.RB_pic_choice_one);
         final RadioButton choiceTwoRB = findViewById(R.id.RB_pic_choice_two);
         final RadioButton choiceThreeRB = findViewById(R.id.RB_pic_choice_three);
@@ -258,9 +285,10 @@ public class QuestionActivity extends AppCompatActivity {
         });
 
         // set up the view displays
-        zoneTV.setText("Zone " + zone.getName());
-        areaTV.setText(zone.getArea());
-        promptTV.setText(question.getPrompt());
+        zoneTV.setText(zone.getName());
+        CardView locationCard = (CardView)findViewById(R.id.card_view_pic_question);
+        locationCard.setCardBackgroundColor(Color.parseColor(zone.getColor()));
+        promptTV.setText("Question: " +question.getPrompt());
 
         // display choices on radio buttons
         int i;

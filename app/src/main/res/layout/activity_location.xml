@@ -4,24 +4,43 @@
     xmlns:tools="http://schemas.android.com/tools"
     android:layout_width="match_parent"
     android:layout_height="match_parent"
+    android:background="@drawable/texture_background"
+
+
     tools:context="com.cmput401f17.eplscavengerhunt.activity.LocationActivity">
 
     <RelativeLayout
-        android:layout_width="368dp"
-        android:layout_height="576dp"
+        android:layout_width="match_parent"
+        android:layout_height="match_parent"
         tools:layout_editor_absoluteY="8dp"
         tools:layout_editor_absoluteX="8dp">
 
-        <TextView
-            android:id="@+id/location_next_zone_text_view"
-            android:layout_width="wrap_content"
-            android:layout_height="wrap_content"
-            android:textSize="30sp" />
+        <android.support.v7.widget.CardView
+            xmlns:android="http://schemas.android.com/apk/res/android"
+            xmlns:card_view="http://schemas.android.com/apk/res-auto"
+            android:id="@+id/card_view_location"
+            card_view:cardBackgroundColor="@color/cardBackGround"
+            android:layout_gravity="center"
+            android:layout_width="match_parent"
+            android:layout_height="@dimen/cardViewHeight"
+            card_view:cardElevation="4dp"
+            card_view:cardCornerRadius="0dp">
+
+            <TextView
+                android:id="@+id/location_next_zone_text_view"
+                android:layout_width="match_parent"
+                android:layout_height="match_parent"
+                android:gravity="center"
+                android:textColor="@color/colorLightText"
+                android:text="Go to Non-Fiction"
+                android:textSize="40sp" />
+        </android.support.v7.widget.CardView>
+
 
         <!-- https://github.com/ckurtm/FabButton 19/10/2017 -->
         <view
-            android:layout_width="90dp"
-            android:layout_height="90dp"
+            android:layout_width="100dp"
+            android:layout_height="100dp"
             class="mbanje.kurt.fabbutton.FabButton"
             android:id="@+id/location_loading_indicator_fab"
             android:src="@drawable/running_man"
@@ -31,7 +50,7 @@
             android:indeterminate="true"
             app:fbb_autoStart="true"
             app:fbb_showShadow="true"
-            app:fbb_progressColor="#FFA726"
+            app:fbb_progressColor="@color/colorButtonYellow"
             app:fbb_progressWidthRatio="0.1"
             app:fbb_hideProgressOnComplete="true"
             app:fbb_endBitmap="@drawable/check_circle"

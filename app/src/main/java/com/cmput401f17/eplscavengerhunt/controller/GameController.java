@@ -131,13 +131,13 @@ public class GameController {
         scavHuntState.setBranch("Clareview");
 
         // Sets a zone with it's specific name and beacon id
-        Zone zone1 = new Zone("[4f8113396f78d23ec78edfb96c79e23a]", "1", "Children's area: Birds"); // DJBeet
-        Zone zone2 = new Zone("[ab1d6643c33e5f6ed7c52a062168f137]", "2", "Nature area"); // CandyStore
-        Zone zone3 = new Zone("[9a78af8c1252fcb37abefecbbbe7322a]", "3", "Nature area"); // Lemonade
+        Zone zone1 = new Zone("[4f8113396f78d23ec78edfb96c79e23a]", "Birds", "Children's area"); // DJBeet
+        Zone zone2 = new Zone("[ab1d6643c33e5f6ed7c52a062168f137]", "Landscape", "Non-fiction"); // CandyStore
+        Zone zone3 = new Zone("[9a78af8c1252fcb37abefecbbbe7322a]", "Landscape", "Fireplace"); // Lemonade
         // Give each zone a color
-        zone1.setColor("#AA00AA00");
-        zone2.setColor("#AAFFAA00");
-        zone3.setColor("#84FFFF00");
+        zone1.setColor("#870099");
+        zone2.setColor("#1D93DC");
+        zone3.setColor("#60CE41");
 
         // Create the zone route
         List<Zone> zoneRoute = Arrays.asList(zone1, zone2, zone3);
