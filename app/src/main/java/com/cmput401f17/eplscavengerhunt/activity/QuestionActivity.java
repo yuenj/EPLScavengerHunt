@@ -106,10 +106,13 @@ public class QuestionActivity extends AppCompatActivity {
         areaTV.setText(zone.getArea()); // TODO capitalize every word with a util function
         //final int resourceId = this.getResources()
         //        .getIdentifier(question.getImageLink(), "drawable", this.getPackageName());
+        System.out.println("Here");
+        String image = "burrowing_owl";
         final int resourceId = this.getResources()
-                .getIdentifier("burrowing_owl", "drawable", this.getPackageName());
+                .getIdentifier(image, "drawable", this.getPackageName());
         final Drawable drawable = this.getResources().getDrawable(resourceId);
-        pictureIV.setImageDrawable(drawable);
+        //pictureIV.setImageDrawable(drawable);
+        System.out.println("Here again!");
         promptTV.setText(question.getPrompt());
 
         // TODO in multiplechoicequestion model - create a guard against setting more than four choices when we retrieve from DB
@@ -133,8 +136,9 @@ public class QuestionActivity extends AppCompatActivity {
             });
         }
         // hide the extra radio buttons if there are less choices than buttons
+
         while (i < choiceRadioButtons.size()) {
-            choiceRadioButtons.get(i).setVisibility(View.GONE);
+            choiceRadioButtons.get(i++).setVisibility(View.GONE);
         }
 
         confirmButton.setOnClickListener(new View.OnClickListener() {
@@ -154,6 +158,7 @@ public class QuestionActivity extends AppCompatActivity {
                 }
             }
         });
+        System.out.println("Here again3!");
     }
 
     /**

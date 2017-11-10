@@ -62,6 +62,7 @@ public class QuestionAnswerActivity extends AppCompatActivity {
         doneButton.setText("Next");
         // allow the player to go to the next screen if the game is not over
         if (!gameController.requestCheckGameOver()) {
+            gameController.requestIncrementCurrentStage();
             intent = new Intent(QuestionAnswerActivity.this, LocationActivity.class);
         // otherwise, allow the player to view results
         } else {
