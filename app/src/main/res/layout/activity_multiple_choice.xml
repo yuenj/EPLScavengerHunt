@@ -5,50 +5,59 @@
     android:layout_width="match_parent"
     android:layout_height="match_parent"
     android:background="#ffffff"
+    android:weightSum="100"
     android:orientation="vertical">
 
-    <LinearLayout
+    <android.support.v7.widget.CardView
+
+        android:id="@+id/card_view_multi_question"
+        card_view:cardBackgroundColor="@color/cardBackGround"
+        android:layout_gravity="center"
         android:layout_width="match_parent"
         android:layout_height="wrap_content"
-        android:orientation="vertical"
-        android:background="#AA00AA00">
-
-        <TextView
-            android:id="@+id/TV_mc_zone"
+        card_view:cardElevation="4dp"
+        card_view:cardCornerRadius="0dp">
+        <RelativeLayout
             android:layout_width="match_parent"
-            android:layout_height="wrap_content"
-            android:fontFamily="@font/roboto_medium"
-            android:paddingHorizontal="16dp"
-            android:paddingTop="24dp"
-            android:text="Zone 1"
-            android:textColor="#ffffffff"
-            android:textSize="24sp" />
+            android:layout_height="wrap_content">
 
-        <TextView
-            android:id="@+id/TV_mc_area"
-            android:layout_width="match_parent"
-            android:layout_height="wrap_content"
-            android:fontFamily="@font/roboto_regular"
-            android:paddingBottom="16dp"
-            android:paddingHorizontal="16dp"
-            android:text="Children's area: Birds"
-            android:textColor="#ffffffff"
-            android:textSize="16sp" />
+            <TextView
+                android:id="@+id/question_zone_text_view"
+                android:layout_width="wrap_content"
+                android:layout_height="wrap_content"
+                android:layout_marginVertical="10dp"
+                android:layout_marginHorizontal="10dp"
+                android:fontFamily="@font/roboto_medium"
+                android:text="@string/question_temp_text"
+                android:textColor="@color/colorLightText"
+                android:textSize="20sp" />
 
-    </LinearLayout>
+            <TextView
+                android:id="@+id/question_prompt_text_view"
+                android:layout_width="wrap_content"
+                android:layout_height="wrap_content"
+                android:layout_below="@id/question_zone_text_view"
+                android:fontFamily="@font/roboto_regular"
+                android:text="This bird is 24 centimetres (9 inches) long and is easily identified by its long legs and short, barred tail. What bird am I?"
+                android:layout_marginBottom="10dp"
+                android:layout_marginHorizontal="10dp"
+                android:textColor="@color/colorLightText"
+                android:textSize="15sp" />
+        </RelativeLayout>
+    </android.support.v7.widget.CardView>
 
     <LinearLayout
         android:layout_width="match_parent"
-        android:layout_height="wrap_content"
+        android:layout_height="match_parent"
         android:orientation="vertical"
-        android:weightSum="100">
+        android:layout_weight="95">
 
         <android.support.v7.widget.CardView
             android:layout_width="match_parent"
             android:layout_height="0dp"
             android:layout_margin="10dp"
             android:layout_weight="65"
-            card_view:cardCornerRadius="20dp">
+            card_view:cardCornerRadius="0dp">
 
             <com.makeramen.roundedimageview.RoundedImageView
                 android:id="@+id/RIV_mc_picture"
@@ -56,29 +65,18 @@
                 android:layout_height="match_parent"
                 android:scaleType="fitXY"
                 android:src="@drawable/burrowing_owl"
-                app:riv_corner_radius="20dp"
+                app:riv_corner_radius="0dp"
                 app:riv_mutate_background="true" />
 
         </android.support.v7.widget.CardView>
 
-        <TextView
-            android:id="@+id/TV_mc_prompt"
-            android:layout_width="match_parent"
-            android:layout_height="wrap_content"
-            android:layout_gravity="center"
-            android:fontFamily="@font/roboto_regular"
-            android:paddingHorizontal="16dp"
-            android:text="This bird is 24 centimetres (9 inches) long and is easily identified by its long legs and short, barred tail. What bird am I?"
-            android:textColor="#000000"
-            android:textSize="16sp" />
 
         <LinearLayout
             android:id="@+id/LL_mc_radio_container"
             android:layout_width="match_parent"
             android:layout_height="0dp"
             android:layout_weight="35"
-            android:orientation="vertical"
-            android:weightSum="100">
+            android:orientation="vertical">
 
             <LinearLayout
                 android:layout_width="match_parent"
@@ -94,7 +92,7 @@
                     android:layout_marginRight="5dp"
                     android:layout_marginTop="10dp"
                     android:layout_weight="50"
-                    card_view:cardBackgroundColor="#F44336"
+                    card_view:cardBackgroundColor="@color/colorButtonPink"
                     card_view:cardCornerRadius="20dp">
 
                     <RadioButton
@@ -120,7 +118,7 @@
                     android:layout_marginRight="10dp"
                     android:layout_marginTop="10dp"
                     android:layout_weight="50"
-                    card_view:cardBackgroundColor="#673AB7"
+                    card_view:cardBackgroundColor="@color/colorButtonPurple"
                     card_view:cardCornerRadius="20dp">
 
                     <RadioButton
@@ -154,7 +152,7 @@
                     android:layout_marginRight="5dp"
                     android:layout_marginTop="5dp"
                     android:layout_weight="50"
-                    card_view:cardBackgroundColor="#03A9F4"
+                    card_view:cardBackgroundColor="@color/colorButtonBlue"
                     card_view:cardCornerRadius="20dp">
 
                     <RadioButton
@@ -180,7 +178,7 @@
                     android:layout_marginRight="10dp"
                     android:layout_marginTop="5dp"
                     android:layout_weight="50"
-                    card_view:cardBackgroundColor="#4CAF50"
+                    card_view:cardBackgroundColor="@color/colorButtonGreen"
                     card_view:cardCornerRadius="20dp">
 
                     <RadioButton
@@ -202,26 +200,36 @@
         </LinearLayout>
 
         <RelativeLayout
+            android:layout_weight="5"
             android:layout_width="match_parent"
             android:layout_height="wrap_content">
 
             <Button
+                style="@style/ButtonStyle"
+                android:layout_marginHorizontal="5dp"
+                android:layout_marginVertical="5dp"
                 android:id="@+id/button_mc_confirm"
                 android:layout_width="wrap_content"
                 android:layout_height="wrap_content"
-                android:layout_centerHorizontal="true"
-                android:background="#00000000"
-                android:text="confirm"
+                android:layout_alignParentRight="true"
+                android:fontFamily="@font/roboto_medium"
+                android:backgroundTint="@color/cardBackGround"
+                android:textColor="@color/colorLightText"
+                android:text="@string/submit"
                 android:textAllCaps="true" />
 
             <Button
+                style="@style/ButtonStyle"
+                android:layout_marginHorizontal="5dp"
+                android:layout_marginVertical="5dp"
                 android:id="@+id/question_skip_button"
                 android:layout_width="wrap_content"
                 android:layout_height="wrap_content"
-                android:layout_alignParentRight="true"
                 android:layout_gravity="right"
-                android:background="#00000000"
-                android:text="skip"
+                android:fontFamily="@font/roboto_medium"
+                android:backgroundTint="@color/cardBackGround"
+                android:textColor="@color/colorLightText"
+                android:text="@string/skip_question"
                 android:textAllCaps="true" />
 
         </RelativeLayout>

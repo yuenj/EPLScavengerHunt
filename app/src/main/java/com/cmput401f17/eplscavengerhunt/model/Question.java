@@ -31,13 +31,13 @@ public abstract class Question {
         this.imageLink = imageLink;
     }
     // Every question will have an image associated with it
-    public Question(int questionID, String zone, String prompt, List<String> choices, String solution, String imageLink, String soundLink, boolean takePic, boolean skipped) {
+    public Question(int questionID, String zone, String prompt, List<String> choices, String solution, String imageLink, String soundLink, boolean takePic, boolean skipped, String answer) {
         this.questionID = questionID;
         this.zone = zone;
         this.prompt = prompt;
         this.choices = choices;
         this.solution = solution;
-        this.answer = solution;
+        this.answer = answer;
         this.imageLink = imageLink;
         this.soundLink = soundLink;
         this.takePic = takePic;

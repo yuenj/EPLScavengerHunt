@@ -30,7 +30,19 @@
     <style name="ButtonStyle" parent="@android:style/Widget.Button">
         <item name="android:textColor">@color/colorLightText</item>
         <item name="android:background">@drawable/rounded_button</item>
+        <item name="android:colorBackground">@color/cardBackGround</item>
+    </style>
 
+    <style name="main_input_text">
+        <item name="android:layout_width">match_parent</item>
+        <item name="android:gravity">center_vertical</item>
+        <item name="android:keyTextColor">@color/colorDarkText</item>
+        <item name="android:keyTextSize">30sp</item>
+        <item name="android:textSize">30sp</item>
+        <item name="android:textColor">@color/colorDarkText</item>
+        <item name="android:textColorHint">@color/colorDarkText</item>
+        <item name="android:colorPrimary">@color/colorDarkText</item>
+        <item name = "backgroundTint">@color/colorDarkText</item>
     </style>
 
 

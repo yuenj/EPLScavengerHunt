@@ -13,12 +13,13 @@ public class Zone {
         area = "";
         branch = "";
         backGrColour = "";
+        color = "";
     }
 
     public Zone(final String beaconID, final String name, final String area) {
         this.beaconID = beaconID;
         this.name = name;
-        this.area = name;
+        this.area = area;
     }
 
     public String getBeaconID() {
@@ -48,12 +49,10 @@ public class Zone {
     }
 
     public String getArea() {
-        return name;
+        return area;
     }
 
-    public void setArea(final String area) {
-        this.name = area;
-    }
+    public void setArea(final String area) { this.area = area; }
 
     public String getColor() {
         return color;

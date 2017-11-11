@@ -218,6 +218,12 @@ public class DatabaseController {
                     zone.setName(jsonReader.nextString());
                 } else  if (key.equals("branch")) {
                     zone.setBranch(jsonReader.nextString());
+                } else if (key.equals("area")) {
+                    zone.setArea(jsonReader.nextString());
+                } else if (key.equals("color")) {
+                    String color = jsonReader.nextString();
+                    zone.setColor(color);
+                    System.out.println(color);
                 } else {
                     jsonReader.skipValue();
                 }
@@ -307,7 +313,7 @@ public class DatabaseController {
             String key;
             int questionID   = 0;
             String prompt    = "";
-            String solution  = "";
+            String answer    = "";
             String zone      = "";
             String branch    = "";
             String type      = ""; // the type of input for question.
@@ -327,7 +333,7 @@ public class DatabaseController {
                     String choices = jsonReader.nextString();
                     choiceList = new ArrayList<>(Arrays.asList(choices.split("\\|_\\|")));
                 } else  if (key.equals("Solution")) {
-                    solution = jsonReader.nextString();
+                    answer = jsonReader.nextString();
                 } else if (key.equals("zone")) {
                     zone = jsonReader.nextString();
                 } else if (key.equals("branch")) {
@@ -345,18 +351,18 @@ public class DatabaseController {
             jsonReader.endObject();
 
             if (type.equals("writInput")) {
-                question = new WrittenInputQuestion(questionID, prompt, iLink, type);
+                question = new WrittenInputQuestion(questionID, prompt, iLink, answer);
                 question.setZone(zone);
                 question.setBranch(branch);
                 question.setChoices(choiceList);
                 question.setSoundLink(sLink);
             } else if (type.equals("picInput")) {
-                question = new PicInputQuestion(questionID, prompt, iLink, choiceList, solution);
+                question = new PicInputQuestion(questionID, prompt, iLink, choiceList, answer);
                 question.setSoundLink(sLink);
                 question.setZone(zone);
                 question.setBranch(branch);
             } else {
-                question = new MultipleChoiceQuestion(questionID, prompt, iLink, choiceList, solution);
+                question = new MultipleChoiceQuestion(questionID, prompt, iLink, choiceList, answer);
                 question.setZone(zone);
                 question.setBranch(branch);
                 question.setSoundLink(sLink);
