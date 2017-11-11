@@ -9,8 +9,10 @@ import com.cmput401f17.eplscavengerhunt.model.Summary;
 import com.cmput401f17.eplscavengerhunt.model.WrittenInputQuestion;
 import com.cmput401f17.eplscavengerhunt.model.Zone;
 
+import java.util.ArrayList;
 import java.util.Arrays;
 import java.util.List;
+import java.util.Random;
 
 import javax.inject.Inject;
 
@@ -42,17 +44,21 @@ public class GameController {
      * @return Boolean          Returns true or false if the game was initiated correctly
      */
     public Boolean initGame() {
-        final String branch = scavHuntState.getBranch();
+        //FOR TESTING
+        scavHuntState.setBranch("Clareview");
+
+        String branch = scavHuntState.getBranch();
+        final List<Zone> zoneRoute = generateZoneRoute(branch,5);
 
         // TODO place 5 in a config file or somwhere else, don't hardcode it
-        final List<Zone> zoneRoute = generateZoneRoute(branch, 5);
+        //final List<Zone> zoneRoute = generateZoneRoute(branch, 5);
         generateQuestionSet(zoneRoute);
 
         // TODO catch BranchNotFoundException (see below TODO)
         // exception before doing this or .clear() in cleanState() will throw
         // Clear previous game data if user just completed a game,
         // gets sent back to the TitleActivity and chooses to start the game again.
-        scavHuntState.cleanState();
+        //scavHuntState.cleanState();
 
         // TODO can DatabaseController throw a BranchNotFoundException
         // TODO instead of checking the return value like this
@@ -76,8 +82,8 @@ public class GameController {
      * @return zoneRoute        The current order of zones the user will go to
      */
     private List<Zone> generateZoneRoute(final String branch, final int numZones) {
-        final List<Zone> zoneRoute =
-                databaseController.retrieveRandomZonesInBranch(branch, numZones);
+        //final List<Zone> zoneRoute = databaseController.retrieveRandomZonesInBranch(branch, numZones);
+        List<Zone> zoneRoute = databaseController.retrieveZones(branch);
         scavHuntState.setZoneRoute(zoneRoute);
         scavHuntState.setNumStages(zoneRoute.size());
 
@@ -90,9 +96,25 @@ public class GameController {
      * @param zoneRoute A list of zones a user will go through
      */
     private void generateQuestionSet(final List<Zone> zoneRoute) {
-        final List<Question> questions =
-                databaseController.retrieveRandomQuestionsForZones(zoneRoute);
-        scavHuntState.setQuestions(questions);
+        //final List<Question> questions = databaseController.retrieveRandomQuestionsForZones(zoneRoute);
+        //scavHuntState.setQuestions(questions);
+        List<Question> questionPool;
+        List<Question> questionSet = new ArrayList<>();
+
+        // Min and max refer to the maximum number of questions
+        // int rand = ThreadLocalRandom.current().nextInt(0, max + 1);
+        Random rand = new Random();
+
+        // Calling for a query for X amount of zones will be
+        // a bottleneck for speed
+        // TODO: Change databaseController to retrieve all questions or limit the amount of database calls
+        for (Zone zone : zoneRoute) {
+            questionPool = databaseController.retrieveQuestionsinZone(zone);
+            Question randomQuestion = questionPool.get(rand.nextInt(questionPool.size()));
+            questionSet.add(randomQuestion);
+        }
+
+        scavHuntState.setQuestions(questionSet);
     }
 
     public Summary requestSummary() {

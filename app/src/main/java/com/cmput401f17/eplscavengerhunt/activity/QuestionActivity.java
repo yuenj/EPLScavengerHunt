@@ -27,6 +27,7 @@ import android.widget.Toast;
 
 import com.cmput401f17.eplscavengerhunt.R;
 import com.cmput401f17.eplscavengerhunt.ScavengerHuntApplication;
+import com.cmput401f17.eplscavengerhunt.controller.GameController;
 import com.cmput401f17.eplscavengerhunt.controller.LocationController;
 import com.cmput401f17.eplscavengerhunt.controller.QuestionController;
 import com.cmput401f17.eplscavengerhunt.custom.CameraHandler;
@@ -48,6 +49,9 @@ public class QuestionActivity extends AppCompatActivity {
     final CameraHandler cameraHandler = new CameraHandler(this);
     @Inject
     QuestionController questionController;
+    @Inject
+    GameController gameController;
+
     @Inject
     LocationController locationController;
     private Question currentQuestion;
@@ -117,6 +121,9 @@ public class QuestionActivity extends AppCompatActivity {
         zoneTV.setText(zone.getName());
         CardView locationCard = (CardView)findViewById(R.id.card_view_multi_question);
         locationCard.setCardBackgroundColor(Color.parseColor(zone.getColor()));
+
+        // image = "burrowing_owl";
+        question.setImageLink("burrowing_owl");
         final int resourceId = this.getResources()
                 .getIdentifier(question.getImageLink(), "drawable", this.getPackageName());
         final Drawable drawable = this.getResources().getDrawable(resourceId);
@@ -145,6 +152,7 @@ public class QuestionActivity extends AppCompatActivity {
             });
         }
         // hide the extra radio buttons if there are less choices than buttons
+
         while (i < choiceRadioButtons.size()) {
             choiceRadioButtons.get(i++).setVisibility(View.GONE);
         }
@@ -169,6 +177,7 @@ public class QuestionActivity extends AppCompatActivity {
                 }
             }
         });
+        System.out.println("Here again3!");
     }
 
     /**
@@ -221,6 +230,7 @@ public class QuestionActivity extends AppCompatActivity {
 
         final ImageView pictureIV = findViewById(R.id.question_picture);
         final WrittenInputQuestion question = (WrittenInputQuestion) questionController.requestQuestion();
+        question.setImageLink("burrowing_owl");
         final int resourceId = this.getResources()
                 .getIdentifier(question.getImageLink(), "drawable", this.getPackageName());
         final Drawable drawable = this.getResources().getDrawable(resourceId);

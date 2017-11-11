@@ -64,12 +64,12 @@ public class GameControllerTest {
         final Question question2 = new WrittenInputQuestion(1, "Question 2", "www.image2.com", "Solution 2");
         final List<Question> questions = Arrays.asList(question1, question2);
         when(mockScavHuntState.getBranch()).thenReturn(branch);
-        when(mockDatabaseController.retrieveRandomZonesInBranch(
-                any(String.class), any(int.class))).thenReturn(zoneRoute);
+        //when(mockDatabaseController.retrieveRandomZonesInBranch(
+          //      any(String.class), any(int.class))).thenReturn(zoneRoute);
         doNothing().when(mockScavHuntState).setZoneRoute(any(List.class));
         doNothing().when(mockScavHuntState).setNumStages(any(int.class));
-        doNothing().when(mockScavHuntState).cleanState();
-        when(mockDatabaseController.retrieveRandomQuestionsForZones(any(List.class))).thenReturn(questions);
+        //doNothing().when(mockScavHuntState).cleanState();
+        //when(mockDatabaseController.retrieveRandomQuestionsForZones(any(List.class))).thenReturn(questions);
         doNothing().when(mockScavHuntState).setQuestions(any(List.class));
         when(mockScavHuntState.getZoneRoute()).thenReturn(zoneRoute);
         when(mockScavHuntState.getNumStages()).thenReturn(zoneRoute.size());

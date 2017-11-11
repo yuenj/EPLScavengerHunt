@@ -23,9 +23,9 @@ public class CongratulationsActivityTest extends
 
     public void testCongratulationsActivityIsProperlyDisplayed() {
         solo.assertCurrentActivity(ERR_MSG, CongratulationsActivity.class);
-        TextView congratsMsgHeader = solo.getCurrentActivity().findViewById(R.id.congrats_text_view);
+        TextView congratsMsgHeader = solo.getCurrentActivity().findViewById(R.id.TV_congrats_msg_header);
         assertEquals(congratsMsgHeader.getText().toString(), solo.getString(R.string.congrats_msg_header));
-        TextView congratsMsgBody = solo.getCurrentActivity().findViewById(R.id.congrats_message_text_view);
+        TextView congratsMsgBody = solo.getCurrentActivity().findViewById(R.id.TV_congrats_msg_body);
         assertEquals(congratsMsgBody.getText().toString(), solo.getString(R.string.congrats_msg_body));
     }
 

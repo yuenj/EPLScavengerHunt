@@ -88,7 +88,6 @@ public class QuestionAnswerActivity extends AppCompatActivity {
         final Intent intent;
         // allow the player to visit the next location if the game is not over
         if (!gameController.requestCheckGameOver()) {
-
             doneButton.setText("VISIT NEXT LOCATION!");
             gameController.requestIncrementCurrentStage();
             intent = new Intent(QuestionAnswerActivity.this, LocationActivity.class);
