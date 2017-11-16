@@ -6,7 +6,7 @@
     <color name="colorAccent">#000000</color>
 
     <color name="colorButton">#FF473A</color>
-    <color name="lightBackground">FCFCFC</color>
+    <color name="lightBackground">#FCFCFC</color>
     <color name="colorDarkText">#000000</color>
     <color name="colorLightText">#FCFCFC</color>
     <color name="cardBackGround">#002C77</color>

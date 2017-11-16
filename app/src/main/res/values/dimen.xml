@@ -2,4 +2,9 @@
 <resources>
     <dimen name = "cardViewHeight">125dp</dimen>
     <dimen name = "titlePageButtonSize">30sp</dimen>
+    <dimen name= "SkipSubmitTextSize">15sp</dimen>
+    <dimen name = "QuestionTextSize">21sp</dimen>
+    <dimen name = "AreaNameZoneTextSize">18sp</dimen>
+    <dimen name = "QuestionCardViewHorMarg">10dp</dimen>
+    <dimen name = "QuestionCardViewVerMarg">7dp</dimen>
 </resources>
