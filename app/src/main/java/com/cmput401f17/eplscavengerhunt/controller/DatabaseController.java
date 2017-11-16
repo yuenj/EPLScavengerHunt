@@ -118,13 +118,7 @@ public class DatabaseController {
         // http://162.246.156.95:5000/getQuestion
         // http://localhost:5000/getQuestion
         taskParams responseParams = new taskParams(null, question, "http://162.246.156.95:5000/updateAnalytics");
-        try {
-            new UpdateAnalytics().execute(responseParams);
-        } catch (InterruptedException e) {
-            e.printStackTrace();
-        } catch (ExecutionException e) {
-            e.printStackTrace();
-        }
+        new UpdateAnalytics().execute(responseParams);
         return null;
     }
 
