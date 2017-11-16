@@ -133,7 +133,7 @@
                     android:layout_marginRight="5dp"
                     android:layout_marginTop="10dp"
                     android:layout_weight="50"
-                    card_view:cardBackgroundColor="#F44336"
+                    card_view:cardBackgroundColor="@color/colorButtonPink"
                     card_view:cardCornerRadius="20dp">
 
                     <RadioButton
@@ -160,7 +160,7 @@
                     android:layout_marginRight="10dp"
                     android:layout_marginTop="10dp"
                     android:layout_weight="50"
-                    card_view:cardBackgroundColor="#673AB7"
+                    card_view:cardBackgroundColor="@color/colorButtonPurple"
                     card_view:cardCornerRadius="20dp">
 
                     <RadioButton
@@ -195,7 +195,7 @@
                     android:layout_marginRight="5dp"
                     android:layout_marginTop="5dp"
                     android:layout_weight="50"
-                    card_view:cardBackgroundColor="#03A9F4"
+                    card_view:cardBackgroundColor="@color/colorButtonBlue"
                     card_view:cardCornerRadius="20dp">
 
                     <RadioButton
@@ -222,7 +222,7 @@
                     android:layout_marginRight="10dp"
                     android:layout_marginTop="5dp"
                     android:layout_weight="50"
-                    card_view:cardBackgroundColor="#4CAF50"
+                    card_view:cardBackgroundColor="@color/colorButtonGreen"
                     card_view:cardCornerRadius="20dp">
 
                     <RadioButton
