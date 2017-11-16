@@ -59,36 +59,6 @@ public class QuestionActivity extends AppCompatActivity {
     private CardView takeAPicCV;
     private File imageFile;
 
-    /**
-     * Displays the name of the current zone
-     * Change the background colour to match that of the current zone
-     */
-    private void displayZone() {
-        TextView zoneView = (TextView) findViewById(R.id.question_zone_text_view);
-        zoneView.setText("Location: " + locationController.requestZone().getName());
-
-        CardView locationCard = (CardView)findViewById(R.id.card_view_written_question);
-        locationCard.setCardBackgroundColor(Color.parseColor(locationController.requestZone().getColor()));
-    }
-
-    /**
-     * Displays the current question prompt
-     */
-    private void displayPrompt() {
-        TextView prompt = (TextView)findViewById(R.id.question_prompt_text_view);
-        prompt.setText("Question: " + currentQuestion.getPrompt());
-    }
-
-    /**
-     * Uses Picasso to display the relate image for a question.
-     */
-    private void displayImage(){
-        //ImageView image = (ImageView)findViewById(R.id.question_image);
-        Log.d("Image debug",currentQuestion.getImageLink());
-        //Picasso.with(getApplicationContext()).load(currentQuestion.getImageLink()).into(image);
-
-    }
-
 
     /**
      * Displays the view for a multiple choice question
@@ -112,23 +82,19 @@ public class QuestionActivity extends AppCompatActivity {
 
         // get the current zone and question
         final Zone zone = locationController.requestZone();
-        final MultipleChoiceQuestion question = (MultipleChoiceQuestion) questionController.requestQuestion();
-        final List<String> choices = question.getChoices();
+        final List<String> choices = currentQuestion.getChoices();
         final List<RadioButton> choiceRadioButtons = Arrays.asList(choiceOneRB, choiceTwoRB,
                 choiceThreeRB, choiceFourRB);
 
         // set up the view displays
-        zoneTV.setText(zone.getName());
+        zoneTV.setText(zone.getArea() + " : " + zone.getName());
         CardView locationCard = (CardView)findViewById(R.id.card_view_multi_question);
         locationCard.setCardBackgroundColor(Color.parseColor(zone.getColor()));
 
-        // image = "burrowing_owl";
-        question.setImageLink("burrowing_owl");
-        final int resourceId = this.getResources()
-                .getIdentifier(question.getImageLink(), "drawable", this.getPackageName());
-        final Drawable drawable = this.getResources().getDrawable(resourceId);
-        pictureIV.setImageDrawable(drawable);
-        promptTV.setText("Question: " +question.getPrompt());
+        // Pull image from URL and display using Picasso
+        currentQuestion.setImageLink("https://upload.wikimedia.org/wikipedia/commons/0/03/Mountain_Bluebird.jpg");
+        Picasso.with(getApplicationContext()).load(currentQuestion.getImageLink()).into(pictureIV);
+        promptTV.setText("Question: " +currentQuestion.getPrompt());
 
         // TODO in multiplechoicequestion model - create a guard against setting more than four choices when we retrieve from DB
         // and validate theres at least min num of choices
@@ -223,18 +189,23 @@ public class QuestionActivity extends AppCompatActivity {
     private void displayWrittenInput() {
         setContentView(R.layout.activity_written_input);
 
-        displayZone();
-        displayPrompt();
-        //displayImage();
-
-
+        // find views
+        final TextView zoneTV = findViewById(R.id.question_zone_text_view);
         final ImageView pictureIV = findViewById(R.id.question_picture);
-        final WrittenInputQuestion question = (WrittenInputQuestion) questionController.requestQuestion();
-        question.setImageLink("burrowing_owl");
-        final int resourceId = this.getResources()
-                .getIdentifier(question.getImageLink(), "drawable", this.getPackageName());
-        final Drawable drawable = this.getResources().getDrawable(resourceId);
-        pictureIV.setImageDrawable(drawable);
+        final TextView promptTV = findViewById(R.id.question_prompt_text_view);
+
+        // get the current zone and question
+        final Zone zone = locationController.requestZone();
+
+        // set up the view displays
+        zoneTV.setText(zone.getArea() + " : " + zone.getName());
+        CardView locationCard = (CardView)findViewById(R.id.card_view_written_question);
+        locationCard.setCardBackgroundColor(Color.parseColor(zone.getColor()));
+        promptTV.setText("Question: " +currentQuestion.getPrompt());
+
+        //Set up image
+        currentQuestion.setImageLink("https://upload.wikimedia.org/wikipedia/commons/0/03/Mountain_Bluebird.jpg");
+        Picasso.with(getApplicationContext()).load(currentQuestion.getImageLink()).into(pictureIV);
 
         // Modified code whose original is from https://developer.android.com/training/keyboard-input/style.html 
         // User's keyboard has a send button, which when pressed will submit the answer the user typed in 
@@ -282,8 +253,8 @@ public class QuestionActivity extends AppCompatActivity {
 
         // get the current zone and question
         final Zone zone = locationController.requestZone();
-        final PicInputQuestion question = (PicInputQuestion) questionController.requestQuestion();
-        final List<String> choices = question.getChoices();
+
+        final List<String> choices = currentQuestion.getChoices();
         final List<RadioButton> choiceRadioButtons = Arrays.asList(choiceOneRB, choiceTwoRB,
                 choiceThreeRB, choiceFourRB);
 
@@ -295,10 +266,10 @@ public class QuestionActivity extends AppCompatActivity {
         });
 
         // set up the view displays
-        zoneTV.setText(zone.getName());
+        zoneTV.setText(zone.getArea() + " : " + zone.getName());
         CardView locationCard = (CardView)findViewById(R.id.card_view_pic_question);
         locationCard.setCardBackgroundColor(Color.parseColor(zone.getColor()));
-        promptTV.setText("Question: " +question.getPrompt());
+        promptTV.setText("Question: " +currentQuestion.getPrompt());
 
         // display choices on radio buttons
         int i;
