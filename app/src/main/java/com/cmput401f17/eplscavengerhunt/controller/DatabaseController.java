@@ -357,6 +357,7 @@ public class DatabaseController {
             String type      = ""; // the type of input for question.
             String iLink     = "";
             String sLink     = "";
+            String blanks = "";
             List<String> choiceList = null;
             Question question;
             // Question question = new Question();
@@ -384,6 +385,8 @@ public class DatabaseController {
                     sLink = jsonReader.nextString();
                 } else if (key.equals("id")) {
                     questionID = jsonReader.nextInt();
+                } else if (key.equals("blanks")) {
+                    blanks = jsonReader.nextString();
                 } else {
                     jsonReader.skipValue();
                 }
@@ -396,6 +399,7 @@ public class DatabaseController {
                 question.setBranch(branch);
                 question.setChoices(choiceList);
                 question.setSoundLink(sLink);
+                question.setBlanks(blanks);
             } else if (type.equals("picInput")) {
                 question = new PicInputQuestion(questionID, prompt, iLink, choiceList, answer);
                 question.setSoundLink(sLink);
