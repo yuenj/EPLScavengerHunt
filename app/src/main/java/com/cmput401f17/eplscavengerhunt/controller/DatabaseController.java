@@ -181,9 +181,9 @@ public class DatabaseController {
 
                 switch (status) {
                     case 200:
-                    case 201:
                         // reads what api returned, converts it into json format
                         JsonReader jsonReader = new JsonReader (new BufferedReader(new InputStreamReader(c.getInputStream())));
+                        Log.d("dbcontroller!!!", jsonReader.toString());
                         try {
                             //questions =  jsonQuestionArray(jsonReader);
                             return jsonZoneArray(jsonReader);
@@ -215,11 +215,22 @@ public class DatabaseController {
 
         private List<Zone> jsonZoneArray (JsonReader jsonReader) throws IOException {
             List<Zone> zones = new ArrayList<>();
-            jsonReader.beginArray();
+            jsonReader.beginObject();
+
             while (jsonReader.hasNext()) {
-                zones.add(readZone(jsonReader));
+                String key = jsonReader.nextName();
+                if (key.equals("data")) {
+                    jsonReader.beginArray();
+                    while (jsonReader.hasNext()) {
+                        zones.add(readZone(jsonReader));
+                    }
+                    jsonReader.endArray();
+                } else {
+                    jsonReader.skipValue();
+                }
             }
-            jsonReader.endArray();
+
+            jsonReader.endObject();
             return zones;
         }
 
@@ -238,9 +249,7 @@ public class DatabaseController {
                 } else if (key.equals("area")) {
                     zone.setArea(jsonReader.nextString());
                 } else if (key.equals("color")) {
-                    String color = jsonReader.nextString();
-                    zone.setColor(color);
-                    System.out.println(color);
+                    zone.setColor(jsonReader.nextString());
                 } else {
                     jsonReader.skipValue();
                 }
@@ -286,7 +295,6 @@ public class DatabaseController {
 
                 switch (status) {
                     case 200:
-                    case 201:
                         // reads what api returned, converts it into json format
                         JsonReader jsonReader = new JsonReader (new BufferedReader(new InputStreamReader(c.getInputStream())));
                         try {
@@ -320,11 +328,22 @@ public class DatabaseController {
 
         private List<Question> jsonQuestionArray (JsonReader jsonReader) throws IOException {
             List<Question> questions = new ArrayList<>();
-            jsonReader.beginArray();
+            jsonReader.beginObject();
+
             while (jsonReader.hasNext()) {
-                questions.add(readQuestion(jsonReader));
+                String key = jsonReader.nextName();
+                if (key.equals("data")) {
+                    jsonReader.beginArray();
+                    while (jsonReader.hasNext()) {
+                        questions.add(readQuestion(jsonReader));
+                    }
+                    jsonReader.endArray();
+                } else {
+                    jsonReader.skipValue();
+                }
             }
-            jsonReader.endArray();
+
+            jsonReader.endObject();
             return questions;
         }
 
@@ -363,6 +382,8 @@ public class DatabaseController {
                     iLink = jsonReader.nextString();
                 } else if (key.equals("sLink")) {
                     sLink = jsonReader.nextString();
+                } else if (key.equals("id")) {
+                    questionID = jsonReader.nextInt();
                 } else {
                     jsonReader.skipValue();
                 }
