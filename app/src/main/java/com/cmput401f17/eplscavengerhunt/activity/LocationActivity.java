@@ -7,7 +7,6 @@ import android.os.Handler;
 import android.support.v7.app.AppCompatActivity;
 import android.support.v7.widget.CardView;
 import android.util.Log;
-import android.view.View;
 import android.widget.TextView;
 
 import com.cmput401f17.eplscavengerhunt.R;
@@ -50,7 +49,7 @@ public class LocationActivity extends AppCompatActivity {
         // I've put the message setting here because we need to call requestZone only after
         // the current stage has been incremented from -1 to 0
         TextView message = findViewById(R.id.location_next_zone_text_view);
-        message.setText("Go to " + locationController.requestZone().getArea() + "!");
+        message.setText("Go to the " + locationController.requestZone().getName() + " area!");
 
         //Set Card colour of activity to be zone specific colour
 
@@ -62,7 +61,6 @@ public class LocationActivity extends AppCompatActivity {
         CardView locationCard = (CardView)findViewById(R.id.card_view_location);
         locationCard.setCardBackgroundColor(Color.parseColor(locationController.requestZone().getColor()));
         button.setColor(Color.parseColor(locationController.requestZone().getColor()));
-
 
         // If the location is verified go to Question activity
         locationController.verifyLocation(new SimpleCallback<Boolean>() {

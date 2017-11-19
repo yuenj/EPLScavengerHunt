@@ -246,8 +246,8 @@ public class DatabaseController {
                     zone.setName(jsonReader.nextString());
                 } else  if (key.equals("branch")) {
                     zone.setBranch(jsonReader.nextString());
-                } else if (key.equals("area")) {
-                    zone.setArea(jsonReader.nextString());
+                } else if (key.equals("category")) {
+                    zone.setCategory(jsonReader.nextString());
                 } else if (key.equals("color")) {
                     zone.setColor(jsonReader.nextString());
                 } else {
