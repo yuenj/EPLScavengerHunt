@@ -20,13 +20,13 @@ public class AboutActivity extends AppCompatActivity {
         super.onCreate(savedInstanceState);
         setContentView(R.layout.activity_about);
 
-        Button returnButton = findViewById(R.id.about_return_button);
+        final Button returnButton = findViewById(R.id.about_return_button);
 
         // User click leads them to the previous screen
         returnButton.setOnClickListener(new View.OnClickListener() {
             public void onClick(View v) {
-                Log.d("AboutActivity", "Return Button Pressed");
                 Intent intent = new Intent(AboutActivity.this, TitleActivity.class);
+                returnButton.setEnabled(false);
                 startActivity(intent);
                 finish();
             }

@@ -83,12 +83,13 @@ public class QuestionActivity extends AppCompatActivity {
         displayLayout();
 
         // Skip the question when the skip button is pressed
-        Button skipButton = findViewById(R.id.question_skip_button);
+        final Button skipButton = findViewById(R.id.question_skip_button);
         skipButton.setOnClickListener(new View.OnClickListener() {
             public void onClick(View v) {
                 Toast.makeText(v.getContext(), "Question skipped", Toast.LENGTH_SHORT).show();
                 questionController.skip(currentQuestion);
                 questionController.requestSubmitResponse("");
+                skipButton.setEnabled(false);
                 startQuestionAnswerActivity();
                 finish();
             }
@@ -214,6 +215,7 @@ public class QuestionActivity extends AppCompatActivity {
                 // Display accuracy of answer
                 if (choice != null) {
                     questionController.requestSubmitResponse(choice);
+                    confirmButton.setEnabled(false);
                     startQuestionAnswerActivity();
                     finish();
                 } else {
@@ -248,8 +250,9 @@ public class QuestionActivity extends AppCompatActivity {
             @Override
             public boolean onEditorAction(TextView view, int actionId, KeyEvent event) {
                 boolean handled = false;
-                if (actionId == EditorInfo.IME_ACTION_SEND) {
-                    writtenAnswerChecker(view, editText, userAnswerLayout);
+                if (actionId == EditorInfo.IME_ACTION_SEND &&
+                        writtenAnswerChecker(view, editText, userAnswerLayout)) {
+                    startQuestionAnswerActivity();
                     handled = true;
                 }
                 return handled;
@@ -257,10 +260,16 @@ public class QuestionActivity extends AppCompatActivity {
         });
 
         // Set listener for submit button
-        Button submit = findViewById(R.id.question_submit_button);
+        final Button submit = findViewById(R.id.question_submit_button);
         submit.setOnClickListener(new View.OnClickListener() {
             public void onClick(View view) {
-                writtenAnswerChecker(view, editText, userAnswerLayout);
+                submit.setEnabled(false);
+                if (writtenAnswerChecker(view, editText, userAnswerLayout)) {
+                    startQuestionAnswerActivity();
+                    return;
+                } else {
+                    submit.setEnabled(true);
+                };
             }
         });
     }
@@ -279,11 +288,10 @@ public class QuestionActivity extends AppCompatActivity {
      *
      * @param view, editText
      */
-    private void writtenAnswerChecker(View view, EditText editText, TextInputLayout userAnswerLayout) {
-        //TextInputLayout userAnswerLayout = findViewById(R.id.written_user_answer_wrapper_til);
-
+    private boolean writtenAnswerChecker(View view, EditText editText, TextInputLayout userAnswerLayout) {
         if (editText.getText().length() == 0) {
             userAnswerLayout.setError("Answer is too short.");
+            return false;
         } else {
             userAnswerLayout.setErrorEnabled(false);
             Toast.makeText(view.getContext(), "Answer Submitted!", Toast.LENGTH_SHORT).show();
@@ -293,7 +301,7 @@ public class QuestionActivity extends AppCompatActivity {
                     hideSoftInputFromWindow(view.getWindowToken(), InputMethodManager.HIDE_NOT_ALWAYS);
 
             questionController.requestSubmitResponse(editText.getText().toString());
-            startQuestionAnswerActivity();
+            return true;
         }
     }
 

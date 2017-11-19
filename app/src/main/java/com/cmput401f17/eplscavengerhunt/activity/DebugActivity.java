@@ -27,48 +27,49 @@ public class DebugActivity extends AppCompatActivity {
         setContentView(R.layout.activity_debug);
         ScavengerHuntApplication.getInstance().getAppComponent().inject(this);
 
-        Button goto_QuestionActivity = findViewById(R.id.debug_goto_questionactivity_button);
-        Button goto_LocationActivity = findViewById(R.id.debug_goto_locationactivity_button);
-        Button goto_congratulationsActivity = findViewById(R.id.debug_goto_congratulationsactivity_button);
-        Button goto_resultsActivity = findViewById(R.id.debug_goto_resultsactivity_button);
+        final Button goto_QuestionActivity = findViewById(R.id.debug_goto_questionactivity_button);
+        final Button goto_LocationActivity = findViewById(R.id.debug_goto_locationactivity_button);
+        final Button goto_congratulationsActivity = findViewById(R.id.debug_goto_congratulationsactivity_button);
+        final Button goto_resultsActivity = findViewById(R.id.debug_goto_resultsactivity_button);
 
         // User click leads them to LocationActivity
-        goto_LocationActivity.setOnClickListener(new View.OnClickListener() {
-            public void onClick(View v) {
-                Log.d("DebugActivity", "Going to LocationActivity");
-                Intent intent = new Intent(DebugActivity.this, LocationActivity.class);
-                startActivity(intent);
+                goto_LocationActivity.setOnClickListener(new View.OnClickListener() {
+                    public void onClick(View v) {
+                        Intent intent = new Intent(DebugActivity.this, LocationActivity.class);
+                        goto_LocationActivity.setEnabled(false);
+                        startActivity(intent);
+                        finish();
             }
         });
 
         // User click leads them to QuestionActivity
         goto_QuestionActivity.setOnClickListener(new View.OnClickListener() {
             public void onClick(View v) {
-                Log.d("DebugActivity", "Going to QuestionActivity");
                 Intent intent = new Intent(DebugActivity.this, QuestionActivity.class);
+                goto_QuestionActivity.setEnabled(false);
                 startActivity(intent);
+                finish();
             }
         });
 
         // User click leads them to CongratulationsActivity
         goto_congratulationsActivity.setOnClickListener(new View.OnClickListener() {
             public void onClick(View v) {
-                Log.d("DebugActivity", "Going to CongratulationsActivity");
                 Intent intent = new Intent(DebugActivity.this, CongratulationsActivity.class);
+                goto_congratulationsActivity.setEnabled(false);
                 startActivity(intent);
+                finish();
             }
         });
 
         // User click leads them to SummaryActivity
         goto_resultsActivity.setOnClickListener(new View.OnClickListener() {
             public void onClick(View v) {
-                Log.d("DebugActivity", "Going to SummaryActivity");
                 Intent intent = new Intent(DebugActivity.this, SummaryActivity.class);
+                goto_resultsActivity.setEnabled(false);
                 startActivity(intent);
+                finish();
             }
         });
-
-        // TextView dagger = findViewById(R.id.dagger);
-        // dagger.setText(gameController.initGame());
     }
 }

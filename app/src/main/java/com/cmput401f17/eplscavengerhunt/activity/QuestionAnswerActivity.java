@@ -60,9 +60,9 @@ public class QuestionAnswerActivity extends AppCompatActivity {
         final Question question = questionController.requestQuestion();
         final Response response = questionController.requestResponse();
 
-        boolean playerIsCorrect = false;
         // Compare the first character for multiple choice questions
         // 'T' of 'F' and 'A'/'B'/'C'/'D'
+        boolean playerIsCorrect = false;
         if (question instanceof MultipleChoiceQuestion && !response.getResponseStr().isEmpty()) {
             if (question.getAnswer().charAt(0) == response.getResponseStr().charAt(0)) {
                 playerIsCorrect = true;
@@ -124,6 +124,7 @@ public class QuestionAnswerActivity extends AppCompatActivity {
         }
         doneButton.setOnClickListener(new View.OnClickListener() {
             public void onClick(View v) {
+                doneButton.setEnabled(false);
                 startActivity(intent);
                 finish();
             }
