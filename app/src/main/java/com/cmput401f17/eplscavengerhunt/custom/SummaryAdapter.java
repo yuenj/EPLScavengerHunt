@@ -58,7 +58,7 @@ public class SummaryAdapter extends BaseAdapter {
         answerTV.setText(question.getAnswer());
         zoneTV.setText("Zone " + zone.getName());
         zoneTV.setBackgroundColor(Color.parseColor(zone.getColor()));
-        areaTV.setText(zone.getArea());
+        areaTV.setText(zone.getCategory());
         summaryContentRL.setBackgroundColor(Color.parseColor(zone.getColor()));
         question.setImageLink("burrowing_owl");
         final int resourceId = parent.getResources()

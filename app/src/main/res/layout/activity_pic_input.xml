@@ -11,7 +11,7 @@
 
     <android.support.v7.widget.CardView
 
-        android:id="@+id/card_view_pic_question"
+        android:id="@+id/card_view"
         card_view:cardBackgroundColor="@color/cardBackGround"
         android:layout_gravity="center"
         android:layout_width="match_parent"
@@ -133,6 +133,7 @@
                     android:layout_marginRight="5dp"
                     android:layout_marginTop="10dp"
                     android:layout_weight="50"
+                    android:visibility="gone"
                     card_view:cardBackgroundColor="#F44336"
                     card_view:cardCornerRadius="20dp">
 
@@ -142,6 +143,7 @@
                         android:layout_height="match_parent"
                         android:layout_gravity="center"
                         android:layout_marginHorizontal="16dp"
+                        android:visibility="gone"
                         android:buttonTint="#ffffff"
                         android:fontFamily="@font/roboto_regular"
                         android:text="Peregrine Falcon"
@@ -160,6 +162,7 @@
                     android:layout_marginRight="10dp"
                     android:layout_marginTop="10dp"
                     android:layout_weight="50"
+                    android:visibility="gone"
                     card_view:cardBackgroundColor="#673AB7"
                     card_view:cardCornerRadius="20dp">
 
@@ -169,6 +172,7 @@
                         android:layout_height="match_parent"
                         android:layout_gravity="center"
                         android:layout_marginHorizontal="16dp"
+                        android:visibility="gone"
                         android:buttonTint="#ffffff"
                         android:fontFamily="@font/roboto_regular"
                         android:text="Burrowing Owl"
@@ -195,6 +199,7 @@
                     android:layout_marginRight="5dp"
                     android:layout_marginTop="5dp"
                     android:layout_weight="50"
+                    android:visibility="gone"
                     card_view:cardBackgroundColor="#03A9F4"
                     card_view:cardCornerRadius="20dp">
 
@@ -204,6 +209,7 @@
                         android:layout_height="match_parent"
                         android:layout_gravity="center"
                         android:layout_marginHorizontal="16dp"
+                        android:visibility="gone"
                         android:buttonTint="#ffffff"
                         android:fontFamily="@font/roboto_regular"
                         android:text="Humming Bird"
@@ -222,6 +228,7 @@
                     android:layout_marginRight="10dp"
                     android:layout_marginTop="5dp"
                     android:layout_weight="50"
+                    android:visibility="gone"
                     card_view:cardBackgroundColor="#4CAF50"
                     card_view:cardCornerRadius="20dp">
 
@@ -231,6 +238,7 @@
                         android:layout_height="match_parent"
                         android:layout_gravity="center"
                         android:layout_marginHorizontal="16dp"
+                        android:visibility="gone"
                         android:buttonTint="#ffffff"
                         android:fontFamily="@font/roboto_regular"
                         android:text="Barn Owl"
