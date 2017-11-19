@@ -5,6 +5,7 @@ import android.graphics.Color;
 import android.os.Bundle;
 import android.support.v7.app.AppCompatActivity;
 import android.support.v7.widget.CardView;
+import android.util.Log;
 import android.view.View;
 import android.widget.Button;
 import android.widget.ImageView;
@@ -16,6 +17,7 @@ import com.cmput401f17.eplscavengerhunt.controller.GameController;
 import com.cmput401f17.eplscavengerhunt.controller.LocationController;
 import com.cmput401f17.eplscavengerhunt.controller.QuestionController;
 import com.cmput401f17.eplscavengerhunt.model.MultipleChoiceQuestion;
+import com.cmput401f17.eplscavengerhunt.model.PicInputQuestion;
 import com.cmput401f17.eplscavengerhunt.model.Question;
 import com.cmput401f17.eplscavengerhunt.model.Response;
 import com.cmput401f17.eplscavengerhunt.model.ScavHuntState;
@@ -61,7 +63,8 @@ public class QuestionAnswerActivity extends AppCompatActivity {
 
         boolean playerIsCorrect = false;
         // Compare the first character for multiple choice questions
-        if (question instanceof MultipleChoiceQuestion) {
+        // 'T' of 'F' and 'A'/'B'/'C'/'D'
+        if (question instanceof MultipleChoiceQuestion && !response.getResponseStr().isEmpty()) {
             if (question.getAnswer().charAt(0) == response.getResponseStr().charAt(0)) {
                 playerIsCorrect = true;
             }
@@ -72,7 +75,8 @@ public class QuestionAnswerActivity extends AppCompatActivity {
                     equals(response.getResponseStr().toLowerCase().replaceAll("\\s+", ""));
         }
         // TODO: Define this later for pic input questions
-        else {
+        // Else if instead of else for the case where a user skips the question
+        else if (question instanceof PicInputQuestion){
             playerIsCorrect = true;
         }
 
