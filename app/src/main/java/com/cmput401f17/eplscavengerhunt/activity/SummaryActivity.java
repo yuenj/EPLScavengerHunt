@@ -51,6 +51,7 @@ public class SummaryActivity extends AppCompatActivity {
                 Log.d("SummaryActivity", "going to TitleActivity");
                 Intent intent = new Intent(SummaryActivity.this, TitleActivity.class);
                 startActivity(intent);
+                finish();
             }
         });
     }
