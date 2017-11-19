@@ -11,7 +11,6 @@ import android.support.annotation.NonNull;
 import android.support.design.widget.TextInputLayout;
 import android.support.v7.app.AppCompatActivity;
 import android.support.v7.widget.CardView;
-import android.util.Log;
 import android.view.KeyEvent;
 import android.view.View;
 import android.view.inputmethod.EditorInfo;
@@ -269,7 +268,7 @@ public class QuestionActivity extends AppCompatActivity {
                     return;
                 } else {
                     submit.setEnabled(true);
-                };
+                }
             }
         });
     }
