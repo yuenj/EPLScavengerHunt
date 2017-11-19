@@ -364,6 +364,7 @@ public class QuestionActivity extends AppCompatActivity {
                 // display correctness of the response in the next screen
                 if (choice != null && hasImage(picTakenIV)) {
                     questionController.requestSubmitResponse(choice);
+                    confirmButton.setEnabled(false);
                     startQuestionAnswerActivity();
                     finish();
                 } else if (!hasImage(picTakenIV)) {
