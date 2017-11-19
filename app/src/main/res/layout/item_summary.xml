@@ -74,18 +74,6 @@
                             android:textColor="#ffffffff"
                             android:textSize="14sp" />
 
-                        <Button
-                            android:id="@+id/button_summary_seemore"
-                            android:layout_width="wrap_content"
-                            android:layout_height="wrap_content"
-                            android:layout_alignBottom="@id/TV_summary_answer"
-                            android:layout_alignParentRight="true"
-                            android:background="#00000000"
-                            android:fontFamily="@font/roboto_medium"
-                            android:text="SEE MORE..."
-                            android:textColor="#ffffffff"
-                            android:textSize="14sp" />
-
                     </RelativeLayout>
                 </LinearLayout>
             </FrameLayout>
