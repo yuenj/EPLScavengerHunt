@@ -34,18 +34,19 @@ import com.cmput401f17.eplscavengerhunt.model.PicInputQuestion;
 import com.cmput401f17.eplscavengerhunt.model.Question;
 import com.cmput401f17.eplscavengerhunt.model.WrittenInputQuestion;
 
-import org.w3c.dom.Text;
-
 import java.io.File;
 import java.util.Arrays;
 import java.util.List;
 import javax.inject.Inject;
 
 public class QuestionActivity extends AppCompatActivity {
+
     @Inject
     QuestionController questionController;
+
     @Inject
     GameController gameController;
+
     @Inject
     LocationController locationController;
 

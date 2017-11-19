@@ -35,8 +35,6 @@ public class LocationActivity extends AppCompatActivity {
         ScavengerHuntApplication.getInstance().getAppComponent().inject(this);
         setContentView(R.layout.activity_location);
 
-
-
         button = findViewById(R.id.location_loading_indicator_fab);
         button.showProgress(true);
     }
@@ -52,8 +50,6 @@ public class LocationActivity extends AppCompatActivity {
         message.setText("Go to the " + locationController.requestZone().getName() + " area!");
 
         //Set Card colour of activity to be zone specific colour
-
-
 
         //View view = this.getWindow().getDecorView();
         //view.setBackgroundColor(Color.parseColor(locationController.requestZone().getColor()));
