@@ -5,6 +5,7 @@
     android:keepScreenOn="true"
     android:background="@drawable/bg_yellow"
     android:orientation="vertical"
+    android:padding="15dp"
     android:weightSum="100">
 
     <ImageView
