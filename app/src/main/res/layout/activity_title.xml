@@ -34,7 +34,7 @@
                 android:paddingHorizontal="15dp"
                 android:text="Scavenger Hunt"
                 android:textColor="@color/colorLightText"
-                android:textSize="48sp" />
+                android:textSize="40sp" />
 
         </android.support.v7.widget.CardView>
     </LinearLayout>
