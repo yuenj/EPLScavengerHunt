@@ -109,12 +109,11 @@
 
     <ImageView
         android:id="@+id/logo"
-        android:layout_width="200dp"
+        android:layout_width="match_parent"
         android:layout_height="0dp"
         android:layout_below="@id/title_buttons"
-        android:layout_gravity="left"
         android:layout_weight="20"
-        android:paddingLeft="15dp"
-        android:src="@drawable/epl_logo" />
+        android:paddingLeft="10dp"
+        android:src="@drawable/epl_logo2" />
 
 </LinearLayout>
