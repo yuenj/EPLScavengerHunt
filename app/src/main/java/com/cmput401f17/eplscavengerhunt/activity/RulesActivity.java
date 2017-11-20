@@ -27,16 +27,15 @@ public class RulesActivity extends AppCompatActivity {
         setContentView(R.layout.activity_rules);
         ScavengerHuntApplication.getInstance().getAppComponent().inject(this);
 
-        Button startButton = findViewById(R.id.rules_start_button);
-        Button returnButton = findViewById(R.id.rules_return_button);
+        final Button startButton = findViewById(R.id.rules_start_button);
+        final Button returnButton = findViewById(R.id.rules_return_button);
 
         // User click leads them to the start of the game
         startButton.setOnClickListener(new View.OnClickListener() {
             public void onClick(View v) {
-                Log.d("RulesActivity", "Start Button Pressed");
-                //Intent intent = new Intent(RulesActivity.this, LocationActivity.class);
                 Intent intent = new Intent(RulesActivity.this, DebugActivity.class);
-                gameController.initScav();
+                startButton.setEnabled(false);
+                gameController.initGame();
                 startActivity(intent);
                 finish();
             }
@@ -45,8 +44,8 @@ public class RulesActivity extends AppCompatActivity {
         // User click leads them to the previous screen
         returnButton.setOnClickListener(new View.OnClickListener() {
             public void onClick(View v) {
-                Log.d("RulesActivity", "Return Button Pressed");
                 Intent intent = new Intent(RulesActivity.this, TitleActivity.class);
+                returnButton.setEnabled(false);
                 startActivity(intent);
                 finish();
             }

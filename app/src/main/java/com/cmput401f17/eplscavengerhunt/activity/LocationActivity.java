@@ -32,8 +32,8 @@ public class LocationActivity extends AppCompatActivity {
     @Override
     protected void onCreate(Bundle savedInstanceState) {
         super.onCreate(savedInstanceState);
-        ScavengerHuntApplication.getInstance().getAppComponent().inject(this);
         setContentView(R.layout.activity_location);
+        ScavengerHuntApplication.getInstance().getAppComponent().inject(this);
 
         button = findViewById(R.id.location_loading_indicator_fab);
         button.showProgress(true);
@@ -45,14 +45,8 @@ public class LocationActivity extends AppCompatActivity {
         locationController.startDiscovery();
 
         // I've put the message setting here because we need to call requestZone only after
-        // the current stage has been incremented from -1 to 0
         TextView message = findViewById(R.id.location_next_zone_text_view);
         message.setText("Go to the " + locationController.requestZone().getName() + " area!");
-
-        //Set Card colour of activity to be zone specific colour
-
-        //View view = this.getWindow().getDecorView();
-        //view.setBackgroundColor(Color.parseColor(locationController.requestZone().getColor()));
 
         CardView locationCard = (CardView)findViewById(R.id.card_view_location);
         locationCard.setCardBackgroundColor(Color.parseColor(locationController.requestZone().getColor()));
@@ -86,7 +80,9 @@ public class LocationActivity extends AppCompatActivity {
                         }
                     }, 700);
 
-                } else { // This shouldn't go off
+                }
+                // TODO: Figure out what to do here if it ever happens
+                else {
                     Log.d("LocationListener", "False Return");
                 }
             }
