@@ -179,8 +179,7 @@ public class QuestionActivity extends AppCompatActivity {
         final Button confirmButton = findViewById(R.id.button_mc_confirm);
 
         // Get question data
-        final MultipleChoiceQuestion question = (MultipleChoiceQuestion) questionController.requestQuestion();
-        final List<String> choices = question.getChoices();
+        final List<String> choices = currentQuestion.getChoices();
 
         // Set choice lists
         final List<CardView> choiceCardViews = Arrays.asList(choiceOneCV, choiceTwoCV,
@@ -232,7 +231,7 @@ public class QuestionActivity extends AppCompatActivity {
         final EditText editText = findViewById(R.id.written_user_answer_edit_text);
 
         final ImageView pictureIV = findViewById(R.id.question_picture);
-        Picasso.with(getApplicationContext()).load(currentQuestion.getImageLink()).into(pictureIV);
+        Picasso.with(getApplicationContext()).load(currentQuestion.getImageLink()).fit().into(pictureIV);
 
         // Set views
         displayCategory();
@@ -328,8 +327,7 @@ public class QuestionActivity extends AppCompatActivity {
                 choiceThreeRB, choiceFourRB);
 
         // Get question data
-        final PicInputQuestion question = (PicInputQuestion) questionController.requestQuestion();
-        final List<String> choices = question.getChoices();
+        final List<String> choices = currentQuestion.getChoices();
 
         // Set views
         displayCategory();
