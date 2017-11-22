@@ -192,12 +192,7 @@ public class QuestionActivity extends AppCompatActivity {
         displayCategory();
         displayPrompt();
         displayChoices(choiceCardViews, choiceRadioButtons, choices);
-
-        // TODO: use question.getImageLink() instead of "burrowing_owl"
-        final int resourceId = this.getResources().getIdentifier("burrowing_owl", "drawable", this.getPackageName());
-        final Drawable drawable = this.getResources().getDrawable(resourceId);
         Picasso.with(getApplicationContext()).load(currentQuestion.getImageLink()).into(pictureIV);
-        promptTV.setText("Question: " +currentQuestion.getPrompt());
 
         // TODO: in multiple choice question model - create a guard against setting more than four choices when we retrieve from DB
         // and validate there's at least min num of choices
