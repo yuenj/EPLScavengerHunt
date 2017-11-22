@@ -192,7 +192,7 @@ public class QuestionActivity extends AppCompatActivity {
         displayCategory();
         displayPrompt();
         displayChoices(choiceCardViews, choiceRadioButtons, choices);
-        Picasso.with(getApplicationContext()).load(currentQuestion.getImageLink()).into(pictureIV);
+        Picasso.with(getApplicationContext()).load(currentQuestion.getImageLink()).fit().into(pictureIV);
 
         // TODO: in multiple choice question model - create a guard against setting more than four choices when we retrieve from DB
         // and validate there's at least min num of choices
