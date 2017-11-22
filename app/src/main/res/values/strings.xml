@@ -21,13 +21,13 @@
     <string name="goto_resultsActivity_text">goto ResultsActivity</string>
 
     <!-- RulesActivity -->
-    <string name="rules_text">Welcome to the EPL scavenger hunt game!  In this game, you will be traveling to different locations within the library and answering questions related to [Alberta nature].
-    \n1. When the game starts, visit the location shown on the screen
-    \n2. Use the environment to help you answer the question on the screen
-    \n3. If you’re really stuck, you can choose to skip the question
-    \n4. Proceed to the next location indicated on the screen
-\nVisit all [5] locations!
-</string>
+    <string name="rules_welcome_msg_1">Welcome to the EPL scavenger hunt game! </string>
+    <string name="rules_welcome_msg_2">In this game, you will be traveling to different locations within the library and answering questions related to Alberta nature.</string>
+    <string name="rules_welcome_msg_3">1. When the game starts, visit the location shown on the screen</string>
+    <string name="rules_welcome_msg_4">2. Use the environment to help you answer the question on the screen</string>
+    <string name="rules_welcome_msg_5">3. If you’re really stuck, you can choose to skip the question</string>
+    <string name="rules_welcome_msg_6">4. Proceed to the next location indicated on the screen</string>
+    <string name="rules_welcome_msg_7">5. Visit all 5 locations!</string>
 
     <!-- CreditsActivity -->
     <string name="credits_text">Credits due to those who deserve credits. (TEMPORARY).</string>
