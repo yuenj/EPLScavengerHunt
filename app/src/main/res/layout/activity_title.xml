@@ -6,6 +6,7 @@
     android:keepScreenOn="true"
     android:orientation="vertical"
     android:weightSum="100"
+    android:background="@drawable/texture_background_2"
     tools:context="com.cmput401f17.eplscavengerhunt.activity.TitleActivity">
 
 
