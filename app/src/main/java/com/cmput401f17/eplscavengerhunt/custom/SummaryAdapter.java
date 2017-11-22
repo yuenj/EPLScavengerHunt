@@ -44,7 +44,6 @@ public class SummaryAdapter extends BaseAdapter {
         if (convertView == null)
             // https://stackoverflow.com/questions/24832497/avoid-passing-null-as-the-view-root-need-to-resolve-layout-parameters-on-the-in
             // 20/10/2017
-            // vi = inflater.inflate(R.layout.item_summary, null);
             vi = inflater.inflate(R.layout.item_summary, parent, false);
 
         final ImageView pictureIV = vi.findViewById(R.id.IV_summary_picture);

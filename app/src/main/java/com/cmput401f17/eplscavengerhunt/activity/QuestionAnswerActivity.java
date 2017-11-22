@@ -62,25 +62,27 @@ public class QuestionAnswerActivity extends AppCompatActivity {
 
         // Compare the first character for multiple choice questions
         // 'T' of 'F' and 'A'/'B'/'C'/'D'
-        boolean playerIsCorrect = false;
+        response.markIncorrect();
         if (question instanceof MultipleChoiceQuestion && !response.getResponseStr().isEmpty()) {
             if (question.getAnswer().charAt(0) == response.getResponseStr().charAt(0)) {
-                playerIsCorrect = true;
+                response.markCorrect();
             }
         }
         // Use Jen's method for written input questions
         else if (question instanceof WrittenInputQuestion) {
-            playerIsCorrect = question.getAnswer().toLowerCase().replaceAll("\\s+", "").
-                    equals(response.getResponseStr().toLowerCase().replaceAll("\\s+", ""));
+            if (question.getAnswer().toLowerCase().replaceAll("\\s+", "").
+                    equals(response.getResponseStr().toLowerCase().replaceAll("\\s+", ""))) {
+                response.markCorrect();
+            }
         }
         // TODO: Define this later for pic input questions
         // Else if instead of else for the case where a user skips the question
         else if (question instanceof PicInputQuestion){
-            playerIsCorrect = true;
+            response.markCorrect();
         }
 
         // Display feedback for the player
-        if (playerIsCorrect) {
+        if (response.isCorrect()) {
             final int resourceId = this.getResources().getIdentifier(
                     "ic_dolphin", "drawable", this.getPackageName());
             imageIV.setImageDrawable(this.getResources().getDrawable(resourceId));
