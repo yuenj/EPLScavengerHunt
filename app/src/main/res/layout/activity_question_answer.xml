@@ -59,7 +59,7 @@
                         android:text="@string/correct_answer_text"
                         android:textAlignment="center"
                         android:textColor="@color/colorDarkText"
-                        android:textSize="48sp" />
+                        android:textSize="36sp" />
 
                     <TextView
                         android:layout_width="wrap_content"
