@@ -1,6 +1,7 @@
 package com.cmput401f17.eplscavengerhunt.controller;
 
 import android.content.Context;
+import android.os.Handler;
 import android.support.annotation.NonNull;
 import android.util.Log;
 
@@ -61,6 +62,18 @@ public class LocationController {
      * Hacky method to get a return value
      */
     public void verifyLocation(@NonNull final SimpleCallback<Boolean> finishedCallback) {
+        // Uncomment to use this for testing
+        final Handler handler = new Handler();
+        handler.postDelayed(new Runnable() {
+            @Override
+            public void run() {
+                beaconManager.stopLocationDiscovery();
+                finishedCallback.callback(true);
+            }
+        }, 1000);
+
+        // Comment when not testing
+        /*
         beaconManager.setLocationListener(new BeaconManager.LocationListener() {
 
             @Override
@@ -81,7 +94,7 @@ public class LocationController {
 
             }
 
-        });
+        }); */
     }
 
     /**
@@ -91,6 +104,7 @@ public class LocationController {
      */
     public Zone requestZone() {
         final int currentStage = scavHuntState.getCurrentStage();
+        Log.d("HELLOOO!!", Integer.toString(currentStage));
         return scavHuntState.getZoneRoute().get(currentStage);
     }
 }

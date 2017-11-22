@@ -3,15 +3,13 @@
     xmlns:card_view="http://schemas.android.com/apk/res-auto"
     android:layout_width="match_parent"
     android:layout_height="match_parent"
+    android:keepScreenOn="true"
     android:weightSum="100"
     android:orientation="vertical">
 
-
-
-
     <android.support.v7.widget.CardView
 
-        android:id="@+id/card_view_pic_question"
+        android:id="@+id/card_view"
         card_view:cardBackgroundColor="@color/cardBackGround"
         android:layout_gravity="center"
         android:layout_width="match_parent"
@@ -134,6 +132,7 @@
                     android:layout_marginTop="10dp"
                     android:layout_weight="50"
                     card_view:cardBackgroundColor="@color/colorButtonPink"
+                    android:visibility="gone"
                     card_view:cardCornerRadius="20dp">
 
                     <RadioButton
@@ -142,6 +141,7 @@
                         android:layout_height="match_parent"
                         android:layout_gravity="center"
                         android:layout_marginHorizontal="16dp"
+                        android:visibility="gone"
                         android:buttonTint="#ffffff"
                         android:fontFamily="@font/roboto_regular"
                         android:text="Peregrine Falcon"
@@ -161,6 +161,7 @@
                     android:layout_marginTop="10dp"
                     android:layout_weight="50"
                     card_view:cardBackgroundColor="@color/colorButtonPurple"
+                    android:visibility="gone"
                     card_view:cardCornerRadius="20dp">
 
                     <RadioButton
@@ -169,6 +170,7 @@
                         android:layout_height="match_parent"
                         android:layout_gravity="center"
                         android:layout_marginHorizontal="16dp"
+                        android:visibility="gone"
                         android:buttonTint="#ffffff"
                         android:fontFamily="@font/roboto_regular"
                         android:text="Burrowing Owl"
@@ -196,6 +198,7 @@
                     android:layout_marginTop="5dp"
                     android:layout_weight="50"
                     card_view:cardBackgroundColor="@color/colorButtonBlue"
+                    android:visibility="gone"
                     card_view:cardCornerRadius="20dp">
 
                     <RadioButton
@@ -204,6 +207,7 @@
                         android:layout_height="match_parent"
                         android:layout_gravity="center"
                         android:layout_marginHorizontal="16dp"
+                        android:visibility="gone"
                         android:buttonTint="#ffffff"
                         android:fontFamily="@font/roboto_regular"
                         android:text="Humming Bird"
@@ -223,6 +227,8 @@
                     android:layout_marginTop="5dp"
                     android:layout_weight="50"
                     card_view:cardBackgroundColor="@color/colorButtonGreen"
+                    android:visibility="gone"
+
                     card_view:cardCornerRadius="20dp">
 
                     <RadioButton
@@ -231,6 +237,7 @@
                         android:layout_height="match_parent"
                         android:layout_gravity="center"
                         android:layout_marginHorizontal="16dp"
+                        android:visibility="gone"
                         android:buttonTint="#ffffff"
                         android:fontFamily="@font/roboto_regular"
                         android:text="Barn Owl"

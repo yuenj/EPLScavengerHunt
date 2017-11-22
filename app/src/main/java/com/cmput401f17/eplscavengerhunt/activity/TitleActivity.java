@@ -36,18 +36,16 @@ public class TitleActivity extends AppCompatActivity {
         setContentView(R.layout.activity_title);
         ScavengerHuntApplication.getInstance().getAppComponent().inject(this);
 
-        Button startButton = findViewById(R.id.title_start_button);
-        Button rulesButton = findViewById(R.id.title_rules_button);
-        Button aboutButton = findViewById(R.id.title_about_button);
-        Button creditsButton = findViewById(R.id.title_credits_button);
+        final Button startButton = findViewById(R.id.title_start_button);
+        final Button rulesButton = findViewById(R.id.title_rules_button);
+        final Button aboutButton = findViewById(R.id.title_about_button);
+        final Button creditsButton = findViewById(R.id.title_credits_button);
 
         // User click leads them to the start of the game
         startButton.setOnClickListener(new View.OnClickListener() {
             public void onClick(View v) {
-                Log.d("TitleActivity", "Start Button Pressed");
-                //Intent intent = new Intent(RulesActivity.this, LocationActivity.class);
                 Intent intent = new Intent(TitleActivity.this, DebugActivity.class);
-                //gameController.initScav();
+                startButton.setEnabled(false);
                 gameController.initGame();
                 startActivity(intent);
                 finish();
@@ -57,8 +55,8 @@ public class TitleActivity extends AppCompatActivity {
         // User click leads them to the rules screen
         rulesButton.setOnClickListener(new View.OnClickListener() {
             public void onClick(View v) {
-                Log.d("TitleActivity", "Rules Button Pressed");
                 Intent intent = new Intent(TitleActivity.this, RulesActivity.class);
+                rulesButton.setEnabled(false);
                 startActivity(intent);
                 finish();
             }
@@ -67,8 +65,8 @@ public class TitleActivity extends AppCompatActivity {
         // User click leads them to the about screen
         aboutButton.setOnClickListener(new View.OnClickListener() {
             public void onClick(View v) {
-                Log.d("TitleActivity", "About Button Pressed");
                 Intent intent = new Intent(TitleActivity.this, AboutActivity.class);
+                aboutButton.setEnabled(false);
                 startActivity(intent);
                 finish();
             }
@@ -77,8 +75,8 @@ public class TitleActivity extends AppCompatActivity {
         // User click leads them to the credits screen
         creditsButton.setOnClickListener(new View.OnClickListener() {
             public void onClick(View v) {
-                Log.d("TitleActivity", "Credits Button Pressed");
                 Intent intent = new Intent(TitleActivity.this, CreditsActivity.class);
+                creditsButton.setEnabled(false);
                 startActivity(intent);
                 finish();
             }

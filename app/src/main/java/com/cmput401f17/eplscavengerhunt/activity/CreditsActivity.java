@@ -20,13 +20,13 @@ public class CreditsActivity extends AppCompatActivity {
         super.onCreate(savedInstanceState);
         setContentView(R.layout.activity_credits);
 
-        Button returnButton = findViewById(R.id.credits_return_button);
+        final Button returnButton = findViewById(R.id.credits_return_button);
 
         // User click leads them to the previous screen
         returnButton.setOnClickListener(new View.OnClickListener() {
             public void onClick(View v) {
-                Log.d("CreditsActivity", "Return Button Pressed");
                 Intent intent = new Intent(CreditsActivity.this, TitleActivity.class);
+                returnButton.setEnabled(false);
                 startActivity(intent);
                 finish();
             }

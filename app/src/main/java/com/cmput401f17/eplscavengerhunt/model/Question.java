@@ -6,7 +6,7 @@ import java.util.List;
 public abstract class Question {
 
     private int questionID;
-    private String zone, prompt, solution, answer, imageLink, soundLink, branch;
+    private String zone, prompt, solution, answer, imageLink, soundLink, branch, blanks;
     private boolean takePic, skipped;
     private List<String> choices;
 
@@ -20,6 +20,7 @@ public abstract class Question {
         this.choices = null;
         this.solution = "";
         this.answer = "";
+        this.blanks = "";
         this.takePic = false;
     }
 
@@ -132,4 +133,11 @@ public abstract class Question {
         this.skipped = true;
     }
 
+    public String getBlanks() {
+        return blanks;
+    }
+
+    public void setBlanks(String blanks) {
+        this.blanks = blanks;
+    }
 }

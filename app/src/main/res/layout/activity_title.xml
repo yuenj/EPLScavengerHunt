@@ -1,96 +1,122 @@
-<RelativeLayout xmlns:android="http://schemas.android.com/apk/res/android"
-    xmlns:tools="http://schemas.android.com/tools"
+<LinearLayout xmlns:android="http://schemas.android.com/apk/res/android"
     xmlns:card_view="http://schemas.android.com/apk/res-auto"
+    xmlns:tools="http://schemas.android.com/tools"
     android:layout_width="match_parent"
     android:layout_height="match_parent"
-    android:background="@drawable/texture_background_2"
+    android:keepScreenOn="true"
+    android:orientation="vertical"
+    android:weightSum="100"
     tools:context="com.cmput401f17.eplscavengerhunt.activity.TitleActivity">
-    <android.support.v7.widget.CardView
-        android:id="@+id/card_view_title"
-        card_view:cardBackgroundColor="@color/cardBackGround"
-        android:layout_gravity="center"
+
+
+    <LinearLayout
         android:layout_width="match_parent"
-        android:layout_height="@dimen/cardViewHeight"
-        card_view:cardElevation="4dp"
-        card_view:cardCornerRadius="0dp">
-        <TextView
-            android:id="@+id/title_text"
-            android:layout_width="wrap_content"
+        android:layout_height="wrap_content"
+        android:orientation="vertical">
+
+        <android.support.v7.widget.CardView
+            android:id="@+id/card_view_title"
+            android:layout_width="match_parent"
             android:layout_height="wrap_content"
-            android:textSize="55sp"
-            android:text="Scavenger Hunt"
-            android:textColor="@color/colorLightText"
             android:layout_gravity="center"
-            android:fontFamily="sans-serif-condensed"/>
-    </android.support.v7.widget.CardView>
+            card_view:cardBackgroundColor="@color/cardBackGround"
+            card_view:cardCornerRadius="0dp"
+            card_view:cardElevation="4dp"
+            card_view:contentPaddingBottom="30dp"
+            card_view:contentPaddingTop="30dp">
+
+            <TextView
+                android:id="@+id/title_text"
+                android:layout_width="wrap_content"
+                android:layout_height="wrap_content"
+                android:layout_gravity="center"
+                android:fontFamily="@font/roboto_medium"
+                android:paddingHorizontal="15dp"
+                android:text="Scavenger Hunt"
+                android:textColor="@color/colorLightText"
+                android:textSize="48sp" />
+
+        </android.support.v7.widget.CardView>
+    </LinearLayout>
+
+    <Space
+        android:layout_width="match_parent"
+        android:layout_height="0dp"
+        android:layout_weight="10" />
+
     <LinearLayout
         android:id="@+id/title_buttons"
-        android:layout_below="@id/card_view_title"
         android:layout_width="match_parent"
-        android:layout_height="400dp"
-        android:orientation="vertical"
+        android:layout_height="0dp"
+        android:layout_below="@id/card_view_title"
+        android:layout_weight="70"
         android:gravity="center"
-        >
+        android:orientation="vertical">
 
         <Button
-            style="@style/ButtonStyle"
             android:id="@+id/title_start_button"
-            android:layout_width="wrap_content"
+            style="@style/ButtonStyle"
+            android:layout_width="match_parent"
             android:layout_height="wrap_content"
-            android:text="@string/start_button_text"
+            android:layout_marginBottom="20dp"
+            android:layout_marginHorizontal="50dp"
             android:backgroundTint="@color/colorButtonPink"
-            android:textSize="@dimen/titlePageButtonSize"
             android:paddingVertical="15dp"
-            android:paddingHorizontal="50dp"
-            android:layout_margin="10sp"/>
+            android:text="@string/start_button_text"
+            android:textAllCaps="true"
+            android:textSize="24sp" />
+
 
         <Button
-            style="@style/ButtonStyle"
             android:id="@+id/title_rules_button"
-            android:layout_width="wrap_content"
+            style="@style/ButtonStyle"
+            android:layout_width="match_parent"
             android:layout_height="wrap_content"
-            android:text="@string/rules_button_text"
+            android:layout_marginBottom="20dp"
+            android:layout_marginHorizontal="50dp"
             android:backgroundTint="@color/colorButtonPurple"
-            android:textSize="@dimen/titlePageButtonSize"
             android:paddingVertical="15dp"
-            android:paddingHorizontal="50dp"
-            android:layout_margin="10sp"/>
+            android:text="@string/rules_button_text"
+            android:textAllCaps="true"
+            android:textSize="24sp" />
+
 
         <Button
-            style="@style/ButtonStyle"
             android:id="@+id/title_about_button"
-            android:layout_width="wrap_content"
+            style="@style/ButtonStyle"
+            android:layout_width="match_parent"
             android:layout_height="wrap_content"
-            android:text="@string/about_button_text"
+            android:layout_marginBottom="20dp"
+            android:layout_marginHorizontal="50dp"
             android:backgroundTint="@color/colorButtonBlue"
-            android:textSize="@dimen/titlePageButtonSize"
             android:paddingVertical="15dp"
-            android:paddingHorizontal="50dp"
-            android:layout_margin="10sp"/>
+            android:text="@string/about_button_text"
+            android:textAllCaps="true"
+            android:textSize="24sp" />
 
         <Button
-            style="@style/ButtonStyle"
             android:id="@+id/title_credits_button"
-            android:layout_width="wrap_content"
+            style="@style/ButtonStyle"
+            android:layout_width="match_parent"
             android:layout_height="wrap_content"
-            android:layout_marginBottom="150dp"
-            android:text="@string/credits_button_text"
+            android:layout_marginBottom="20dp"
+            android:layout_marginHorizontal="50dp"
             android:backgroundTint="@color/colorButtonGreen"
-            android:textSize="@dimen/titlePageButtonSize"
             android:paddingVertical="15dp"
-            android:paddingHorizontal="50dp"
-            android:layout_margin="10sp"/>
+            android:text="@string/credits_button_text"
+            android:textAllCaps="true"
+            android:textSize="24sp" />
 
     </LinearLayout>
+
     <ImageView
         android:id="@+id/logo"
-        android:paddingTop="0sp"
-        android:paddingStart="15sp"
-        android:layout_alignParentBottom="true"
-        android:layout_width="200sp"
-        android:layout_height="100sp"
-        android:src="@drawable/epl_logo"/>
+        android:layout_width="200dp"
+        android:layout_height="0dp"
+        android:layout_below="@id/title_buttons"
+        android:layout_gravity="left"
+        android:layout_weight="20"
+        android:paddingLeft="15dp"
+        android:src="@drawable/epl_logo" />
 
-
-
-</RelativeLayout>
+</LinearLayout>

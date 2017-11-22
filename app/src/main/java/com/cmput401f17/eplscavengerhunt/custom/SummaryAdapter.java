@@ -49,7 +49,6 @@ public class SummaryAdapter extends BaseAdapter {
         final TextView zoneTV = vi.findViewById(R.id.TV_summary_zone);
         final TextView areaTV = vi.findViewById(R.id.TV_summary_area);
         final TextView answerTV = vi.findViewById(R.id.TV_summary_answer);
-        final Button seeMoreButton = vi.findViewById(R.id.button_summary_seemore);
         final RelativeLayout summaryContentRL = vi.findViewById(R.id.RL_summary_content);
 
         final Question question = questions.get(position);
@@ -58,17 +57,13 @@ public class SummaryAdapter extends BaseAdapter {
         answerTV.setText(question.getAnswer());
         zoneTV.setText("Zone " + zone.getName());
         zoneTV.setBackgroundColor(Color.parseColor(zone.getColor()));
-        areaTV.setText(zone.getArea());
+        areaTV.setText(zone.getCategory());
         summaryContentRL.setBackgroundColor(Color.parseColor(zone.getColor()));
         question.setImageLink("burrowing_owl");
         final int resourceId = parent.getResources()
                 .getIdentifier(question.getImageLink(), "drawable", activity.getPackageName());
         final Drawable drawable = parent.getResources().getDrawable(resourceId);
         pictureIV.setImageDrawable(drawable);
-
-        // TODO seeMoreButton should open a dialog with more info
-        // about e.g. question prompt, users response, detailed answer (see Lydia's
-        // examples in google drive
 
         return vi;
     }
