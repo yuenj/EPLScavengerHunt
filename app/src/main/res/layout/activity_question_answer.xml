@@ -4,8 +4,8 @@
     android:id="@+id/LL_question_answer_background"
     android:layout_width="match_parent"
     android:layout_height="match_parent"
-    android:keepScreenOn="true"
     android:background="@drawable/texture_background"
+    android:keepScreenOn="true"
     android:orientation="vertical"
     android:padding="20dp">
 

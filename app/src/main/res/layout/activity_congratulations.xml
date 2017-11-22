@@ -2,8 +2,8 @@
 <LinearLayout xmlns:android="http://schemas.android.com/apk/res/android"
     android:layout_width="match_parent"
     android:layout_height="match_parent"
-    android:keepScreenOn="true"
     android:background="@drawable/bg_yellow"
+    android:keepScreenOn="true"
     android:orientation="vertical"
     android:padding="15dp"
     android:weightSum="100">
@@ -12,41 +12,56 @@
         android:id="@+id/IV_congrats_victory"
         android:layout_width="match_parent"
         android:layout_height="0dp"
-        android:layout_weight="80"
-        android:contentDescription="@string/congrats_trophy_content_description"
+        android:layout_weight="70"
+        android:contentDescription="@string/congrats_image_content_description"
         android:paddingHorizontal="10dp"
-        android:src="@drawable/trophy" />
+        android:src="@drawable/ic_catapillar" />
 
-    <TextView
-        android:id="@+id/TV_congrats_msg_header"
+    <LinearLayout
         android:layout_width="match_parent"
         android:layout_height="0dp"
-        android:layout_weight="10"
-        android:text="@string/congrats_msg_header"
-        android:textAlignment="center"
-        android:textColor="#ffffffff"
-        android:textSize="34sp" />
+        android:layout_weight="30"
+        android:orientation="vertical">
 
-    <TextView
-        android:id="@+id/TV_congrats_msg_body"
-        android:layout_width="match_parent"
-        android:layout_height="wrap_content"
-        android:paddingBottom="10dp"
-        android:paddingHorizontal="10dp"
-        android:text="@string/congrats_msg_body"
-        android:textAlignment="center"
-        android:textColor="#ffffffff"
-        android:textSize="24sp" />
+        <TextView
+            android:id="@+id/TV_congrats_msg_header"
+            android:layout_width="match_parent"
+            android:layout_height="wrap_content"
+            android:layout_gravity="center"
+            android:fontFamily="@font/roboto_black"
+            android:paddingHorizontal="5dp"
+            android:paddingTop="5dp"
+            android:text="@string/congrats_msg_header"
+            android:textAlignment="center"
+            android:textColor="#ffffffff"
+            android:textSize="36sp" />
+
+        <TextView
+            android:id="@+id/TV_congrats_msg_body"
+            android:layout_width="match_parent"
+            android:layout_height="wrap_content"
+            android:layout_gravity="center"
+            android:fontFamily="@font/roboto_medium"
+            android:padding="5dp"
+            android:text="@string/congrats_msg_body"
+            android:textAlignment="center"
+            android:textColor="#ffffffff"
+            android:textSize="24sp" />
+    </LinearLayout>
 
     <Button
         android:id="@+id/button_congrats_view_summary"
+        style="@style/ButtonStyle"
         android:layout_width="wrap_content"
-        android:layout_height="0dp"
+        android:layout_height="wrap_content"
         android:layout_gravity="center"
-        android:layout_weight="10"
-        android:background="#00000000"
+        android:layout_marginBottom="16dp"
+        android:layout_marginTop="10dp"
+        android:backgroundTint="@color/cardBackGround"
+        android:fontFamily="@font/roboto_medium"
+        android:padding="15dp"
         android:text="@string/goto_summary_activity_text"
         android:textAllCaps="true"
-        android:textColor="#ffffffff" />
+        android:textColor="@color/colorLightText" />
 
 </LinearLayout>
