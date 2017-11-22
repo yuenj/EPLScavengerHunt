@@ -105,7 +105,7 @@ public class QuestionActivity extends AppCompatActivity {
         TextView zoneView = findViewById(R.id.question_zone_text_view);
         CardView card = findViewById(R.id.card_view);
 
-        zoneView.setText(locationController.requestZone().getCategory() + " : " + locationController.requestZone().getName());
+        zoneView.setText("Category: " + locationController.requestZone().getCategory() + ", Zone: " + locationController.requestZone().getName());
         card.setCardBackgroundColor(Color.parseColor(locationController.requestZone().getColor()));
     }
 
