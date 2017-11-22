@@ -14,8 +14,10 @@ import android.widget.RelativeLayout;
 import android.widget.TextView;
 
 import com.cmput401f17.eplscavengerhunt.R;
+import com.cmput401f17.eplscavengerhunt.model.MultipleChoiceQuestion;
 import com.cmput401f17.eplscavengerhunt.model.Question;
 import com.cmput401f17.eplscavengerhunt.model.Zone;
+import com.squareup.picasso.Picasso;
 
 import java.util.List;
 
@@ -54,16 +56,21 @@ public class SummaryAdapter extends BaseAdapter {
         final Question question = questions.get(position);
         final Zone zone = zones.get(position);
 
-        answerTV.setText(question.getAnswer());
+        // Gets the full answer instead of just 'A' or 'C'
+        if (question instanceof MultipleChoiceQuestion) {
+            for (String string: question.getChoices()) {
+                if (string.charAt(0) == question.getAnswer().charAt(0)) {
+                    answerTV.setText(string);
+                }
+            }
+        } else {
+            answerTV.setText(question.getAnswer());
+        }
         zoneTV.setText("Zone " + zone.getName());
         zoneTV.setBackgroundColor(Color.parseColor(zone.getColor()));
         areaTV.setText(zone.getCategory());
         summaryContentRL.setBackgroundColor(Color.parseColor(zone.getColor()));
-        question.setImageLink("burrowing_owl");
-        final int resourceId = parent.getResources()
-                .getIdentifier(question.getImageLink(), "drawable", activity.getPackageName());
-        final Drawable drawable = parent.getResources().getDrawable(resourceId);
-        pictureIV.setImageDrawable(drawable);
+        Picasso.with(activity).load(question.getImageLink()).into(pictureIV);
 
         return vi;
     }
