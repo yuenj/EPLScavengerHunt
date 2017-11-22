@@ -25,25 +25,26 @@
                 android:id="@+id/question_zone_text_view"
                 android:layout_width="wrap_content"
                 android:layout_height="wrap_content"
-                android:layout_marginHorizontal="10dp"
-                android:layout_marginVertical="10dp"
-                android:fontFamily="@font/roboto_medium"
-                android:text="@string/question_temp_text"
+                android:layout_marginHorizontal="@dimen/QuestionCardViewHorMarg"
+                android:layout_marginVertical="@dimen/QuestionCardViewVerMarg"
+                android:fontFamily="@font/roboto_bold"
+                android:text="@string/Temp_Zone"
                 android:textColor="@color/colorLightText"
-                android:textSize="30sp" />
+                android:textSize="@dimen/AreaNameZoneTextSize" />
+
 
             <TextView
                 android:id="@+id/question_prompt_text_view"
                 android:layout_width="match_parent"
                 android:layout_height="wrap_content"
                 android:layout_below="@id/question_zone_text_view"
-                android:layout_marginBottom="10dp"
-                android:layout_marginHorizontal="10dp"
-                android:autoSizeTextType="uniform"
+                android:layout_marginBottom="5dp"
+                android:layout_marginHorizontal="@dimen/QuestionCardViewHorMarg"
                 android:fontFamily="@font/roboto_regular"
-                android:text="This bird is 24 centimetres (9 inches) long and is easily identified by its long legs and short, barred tail. What bird am I?"
+                android:text="@string/Temp_Question"
                 android:textColor="@color/colorLightText"
-                android:textSize="20sp" />
+                android:textSize="@dimen/QuestionTextSize" />
+
         </RelativeLayout>
     </android.support.v7.widget.CardView>
 
@@ -134,7 +135,7 @@
                     android:layout_marginTop="10dp"
                     android:layout_weight="50"
                     android:visibility="gone"
-                    card_view:cardBackgroundColor="#F44336"
+                    card_view:cardBackgroundColor="@color/colorButtonPink"
                     card_view:cardCornerRadius="20dp">
 
                     <RadioButton
@@ -163,7 +164,7 @@
                     android:layout_marginTop="10dp"
                     android:layout_weight="50"
                     android:visibility="gone"
-                    card_view:cardBackgroundColor="#673AB7"
+                    card_view:cardBackgroundColor="@color/colorButtonPurple"
                     card_view:cardCornerRadius="20dp">
 
                     <RadioButton
@@ -200,7 +201,7 @@
                     android:layout_marginTop="5dp"
                     android:layout_weight="50"
                     android:visibility="gone"
-                    card_view:cardBackgroundColor="#03A9F4"
+                    card_view:cardBackgroundColor="@color/colorButtonBlue"
                     card_view:cardCornerRadius="20dp">
 
                     <RadioButton
@@ -229,7 +230,8 @@
                     android:layout_marginTop="5dp"
                     android:layout_weight="50"
                     android:visibility="gone"
-                    card_view:cardBackgroundColor="#4CAF50"
+                    card_view:cardBackgroundColor="@color/colorButtonGreen"
+
                     card_view:cardCornerRadius="20dp">
 
                     <RadioButton

@@ -1,5 +1,8 @@
 package com.cmput401f17.eplscavengerhunt.controller;
 
+import android.graphics.Bitmap;
+
+import com.cmput401f17.eplscavengerhunt.model.PicInputQuestion;
 import com.cmput401f17.eplscavengerhunt.model.Question;
 import com.cmput401f17.eplscavengerhunt.model.Response;
 import com.cmput401f17.eplscavengerhunt.model.ScavHuntState;
@@ -23,9 +26,26 @@ public class QuestionController {
      *  @pre User has input an answer
      *  @param answer       The user's answer
      */
-    public void requestSubmitResponse(final String answer){
+    public void requestSubmitResponse(final String answer) {
         Response response = new Response(answer);
         scavHuntState.addResponse(response);
+    }
+
+    /**
+     * Used to set the a users picture to the result
+     * @param answer
+     * @param imageFile
+     */
+    public void requestSubmitResponse(final String answer, Bitmap imageFile){
+        if (requestQuestion() instanceof PicInputQuestion) {
+            Response response = new Response(answer);
+            response.setImageFile(imageFile);
+            scavHuntState.addResponse(response);
+
+        } else {
+            Response response = new Response(answer);
+            scavHuntState.addResponse(response);
+        }
     }
 
     /**

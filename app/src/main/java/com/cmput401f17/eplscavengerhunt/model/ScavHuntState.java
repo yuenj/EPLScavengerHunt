@@ -69,7 +69,6 @@ public class ScavHuntState {
      * @return Boolean True if gameOver, False if not
      */
     public Boolean isGameOver() {
-        Log.d("Number of User Res",Integer.toString(playerResponses.size()));
         return playerResponses.size() == numStages;
     }
 

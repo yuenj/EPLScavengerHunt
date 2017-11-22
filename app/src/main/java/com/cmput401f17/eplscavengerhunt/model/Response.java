@@ -1,5 +1,9 @@
 package com.cmput401f17.eplscavengerhunt.model;
 
+import android.graphics.Bitmap;
+
+import java.io.File;
+
 /**
  * Holds information for the user response
  */
@@ -7,6 +11,7 @@ public class Response {
 
     private String responseStr;
     private Boolean correct;
+    private Bitmap imageFile;
 
     public Response(final String responseStr) {
         this.responseStr = responseStr;
@@ -31,5 +36,13 @@ public class Response {
 
     public void markIncorrect() {
         this.correct = false;
+    }
+
+    public Bitmap getImageFile() {
+        return imageFile;
+    }
+
+    public void setImageFile(Bitmap imageFile) {
+        this.imageFile = imageFile;
     }
 }
