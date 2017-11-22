@@ -16,6 +16,7 @@ import android.widget.TextView;
 import com.cmput401f17.eplscavengerhunt.R;
 import com.cmput401f17.eplscavengerhunt.model.MultipleChoiceQuestion;
 import com.cmput401f17.eplscavengerhunt.model.Question;
+import com.cmput401f17.eplscavengerhunt.model.Response;
 import com.cmput401f17.eplscavengerhunt.model.Zone;
 import com.squareup.picasso.Picasso;
 
@@ -28,13 +29,16 @@ public class SummaryAdapter extends BaseAdapter {
     private final Activity activity;
     private final List<Question> questions;
     private final List<Zone> zones;
+    private final List<Response> responses;
 
     public SummaryAdapter(final Activity activity,
                           final List<Question> questions,
-                          final List<Zone> zones) {
+                          final List<Zone> zones,
+                          final List<Response> responses) {
         this.activity = activity;
         this.questions = questions;
         this.zones = zones;
+        this.responses = responses;
 
         inflater = (LayoutInflater)activity.getSystemService(Context.LAYOUT_INFLATER_SERVICE);
     }
@@ -54,6 +58,22 @@ public class SummaryAdapter extends BaseAdapter {
 
         final Question question = questions.get(position);
         final Zone zone = zones.get(position);
+        final Response response = responses.get(position);
+
+        // TODO: Set this as the user's photo
+        String picture;
+        if (question.getImageLink().isEmpty()) {
+            if (response.isCorrect()) {
+                picture = "ic_dolphin";
+            } else {
+                picture = "ic_monkey_wrong";
+            }
+            final int resourceId = activity.getResources().getIdentifier(
+                    picture, "drawable", activity.getPackageName());
+            pictureIV.setImageDrawable(activity.getResources().getDrawable(resourceId));
+        } else {
+            Picasso.with(activity).load(question.getImageLink()).fit().into(pictureIV);
+        }
 
         // Gets the full answer instead of just 'A' or 'C'
         if (question instanceof MultipleChoiceQuestion) {
@@ -65,11 +85,11 @@ public class SummaryAdapter extends BaseAdapter {
         } else {
             answerTV.setText(question.getAnswer());
         }
+
         zoneTV.setText("Zone " + zone.getName());
         zoneTV.setBackgroundColor(Color.parseColor(zone.getColor()));
         areaTV.setText(zone.getCategory());
         summaryContentRL.setBackgroundColor(Color.parseColor(zone.getColor()));
-        Picasso.with(activity).load(question.getImageLink()).into(pictureIV);
 
         return vi;
     }

@@ -13,6 +13,7 @@ import com.cmput401f17.eplscavengerhunt.ScavengerHuntApplication;
 import com.cmput401f17.eplscavengerhunt.controller.GameController;
 import com.cmput401f17.eplscavengerhunt.custom.SummaryAdapter;
 import com.cmput401f17.eplscavengerhunt.model.Question;
+import com.cmput401f17.eplscavengerhunt.model.Response;
 import com.cmput401f17.eplscavengerhunt.model.Summary;
 import com.cmput401f17.eplscavengerhunt.model.Zone;
 
@@ -27,6 +28,7 @@ public class SummaryActivity extends AppCompatActivity {
 
     @Inject
     GameController gameController;
+
     private SummaryAdapter summaryAdapter;
 
     @Override
@@ -36,19 +38,19 @@ public class SummaryActivity extends AppCompatActivity {
         ScavengerHuntApplication.getInstance().getAppComponent().inject(this);
 
         final Summary summary = gameController.requestSummary();
-        Log.i("SUMMARY:", summary.getQuestions().toString());
 
         final ListView summaryContentLV = findViewById(R.id.LV_summary_content);
         final Button replayButton = findViewById(R.id.button_summary_replay);
 
         final List<Question> questions = summary.getQuestions();
         final List<Zone> zones = summary.getZones();
-        summaryAdapter = new SummaryAdapter(this, questions, zones);
+        final List<Response> responses = summary.getResponses();
+
+        summaryAdapter = new SummaryAdapter(this, questions, zones, responses);
         summaryContentLV.setAdapter(summaryAdapter);
 
         replayButton.setOnClickListener(new View.OnClickListener() {
             public void onClick(View v) {
-                Log.d("SummaryActivity", "going to TitleActivity");
                 Intent intent = new Intent(SummaryActivity.this, TitleActivity.class);
                 startActivity(intent);
                 finish();
