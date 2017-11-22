@@ -4,10 +4,11 @@
     android:layout_width="match_parent"
     android:layout_height="match_parent"
     android:keepScreenOn="true"
-    android:background="@color/cardview_light_background"
     android:orientation="vertical"
     android:weightSum="100"
+    android:background="@drawable/texture_background_2"
     tools:context="com.cmput401f17.eplscavengerhunt.activity.TitleActivity">
+
 
     <LinearLayout
         android:layout_width="match_parent"
@@ -66,6 +67,7 @@
             android:textAllCaps="true"
             android:textSize="24sp" />
 
+
         <Button
             android:id="@+id/title_rules_button"
             style="@style/ButtonStyle"
@@ -78,6 +80,7 @@
             android:text="@string/rules_button_text"
             android:textAllCaps="true"
             android:textSize="24sp" />
+
 
         <Button
             android:id="@+id/title_about_button"

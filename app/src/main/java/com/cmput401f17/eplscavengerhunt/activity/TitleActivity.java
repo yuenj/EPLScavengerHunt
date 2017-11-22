@@ -44,7 +44,7 @@ public class TitleActivity extends AppCompatActivity {
         // User click leads them to the start of the game
         startButton.setOnClickListener(new View.OnClickListener() {
             public void onClick(View v) {
-                Intent intent = new Intent(TitleActivity.this, DebugActivity.class);
+                Intent intent = new Intent(TitleActivity.this, LocationActivity.class);
                 startButton.setEnabled(false);
                 gameController.initGame();
                 startActivity(intent);

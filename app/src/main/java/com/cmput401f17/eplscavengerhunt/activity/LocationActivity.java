@@ -47,7 +47,6 @@ public class LocationActivity extends AppCompatActivity {
         // I've put the message setting here because we need to call requestZone only after
         TextView message = findViewById(R.id.location_next_zone_text_view);
         message.setText("Go to the " + locationController.requestZone().getName() + " area!");
-
         CardView locationCard = (CardView)findViewById(R.id.card_view_location);
         locationCard.setCardBackgroundColor(Color.parseColor(locationController.requestZone().getColor()));
         button.setColor(Color.parseColor(locationController.requestZone().getColor()));

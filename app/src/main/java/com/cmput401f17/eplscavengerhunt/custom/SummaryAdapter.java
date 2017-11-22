@@ -14,8 +14,12 @@ import android.widget.RelativeLayout;
 import android.widget.TextView;
 
 import com.cmput401f17.eplscavengerhunt.R;
+import com.cmput401f17.eplscavengerhunt.model.MultipleChoiceQuestion;
+import com.cmput401f17.eplscavengerhunt.model.PicInputQuestion;
 import com.cmput401f17.eplscavengerhunt.model.Question;
+import com.cmput401f17.eplscavengerhunt.model.Response;
 import com.cmput401f17.eplscavengerhunt.model.Zone;
+import com.squareup.picasso.Picasso;
 
 import java.util.List;
 
@@ -26,13 +30,16 @@ public class SummaryAdapter extends BaseAdapter {
     private final Activity activity;
     private final List<Question> questions;
     private final List<Zone> zones;
+    private final List<Response> responses;
 
     public SummaryAdapter(final Activity activity,
                           final List<Question> questions,
-                          final List<Zone> zones) {
+                          final List<Zone> zones,
+                          final List<Response> responses) {
         this.activity = activity;
         this.questions = questions;
         this.zones = zones;
+        this.responses = responses;
 
         inflater = (LayoutInflater)activity.getSystemService(Context.LAYOUT_INFLATER_SERVICE);
     }
@@ -42,7 +49,6 @@ public class SummaryAdapter extends BaseAdapter {
         if (convertView == null)
             // https://stackoverflow.com/questions/24832497/avoid-passing-null-as-the-view-root-need-to-resolve-layout-parameters-on-the-in
             // 20/10/2017
-            // vi = inflater.inflate(R.layout.item_summary, null);
             vi = inflater.inflate(R.layout.item_summary, parent, false);
 
         final ImageView pictureIV = vi.findViewById(R.id.IV_summary_picture);
@@ -53,17 +59,57 @@ public class SummaryAdapter extends BaseAdapter {
 
         final Question question = questions.get(position);
         final Zone zone = zones.get(position);
+        final Response response = responses.get(position);
 
-        answerTV.setText(question.getAnswer());
+        // TODO: Set this as the user's photo
+        String picture;
+        if (question instanceof PicInputQuestion) {
+
+            // Set to monkey or dolphin
+            if (question.isSkipped()) {
+                if (response.isCorrect()) {
+                    picture = "ic_dolphin";
+                } else {
+                    picture = "ic_monkey_wrong";
+                }
+                final int resourceId = activity.getResources().getIdentifier(
+                        picture, "drawable", activity.getPackageName());
+                pictureIV.setImageDrawable(activity.getResources().getDrawable(resourceId));
+            } else {
+                pictureIV.setImageBitmap(response.getImageFile());
+            }
+        } else {
+            Picasso.with(activity).load(question.getImageLink()).fit().into(pictureIV);
+        }
+        /*
+        if (question.getImageLink().isEmpty()) {
+            if (response.isCorrect()) {
+                picture = "ic_dolphin";
+            } else {
+                picture = "ic_monkey_wrong";
+            }
+            final int resourceId = activity.getResources().getIdentifier(
+                    picture, "drawable", activity.getPackageName());
+            pictureIV.setImageDrawable(activity.getResources().getDrawable(resourceId));
+        } else {
+            Picasso.with(activity).load(question.getImageLink()).fit().into(pictureIV);
+        } */
+
+        // Gets the full answer instead of just 'A' or 'C'
+        if (question instanceof MultipleChoiceQuestion) {
+            for (String string: question.getChoices()) {
+                if (string.charAt(0) == question.getAnswer().charAt(0)) {
+                    answerTV.setText(string);
+                }
+            }
+        } else {
+            answerTV.setText(question.getAnswer());
+        }
+
         zoneTV.setText("Zone " + zone.getName());
         zoneTV.setBackgroundColor(Color.parseColor(zone.getColor()));
         areaTV.setText(zone.getCategory());
         summaryContentRL.setBackgroundColor(Color.parseColor(zone.getColor()));
-        question.setImageLink("burrowing_owl");
-        final int resourceId = parent.getResources()
-                .getIdentifier(question.getImageLink(), "drawable", activity.getPackageName());
-        final Drawable drawable = parent.getResources().getDrawable(resourceId);
-        pictureIV.setImageDrawable(drawable);
 
         return vi;
     }

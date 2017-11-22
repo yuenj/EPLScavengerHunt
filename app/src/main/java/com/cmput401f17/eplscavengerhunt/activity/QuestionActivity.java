@@ -32,6 +32,7 @@ import com.cmput401f17.eplscavengerhunt.model.MultipleChoiceQuestion;
 import com.cmput401f17.eplscavengerhunt.model.PicInputQuestion;
 import com.cmput401f17.eplscavengerhunt.model.Question;
 import com.cmput401f17.eplscavengerhunt.model.WrittenInputQuestion;
+import com.squareup.picasso.Picasso;
 
 import java.io.File;
 import java.util.Arrays;
@@ -56,6 +57,7 @@ public class QuestionActivity extends AppCompatActivity {
     private ImageView picTakenIV;
     private CardView takeAPicCV;
     private File imageFile;
+    private Bitmap downScaledBitMap;
 
     /**
      * Choose which view to display
@@ -103,7 +105,7 @@ public class QuestionActivity extends AppCompatActivity {
         TextView zoneView = findViewById(R.id.question_zone_text_view);
         CardView card = findViewById(R.id.card_view);
 
-        zoneView.setText("Category: " + locationController.requestZone().getCategory());
+        zoneView.setText("Category: " + locationController.requestZone().getCategory() + ", Zone: " + locationController.requestZone().getName());
         card.setCardBackgroundColor(Color.parseColor(locationController.requestZone().getColor()));
     }
 
@@ -178,8 +180,7 @@ public class QuestionActivity extends AppCompatActivity {
         final Button confirmButton = findViewById(R.id.button_mc_confirm);
 
         // Get question data
-        final MultipleChoiceQuestion question = (MultipleChoiceQuestion) questionController.requestQuestion();
-        final List<String> choices = question.getChoices();
+        final List<String> choices = currentQuestion.getChoices();
 
         // Set choice lists
         final List<CardView> choiceCardViews = Arrays.asList(choiceOneCV, choiceTwoCV,
@@ -191,11 +192,7 @@ public class QuestionActivity extends AppCompatActivity {
         displayCategory();
         displayPrompt();
         displayChoices(choiceCardViews, choiceRadioButtons, choices);
-
-        // TODO: use question.getImageLink() instead of "burrowing_owl"
-        final int resourceId = this.getResources().getIdentifier("burrowing_owl", "drawable", this.getPackageName());
-        final Drawable drawable = this.getResources().getDrawable(resourceId);
-        pictureIV.setImageDrawable(drawable);
+        Picasso.with(getApplicationContext()).load(currentQuestion.getImageLink()).fit().into(pictureIV);
 
         // TODO: in multiple choice question model - create a guard against setting more than four choices when we retrieve from DB
         // and validate there's at least min num of choices
@@ -231,14 +228,11 @@ public class QuestionActivity extends AppCompatActivity {
      */
     private void displayWrittenInput() {
         setContentView(R.layout.activity_written_input);
-
-        // TODO: Use question.getImageLink() instead of "burrowing_owl"
         final TextInputLayout userAnswerLayout = findViewById(R.id.written_user_answer_wrapper_til);
         final EditText editText = findViewById(R.id.written_user_answer_edit_text);
-        final int resourceId = this.getResources().getIdentifier("burrowing_owl", "drawable", this.getPackageName());
-        final Drawable drawable = this.getResources().getDrawable(resourceId);
+
         final ImageView pictureIV = findViewById(R.id.question_picture);
-        pictureIV.setImageDrawable(drawable);
+        Picasso.with(getApplicationContext()).load(currentQuestion.getImageLink()).fit().into(pictureIV);
 
         // Set views
         displayCategory();
@@ -334,8 +328,7 @@ public class QuestionActivity extends AppCompatActivity {
                 choiceThreeRB, choiceFourRB);
 
         // Get question data
-        final PicInputQuestion question = (PicInputQuestion) questionController.requestQuestion();
-        final List<String> choices = question.getChoices();
+        final List<String> choices = currentQuestion.getChoices();
 
         // Set views
         displayCategory();
@@ -362,7 +355,7 @@ public class QuestionActivity extends AppCompatActivity {
                 }
                 // display correctness of the response in the next screen
                 if (choice != null && hasImage(picTakenIV)) {
-                    questionController.requestSubmitResponse(choice);
+                    questionController.requestSubmitResponse(choice, downScaledBitMap);
                     confirmButton.setEnabled(false);
                     startQuestionAnswerActivity();
                     finish();
@@ -402,6 +395,7 @@ public class QuestionActivity extends AppCompatActivity {
         finish();
     }
 
+    /*
     @Override
     /**
      * Display taken imageFile on imageView, and **FOR NOW** delete the fullsize photo
@@ -412,10 +406,10 @@ public class QuestionActivity extends AppCompatActivity {
     protected void onActivityResult(int requestCode, int resultCode, Intent data) {
         if (requestCode == REQUEST_IMAGE_CAPTURE && resultCode == RESULT_OK) {
             if (imageFile.exists()) {
-                Bitmap downScaledBitMap = cameraHandler.downScaleBitMap(imageFile);
+                downScaledBitMap = cameraHandler.downScaleBitMap(imageFile);
                 picTakenIV.setImageBitmap(downScaledBitMap);
                 takeAPicCV.setVisibility(View.GONE);
-                imageFile.delete();
+                //imageFile.delete();
             }
         }
     }
