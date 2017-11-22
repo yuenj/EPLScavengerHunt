@@ -6,8 +6,8 @@
     android:layout_width="match_parent"
     android:layout_height="match_parent"
     android:keepScreenOn="true"
-    android:weightSum="100"
-    android:orientation="vertical">
+    android:orientation="vertical"
+    android:weightSum="100">
 
 
     <android.support.v7.widget.CardView
@@ -27,8 +27,8 @@
                 android:id="@+id/question_zone_text_view"
                 android:layout_width="wrap_content"
                 android:layout_height="wrap_content"
-                android:layout_marginVertical="@dimen/QuestionCardViewVerMarg"
                 android:layout_marginHorizontal="@dimen/QuestionCardViewHorMarg"
+                android:layout_marginVertical="@dimen/QuestionCardViewVerMarg"
                 android:fontFamily="@font/roboto_bolditalic"
                 android:text="@string/Temp_Zone"
                 android:textColor="@color/colorLightText"
@@ -36,15 +36,16 @@
 
             <TextView
                 android:id="@+id/question_prompt_text_view"
-                android:layout_width="wrap_content"
+                android:layout_width="match_parent"
                 android:layout_height="wrap_content"
                 android:layout_below="@id/question_zone_text_view"
-                android:text="@string/Temp_Question"
                 android:layout_marginBottom="5dp"
-                android:fontFamily="@font/roboto_regular"
                 android:layout_marginHorizontal="@dimen/QuestionCardViewHorMarg"
+                android:fontFamily="@font/roboto_regular"
+                android:text="@string/Temp_Question"
                 android:textColor="@color/colorLightText"
                 android:textSize="@dimen/QuestionTextSize" />
+
         </RelativeLayout>
     </android.support.v7.widget.CardView>
 
@@ -68,7 +69,7 @@
                 android:layout_width="match_parent"
                 android:layout_height="match_parent"
                 android:scaleType="fitXY"
-                android:src="@drawable/burrowing_owl"/>
+                android:src="@drawable/burrowing_owl" />
 
         </android.support.v7.widget.CardView>
 
@@ -110,6 +111,7 @@
                 android:layout_height="wrap_content"
                 android:layout_alignParentRight="true"
                 android:backgroundTint="@color/cardBackGround"
+                android:fontFamily="@font/roboto_medium"
                 android:text="@string/submit"
                 android:textAllCaps="true"
                 android:textColor="@color/colorLightText" />
@@ -121,6 +123,7 @@
                 android:layout_height="wrap_content"
                 android:layout_alignParentLeft="true"
                 android:backgroundTint="@color/cardBackGround"
+                android:fontFamily="@font/roboto_medium"
                 android:text="@string/skip_question"
                 android:textAllCaps="true"
                 android:textColor="@color/colorLightText" />

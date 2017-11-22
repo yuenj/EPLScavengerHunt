@@ -1,76 +1,176 @@
-<RelativeLayout xmlns:android="http://schemas.android.com/apk/res/android"
-    xmlns:tools="http://schemas.android.com/tools"
+<LinearLayout xmlns:android="http://schemas.android.com/apk/res/android"
     xmlns:card_view="http://schemas.android.com/apk/res-auto"
     android:layout_width="match_parent"
     android:layout_height="match_parent"
     android:background="@color/lightBackground"
-    android:keepScreenOn="true"
-
-
-    tools:context="com.cmput401f17.eplscavengerhunt.activity.TitleActivity">
-    <android.support.v7.widget.CardView
-        android:id="@+id/card_view_rules"
-        card_view:cardBackgroundColor="@color/cardBackGround"
-        android:layout_gravity="center"
-        android:layout_width="match_parent"
-        android:layout_height="@dimen/cardViewHeight"
-        card_view:cardElevation="4dp"
-        card_view:cardCornerRadius="0dp">
-        <TextView
-            android:id="@+id/title_text"
-            android:layout_width="wrap_content"
-            android:layout_height="wrap_content"
-            android:textSize="50sp"
-            android:text="Rules"
-            android:textColor="@color/colorLightText"
-            android:layout_gravity="center"
-            android:fontFamily="sans-serif-condensed"/>
-    </android.support.v7.widget.CardView>
-
-    <TextView
-        android:id="@+id/rules_text_view"
-        android:layout_below="@id/card_view_rules"
-        android:layout_width="match_parent"
-        android:layout_height="wrap_content"
-        android:gravity="center|top"
-        android:layout_marginTop="30dp"
-        android:text="@string/rules_text"
-        android:layout_marginHorizontal="10dp"
-        android:textColor="#000"
-        android:textSize="17sp"
-        android:textStyle="bold" />
+    android:orientation="vertical"
+    android:keepScreenOn="true">
 
     <LinearLayout
-        android:id="@+id/title_buttons"
-        android:layout_below="@id/rules_text_view"
         android:layout_width="match_parent"
-        android:layout_height="400dp"
-        android:orientation="vertical"
-        android:gravity="center"
-        >
+        android:layout_height="match_parent"
+        android:background="@drawable/texture_background"
+        android:orientation="vertical">
 
-        <Button
-            style="@style/ButtonStyle"
-            android:id="@+id/rules_start_button"
-            android:layout_width="wrap_content"
-            android:layout_height="wrap_content"
-            android:text="@string/start_button_text"
-            android:backgroundTint="@color/colorButtonPink"
-            android:layout_margin="10sp"/>
+        <android.support.v7.widget.CardView
+            android:layout_width="match_parent"
+            android:layout_height="match_parent"
+            android:layout_margin="20dp"
+            card_view:cardBackgroundColor="#ffffff"
+            card_view:cardCornerRadius="30dp"
+            card_view:cardElevation="10dp">
 
-        <Button
-            style="@style/ButtonStyle"
-            android:id="@+id/rules_return_button"
-            android:layout_width="wrap_content"
-            android:layout_height="wrap_content"
-            android:text="@string/return_button_text"
-            android:backgroundTint="@color/colorButtonPurple"
-            android:layout_margin="10sp"/>
+            <LinearLayout
+                android:layout_width="match_parent"
+                android:layout_height="match_parent"
+                android:orientation="vertical">
 
+                <FrameLayout
+                    android:layout_width="match_parent"
+                    android:layout_height="wrap_content">
+
+                    <android.support.v7.widget.CardView
+                        android:layout_width="match_parent"
+                        android:layout_height="wrap_content"
+                        card_view:cardBackgroundColor="@color/cardBackGround"
+                        card_view:cardCornerRadius="30dp">
+
+                            <TextView
+                                android:id="@+id/title_text"
+                                android:layout_width="wrap_content"
+                                android:layout_height="wrap_content"
+                                android:layout_gravity="center"
+                                android:padding="16dp"
+                                android:fontFamily="@font/roboto_bold"
+                                android:text="Rules"
+                                android:textColor="@color/colorLightText"
+                                android:textSize="40sp" />
+
+                    </android.support.v7.widget.CardView>
+
+                    <TextView
+                        android:layout_width="match_parent"
+                        android:layout_height="40dp"
+                        android:layout_gravity="center_horizontal|bottom"
+                        android:background="@color/cardBackGround"/>
+
+                </FrameLayout>
+
+                <TextView
+                    android:id="@+id/rules_text_view_1"
+                    android:layout_width="match_parent"
+                    android:layout_height="wrap_content"
+                    android:paddingHorizontal="16dp"
+                    android:paddingVertical="8dp"
+                    android:text="@string/rules_welcome_msg_1"
+                    android:textColor="@color/colorDarkText"
+                    android:fontFamily="@font/roboto_regular"
+                    android:textSize="20sp" />
+
+                <TextView
+                    android:id="@+id/rules_text_view_2"
+                    android:layout_width="match_parent"
+                    android:layout_height="wrap_content"
+                    android:paddingHorizontal="16dp"
+                    android:paddingVertical="8dp"
+                    android:text="@string/rules_welcome_msg_2"
+                    android:textColor="@color/colorDarkText"
+                    android:fontFamily="@font/roboto_regular"
+                    android:textSize="18sp" />
+
+                <TextView
+                    android:id="@+id/rules_text_view_3"
+                    android:layout_width="match_parent"
+                    android:layout_height="wrap_content"
+                    android:paddingHorizontal="16dp"
+                    android:paddingVertical="3dp"
+                    android:text="@string/rules_welcome_msg_3"
+                    android:textColor="@color/colorDarkText"
+                    android:fontFamily="@font/roboto_regular"
+                    android:textSize="16sp" />
+
+                <TextView
+                    android:id="@+id/rules_text_view_4"
+                    android:layout_width="match_parent"
+                    android:layout_height="wrap_content"
+                    android:paddingHorizontal="16dp"
+                    android:paddingVertical="3dp"
+                    android:text="@string/rules_welcome_msg_4"
+                    android:textColor="@color/colorDarkText"
+                    android:fontFamily="@font/roboto_regular"
+                    android:textSize="16sp" />
+
+                <TextView
+                    android:id="@+id/rules_text_view_5"
+                    android:layout_width="match_parent"
+                    android:layout_height="wrap_content"
+                    android:paddingHorizontal="16dp"
+                    android:paddingVertical="3dp"
+                    android:text="@string/rules_welcome_msg_5"
+                    android:textColor="@color/colorDarkText"
+                    android:fontFamily="@font/roboto_regular"
+                    android:textSize="16sp" />
+
+                <TextView
+                    android:id="@+id/rules_text_view_6"
+                    android:layout_width="match_parent"
+                    android:layout_height="wrap_content"
+                    android:paddingHorizontal="16dp"
+                    android:paddingVertical="3dp"
+                    android:text="@string/rules_welcome_msg_6"
+                    android:textColor="@color/colorDarkText"
+                    android:fontFamily="@font/roboto_regular"
+                    android:textSize="16sp" />
+
+                <TextView
+                    android:id="@+id/rules_text_view_7"
+                    android:layout_width="match_parent"
+                    android:layout_height="wrap_content"
+                    android:paddingHorizontal="16dp"
+                    android:paddingVertical="3dp"
+                    android:text="@string/rules_welcome_msg_7"
+                    android:textColor="@color/colorDarkText"
+                    android:fontFamily="@font/roboto_regular"
+                    android:textSize="16sp" />
+
+                <LinearLayout
+                    android:id="@+id/title_buttons"
+                    android:layout_width="match_parent"
+                    android:layout_height="wrap_content"
+                    android:layout_gravity="bottom"
+                    android:layout_marginBottom="16dp"
+                    android:layout_marginTop="24dp"
+                    android:gravity="bottom"
+                    android:orientation="vertical">
+
+                    <Button
+                        android:id="@+id/rules_start_button"
+                        style="@style/ButtonStyle"
+                        android:layout_width="wrap_content"
+                        android:layout_height="wrap_content"
+                        android:layout_alignParentRight="true"
+                        android:layout_gravity="center"
+                        android:layout_marginBottom="10dp"
+                        android:backgroundTint="@color/colorButtonPink"
+                        android:text="@string/start_button_text"
+                        android:textAlignment="center"
+                        android:textAllCaps="true" />
+
+                    <Button
+                        android:id="@+id/rules_return_button"
+                        style="@style/ButtonStyle"
+                        android:layout_width="wrap_content"
+                        android:layout_height="wrap_content"
+                        android:layout_alignParentLeft="true"
+                        android:layout_gravity="center"
+                        android:backgroundTint="@color/colorButtonPurple"
+                        android:text="@string/return_button_text"
+                        android:textAlignment="center"
+                        android:textAllCaps="true" />
+
+                </LinearLayout>
+
+            </LinearLayout>
+        </android.support.v7.widget.CardView>
     </LinearLayout>
-
-
-
-
-
-</RelativeLayout>
+</LinearLayout>

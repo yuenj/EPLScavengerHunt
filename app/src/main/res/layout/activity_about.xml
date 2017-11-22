@@ -10,8 +10,8 @@
         android:id="@+id/about_text_view"
         android:layout_width="match_parent"
         android:layout_height="match_parent"
-        android:gravity="center"
         android:layout_marginTop="0dp"
+        android:gravity="center"
         android:text="@string/about_text"
         android:textColor="#000"
         android:textSize="25sp"
@@ -21,9 +21,9 @@
         android:id="@+id/about_return_button"
         android:layout_width="wrap_content"
         android:layout_height="wrap_content"
-        android:layout_marginBottom="100dp"
         android:layout_alignParentBottom="true"
         android:layout_centerHorizontal="true"
+        android:layout_marginBottom="100dp"
         android:text="@string/return_button_text" />
 
 </RelativeLayout>

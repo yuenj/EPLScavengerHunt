@@ -98,7 +98,8 @@ public class QuestionAnswerActivity extends AppCompatActivity {
                     messageTV.setText(getResources().getText(R.string.skipped_answer_text));
                 } else {
                     messageTV.setText(getResources().getText(R.string.wrong_answer_text));
-                    messageTV.setTextSize(30);
+                    messageTV.setPadding(5, 0, 0, 5);
+                    messageTV.setTextSize(40);
                 }
                 cardCV.setCardBackgroundColor(Color.parseColor("#EF005D"));
             }
@@ -125,7 +126,7 @@ public class QuestionAnswerActivity extends AppCompatActivity {
         }
         // End game otherwise
         else {
-            doneButton.setText("YOU'RE DONE!");
+            doneButton.setText("HURRAY!");
             intent = new Intent(QuestionAnswerActivity.this, CongratulationsActivity.class);
         }
         doneButton.setOnClickListener(new View.OnClickListener() {
