@@ -51,8 +51,7 @@
             app:fbb_progressColor="@color/colorButtonYellow"
             app:fbb_progressWidthRatio="0.1"
             app:fbb_showEndBitmap="true"
-            app:fbb_showShadow="true">
-        </view>
+            app:fbb_showShadow="true"></view>
 
     </RelativeLayout>
 </LinearLayout>

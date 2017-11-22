@@ -3,10 +3,10 @@
     xmlns:tools="http://schemas.android.com/tools"
     android:layout_width="match_parent"
     android:layout_height="match_parent"
+    android:background="@drawable/texture_background_2"
     android:keepScreenOn="true"
     android:orientation="vertical"
     android:weightSum="100"
-    android:background="@drawable/texture_background_2"
     tools:context="com.cmput401f17.eplscavengerhunt.activity.TitleActivity">
 
 

@@ -2,8 +2,8 @@
 <LinearLayout xmlns:android="http://schemas.android.com/apk/res/android"
     android:layout_width="match_parent"
     android:layout_height="match_parent"
-    android:keepScreenOn="true"
     android:background="@drawable/bg_yellow"
+    android:keepScreenOn="true"
     android:orientation="vertical"
     android:padding="15dp"
     android:weightSum="100">
@@ -27,21 +27,21 @@
             android:id="@+id/TV_congrats_msg_header"
             android:layout_width="match_parent"
             android:layout_height="wrap_content"
+            android:layout_gravity="center"
             android:fontFamily="@font/roboto_black"
+            android:paddingHorizontal="5dp"
+            android:paddingTop="5dp"
             android:text="@string/congrats_msg_header"
             android:textAlignment="center"
-            android:layout_gravity="center"
             android:textColor="#ffffffff"
-            android:paddingTop="5dp"
-            android:paddingHorizontal="5dp"
             android:textSize="36sp" />
 
         <TextView
             android:id="@+id/TV_congrats_msg_body"
             android:layout_width="match_parent"
             android:layout_height="wrap_content"
-            android:fontFamily="@font/roboto_medium"
             android:layout_gravity="center"
+            android:fontFamily="@font/roboto_medium"
             android:padding="5dp"
             android:text="@string/congrats_msg_body"
             android:textAlignment="center"
@@ -50,16 +50,16 @@
     </LinearLayout>
 
     <Button
-        style="@style/ButtonStyle"
         android:id="@+id/button_congrats_view_summary"
-        android:padding="15dp"
-        android:layout_marginTop="10dp"
-        android:layout_marginBottom="16dp"
+        style="@style/ButtonStyle"
         android:layout_width="wrap_content"
         android:layout_height="wrap_content"
         android:layout_gravity="center"
-        android:fontFamily="@font/roboto_medium"
+        android:layout_marginBottom="16dp"
+        android:layout_marginTop="10dp"
         android:backgroundTint="@color/cardBackGround"
+        android:fontFamily="@font/roboto_medium"
+        android:padding="15dp"
         android:text="@string/goto_summary_activity_text"
         android:textAllCaps="true"
         android:textColor="@color/colorLightText" />
