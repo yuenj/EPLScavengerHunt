@@ -98,8 +98,8 @@ public class QuestionAnswerActivity extends AppCompatActivity {
                     messageTV.setText(getResources().getText(R.string.skipped_answer_text));
                 } else {
                     messageTV.setText(getResources().getText(R.string.wrong_answer_text));
-                    messageTV.setPadding(5, 0, 0, 5);
-                    messageTV.setTextSize(40);
+                    //messageTV.setPadding(5, 0, 0, 5);
+                    messageTV.setTextSize(30);
                 }
                 cardCV.setCardBackgroundColor(Color.parseColor("#EF005D"));
             }
