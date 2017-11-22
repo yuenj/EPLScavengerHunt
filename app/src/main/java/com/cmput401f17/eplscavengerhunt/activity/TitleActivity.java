@@ -33,9 +33,10 @@ public class TitleActivity extends AppCompatActivity {
     @Override
     protected void onCreate(Bundle savedInstanceState) {
         super.onCreate(savedInstanceState);
-        setContentView(R.layout.activity_title);
         ScavengerHuntApplication.getInstance().getAppComponent().inject(this);
 
+        gameController.initGame();
+        setContentView(R.layout.activity_title);
         final Button startButton = findViewById(R.id.title_start_button);
         final Button rulesButton = findViewById(R.id.title_rules_button);
         final Button aboutButton = findViewById(R.id.title_about_button);
@@ -46,7 +47,6 @@ public class TitleActivity extends AppCompatActivity {
             public void onClick(View v) {
                 Intent intent = new Intent(TitleActivity.this, LocationActivity.class);
                 startButton.setEnabled(false);
-                gameController.initGame();
                 startActivity(intent);
                 finish();
             }
