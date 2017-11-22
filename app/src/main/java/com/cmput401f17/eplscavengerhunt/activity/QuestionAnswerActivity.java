@@ -82,22 +82,26 @@ public class QuestionAnswerActivity extends AppCompatActivity {
         }
 
         // Display feedback for the player
-        if (response.isCorrect()) {
-            final int resourceId = this.getResources().getIdentifier(
-                    "ic_dolphin", "drawable", this.getPackageName());
-            imageIV.setImageDrawable(this.getResources().getDrawable(resourceId));
-            messageTV.setText(getResources().getText(R.string.correct_answer_text));
+        if (question instanceof PicInputQuestion && !question.isSkipped()) {
+            imageIV.setImageBitmap(response.getImageFile());
         } else {
-            final int resourceId = this.getResources().getIdentifier(
-                    "ic_monkey_wrong", "drawable", this.getPackageName());
-            imageIV.setImageDrawable(this.getResources().getDrawable(resourceId));
-            if (question.isSkipped()) {
-                messageTV.setText(getResources().getText(R.string.skipped_answer_text));
+            if (response.isCorrect()) {
+                final int resourceId = this.getResources().getIdentifier(
+                        "ic_dolphin", "drawable", this.getPackageName());
+                imageIV.setImageDrawable(this.getResources().getDrawable(resourceId));
+                messageTV.setText(getResources().getText(R.string.correct_answer_text));
             } else {
-                messageTV.setText(getResources().getText(R.string.wrong_answer_text));
-                messageTV.setTextSize(30);
+                final int resourceId = this.getResources().getIdentifier(
+                        "ic_monkey_wrong", "drawable", this.getPackageName());
+                imageIV.setImageDrawable(this.getResources().getDrawable(resourceId));
+                if (question.isSkipped()) {
+                    messageTV.setText(getResources().getText(R.string.skipped_answer_text));
+                } else {
+                    messageTV.setText(getResources().getText(R.string.wrong_answer_text));
+                    messageTV.setTextSize(30);
+                }
+                cardCV.setCardBackgroundColor(Color.parseColor("#EF005D"));
             }
-            cardCV.setCardBackgroundColor(Color.parseColor("#EF005D"));
         }
 
         // Gets the full answer instead of just 'A' or 'C'

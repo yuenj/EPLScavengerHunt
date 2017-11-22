@@ -57,6 +57,7 @@ public class QuestionActivity extends AppCompatActivity {
     private ImageView picTakenIV;
     private CardView takeAPicCV;
     private File imageFile;
+    private Bitmap downScaledBitMap;
 
     /**
      * Choose which view to display
@@ -354,7 +355,7 @@ public class QuestionActivity extends AppCompatActivity {
                 }
                 // display correctness of the response in the next screen
                 if (choice != null && hasImage(picTakenIV)) {
-                    questionController.requestSubmitResponse(choice);
+                    questionController.requestSubmitResponse(choice, downScaledBitMap);
                     confirmButton.setEnabled(false);
                     startQuestionAnswerActivity();
                     finish();
@@ -394,6 +395,7 @@ public class QuestionActivity extends AppCompatActivity {
         finish();
     }
 
+    /*
     @Override
     /**
      * Display taken imageFile on imageView, and **FOR NOW** delete the fullsize photo
@@ -404,10 +406,10 @@ public class QuestionActivity extends AppCompatActivity {
     protected void onActivityResult(int requestCode, int resultCode, Intent data) {
         if (requestCode == REQUEST_IMAGE_CAPTURE && resultCode == RESULT_OK) {
             if (imageFile.exists()) {
-                Bitmap downScaledBitMap = cameraHandler.downScaleBitMap(imageFile);
+                downScaledBitMap = cameraHandler.downScaleBitMap(imageFile);
                 picTakenIV.setImageBitmap(downScaledBitMap);
                 takeAPicCV.setVisibility(View.GONE);
-                imageFile.delete();
+                //imageFile.delete();
             }
         }
     }

@@ -15,6 +15,7 @@ import android.widget.TextView;
 
 import com.cmput401f17.eplscavengerhunt.R;
 import com.cmput401f17.eplscavengerhunt.model.MultipleChoiceQuestion;
+import com.cmput401f17.eplscavengerhunt.model.PicInputQuestion;
 import com.cmput401f17.eplscavengerhunt.model.Question;
 import com.cmput401f17.eplscavengerhunt.model.Response;
 import com.cmput401f17.eplscavengerhunt.model.Zone;
@@ -62,6 +63,25 @@ public class SummaryAdapter extends BaseAdapter {
 
         // TODO: Set this as the user's photo
         String picture;
+        if (question instanceof PicInputQuestion) {
+
+            // Set to monkey or dolphin
+            if (question.isSkipped()) {
+                if (response.isCorrect()) {
+                    picture = "ic_dolphin";
+                } else {
+                    picture = "ic_monkey_wrong";
+                }
+                final int resourceId = activity.getResources().getIdentifier(
+                        picture, "drawable", activity.getPackageName());
+                pictureIV.setImageDrawable(activity.getResources().getDrawable(resourceId));
+            } else {
+                pictureIV.setImageBitmap(response.getImageFile());
+            }
+        } else {
+            Picasso.with(activity).load(question.getImageLink()).fit().into(pictureIV);
+        }
+        /*
         if (question.getImageLink().isEmpty()) {
             if (response.isCorrect()) {
                 picture = "ic_dolphin";
@@ -73,7 +93,7 @@ public class SummaryAdapter extends BaseAdapter {
             pictureIV.setImageDrawable(activity.getResources().getDrawable(resourceId));
         } else {
             Picasso.with(activity).load(question.getImageLink()).fit().into(pictureIV);
-        }
+        } */
 
         // Gets the full answer instead of just 'A' or 'C'
         if (question instanceof MultipleChoiceQuestion) {
