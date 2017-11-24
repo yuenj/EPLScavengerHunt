@@ -1,10 +1,33 @@
 <?xml version="1.0" encoding="utf-8"?>
 <resources>
     <dimen name = "cardViewHeight">125dp</dimen>
-    <dimen name = "titlePageButtonSize">30sp</dimen>
     <dimen name= "SkipSubmitTextSize">15sp</dimen>
     <dimen name = "QuestionTextSize">21sp</dimen>
     <dimen name = "AreaNameZoneTextSize">18sp</dimen>
     <dimen name = "QuestionCardViewHorMarg">10dp</dimen>
     <dimen name = "QuestionCardViewVerMarg">7dp</dimen>
+
+    <!-- Title -->
+    <dimen name="titleTextSize">40sp</dimen>
+    <dimen name="titlePaddingHorizontal">15dp</dimen>
+    <dimen name="titlePaddingVertical">0dp</dimen>
+    <dimen name="titleButtonPaddingVertical">15dp</dimen>
+    <dimen name="titleButtonMarginBottom">20dp</dimen>
+    <dimen name="titleButtonMarginHorizontal">50dp</dimen>
+    <dimen name="titleButtonTextSize">24sp</dimen>
+
+    <!-- Congrats -->
+    <dimen name="congratsImageLayoutWeight">70</dimen>
+    <dimen name="congratsImagePaddingHorizontal">10dp</dimen>
+    <dimen name="congratsTextLayoutWeight">30</dimen>
+    <dimen name="congratsHeaderPaddingHorizontal">5dp</dimen>
+    <dimen name="congratsHeaderPaddingTop">5dp</dimen>
+    <dimen name="congratsHeaderTextSize">36sp</dimen>
+    <dimen name="congratsBodyPadding">5dp</dimen>
+    <dimen name="congratsBodyTextSize">24sp</dimen>
+    <dimen name="congratsButtonMarginBottom">16dp</dimen>
+    <dimen name="congratsButtonMarginTop">10dp</dimen>
+    <dimen name="congratsButtonPadding">16dp</dimen>
+    <dimen name="congratsButtonTextSize">12sp</dimen>
+
 </resources>

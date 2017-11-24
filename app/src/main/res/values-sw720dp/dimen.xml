@@ -1,0 +1,18 @@
+<?xml version="1.0" encoding="utf-8"?>
+<resources>
+    <!-- For devices with smallest width "sw" of 720dp e.g. large tablets -->
+
+    <!-- Title -->
+    <dimen name="titleTextSize">92sp</dimen>
+    <dimen name="titlePaddingVertical">15dp</dimen>
+    <dimen name="titleButtonPaddingVertical">24dp</dimen>
+    <dimen name="titleButtonMarginHorizontal">92dp</dimen>
+    <dimen name="titleButtonTextSize">40dp</dimen>
+
+    <!-- Congrats -->
+    <dimen name="congratsHeaderTextSize">84sp</dimen>
+    <dimen name="congratsBodyTextSize">40sp</dimen>
+    <dimen name="congratsButtonPadding">28dp</dimen>
+    <dimen name="congratsButtonTextSize">28sp</dimen>
+
+</resources>

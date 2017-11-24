@@ -12,15 +12,15 @@
         android:id="@+id/IV_congrats_victory"
         android:layout_width="match_parent"
         android:layout_height="0dp"
-        android:layout_weight="70"
+        android:layout_weight="@dimen/congratsImageLayoutWeight"
         android:contentDescription="@string/congrats_image_content_description"
-        android:paddingHorizontal="10dp"
+        android:paddingHorizontal="@dimen/congratsImagePaddingHorizontal"
         android:src="@drawable/ic_catapillar" />
 
     <LinearLayout
         android:layout_width="match_parent"
         android:layout_height="0dp"
-        android:layout_weight="30"
+        android:layout_weight="@dimen/congratsTextLayoutWeight"
         android:orientation="vertical">
 
         <TextView
@@ -29,12 +29,12 @@
             android:layout_height="wrap_content"
             android:layout_gravity="center"
             android:fontFamily="@font/roboto_black"
-            android:paddingHorizontal="5dp"
-            android:paddingTop="5dp"
+            android:paddingHorizontal="@dimen/congratsHeaderPaddingHorizontal"
+            android:paddingTop="@dimen/congratsHeaderPaddingTop"
             android:text="@string/congrats_msg_header"
             android:textAlignment="center"
-            android:textColor="#ffffffff"
-            android:textSize="36sp" />
+            android:textColor="@color/colorLightText"
+            android:textSize="@dimen/congratsHeaderTextSize" />
 
         <TextView
             android:id="@+id/TV_congrats_msg_body"
@@ -42,11 +42,11 @@
             android:layout_height="wrap_content"
             android:layout_gravity="center"
             android:fontFamily="@font/roboto_medium"
-            android:padding="5dp"
+            android:padding="@dimen/congratsBodyPadding"
             android:text="@string/congrats_msg_body"
             android:textAlignment="center"
-            android:textColor="#ffffffff"
-            android:textSize="24sp" />
+            android:textColor="@color/colorLightText"
+            android:textSize="@dimen/congratsBodyTextSize" />
     </LinearLayout>
 
     <Button
@@ -55,13 +55,14 @@
         android:layout_width="wrap_content"
         android:layout_height="wrap_content"
         android:layout_gravity="center"
-        android:layout_marginBottom="16dp"
-        android:layout_marginTop="10dp"
+        android:layout_marginBottom="@dimen/congratsButtonMarginBottom"
+        android:layout_marginTop="@dimen/congratsButtonMarginTop"
         android:backgroundTint="@color/cardBackGround"
         android:fontFamily="@font/roboto_medium"
-        android:padding="15dp"
+        android:padding="@dimen/congratsButtonPadding"
         android:text="@string/goto_summary_activity_text"
         android:textAllCaps="true"
-        android:textColor="@color/colorLightText" />
+        android:textColor="@color/colorLightText"
+        android:textSize="@dimen/congratsButtonTextSize" />
 
 </LinearLayout>
