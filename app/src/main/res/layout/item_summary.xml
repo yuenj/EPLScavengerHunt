@@ -21,7 +21,7 @@
 
             <FrameLayout
                 android:layout_width="match_parent"
-                android:layout_height="300dp">
+                android:layout_height="@dimen/summaryLayoutHeight">
 
                 <ImageView
                     android:id="@+id/IV_summary_picture"
@@ -46,7 +46,7 @@
                         android:paddingTop="24dp"
                         android:text="Zone 1"
                         android:textColor="#ffffffff"
-                        android:textSize="24sp" />
+                        android:textSize="@dimen/summaryZoneTextSize" />
 
                     <RelativeLayout
                         android:id="@+id/RL_summary_content"
@@ -63,7 +63,7 @@
                             android:fontFamily="@font/roboto_regular"
                             android:text="Children's area"
                             android:textColor="#ffffffff"
-                            android:textSize="14sp" />
+                            android:textSize="@dimen/summaryCategoryTextSize" />
 
                         <TextView
                             android:id="@+id/TV_summary_answer"
@@ -73,7 +73,7 @@
                             android:fontFamily="@font/roboto_bold"
                             android:text="A: Rocky mountains"
                             android:textColor="#ffffffff"
-                            android:textSize="14sp" />
+                            android:textSize="@dimen/summaryAnswerTextSize" />
 
                     </RelativeLayout>
                 </LinearLayout>

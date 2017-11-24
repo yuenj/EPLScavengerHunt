@@ -61,7 +61,7 @@
             android:layout_width="match_parent"
             android:layout_height="0dp"
             android:layout_margin="10dp"
-            android:layout_weight="70"
+            android:layout_weight="100"
             card_view:cardCornerRadius="0dp">
 
             <ImageView
@@ -78,10 +78,10 @@
         <android.support.design.widget.TextInputLayout
             android:id="@+id/written_user_answer_wrapper_til"
             android:layout_width="match_parent"
-            android:layout_height="0dp"
-            android:layout_weight="20"
+            android:layout_height="wrap_content"
+            android:layout_marginHorizontal="5dp"
             android:backgroundTint="@color/colorDarkText"
-            android:textSize="30sp">
+            android:textSize="@dimen/questionAnswerPromptTextSize">
 
             <EditText
                 android:id="@+id/written_user_answer_edit_text"
@@ -91,42 +91,48 @@
                 android:imeOptions="actionSend"
                 android:inputType="textAutoCorrect"
                 android:textColor="@color/colorDarkText"
-                android:textSize="20sp" />
+                android:textSize="@dimen/questionAnswerInputTextSize" />
 
         </android.support.design.widget.TextInputLayout>
 
         <RelativeLayout
             android:layout_width="match_parent"
-            android:layout_height="0dp"
+            android:layout_height="wrap_content"
             android:layout_marginHorizontal="5dp"
             android:layout_marginVertical="5dp"
-            android:layout_weight="10"
-            android:gravity="bottom"
-            android:orientation="vertical">
+            android:gravity="bottom" >
 
             <Button
                 android:id="@+id/question_submit_button"
                 style="@style/ButtonStyle"
                 android:layout_width="wrap_content"
                 android:layout_height="wrap_content"
+                android:layout_marginHorizontal="5dp"
+                android:layout_marginVertical="5dp"
                 android:layout_alignParentRight="true"
                 android:backgroundTint="@color/cardBackGround"
                 android:fontFamily="@font/roboto_medium"
+                android:padding="@dimen/questionButtonPadding"
                 android:text="@string/submit"
                 android:textAllCaps="true"
-                android:textColor="@color/colorLightText" />
+                android:textColor="@color/colorLightText"
+                android:textSize="@dimen/questionButtonTextSize" />
 
             <Button
                 android:id="@+id/question_skip_button"
                 style="@style/ButtonStyle"
                 android:layout_width="wrap_content"
                 android:layout_height="wrap_content"
+                android:layout_marginHorizontal="5dp"
+                android:layout_marginVertical="5dp"
                 android:layout_alignParentLeft="true"
                 android:backgroundTint="@color/cardBackGround"
                 android:fontFamily="@font/roboto_medium"
+                android:padding="@dimen/questionButtonPadding"
                 android:text="@string/skip_question"
                 android:textAllCaps="true"
-                android:textColor="@color/colorLightText" />
+                android:textColor="@color/colorLightText"
+                android:textSize="@dimen/questionButtonTextSize" />
 
         </RelativeLayout>
     </LinearLayout>

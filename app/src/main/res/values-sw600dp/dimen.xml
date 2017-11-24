@@ -1,0 +1,67 @@
+<?xml version="1.0" encoding="utf-8"?>
+<resources>
+    <!-- For devices with smallest width "sw" of 600dp e.g. small tablets -->
+
+    <!-- App -->
+    <dimen name = "cardViewHeight">200dp</dimen>
+
+    <!-- Title -->
+    <dimen name="titleTextSize">72sp</dimen>
+    <dimen name="titlePaddingVertical">15dp</dimen>
+    <dimen name="titleButtonPaddingVertical">24dp</dimen>
+    <dimen name="titleButtonMarginBottom">30dp</dimen>
+    <dimen name="titleButtonMarginHorizontal">72dp</dimen>
+    <dimen name="titleButtonTextSize">36dp</dimen>
+
+    <!-- Congrats -->
+    <dimen name="congratsHeaderTextSize">72sp</dimen>
+    <dimen name="congratsBodyTextSize">36sp</dimen>
+    <dimen name="congratsButtonMarginBottom">24dp</dimen>
+    <dimen name="congratsButtonMarginTop">16dp</dimen>
+    <dimen name="congratsButtonPadding">24dp</dimen>
+    <dimen name="congratsButtonTextSize">24sp</dimen>
+
+    <!-- Location -->
+    <dimen name="locationTextSize">60sp</dimen>
+
+    <!-- Question -->
+    <dimen name ="QuestionTextSize">36sp</dimen>
+    <dimen name ="AreaNameZoneTextSize">28sp</dimen>
+    <dimen name="questionButtonTextSize">24sp</dimen>
+    <dimen name="questionButtonPadding">24dp</dimen>
+
+    <!-- Written -->
+    <dimen name="questionAnswerPromptTextSize">24sp</dimen>
+    <dimen name="questionAnswerInputTextSize">36sp</dimen>
+
+    <!-- Multiple choice -->
+    <dimen name="multipleChoiceRadioButtonTextSize">24sp</dimen>
+
+    <!-- Picture input -->
+    <dimen name="picturePromptTextSize">24sp</dimen>
+
+    <!-- Summary -->
+    <dimen name="summaryButtonTextSize">24sp</dimen>
+    <dimen name="summaryLayoutHeight">400dp</dimen>
+    <dimen name="summaryZoneTextSize">28sp</dimen>
+    <dimen name="summaryCategoryTextSize">18sp</dimen>
+    <dimen name="summaryAnswerTextSize">18sp</dimen>
+
+    <!-- Question Answer -->
+    <dimen name="questionAnswerImageWeight">60</dimen>
+    <dimen name="questionAnswerOtherWeight">40</dimen>
+    <dimen name="questionAnswerMessageTextSize">48sp</dimen>
+    <dimen name="questionAnswerDetailedMessageTextSize">36sp</dimen>
+    <dimen name="questionAnswerAnswerTextSize">32sp</dimen>
+    <dimen name="questionAnswerButtonTextSize">24sp</dimen>
+
+    <!-- Rules -->
+    <dimen name="rulesTitleTextSize">72sp</dimen>
+    <dimen name="rulesWelcomeTextSize">48sp</dimen>
+    <dimen name="rulesSecondaryHeaderTextSize">36sp</dimen>
+    <dimen name="rulesBodyTextSize">28sp</dimen>
+    <dimen name="rulesButtonTextSize">24sp</dimen>
+    <dimen name="rulesButtonPadding">24dp</dimen>
+    <dimen name="rulesButtonWidth">150dp</dimen>
+
+</resources>

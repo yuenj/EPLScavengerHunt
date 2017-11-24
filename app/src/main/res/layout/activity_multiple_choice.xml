@@ -1,6 +1,5 @@
 <?xml version="1.0" encoding="utf-8"?>
 <LinearLayout xmlns:android="http://schemas.android.com/apk/res/android"
-    xmlns:app="http://schemas.android.com/tools"
     xmlns:card_view="http://schemas.android.com/apk/res-auto"
     android:layout_width="match_parent"
     android:layout_height="match_parent"
@@ -68,8 +67,8 @@
                 android:layout_height="match_parent"
                 android:scaleType="fitXY"
                 android:src="@drawable/burrowing_owl"
-                app:riv_corner_radius="0dp"
-                app:riv_mutate_background="true" />
+                card_view:riv_corner_radius="0dp"
+                card_view:riv_mutate_background="true" />
 
         </android.support.v7.widget.CardView>
 
@@ -106,12 +105,12 @@
                         android:layout_height="match_parent"
                         android:layout_gravity="center"
                         android:layout_marginHorizontal="16dp"
-                        android:buttonTint="#ffffff"
+                        android:buttonTint="@color/colorLightText"
                         android:fontFamily="@font/roboto_regular"
                         android:text="Peregrine Falcon"
                         android:textAlignment="center"
                         android:textColor="@color/colorLightText"
-                        android:textSize="16sp"
+                        android:textSize="@dimen/multipleChoiceRadioButtonTextSize"
                         android:visibility="gone" />
 
                 </android.support.v7.widget.CardView>
@@ -135,12 +134,12 @@
                         android:layout_height="match_parent"
                         android:layout_gravity="center"
                         android:layout_marginHorizontal="16dp"
-                        android:buttonTint="#ffffff"
+                        android:buttonTint="@color/colorLightText"
                         android:fontFamily="@font/roboto_regular"
                         android:text="Burrowing Owl"
                         android:textAlignment="center"
-                        android:textColor="#ffffff"
-                        android:textSize="16sp"
+                        android:textColor="@color/colorLightText"
+                        android:textSize="@dimen/multipleChoiceRadioButtonTextSize"
                         android:visibility="gone" />
 
                 </android.support.v7.widget.CardView>
@@ -172,12 +171,12 @@
                         android:layout_height="match_parent"
                         android:layout_gravity="center"
                         android:layout_marginHorizontal="16dp"
-                        android:buttonTint="#ffffff"
+                        android:buttonTint="@color/colorLightText"
                         android:fontFamily="@font/roboto_regular"
                         android:text="Humming Bird"
                         android:textAlignment="center"
-                        android:textColor="#ffffff"
-                        android:textSize="16sp"
+                        android:textColor="@color/colorLightText"
+                        android:textSize="@dimen/multipleChoiceRadioButtonTextSize"
                         android:visibility="gone" />
 
                 </android.support.v7.widget.CardView>
@@ -201,12 +200,12 @@
                         android:layout_height="match_parent"
                         android:layout_gravity="center"
                         android:layout_marginHorizontal="16dp"
-                        android:buttonTint="#ffffff"
+                        android:buttonTint="@color/colorLightText"
                         android:fontFamily="@font/roboto_regular"
                         android:text="Barn Owl"
                         android:textAlignment="center"
-                        android:textColor="#ffffff"
-                        android:textSize="16sp"
+                        android:textColor="@color/colorLightText"
+                        android:textSize="@dimen/multipleChoiceRadioButtonTextSize"
                         android:visibility="gone" />
 
                 </android.support.v7.widget.CardView>
@@ -216,7 +215,10 @@
 
         <RelativeLayout
             android:layout_width="match_parent"
-            android:layout_height="wrap_content">
+            android:layout_height="wrap_content"
+            android:layout_marginHorizontal="5dp"
+            android:layout_marginVertical="5dp"
+            android:gravity="bottom">
 
             <Button
                 android:id="@+id/button_mc_confirm"
@@ -228,23 +230,28 @@
                 android:layout_marginVertical="5dp"
                 android:backgroundTint="@color/cardBackGround"
                 android:fontFamily="@font/roboto_medium"
+                android:padding="@dimen/questionButtonPadding"
                 android:text="@string/submit"
                 android:textAllCaps="true"
-                android:textColor="@color/colorLightText" />
+                android:textColor="@color/colorLightText"
+                android:textSize="@dimen/questionButtonTextSize" />
 
             <Button
                 android:id="@+id/question_skip_button"
                 style="@style/ButtonStyle"
                 android:layout_width="wrap_content"
                 android:layout_height="wrap_content"
+                android:layout_alignParentLeft="true"
                 android:layout_gravity="right"
                 android:layout_marginHorizontal="5dp"
                 android:layout_marginVertical="5dp"
                 android:backgroundTint="@color/cardBackGround"
                 android:fontFamily="@font/roboto_medium"
+                android:padding="@dimen/questionButtonPadding"
                 android:text="@string/skip_question"
                 android:textAllCaps="true"
-                android:textColor="@color/colorLightText" />
+                android:textColor="@color/colorLightText"
+                android:textSize="@dimen/questionButtonTextSize" />
 
         </RelativeLayout>
     </LinearLayout>
