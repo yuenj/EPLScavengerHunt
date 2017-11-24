@@ -12,6 +12,7 @@ import android.widget.TextView;
 
 import com.cmput401f17.eplscavengerhunt.R;
 import com.cmput401f17.eplscavengerhunt.ScavengerHuntApplication;
+import com.cmput401f17.eplscavengerhunt.controller.DatabaseController;
 import com.cmput401f17.eplscavengerhunt.controller.GameController;
 import com.cmput401f17.eplscavengerhunt.controller.LocationController;
 import com.cmput401f17.eplscavengerhunt.controller.QuestionController;
@@ -60,6 +61,7 @@ public class QuestionAnswerActivity extends AppCompatActivity {
         final Question question = questionController.requestQuestion();
         final Response response = questionController.requestResponse();
 
+        //DatabaseController.updateAnalyticsForQuestion(question, response);
         // Compare the first character for multiple choice questions
         // 'T' of 'F' and 'A'/'B'/'C'/'D'
         response.markIncorrect();
