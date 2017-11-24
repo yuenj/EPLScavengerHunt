@@ -36,7 +36,7 @@
     <!-- Question -->
     <dimen name="QuestionTextSize">21sp</dimen>
     <dimen name="AreaNameZoneTextSize">18sp</dimen>
-    <dimen name="questionButtonTextSize">12sp</dimen>
+    <dimen name="questionButtonTextSize">16sp</dimen>
     <dimen name="questionButtonPadding">16dp</dimen>
 
     <!-- Written -->
@@ -48,6 +48,13 @@
 
     <!-- Picture input -->
     <dimen name="picturePromptTextSize">16sp</dimen>
+
+    <!-- Summary -->
+    <dimen name="summaryButtonTextSize">16sp</dimen>
+    <dimen name="summaryLayoutHeight">300dp</dimen>
+    <dimen name="summaryZoneTextSize">24sp</dimen>
+    <dimen name="summaryCategoryTextSize">14sp</dimen>
+    <dimen name="summaryAnswerTextSize">14sp</dimen>
 
 
 </resources>
