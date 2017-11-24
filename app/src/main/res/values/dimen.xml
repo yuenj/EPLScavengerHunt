@@ -64,4 +64,13 @@
     <dimen name="questionAnswerAnswerTextSize">20sp</dimen>
     <dimen name="questionAnswerButtonTextSize">14sp</dimen>
 
+    <!-- Rules -->
+    <dimen name="rulesTitleTextSize">40sp</dimen>
+    <dimen name="rulesWelcomeTextSize">24sp</dimen>
+    <dimen name="rulesSecondaryHeaderTextSize">18sp</dimen>
+    <dimen name="rulesBodyTextSize">16sp</dimen>
+    <dimen name="rulesButtonTextSize">14sp</dimen>
+    <dimen name="rulesButtonPadding">16dp</dimen>
+    <dimen name="rulesButtonWidth">100dp</dimen>
+
 </resources>
