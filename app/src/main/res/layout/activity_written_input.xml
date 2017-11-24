@@ -61,7 +61,7 @@
             android:layout_width="match_parent"
             android:layout_height="0dp"
             android:layout_margin="10dp"
-            android:layout_weight="80"
+            android:layout_weight="100"
             card_view:cardCornerRadius="0dp">
 
             <ImageView
@@ -78,8 +78,7 @@
         <android.support.design.widget.TextInputLayout
             android:id="@+id/written_user_answer_wrapper_til"
             android:layout_width="match_parent"
-            android:layout_height="0dp"
-            android:layout_weight="20"
+            android:layout_height="wrap_content"
             android:layout_marginHorizontal="5dp"
             android:backgroundTint="@color/colorDarkText"
             android:textSize="@dimen/questionAnswerPromptTextSize">
