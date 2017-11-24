@@ -37,4 +37,10 @@
     <dimen name="summaryCategoryTextSize">22sp</dimen>
     <dimen name="summaryAnswerTextSize">22sp</dimen>
 
+    <!-- Question Answer -->
+    <dimen name="questionAnswerMessageTextSize">56sp</dimen>
+    <dimen name="questionAnswerDetailedMessageTextSize">48sp</dimen>
+    <dimen name="questionAnswerAnswerTextSize">40sp</dimen>
+    <dimen name="questionAnswerButtonTextSize">28sp</dimen>
+
 </resources>

@@ -56,5 +56,12 @@
     <dimen name="summaryCategoryTextSize">14sp</dimen>
     <dimen name="summaryAnswerTextSize">14sp</dimen>
 
+    <!-- Question Answer -->
+    <dimen name="questionAnswerImageWeight">50</dimen>
+    <dimen name="questionAnswerOtherWeight">50</dimen>
+    <dimen name="questionAnswerMessageTextSize">36sp</dimen>
+    <dimen name="questionAnswerDetailedMessageTextSize">24sp</dimen>
+    <dimen name="questionAnswerAnswerTextSize">20sp</dimen>
+    <dimen name="questionAnswerButtonTextSize">14sp</dimen>
 
 </resources>
