@@ -1,11 +1,11 @@
 <?xml version="1.0" encoding="utf-8"?>
 <resources>
-    <dimen name = "cardViewHeight">125dp</dimen>
-    <dimen name= "SkipSubmitTextSize">15sp</dimen>
-    <dimen name = "QuestionTextSize">21sp</dimen>
-    <dimen name = "AreaNameZoneTextSize">18sp</dimen>
-    <dimen name = "QuestionCardViewHorMarg">10dp</dimen>
-    <dimen name = "QuestionCardViewVerMarg">7dp</dimen>
+    <dimen name="SkipSubmitTextSize">15sp</dimen>
+    <dimen name="QuestionCardViewHorMarg">10dp</dimen>
+    <dimen name="QuestionCardViewVerMarg">7dp</dimen>
+
+    <!-- App -->
+    <dimen name="cardViewHeight">125dp</dimen>
 
     <!-- Title -->
     <dimen name="titleTextSize">40sp</dimen>
@@ -29,5 +29,25 @@
     <dimen name="congratsButtonMarginTop">10dp</dimen>
     <dimen name="congratsButtonPadding">16dp</dimen>
     <dimen name="congratsButtonTextSize">12sp</dimen>
+
+    <!-- Location -->
+    <dimen name="locationTextSize">40sp</dimen>
+
+    <!-- Question -->
+    <dimen name="QuestionTextSize">21sp</dimen>
+    <dimen name="AreaNameZoneTextSize">18sp</dimen>
+    <dimen name="questionButtonTextSize">12sp</dimen>
+    <dimen name="questionButtonPadding">16dp</dimen>
+
+    <!-- Written -->
+    <dimen name="questionAnswerPromptTextSize">20sp</dimen>
+    <dimen name="questionAnswerInputTextSize">20sp</dimen>
+
+    <!-- Multiple choice -->
+    <dimen name="multipleChoiceRadioButtonTextSize">16sp</dimen>
+
+    <!-- Picture input -->
+    <dimen name="picturePromptTextSize">16sp</dimen>
+
 
 </resources>

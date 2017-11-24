@@ -15,4 +15,22 @@
     <dimen name="congratsButtonPadding">28dp</dimen>
     <dimen name="congratsButtonTextSize">28sp</dimen>
 
+    <!-- Location -->
+    <dimen name="locationTextSize">72sp</dimen>
+
+    <!-- Question -->
+    <dimen name = "QuestionTextSize">36sp</dimen>
+    <dimen name = "AreaNameZoneTextSize">36sp</dimen>
+    <dimen name="questionButtonTextSize">28sp</dimen>
+    <dimen name="questionButtonPadding">28dp</dimen>
+
+    <!-- Written -->
+    <dimen name="questionAnswerPromptTextSize">36sp</dimen>
+
+    <!-- Multiple choice -->
+    <dimen name="multipleChoiceRadioButtonTextSize">24sp</dimen>
+
+    <!-- Picture input -->
+    <dimen name="picturePromptTextSize">36sp</dimen>
+
 </resources>
