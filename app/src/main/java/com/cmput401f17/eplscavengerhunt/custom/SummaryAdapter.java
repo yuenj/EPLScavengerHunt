@@ -106,7 +106,7 @@ public class SummaryAdapter extends BaseAdapter {
             answerTV.setText(question.getAnswer());
         }
 
-        zoneTV.setText("Zone " + zone.getName());
+        zoneTV.setText(zone.getName());
         zoneTV.setBackgroundColor(Color.parseColor(zone.getColor()));
         areaTV.setText(zone.getCategory());
         summaryContentRL.setBackgroundColor(Color.parseColor(zone.getColor()));

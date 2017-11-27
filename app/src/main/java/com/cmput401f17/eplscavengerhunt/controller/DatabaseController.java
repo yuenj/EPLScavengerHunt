@@ -169,8 +169,8 @@ public class DatabaseController {
                 c.setAllowUserInteraction(false);
 
                 // if it lags for 5 seconds while connecting, backout.
-                c.setConnectTimeout(5000);
-                c.setReadTimeout(5000);
+                c.setConnectTimeout(50000);
+                c.setReadTimeout(50000);
                 // connect!
                 c.connect();
 

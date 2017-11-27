@@ -30,22 +30,32 @@
         <meta-data
             android:name="com.google.android.geo.API_KEY"
             android:value="AIzaSyAhwdQwAGyciO9J2qeRZmrnEAmXlvEF89o"/>
-        <activity android:name=".activity.TitleActivity">
+        <activity android:name=".activity.TitleActivity"
+            android:screenOrientation="portrait">
             <intent-filter>
                 <action android:name="android.intent.action.MAIN" />
 
                 <category android:name="android.intent.category.LAUNCHER" />
             </intent-filter>
         </activity>
-        <activity android:name=".activity.AboutActivity" />
-        <activity android:name=".activity.CongratulationsActivity" />
-        <activity android:name=".activity.CreditsActivity"/>
-        <activity android:name=".activity.DebugActivity" />
-        <activity android:name=".activity.LocationActivity" />
-        <activity android:name=".activity.RulesActivity" />
-        <activity android:name=".activity.SummaryActivity" />
-        <activity android:name=".activity.QuestionActivity" />
-        <activity android:name=".activity.QuestionAnswerActivity" />
+        <activity android:name=".activity.AboutActivity"
+            android:screenOrientation="portrait" />
+        <activity android:name=".activity.CongratulationsActivity"
+            android:screenOrientation="portrait" />
+        <activity android:name=".activity.CreditsActivity"
+            android:screenOrientation="portrait" />
+        <activity android:name=".activity.DebugActivity"
+            android:screenOrientation="portrait" />
+        <activity android:name=".activity.LocationActivity"
+            android:screenOrientation="portrait" />
+        <activity android:name=".activity.RulesActivity"
+            android:screenOrientation="portrait" />
+        <activity android:name=".activity.SummaryActivity"
+            android:screenOrientation="portrait" />
+        <activity android:name=".activity.QuestionActivity"
+            android:screenOrientation="portrait" />
+        <activity android:name=".activity.QuestionAnswerActivity"
+            android:screenOrientation="portrait" />
     </application>
 
 </manifest>

@@ -29,7 +29,7 @@
                 android:id="@+id/IV_question_answer_image"
                 android:layout_width="match_parent"
                 android:layout_height="0dp"
-                android:layout_weight="50"
+                android:layout_weight="@dimen/questionAnswerImageWeight"
                 android:paddingBottom="5dp"
                 android:paddingHorizontal="10dp"
                 android:paddingTop="5dp"
@@ -38,7 +38,7 @@
             <LinearLayout
                 android:layout_width="match_parent"
                 android:layout_height="0dp"
-                android:layout_weight="50"
+                android:layout_weight="@dimen/questionAnswerOtherWeight"
                 android:orientation="vertical"
                 android:weightSum="100">
 
@@ -59,7 +59,7 @@
                         android:text="@string/correct_answer_text"
                         android:textAlignment="center"
                         android:textColor="@color/colorDarkText"
-                        android:textSize="36sp" />
+                        android:textSize="@dimen/questionAnswerMessageTextSize" />
 
                     <TextView
                         android:layout_width="wrap_content"
@@ -70,7 +70,7 @@
                         android:text="The answer is :"
                         android:textAlignment="center"
                         android:textColor="@color/colorDarkText"
-                        android:textSize="24sp" />
+                        android:textSize="@dimen/questionAnswerDetailedMessageTextSize" />
 
                     <TextView
                         android:id="@+id/TV_question_answer_answer"
@@ -83,7 +83,7 @@
                         android:text="Burrowing Owl"
                         android:textAlignment="center"
                         android:textColor="@color/colorDarkText"
-                        android:textSize="20sp" />
+                        android:textSize="@dimen/questionAnswerAnswerTextSize" />
 
                 </LinearLayout>
 
@@ -97,11 +97,11 @@
                     android:layout_weight="20"
                     android:backgroundTint="@color/cardBackGround"
                     android:fontFamily="@font/roboto_bold"
-                    android:padding="15dp"
+                    android:padding="16dp"
                     android:text="visit next location"
                     android:textAllCaps="true"
                     android:textColor="@color/colorLightText"
-                    android:textSize="14sp" />
+                    android:textSize="@dimen/questionAnswerButtonTextSize" />
 
             </LinearLayout>
         </LinearLayout>

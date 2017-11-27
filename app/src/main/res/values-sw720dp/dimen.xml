@@ -1,0 +1,55 @@
+<?xml version="1.0" encoding="utf-8"?>
+<resources>
+    <!-- For devices with smallest width "sw" of 720dp e.g. large tablets -->
+
+    <!-- Title -->
+    <dimen name="titleTextSize">92sp</dimen>
+    <dimen name="titlePaddingVertical">15dp</dimen>
+    <dimen name="titleButtonPaddingVertical">24dp</dimen>
+    <dimen name="titleButtonMarginHorizontal">92dp</dimen>
+    <dimen name="titleButtonTextSize">40dp</dimen>
+
+    <!-- Congrats -->
+    <dimen name="congratsHeaderTextSize">84sp</dimen>
+    <dimen name="congratsBodyTextSize">40sp</dimen>
+    <dimen name="congratsButtonPadding">28dp</dimen>
+    <dimen name="congratsButtonTextSize">28sp</dimen>
+
+    <!-- Location -->
+    <dimen name="locationTextSize">72sp</dimen>
+
+    <!-- Question -->
+    <dimen name ="QuestionTextSize">32sp</dimen>
+    <dimen name ="AreaNameZoneTextSize">30sp</dimen>
+    <dimen name="questionButtonTextSize">28sp</dimen>
+    <dimen name="questionButtonPadding">28dp</dimen>
+
+    <!-- Written -->
+    <dimen name="questionAnswerPromptTextSize">36sp</dimen>
+
+    <!-- Multiple choice -->
+    <dimen name="multipleChoiceRadioButtonTextSize">24sp</dimen>
+
+    <!-- Picture input -->
+    <dimen name="picturePromptTextSize">36sp</dimen>
+    <dimen name="summaryLayoutHeight">500dp</dimen>
+    <dimen name="summaryZoneTextSize">32sp</dimen>
+    <dimen name="summaryCategoryTextSize">22sp</dimen>
+    <dimen name="summaryAnswerTextSize">22sp</dimen>
+
+    <!-- Question Answer -->
+    <dimen name="questionAnswerMessageTextSize">56sp</dimen>
+    <dimen name="questionAnswerDetailedMessageTextSize">48sp</dimen>
+    <dimen name="questionAnswerAnswerTextSize">40sp</dimen>
+    <dimen name="questionAnswerButtonTextSize">28sp</dimen>
+
+    <!-- Rules -->
+    <dimen name="rulesTitleTextSize">72sp</dimen>
+    <dimen name="rulesWelcomeTextSize">56sp</dimen>
+    <dimen name="rulesSecondaryHeaderTextSize">40sp</dimen>
+    <dimen name="rulesBodyTextSize">32sp</dimen>
+    <dimen name="rulesButtonTextSize">32sp</dimen>
+    <dimen name="rulesButtonPadding">32dp</dimen>
+    <dimen name="rulesButtonWidth">200dp</dimen>
+
+</resources>
