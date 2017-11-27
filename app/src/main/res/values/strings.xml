@@ -46,7 +46,7 @@
     <string name="skip_question">Skip</string>
     <string name="Temp_Question">This bird is 24 centimetres (9 inches) long and is easily identified by its long legs and short, barred tail. What bird am I?</string>
     <string name="Temp_Zone">Birds : Children\'s Area</string>
-    <string name="hint"><font size="30">Your Answer :</font></string>
+    <string name="hint">Your Answer</string>
 
     <!-- SummaryActivity -->
     <string name="total_score">Your Total: </string>

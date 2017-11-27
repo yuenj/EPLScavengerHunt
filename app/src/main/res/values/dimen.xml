@@ -41,8 +41,8 @@
     <dimen name="QuestionCardViewVerMarg">5dp</dimen>
 
     <!-- Written -->
-    <dimen name="questionAnswerPromptTextSize">20sp</dimen>
-    <dimen name="questionAnswerInputTextSize">20sp</dimen>
+    <dimen name="questionAnswerPromptTextSize">30sp</dimen>
+    <dimen name="questionAnswerInputTextSize">30sp</dimen>
 
     <!-- Multiple choice -->
     <dimen name="multipleChoiceRadioButtonTextSize">16sp</dimen>
