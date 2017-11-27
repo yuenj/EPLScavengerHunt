@@ -1,8 +1,6 @@
 <?xml version="1.0" encoding="utf-8"?>
 <resources>
-    <dimen name="SkipSubmitTextSize">15sp</dimen>
-    <dimen name="QuestionCardViewHorMarg">10dp</dimen>
-    <dimen name="QuestionCardViewVerMarg">7dp</dimen>
+
 
     <!-- App -->
     <dimen name="cardViewHeight">125dp</dimen>
@@ -36,8 +34,11 @@
     <!-- Question -->
     <dimen name="QuestionTextSize">21sp</dimen>
     <dimen name="AreaNameZoneTextSize">18sp</dimen>
-    <dimen name="questionButtonTextSize">16sp</dimen>
+    <dimen name="questionButtonTextSize">18sp</dimen>
     <dimen name="questionButtonPadding">16dp</dimen>
+    <dimen name ="zoneCardMargHor">5dp</dimen>
+    <dimen name="QuestionCardViewHorMarg">10dp</dimen>
+    <dimen name="QuestionCardViewVerMarg">5dp</dimen>
 
     <!-- Written -->
     <dimen name="questionAnswerPromptTextSize">20sp</dimen>
