@@ -31,9 +31,9 @@
     <string name="credits_text">Credits due to those who deserve credits. (TEMPORARY).</string>
 
     <!-- AboutActivity -->
-    <string name="about_text">This app is a scavenger hunt where you moving from zone to zone and
-    answer questions. (TEMPORARY).</string>
-
+    <string name="about_text1">This app was produce in conjunction with Edmonton Public Library and a team of students from the University of Alberta</string>
+    <string name="about_text2">It can be played at all supported branches which include : Clareview</string>
+    <string name="about_text3">Any further details regarding this app can be found at : website</string>
     <!-- CongratsActivity -->
     <string name="congrats_msg_header">Congratulations!</string>
     <string name="congrats_msg_body">You have completed the Scavenger hunt!</string>
