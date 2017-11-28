@@ -15,7 +15,7 @@ public class Response {
 
     public Response(final String responseStr) {
         this.responseStr = responseStr;
-        this.correct = true;
+        this.correct = false;
     }
 
     public String getResponseStr() {

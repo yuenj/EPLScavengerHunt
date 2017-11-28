@@ -23,22 +23,29 @@ public class QuestionController {
 
     /**
      *  Passes/ updates the user answer
+     *  Also confirms the correctness of the response
      *  @pre User has input an answer
      *  @param answer       The user's answer
      */
     public void requestSubmitResponse(final String answer) {
         Response response = new Response(answer);
+        if (this.requestQuestion().getAnswer().toLowerCase().replaceAll("\\s+", "").
+                equals(answer.toLowerCase().replaceAll("\\s+", ""))) {
+            response.markCorrect();
+        }
         scavHuntState.addResponse(response);
     }
 
     /**
      * Used to set the a users picture to the result
+     * Also confirms the correctness of the response
      * @param answer
      * @param imageFile
      */
-    public void requestSubmitResponse(final String answer, Bitmap imageFile){
+    public void requestSubmitResponseImage(final String answer, Bitmap imageFile){
         if (requestQuestion() instanceof PicInputQuestion) {
             Response response = new Response(answer);
+            response.markCorrect();
             response.setImageFile(imageFile);
             scavHuntState.addResponse(response);
 

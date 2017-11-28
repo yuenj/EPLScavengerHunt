@@ -59,7 +59,7 @@ public class QuestionAnswerActivity extends AppCompatActivity {
         // Determine if the answer is correct
         final Question question = questionController.requestQuestion();
         final Response response = questionController.requestResponse();
-
+        /*
         // Compare the first character for multiple choice questions
         // 'T' of 'F' and 'A'/'B'/'C'/'D'
         response.markIncorrect();
@@ -80,6 +80,7 @@ public class QuestionAnswerActivity extends AppCompatActivity {
         else if (question instanceof PicInputQuestion){
             response.markCorrect();
         }
+        */
 
         // Display feedback for the player
         if (question instanceof PicInputQuestion && !question.isSkipped()) {
