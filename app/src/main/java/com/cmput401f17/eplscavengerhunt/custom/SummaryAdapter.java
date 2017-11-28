@@ -55,6 +55,7 @@ public class SummaryAdapter extends BaseAdapter {
         final TextView zoneTV = vi.findViewById(R.id.TV_summary_zone);
         final TextView areaTV = vi.findViewById(R.id.TV_summary_area);
         final TextView answerTV = vi.findViewById(R.id.TV_summary_answer);
+        final TextView responseTV = vi.findViewById(R.id.TV_summary_response);
         final RelativeLayout summaryContentRL = vi.findViewById(R.id.RL_summary_content);
 
         final Question question = questions.get(position);
@@ -96,14 +97,14 @@ public class SummaryAdapter extends BaseAdapter {
         } */
 
         // Gets the full answer instead of just 'A' or 'C'
-        if (question instanceof MultipleChoiceQuestion) {
-            for (String string: question.getChoices()) {
-                if (string.charAt(0) == question.getAnswer().charAt(0)) {
-                    answerTV.setText(string);
-                }
-            }
-        } else {
-            answerTV.setText(question.getAnswer());
+
+        answerTV.setText("Correct Answer : " + question.getAnswer());
+        
+        if(question.isSkipped()){
+            responseTV.setText("You skipped this question");
+        }
+        else {
+            responseTV.setText("Your Answer : " + response.getResponseStr());
         }
 
         zoneTV.setText(zone.getName());

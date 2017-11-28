@@ -62,7 +62,7 @@
                             android:layout_height="wrap_content"
                             android:fontFamily="@font/roboto_regular"
                             android:text="Children's area"
-                            android:textColor="#ffffffff"
+                            android:textColor="@color/colorLightText"
                             android:textSize="@dimen/summaryCategoryTextSize" />
 
                         <TextView
@@ -72,7 +72,16 @@
                             android:layout_below="@id/TV_summary_area"
                             android:fontFamily="@font/roboto_bold"
                             android:text="A: Rocky mountains"
-                            android:textColor="#ffffffff"
+                            android:textColor="@color/colorLightText"
+                            android:textSize="@dimen/summaryAnswerTextSize" />
+                        <TextView
+                            android:id="@+id/TV_summary_response"
+                            android:layout_width="wrap_content"
+                            android:layout_height="wrap_content"
+                            android:layout_below="@id/TV_summary_answer"
+                            android:fontFamily="@font/roboto_bold"
+                            android:text="A: Big Rock"
+                            android:textColor="@color/colorLightText"
                             android:textSize="@dimen/summaryAnswerTextSize" />
 
                     </RelativeLayout>
