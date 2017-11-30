@@ -48,6 +48,9 @@ public class GameController {
 
         String branch = scavHuntState.getBranch();
         final List<Zone> zoneRoute = generateZoneRoute(branch,5);
+        if (zoneRoute.size() > 0) {
+            System.out.println("IT WORKSADAWDAWDAW");
+        }
 
         // TODO place 5 in a config file or somwhere else, don't hardcode it
         generateQuestionSet(zoneRoute);

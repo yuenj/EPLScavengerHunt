@@ -71,7 +71,7 @@ public class DatabaseController {
         // http://localhost:5000/getQuestion
         Zone zone = new Zone();
         zone.setBranch(branch);
-        taskParams responseParams = new taskParams(zone, null, "http://162.246.156.95:5000/getZone");
+        taskParams responseParams = new taskParams(zone, null, "http://162.246.156.95:5000/getZone", null);
         try {
             System.out.println(responseParams.zone.getBranch());
             return new GetZone().execute(responseParams).get();
@@ -94,10 +94,12 @@ public class DatabaseController {
     public List<Question> retrieveQuestionsinZone(Zone zone) {
         // http://162.246.156.95:5000/getQuestion
         // http://localhost:5000/getQuestion
-        taskParams responseParams = new taskParams(zone, null, "http://162.246.156.95:5000/getQuestion");
+        taskParams responseParams = new taskParams(zone, null, "http://162.246.156.95:5000/getQuestion", null);
         try {
             List<Question> testList = new GetQuestion().execute(responseParams).get();
             Log.i("@@@DatabaseController", testList.toString());
+            String tempZoneName = zone.getName();
+            zone.setName(tempZoneName.replace("_", " "));
             return testList;
         } catch (InterruptedException e) {
             e.printStackTrace();
@@ -114,12 +116,11 @@ public class DatabaseController {
      * @param question       Question that has been answered already.
      * @see GameController
      */
-    public Void updateAnalyticsForQuestion(Question question) {
+    public void updateAnalyticsForQuestion(Question question, Response response) {
         // http://162.246.156.95:5000/getQuestion
         // http://localhost:5000/getQuestion
-        taskParams responseParams = new taskParams(null, question, "http://162.246.156.95:5000/updateAnalytics");
+        taskParams responseParams = new taskParams(null, question, "http://162.246.156.95:5000/updateAnalytics", response);
         new UpdateAnalytics().execute(responseParams);
-        return null;
     }
 
     /**
@@ -137,11 +138,13 @@ public class DatabaseController {
         Zone zone;
         Question question;
         String url;
+        Response response;
 
-        taskParams(Zone zone, Question question, String url) {
+        taskParams(Zone zone, Question question, String url, Response response) {
             this.zone = zone;
             this.question = question;
             this.url = url;
+            this.response = response;
         }
 
     }
@@ -162,14 +165,14 @@ public class DatabaseController {
                 // this setrequest stuff tells the api to GET something,
                 // and gives it variables it will need.
                 c.setRequestMethod("GET");
-                c.setRequestProperty("branch", taskInfo.zone.getBranch());
+                //c.setRequestProperty("branch", taskInfo.zone.getBranch());
 
                 c.setUseCaches(false);
                 c.setAllowUserInteraction(false);
 
                 // if it lags for 5 seconds while connecting, backout.
-                c.setConnectTimeout(5000);
-                c.setReadTimeout(5000);
+                c.setConnectTimeout(50000);
+                c.setReadTimeout(50000);
                 // connect!
                 c.connect();
 
@@ -282,8 +285,8 @@ public class DatabaseController {
                 c.setAllowUserInteraction(false);
 
                 // if it lags for 5 seconds while connecting, backout.
-                c.setConnectTimeout(5000);
-                c.setReadTimeout(5000);
+                c.setConnectTimeout(50000);
+                c.setReadTimeout(50000);
                 // connect!
                 c.connect();
 
@@ -292,6 +295,7 @@ public class DatabaseController {
 
                 // This gets the connection status of the api.
                 int status = c.getResponseCode();
+                System.out.println(status);
 
                 switch (status) {
                     case 200:
@@ -418,24 +422,20 @@ public class DatabaseController {
         }
     }
 
-    public class UpdateAnalytics extends AsyncTask<taskParams, List<Question>, List<Question>> {
-
+    public class UpdateAnalytics extends AsyncTask<taskParams, Void, Void> {
         @Override
-        protected List<Question> doInBackground(taskParams... params) {
+        protected Void doInBackground(taskParams... params) {
             HttpURLConnection c = null;
             taskParams taskInfo = params[0];
             try {
                 // url must point to flask endpoint. "http://162.246.156.95:5000/..."
-                String restUrl = taskInfo.url + "/" + taskInfo.zone.getName() + "/" + taskInfo.zone.getBranch();
+                String restUrl = taskInfo.url + "/" + taskInfo.question.getQuestionID() + "/" + taskInfo.response.getResponseStr();
                 URL u = new URL(restUrl);
-                System.out.println(restUrl);
                 c = (HttpURLConnection) u.openConnection();
 
                 // this setrequest stuff tells the api to GET something,
                 // and gives it variables it will need.
-                //c.setRequestMethod("GET");
-                //c.setRequestProperty("zone", taskInfo.zone.getName());
-                //c.setRequestProperty("branch", taskInfo.zone.getBranch());
+                c.setRequestMethod("PUT");
 
                 c.setUseCaches(false);
                 c.setAllowUserInteraction(false);
@@ -451,20 +451,6 @@ public class DatabaseController {
 
                 // This gets the connection status of the api.
                 int status = c.getResponseCode();
-
-                switch (status) {
-                    case 200:
-                    case 201:
-                        // reads what api returned, converts it into json format
-                        JsonReader jsonReader = new JsonReader (new BufferedReader(new InputStreamReader(c.getInputStream())));
-                        try {
-                            //questions =  jsonQuestionArray(jsonReader);
-                            return jsonQuestionArray(jsonReader);
-
-                        } finally {
-                            jsonReader.close();
-                        }
-                }
             } catch (MalformedURLException e) {
                 Logger.getLogger(getClass().getName()).log(Level.SEVERE, null, e);
             } catch (IOException e) {
@@ -479,85 +465,6 @@ public class DatabaseController {
                 }
             }
             return null;
-        }
-
-        @Override
-        protected void onPostExecute(List<Question> q) {
-            super.onPostExecute(q);
-        }
-
-        private List<Question> jsonQuestionArray (JsonReader jsonReader) throws IOException {
-            List<Question> questions = new ArrayList<>();
-            jsonReader.beginArray();
-            while (jsonReader.hasNext()) {
-                questions.add(readQuestion(jsonReader));
-            }
-            jsonReader.endArray();
-            return questions;
-        }
-
-        private Question readQuestion (JsonReader jsonReader) throws IOException {
-            String key;
-            int questionID   = 0;
-            String prompt    = "";
-            String answer    = "";
-            String zone      = "";
-            String branch    = "";
-            String type      = ""; // the type of input for question.
-            String iLink     = "";
-            String sLink     = "";
-            List<String> choiceList = null;
-            Question question;
-            // Question question = new Question();
-
-            // initial read to figure out question type
-            jsonReader.beginObject(); // start reading each sql row entry
-            while (jsonReader.hasNext()) {
-                key = jsonReader.nextName();
-                if (key.equals("Prompt")) {
-                    prompt = jsonReader.nextString();
-                } else if (key.equals("Choices")) {
-                    String choices = jsonReader.nextString();
-                    choiceList = new ArrayList<>(Arrays.asList(choices.split("\\|_\\|")));
-                } else  if (key.equals("Solution")) {
-                    answer = jsonReader.nextString();
-                } else if (key.equals("zone")) {
-                    zone = jsonReader.nextString();
-                } else if (key.equals("branch")) {
-                    branch = jsonReader.nextString();
-                } else if (key.equals("qType")) {
-                    type = jsonReader.nextString();
-                } else if (key.equals("iLink")) {
-                    iLink = jsonReader.nextString();
-                } else if (key.equals("sLink")) {
-                    sLink = jsonReader.nextString();
-                } else {
-                    jsonReader.skipValue();
-                }
-            }
-            jsonReader.endObject();
-
-            if (type.equals("writInput")) {
-                question = new WrittenInputQuestion(questionID, prompt, iLink, answer);
-                question.setZone(zone);
-                question.setBranch(branch);
-                question.setChoices(choiceList);
-                question.setSoundLink(sLink);
-            } else if (type.equals("picInput")) {
-                question = new PicInputQuestion(questionID, prompt, iLink, choiceList, answer);
-                question.setSoundLink(sLink);
-                question.setZone(zone);
-                question.setBranch(branch);
-            } else {
-                question = new MultipleChoiceQuestion(questionID, prompt, iLink, choiceList, answer);
-                question.setZone(zone);
-                question.setBranch(branch);
-                question.setSoundLink(sLink);
-            }
-            // after we figure out the question type, instantiate
-            // the correct model. then re-parse the
-
-            return question;
         }
     }
 }
