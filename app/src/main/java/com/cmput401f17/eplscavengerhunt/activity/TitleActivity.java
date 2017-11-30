@@ -87,7 +87,6 @@ public class TitleActivity extends AppCompatActivity {
         SystemRequirementsChecker.checkWithDefaultDialogs(this);
         // checks for storage access (for getting fullsize photo taken from camera)
         getPermissions();
-        ;
     }
 
     /**
