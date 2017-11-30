@@ -9,6 +9,7 @@
     <color name="lightBackground">#FCFCFC</color>
     <color name="colorDarkText">#000000</color>
     <color name="colorLightText">#FCFCFC</color>
+    <color name="hintTextColor">#64ffffff</color>
     <color name="cardBackGround">#002C77</color>
     <color name="colorButtonPink">#E40E62</color>
     <color name="colorButtonPurple">#7C4199</color>
