@@ -1,6 +1,6 @@
 <?xml version="1.0" encoding="utf-8"?>
 <resources>
-
+    <!-- Supports the Pixel device and other larger phones -->
 
     <!-- App -->
     <dimen name="cardViewHeight">125dp</dimen>
