@@ -45,7 +45,7 @@
                             android:padding="16dp"
                             android:text="Credits"
                             android:textColor="@color/colorLightText"
-                            android:textSize="@dimen/rulesTitleTextSize" />
+                            android:textSize="40sp" />
 
                     </android.support.v7.widget.CardView>
 
@@ -68,52 +68,87 @@
                         android:orientation="vertical">
 
                         <TextView
-                            android:id="@+id/credits_text_view_2"
                             android:layout_width="match_parent"
                             android:layout_height="wrap_content"
-                            android:fontFamily="@font/roboto_regular"
+                            android:fontFamily="@font/roboto_bold"
                             android:paddingHorizontal="16dp"
                             android:paddingVertical="10dp"
                             android:text="@string/credits_text1"
-                            android:textAlignment="center"
                             android:textColor="@color/colorDarkText"
-                            android:textSize="@dimen/rulesSecondaryHeaderTextSize" />
+                            android:textSize="@dimen/creditsBodyTextSize" />
 
                         <TextView
-                            android:id="@+id/credits_text_view_3"
                             android:layout_width="match_parent"
                             android:layout_height="wrap_content"
                             android:fontFamily="@font/roboto_regular"
                             android:paddingHorizontal="16dp"
-                            android:paddingVertical="10dp"
                             android:text="@string/credits_text2"
-                            android:textAlignment="center"
                             android:textColor="@color/colorDarkText"
-                            android:textSize="@dimen/rulesBodyTextSize" />
+                            android:textSize="@dimen/creditsBodyTextSize" />
 
                         <TextView
-                            android:id="@+id/credits_text_view_4"
                             android:layout_width="match_parent"
                             android:layout_height="wrap_content"
                             android:fontFamily="@font/roboto_regular"
                             android:paddingHorizontal="16dp"
-                            android:paddingVertical="10dp"
                             android:text="@string/credits_text3"
-                            android:textAlignment="center"
                             android:textColor="@color/colorDarkText"
-                            android:textSize="@dimen/rulesBodyTextSize" />
+                            android:textSize="@dimen/creditsBodyTextSize" />
 
                         <TextView
-                            android:id="@+id/credits_text_view_5"
                             android:layout_width="match_parent"
                             android:layout_height="wrap_content"
                             android:fontFamily="@font/roboto_regular"
                             android:paddingHorizontal="16dp"
-                            android:paddingVertical="10dp"
                             android:text="@string/credits_text4"
-                            android:textAlignment="center"
                             android:textColor="@color/colorDarkText"
-                            android:textSize="@dimen/rulesBodyTextSize" />
+                            android:textSize="@dimen/creditsBodyTextSize" />
+
+                        <TextView
+                            android:layout_width="match_parent"
+                            android:layout_height="wrap_content"
+                            android:fontFamily="@font/roboto_regular"
+                            android:paddingHorizontal="16dp"
+                            android:text="@string/credits_text5"
+                            android:textColor="@color/colorDarkText"
+                            android:textSize="@dimen/creditsBodyTextSize" />
+
+                        <TextView
+                            android:layout_width="match_parent"
+                            android:layout_height="wrap_content"
+                            android:fontFamily="@font/roboto_regular"
+                            android:paddingHorizontal="16dp"
+                            android:text="@string/credits_text6"
+                            android:textColor="@color/colorDarkText"
+                            android:textSize="@dimen/creditsBodyTextSize" />
+
+                        <TextView
+                            android:layout_width="match_parent"
+                            android:layout_height="wrap_content"
+                            android:fontFamily="@font/roboto_regular"
+                            android:paddingHorizontal="16dp"
+                            android:text="@string/credits_text7"
+                            android:textColor="@color/colorDarkText"
+                            android:textSize="@dimen/creditsBodyTextSize" />
+
+                        <TextView
+                            android:layout_width="match_parent"
+                            android:layout_height="wrap_content"
+                            android:fontFamily="@font/roboto_bold"
+                            android:paddingHorizontal="16dp"
+                            android:paddingVertical="10dp"
+                            android:text="@string/image_credits1"
+                            android:textColor="@color/colorDarkText"
+                            android:textSize="@dimen/creditsBodyTextSize" />
+
+                        <TextView
+                            android:layout_width="match_parent"
+                            android:layout_height="wrap_content"
+                            android:fontFamily="@font/roboto_regular"
+                            android:paddingHorizontal="16dp"
+                            android:text="@string/image_credits2"
+                            android:textColor="@color/colorDarkText"
+                            android:textSize="@dimen/creditsBodyTextSize" />
 
                     </LinearLayout>
 

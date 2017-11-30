@@ -28,15 +28,21 @@
     <string name="rules_welcome_msg_5">Visit all 5 locations!</string>
 
     <!-- CreditsActivity -->
-    <string name="credits_text1">All credits belong to the apporiate owners.</string>
-    <string name="credits_text2">Backgrounds : </string>
-    <string name="credits_text3">Animal Icons : </string>
-    <string name="credits_text4">Question Photos : </string>
+    <string name="credits_text1">The following resources were consulted to create the questions in this game:</string>
+    <string name="credits_text2">2learn.ca - Educational resources for teachers, students and parents</string>
+    <string name="credits_text3">Jennings, N. L. (2010). In Plain Sight: Exploring the Natural Wonders of Southern Alberta. Victoria, BC: Rocky Mountain Books.</string>
+    <string name="credits_text4">Kagume, K. (2011). Alberta Nature Guide. Edmonton, AB: Lone Pine Publishing.</string>
+    <string name="credits_text5">Laessoe, T. (2013.) Mushrooms: How to Identify and Gather Wild Mushrooms and Other Fungi. New York: DK Publishing.</string>
+    <string name="credits_text6">Lynch, W. (2005). Wild Alberta: A Visual Celebration. Calgary, AB: Fifth House.</string>
+    <string name="credits_text7">Zuehlke, M. (1997). The Alberta Fact Book: Everything You Wanted to Know about Alberta. Vancouver, BC:: Whitecap Books.</string>
+    <string name="image_credits1">Image Credits:</string>
+    <string name="image_credits2">All images are from the Wikimedia Foundation, licensed for reuse for non commercial purpose.</string>
 
     <!-- AboutActivity -->
     <string name="about_text1">This app was produce in conjunction with Edmonton Public Library and a team of students from the University of Alberta</string>
     <string name="about_text2">It can be played at all supported branches which include : Clareview</string>
     <string name="about_text3">Any further details regarding this app can be found at : website</string>
+
     <!-- CongratsActivity -->
     <string name="congrats_msg_header">Congratulations!</string>
     <string name="congrats_msg_body">You have completed the Scavenger hunt!</string>
