@@ -77,4 +77,8 @@
     <!-- Credits -->
     <dimen name="creditsBodyTextSize">12sp</dimen>
 
+    <!-- About -->
+    <dimen name="aboutHeaderTextSize">16sp</dimen>
+    <dimen name="aboutBodyTextSize">14sp</dimen>
+
 </resources>

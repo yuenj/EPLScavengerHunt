@@ -39,9 +39,16 @@
     <string name="image_credits2">All images are from the Wikimedia Foundation, licensed for reuse for non commercial purpose.</string>
 
     <!-- AboutActivity -->
-    <string name="about_text1">This app was produce in conjunction with Edmonton Public Library and a team of students from the University of Alberta</string>
-    <string name="about_text2">It can be played at all supported branches which include : Clareview</string>
-    <string name="about_text3">Any further details regarding this app can be found at : website</string>
+    <string name="about_text1">This game is the result of a partnership between the University of Alberta Department of Computing Science and the Edmonton Public Library. The following individuals were involved in this project:</string>
+    <string name="about_text2">Victor Guana</string>
+    <string name="about_text3">Diego Serrano Suarez</string>
+    <string name="about_text4">Alexandrea Czeto</string>
+    <string name="about_text5">Brett Garbitt</string>
+    <string name="about_text6">Jennifer Yuen</string>
+    <string name="about_text7">Nathan Nguyen</string>
+    <string name="about_text8">Ryan Perez</string>
+    <string name="about_text9">William Thoang</string>
+    <string name="about_text10">Lydia Zvyagintseva</string>
 
     <!-- CongratsActivity -->
     <string name="congrats_msg_header">Congratulations!</string>
