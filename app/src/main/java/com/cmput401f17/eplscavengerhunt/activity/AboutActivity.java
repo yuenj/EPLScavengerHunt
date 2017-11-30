@@ -1,17 +1,16 @@
 package com.cmput401f17.eplscavengerhunt.activity;
 
 import android.content.Intent;
-import android.support.v7.app.AppCompatActivity;
 import android.os.Bundle;
-import android.util.Log;
+import android.support.v7.app.AppCompatActivity;
 import android.view.View;
 import android.widget.Button;
 
 import com.cmput401f17.eplscavengerhunt.R;
 
 /**
- * Contains information about the game and what it is
- * TODO: Figure out what to put on the about screen
+ * The About page of the app
+ * contains information about the game and what it is
  */
 public class AboutActivity extends AppCompatActivity {
 
@@ -20,9 +19,10 @@ public class AboutActivity extends AppCompatActivity {
         super.onCreate(savedInstanceState);
         setContentView(R.layout.activity_about);
 
+        // find views
         final Button returnButton = findViewById(R.id.about_return_button);
 
-        // User click leads them to the previous screen
+        // set up on click listeners
         returnButton.setOnClickListener(new View.OnClickListener() {
             public void onClick(View v) {
                 Intent intent = new Intent(AboutActivity.this, TitleActivity.class);

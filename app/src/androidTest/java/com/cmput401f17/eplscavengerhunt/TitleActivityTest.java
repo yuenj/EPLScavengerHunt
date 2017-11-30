@@ -4,7 +4,6 @@ import android.test.ActivityInstrumentationTestCase2;
 
 import com.cmput401f17.eplscavengerhunt.activity.AboutActivity;
 import com.cmput401f17.eplscavengerhunt.activity.CreditsActivity;
-import com.cmput401f17.eplscavengerhunt.activity.DebugActivity;
 import com.cmput401f17.eplscavengerhunt.activity.RulesActivity;
 import com.cmput401f17.eplscavengerhunt.activity.TitleActivity;
 import com.robotium.solo.Solo;

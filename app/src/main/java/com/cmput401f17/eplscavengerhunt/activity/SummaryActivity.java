@@ -3,7 +3,6 @@ package com.cmput401f17.eplscavengerhunt.activity;
 import android.content.Intent;
 import android.os.Bundle;
 import android.support.v7.app.AppCompatActivity;
-import android.util.Log;
 import android.view.View;
 import android.widget.Button;
 import android.widget.ListView;
@@ -22,7 +21,8 @@ import java.util.List;
 import javax.inject.Inject;
 
 /**
- * Displays a summary of the game results
+ * The Summary page of the app
+ * Displays a summary of the scavenger hunt results
  */
 public class SummaryActivity extends AppCompatActivity {
 
@@ -37,11 +37,12 @@ public class SummaryActivity extends AppCompatActivity {
         setContentView(R.layout.activity_summary);
         ScavengerHuntApplication.getInstance().getAppComponent().inject(this);
 
-        final Summary summary = gameController.requestSummary();
-
+        // find views
         final ListView summaryContentLV = findViewById(R.id.LV_summary_content);
         final Button replayButton = findViewById(R.id.button_summary_replay);
 
+        // retrieve question metadata
+        final Summary summary = gameController.requestSummary();
         final List<Question> questions = summary.getQuestions();
         final List<Zone> zones = summary.getZones();
         final List<Response> responses = summary.getResponses();

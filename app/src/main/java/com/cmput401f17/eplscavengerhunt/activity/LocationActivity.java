@@ -19,9 +19,9 @@ import javax.inject.Inject;
 import mbanje.kurt.fabbutton.FabButton;
 
 /**
- * Tells the user to go to their next zone
- * Verifies if they are in the zone and routes them
- * to question activity
+ * The Location page of the app
+ * Indicates the next zone for the player and
+ * polls to check if the player has arrived in the zone
  */
 public class LocationActivity extends AppCompatActivity {
     @Inject
@@ -42,24 +42,28 @@ public class LocationActivity extends AppCompatActivity {
     @Override
     protected void onStart() {
         super.onStart();
+
+        // poll the players location
         locationController.startDiscovery();
 
-        // I've put the message setting here because we need to call requestZone only after
-        TextView message = findViewById(R.id.location_next_zone_text_view);
-        message.setText("Go to the " + locationController.requestZone().getName() + " area!");
-        CardView locationCard = (CardView)findViewById(R.id.card_view_location);
-        locationCard.setCardBackgroundColor(Color.parseColor(locationController.requestZone().getColor()));
-        button.setColor(Color.parseColor(locationController.requestZone().getColor()));
+        // find views
+        final TextView messageTextView = findViewById(R.id.location_next_zone_text_view);
+        messageTextView.setText("Go to the " + locationController.requestZone().getName() + " area!");
+        final CardView locationCardView = findViewById(R.id.card_view_location);
 
-        // If the location is verified go to Question activity
+        // set the theme to match the zone color
+        final int zoneColor = Color.parseColor(locationController.requestZone().getColor());
+        locationCardView.setCardBackgroundColor(zoneColor);
+        button.setColor(zoneColor);
+
         locationController.verifyLocation(new SimpleCallback<Boolean>() {
             @Override
             public void callback(Boolean data) {
+                // player is inside the new zone
                 if (data) {
                     final Intent intent = new Intent(LocationActivity.this, QuestionActivity.class);
 
-                    // Switches to a check mark to show that the user has
-                    // found the zone
+                    // display a checkmark
                     button.onProgressCompleted();
 
                     final Handler handler = new Handler();

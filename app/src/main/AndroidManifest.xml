@@ -44,8 +44,6 @@
             android:screenOrientation="portrait" />
         <activity android:name=".activity.CreditsActivity"
             android:screenOrientation="portrait" />
-        <activity android:name=".activity.DebugActivity"
-            android:screenOrientation="portrait" />
         <activity android:name=".activity.LocationActivity"
             android:screenOrientation="portrait" />
         <activity android:name=".activity.RulesActivity"
