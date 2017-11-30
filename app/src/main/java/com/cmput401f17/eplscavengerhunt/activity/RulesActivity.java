@@ -33,7 +33,7 @@ public class RulesActivity extends AppCompatActivity {
         // User click leads them to the start of the game
         startButton.setOnClickListener(new View.OnClickListener() {
             public void onClick(View v) {
-                Intent intent = new Intent(RulesActivity.this, DebugActivity.class);
+                Intent intent = new Intent(RulesActivity.this, LocationActivity.class);
                 startButton.setEnabled(false);
                 gameController.initGame();
                 startActivity(intent);
