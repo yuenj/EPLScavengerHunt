@@ -88,7 +88,7 @@ public class QuestionActivity extends AppCompatActivity {
         skipButton.setOnClickListener(new View.OnClickListener() {
             public void onClick(View v) {
                 questionController.skip(currentQuestion);
-                questionController.requestSubmitResponse("");
+                questionController.requestSubmitResponse("",currentQuestion.getAnswer());
                 skipButton.setEnabled(false);
                 startQuestionAnswerActivity();
                 finish();
@@ -209,7 +209,7 @@ public class QuestionActivity extends AppCompatActivity {
                 }
                 // Display accuracy of answer
                 if (choice != null) {
-                    questionController.requestSubmitResponse(choice);
+                    questionController.requestSubmitResponse(choice,currentQuestion.getAnswer());
                     confirmButton.setEnabled(false);
                     startQuestionAnswerActivity();
                     finish();
@@ -290,7 +290,7 @@ public class QuestionActivity extends AppCompatActivity {
             ((InputMethodManager) getSystemService(Context.INPUT_METHOD_SERVICE)).
                     hideSoftInputFromWindow(view.getWindowToken(), InputMethodManager.HIDE_NOT_ALWAYS);
 
-            questionController.requestSubmitResponse(editText.getText().toString());
+            questionController.requestSubmitResponse(editText.getText().toString(),currentQuestion.getAnswer());
             return true;
         }
     }
