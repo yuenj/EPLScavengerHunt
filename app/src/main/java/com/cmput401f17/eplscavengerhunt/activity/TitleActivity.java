@@ -30,6 +30,8 @@ public class TitleActivity extends AppCompatActivity {
     static final int MY_PERMISSIONS_REQUEST_WRITE_EXTERNAL_STORAGE = 20;
     @Inject
     GameController gameController;
+    @Inject
+    ScavHuntState scavHuntState;
 
     @Override
     protected void onCreate(Bundle savedInstanceState) {
