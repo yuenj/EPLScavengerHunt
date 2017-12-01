@@ -22,8 +22,8 @@ public class AboutActivityTest extends ActivityInstrumentationTestCase2<AboutAct
 
     public void testAboutActivityIsProperlyDisplayed() {
         solo.assertCurrentActivity(ERR_MSG, AboutActivity.class);
-        TextView aboutMessage = solo.getCurrentActivity().findViewById(R.id.about_text_view);
-        assertEquals(aboutMessage.getText().toString(), solo.getString(R.string.about_text));
+        TextView aboutMessage = solo.getCurrentActivity().findViewById(R.id.rules_text_view_2);
+        assertEquals(aboutMessage.getText().toString(), solo.getString(R.string.about_text1));
     }
 
     public void testReturnButtonShouldGoToTitleActivity() {
