@@ -1,6 +1,6 @@
 <?xml version="1.0" encoding="utf-8"?>
 <resources>
-
+    <!-- Supports the Pixel device and other larger phones -->
 
     <!-- App -->
     <dimen name="cardViewHeight">125dp</dimen>
@@ -60,7 +60,7 @@
     <!-- Question Answer -->
     <dimen name="questionAnswerImageWeight">50</dimen>
     <dimen name="questionAnswerOtherWeight">50</dimen>
-    <dimen name="questionAnswerMessageTextSize">36sp</dimen>
+    <dimen name="questionAnswerMessageTextSize">30sp</dimen>
     <dimen name="questionAnswerDetailedMessageTextSize">24sp</dimen>
     <dimen name="questionAnswerAnswerTextSize">20sp</dimen>
     <dimen name="questionAnswerButtonTextSize">14sp</dimen>
@@ -73,5 +73,12 @@
     <dimen name="rulesButtonTextSize">14sp</dimen>
     <dimen name="rulesButtonPadding">16dp</dimen>
     <dimen name="rulesButtonWidth">100dp</dimen>
+
+    <!-- Credits -->
+    <dimen name="creditsBodyTextSize">12sp</dimen>
+
+    <!-- About -->
+    <dimen name="aboutHeaderTextSize">16sp</dimen>
+    <dimen name="aboutBodyTextSize">14sp</dimen>
 
 </resources>

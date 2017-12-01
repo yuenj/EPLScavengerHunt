@@ -48,7 +48,7 @@ public class LocationActivity extends AppCompatActivity {
 
         // find views
         final TextView messageTextView = findViewById(R.id.location_next_zone_text_view);
-        messageTextView.setText("Go to the " + locationController.requestZone().getName() + " area!");
+        message.setText("Go to " + locationController.requestZone().getName() + "!");
         final CardView locationCardView = findViewById(R.id.card_view_location);
 
         // set the theme to match the zone color
