@@ -1,6 +1,8 @@
 package com.cmput401f17.eplscavengerhunt.activity;
 
 import android.Manifest;
+import android.app.Activity;
+import android.content.Context;
 import android.content.Intent;
 import android.content.pm.PackageManager;
 import android.os.Bundle;
@@ -10,10 +12,12 @@ import android.support.v7.app.AppCompatActivity;
 import android.util.Log;
 import android.view.View;
 import android.widget.Button;
+import android.widget.Toast;
 
 import com.cmput401f17.eplscavengerhunt.R;
 import com.cmput401f17.eplscavengerhunt.ScavengerHuntApplication;
 import com.cmput401f17.eplscavengerhunt.controller.GameController;
+import com.cmput401f17.eplscavengerhunt.model.ScavHuntState;
 import com.estimote.coresdk.common.requirements.SystemRequirementsChecker;
 
 import javax.inject.Inject;
@@ -28,15 +32,17 @@ public class TitleActivity extends AppCompatActivity {
     @Inject
     GameController gameController;
 
+    @Inject
+    ScavHuntState scavHuntState;
+
     static final int MY_PERMISSIONS_REQUEST_WRITE_EXTERNAL_STORAGE = 20;
 
     @Override
     protected void onCreate(Bundle savedInstanceState) {
         super.onCreate(savedInstanceState);
+        setContentView(R.layout.activity_title);
         ScavengerHuntApplication.getInstance().getAppComponent().inject(this);
 
-        gameController.initGame();
-        setContentView(R.layout.activity_title);
         final Button startButton = findViewById(R.id.title_start_button);
         final Button rulesButton = findViewById(R.id.title_rules_button);
         final Button aboutButton = findViewById(R.id.title_about_button);
@@ -47,8 +53,18 @@ public class TitleActivity extends AppCompatActivity {
             public void onClick(View v) {
                 Intent intent = new Intent(TitleActivity.this, LocationActivity.class);
                 startButton.setEnabled(false);
-                startActivity(intent);
-                finish();
+                gameController.initGame();
+
+                if(!checkConnection()) {
+                    System.out.println("Database Connection Error. Restarting.");
+                    intent = new  Intent(TitleActivity.this, TitleActivity.class);
+                    finish();
+                    startActivity(intent);
+                } else {
+                    System.out.println("Database Connected!!");
+                    startActivity(intent);
+                    finish();
+                }
             }
         });
 
@@ -82,6 +98,32 @@ public class TitleActivity extends AppCompatActivity {
             }
         });
 
+    }
+    /**
+     * Checks if a connection to the database was successful:
+     * Connection successful if:
+     * - zoneRoute from ScavHuntState is not empty
+     * - numStages from ScavHuntState is more than zero
+     * - questions from ScavHuntState is not empty
+     */
+    private boolean checkConnection() {
+        Context context = getApplicationContext();
+        CharSequence text = "Connection Error. Please ensure that you are connect to a network (WiFi or Data)";
+        int duration = Toast.LENGTH_SHORT;
+
+        if(scavHuntState == null) {
+            Toast.makeText(context, text, duration).show();
+            return(false);
+        }
+
+        if(scavHuntState.getZoneRoute() == null || scavHuntState.getZoneRoute().isEmpty()){
+            System.out.println("No Zones. Check database connection.");
+            Toast.makeText(context, text, duration).show();
+
+            return(false);
+        }
+
+        return(true);
     }
 
     /**

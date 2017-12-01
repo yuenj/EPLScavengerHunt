@@ -23,8 +23,17 @@ public class RulesActivityTest extends ActivityInstrumentationTestCase2<RulesAct
 
     public void testRulesActivityIsProperlyDisplayed() {
         solo.assertCurrentActivity(ERR_MSG, RulesActivity.class);
-        TextView rulesMessage = solo.getCurrentActivity().findViewById(R.id.rules_text_view);
-        assertEquals(rulesMessage.getText().toString(), solo.getString(R.string.rules_text));
+        TextView rulesMessage = solo.getCurrentActivity().findViewById(R.id.rules_text_view_2);
+        assertEquals(rulesMessage.getText().toString(), solo.getString(R.string.rules_welcome_msg_2));
+
+        rulesMessage = solo.getCurrentActivity().findViewById(R.id.rules_text_view_3);
+        assertEquals(rulesMessage.getText().toString(), solo.getString(R.string.rules_welcome_msg_3));
+
+        rulesMessage = solo.getCurrentActivity().findViewById(R.id.rules_text_view_4);
+        assertEquals(rulesMessage.getText().toString(), solo.getString(R.string.rules_welcome_msg_4));
+
+        rulesMessage = solo.getCurrentActivity().findViewById(R.id.rules_text_view_5);
+        assertEquals(rulesMessage.getText().toString(), solo.getString(R.string.rules_welcome_msg_5));
     }
 
     public void testStartButtonShouldGoToDebugActivity() {
