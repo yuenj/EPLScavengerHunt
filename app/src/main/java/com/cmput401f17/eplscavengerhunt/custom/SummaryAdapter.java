@@ -97,10 +97,8 @@ public class SummaryAdapter extends BaseAdapter {
         } */
 
         // Gets the full answer instead of just 'A' or 'C'
-        if(question.isSkipped()){
-            answerTV.setText("You skipped this question.");
-        }
-        else if (question instanceof MultipleChoiceQuestion) {
+
+        if (question instanceof MultipleChoiceQuestion) {
             for (String string: question.getChoices()) {
                 if (string.charAt(0) == question.getAnswer().charAt(0)) {
                     answerTV.setText("Correct Answer: " + string);
@@ -109,7 +107,13 @@ public class SummaryAdapter extends BaseAdapter {
         } else {
             answerTV.setText("Correct Answer: " + question.getAnswer());
         }
-        responseTV.setText("Your Answer: " + response.getResponseStr());
+        
+        if(question.isSkipped()){
+            answerTV.setText("You skipped this question");
+        }
+        else {
+            responseTV.setText("Your Answer: " + response.getResponseStr());
+        }
 
         zoneTV.setText(zone.getName());
         zoneTV.setBackgroundColor(Color.parseColor(zone.getColor()));
