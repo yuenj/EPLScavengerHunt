@@ -31,7 +31,6 @@ public class LocationControllerTest {
     @Captor
     private ArgumentCaptor<List<Zone>> zoneRouteCaptor;
 
-
     LocationController locationController;
     private Zone zone1;
     private Zone zone2;
@@ -55,10 +54,8 @@ public class LocationControllerTest {
 
     @Test
     public void requestZoneTest() {
-
         when(mockScavHuntState.getZoneRoute()).thenReturn(zoneRoute);
         Zone returnedZone = locationController.requestZone();
-
 
         assertEquals(zone3, returnedZone);
     }
