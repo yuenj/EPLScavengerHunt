@@ -87,7 +87,6 @@ public class QuestionActivity extends AppCompatActivity {
         final Button skipButton = findViewById(R.id.question_skip_button);
         skipButton.setOnClickListener(new View.OnClickListener() {
             public void onClick(View v) {
-                Toast.makeText(v.getContext(), "Question skipped", Toast.LENGTH_SHORT).show();
                 questionController.skip(currentQuestion);
                 questionController.requestSubmitResponse("");
                 skipButton.setEnabled(false);
@@ -105,7 +104,7 @@ public class QuestionActivity extends AppCompatActivity {
         TextView zoneView = findViewById(R.id.question_zone_text_view);
         CardView card = findViewById(R.id.card_view);
 
-        zoneView.setText("Category: " + locationController.requestZone().getCategory() + ", Zone: " + locationController.requestZone().getName());
+        zoneView.setText(locationController.requestZone().getCategory() + " : " + locationController.requestZone().getName());
         card.setCardBackgroundColor(Color.parseColor(locationController.requestZone().getColor()));
     }
 
@@ -114,7 +113,7 @@ public class QuestionActivity extends AppCompatActivity {
      */
     private void displayPrompt() {
         TextView prompt = findViewById(R.id.question_prompt_text_view);
-        prompt.setText("Question: " + currentQuestion.getPrompt());
+        prompt.setText(currentQuestion.getPrompt());
     }
 
     /**
@@ -228,7 +227,7 @@ public class QuestionActivity extends AppCompatActivity {
      */
     private void displayWrittenInput() {
         setContentView(R.layout.activity_written_input);
-        final TextInputLayout userAnswerLayout = findViewById(R.id.written_user_answer_wrapper_til);
+        //final TextInputLayout userAnswerLayout = findViewById(R.id.written_user_answer_edit_text);
         final EditText editText = findViewById(R.id.written_user_answer_edit_text);
 
         final ImageView pictureIV = findViewById(R.id.question_picture);
@@ -244,7 +243,7 @@ public class QuestionActivity extends AppCompatActivity {
             public boolean onEditorAction(TextView view, int actionId, KeyEvent event) {
                 boolean handled = false;
                 if (actionId == EditorInfo.IME_ACTION_SEND &&
-                        writtenAnswerChecker(view, editText, userAnswerLayout)) {
+                        writtenAnswerChecker(view, editText)) {
                     startQuestionAnswerActivity();
                     handled = true;
                 }
@@ -257,7 +256,7 @@ public class QuestionActivity extends AppCompatActivity {
         submit.setOnClickListener(new View.OnClickListener() {
             public void onClick(View view) {
                 submit.setEnabled(false);
-                if (writtenAnswerChecker(view, editText, userAnswerLayout)) {
+                if (writtenAnswerChecker(view, editText)) {
                     startQuestionAnswerActivity();
                     return;
                 } else {
@@ -281,13 +280,11 @@ public class QuestionActivity extends AppCompatActivity {
      *
      * @param view, editText
      */
-    private boolean writtenAnswerChecker(View view, EditText editText, TextInputLayout userAnswerLayout) {
+    private boolean writtenAnswerChecker(View view, EditText editText) {
         if (editText.getText().length() == 0) {
-            userAnswerLayout.setError("Answer is too short.");
+            Toast.makeText(view.getContext(), "Answer too short", Toast.LENGTH_SHORT).show();
             return false;
         } else {
-            userAnswerLayout.setErrorEnabled(false);
-            Toast.makeText(view.getContext(), "Answer Submitted!", Toast.LENGTH_SHORT).show();
 
             // Hides the on-screen (soft) keyboard
             ((InputMethodManager) getSystemService(Context.INPUT_METHOD_SERVICE)).

@@ -98,14 +98,16 @@ public class SummaryAdapter extends BaseAdapter {
 
         // Gets the full answer instead of just 'A' or 'C'
 
+
         answerTV.setText("Correct Answer : " + question.getAnswer());
-        
+
         if(question.isSkipped()){
             responseTV.setText("You skipped this question");
         }
         else {
-            responseTV.setText("Your Answer : " + response.getResponseStr());
+            responseTV.setText("Your Answer: " + response.getResponseStr());
         }
+
 
         zoneTV.setText(zone.getName());
         zoneTV.setBackgroundColor(Color.parseColor(zone.getColor()));
