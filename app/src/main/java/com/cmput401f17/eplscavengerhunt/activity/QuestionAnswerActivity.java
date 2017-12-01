@@ -12,7 +12,6 @@ import android.widget.TextView;
 
 import com.cmput401f17.eplscavengerhunt.R;
 import com.cmput401f17.eplscavengerhunt.ScavengerHuntApplication;
-import com.cmput401f17.eplscavengerhunt.controller.DatabaseController;
 import com.cmput401f17.eplscavengerhunt.controller.GameController;
 import com.cmput401f17.eplscavengerhunt.controller.LocationController;
 import com.cmput401f17.eplscavengerhunt.controller.QuestionController;
@@ -26,21 +25,17 @@ import com.cmput401f17.eplscavengerhunt.model.WrittenInputQuestion;
 import javax.inject.Inject;
 
 /**
- * Displays congratulations if they user inputted the correct answer, or
- * The correct answer and the users response if incorrect, and
- * displays the next zone to visit.
+ * The Question Answer page of the app
+ * Displays feedback and the correct answer to the player
  */
 public class QuestionAnswerActivity extends AppCompatActivity {
 
     @Inject
     GameController gameController;
-
     @Inject
     LocationController locationController;
-
     @Inject
     QuestionController questionController;
-
     @Inject
     ScavHuntState scavHuntState;
 
@@ -50,27 +45,25 @@ public class QuestionAnswerActivity extends AppCompatActivity {
         setContentView(R.layout.activity_question_answer);
         ScavengerHuntApplication.getInstance().getAppComponent().inject(this);
 
-        // Get views
+        // find views
         final CardView cardCV = findViewById(R.id.CV_question_answer_card);
         final ImageView imageIV = findViewById(R.id.IV_question_answer_image);
         final TextView messageTV = findViewById(R.id.TV_question_answer_message);
         final TextView answerTV = findViewById(R.id.TV_question_answer_answer);
         final Button doneButton = findViewById(R.id.button_question_answer_done);
 
-        // Determine if the answer is correct
+        // compare the first character for multiple choice questions
+        // 'T' of 'F' and 'A'/'B'/'C'/'D'
         final Question question = questionController.requestQuestion();
         final Response response = questionController.requestResponse();
-
-        //DatabaseController.updateAnalyticsForQuestion(question, response);
-        // Compare the first character for multiple choice questions
-        // 'T' of 'F' and 'A'/'B'/'C'/'D'
         response.markIncorrect();
         if (question instanceof MultipleChoiceQuestion && !response.getResponseStr().isEmpty()) {
             if (question.getAnswer().charAt(0) == response.getResponseStr().charAt(0)) {
                 response.markCorrect();
             }
         }
-        // Use Jen's method for written input questions
+        // perform case-insensitive comparison of the answer and players response
+        // and ignore spaces
         else if (question instanceof WrittenInputQuestion) {
             if (question.getAnswer().toLowerCase().replaceAll("\\s+", "").
                     equals(response.getResponseStr().toLowerCase().replaceAll("\\s+", ""))) {
@@ -79,11 +72,11 @@ public class QuestionAnswerActivity extends AppCompatActivity {
         }
         // TODO: Define this later for pic input questions
         // Else if instead of else for the case where a user skips the question
-        else if (question instanceof PicInputQuestion){
+        else if (question instanceof PicInputQuestion) {
             response.markCorrect();
         }
 
-        // Display feedback for the player
+        // display feedback for the player
         if (question instanceof PicInputQuestion && !question.isSkipped()) {
             imageIV.setImageBitmap(response.getImageFile());
         } else {
@@ -101,13 +94,13 @@ public class QuestionAnswerActivity extends AppCompatActivity {
                 } else {
                     messageTV.setText(getResources().getText(R.string.wrong_answer_text));
                 }
-                cardCV.setCardBackgroundColor(Color.parseColor("#EF005D"));
+                cardCV.setCardBackgroundColor(Color.parseColor("#EF005D")); // red
             }
         }
 
-        // Gets the full answer instead of just 'A' or 'C'
+        // gets the full answer instead of just 'A' or 'C'
         if (question instanceof MultipleChoiceQuestion) {
-            for (String string: question.getChoices()) {
+            for (String string : question.getChoices()) {
                 if (string.charAt(0) == question.getAnswer().charAt(0)) {
                     answerTV.setText(string);
                 }
@@ -117,12 +110,11 @@ public class QuestionAnswerActivity extends AppCompatActivity {
         }
 
         final Intent intent;
-        // If the game is not over give the player a location
+        // if the game is not over, give the player a location
         if (!gameController.requestCheckGameOver()) {
             doneButton.setText("VISIT NEXT LOCATION!");
             gameController.requestIncrementCurrentStage();
             intent = new Intent(QuestionAnswerActivity.this, LocationActivity.class);
-
         }
         // End game otherwise
         else {
