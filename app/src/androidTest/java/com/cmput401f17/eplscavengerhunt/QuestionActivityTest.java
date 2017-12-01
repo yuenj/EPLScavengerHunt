@@ -39,7 +39,7 @@ public class QuestionActivityTest extends ActivityInstrumentationTestCase2<com.c
     public void testSkipButton(){
         solo.waitForActivity("QuestionActivity");
 
-        assertTrue(solo.searchText("skip_question"));
+//        assertTrue(solo.searchText("skip_question"));
 
 //        /* Find skip button as all views/layouts displayed by QuestionActivityTest contain a skip button */
 //        Button skipButton = (Button) solo.getView(R.id.question_skip_button);
