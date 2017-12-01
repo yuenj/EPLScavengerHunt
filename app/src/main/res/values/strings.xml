@@ -28,11 +28,27 @@
     <string name="rules_welcome_msg_5">Visit all 5 locations!</string>
 
     <!-- CreditsActivity -->
-    <string name="credits_text">Credits due to those who deserve credits. (TEMPORARY).</string>
+    <string name="credits_text1">The following resources were consulted to create the questions in this game:</string>
+    <string name="credits_text2">2learn.ca - Educational resources for teachers, students and parents</string>
+    <string name="credits_text3">Jennings, N. L. (2010). In Plain Sight: Exploring the Natural Wonders of Southern Alberta. Victoria, BC: Rocky Mountain Books.</string>
+    <string name="credits_text4">Kagume, K. (2011). Alberta Nature Guide. Edmonton, AB: Lone Pine Publishing.</string>
+    <string name="credits_text5">Laessoe, T. (2013.) Mushrooms: How to Identify and Gather Wild Mushrooms and Other Fungi. New York: DK Publishing.</string>
+    <string name="credits_text6">Lynch, W. (2005). Wild Alberta: A Visual Celebration. Calgary, AB: Fifth House.</string>
+    <string name="credits_text7">Zuehlke, M. (1997). The Alberta Fact Book: Everything You Wanted to Know about Alberta. Vancouver, BC:: Whitecap Books.</string>
+    <string name="image_credits1">Image Credits:</string>
+    <string name="image_credits2">All images are from the Wikimedia Foundation, licensed for reuse for non commercial purpose.</string>
 
     <!-- AboutActivity -->
-    <string name="about_text">This app is a scavenger hunt where you moving from zone to zone and
-    answer questions. (TEMPORARY).</string>
+    <string name="about_text1">This game is the result of a partnership between the University of Alberta Department of Computing Science and the Edmonton Public Library. The following individuals were involved in this project:</string>
+    <string name="about_text2">Victor Guana</string>
+    <string name="about_text3">Diego Serrano Suarez</string>
+    <string name="about_text4">Alexandrea Czeto</string>
+    <string name="about_text5">Brett Garbitt</string>
+    <string name="about_text6">Jennifer Yuen</string>
+    <string name="about_text7">Nathan Nguyen</string>
+    <string name="about_text8">Ryan Perez</string>
+    <string name="about_text9">William Thoang</string>
+    <string name="about_text10">Lydia Zvyagintseva</string>
 
     <!-- CongratsActivity -->
     <string name="congrats_msg_header">Congratulations!</string>
@@ -46,7 +62,7 @@
     <string name="skip_question">Skip</string>
     <string name="Temp_Question">This bird is 24 centimetres (9 inches) long and is easily identified by its long legs and short, barred tail. What bird am I?</string>
     <string name="Temp_Zone">Birds : Children\'s Area</string>
-    <string name="hint"><font size="30">Your Answer :</font></string>
+    <string name="hint">Your Answer</string>
 
     <!-- SummaryActivity -->
     <string name="total_score">Your Total: </string>

@@ -3,27 +3,199 @@
     xmlns:tools="http://schemas.android.com/tools"
     android:layout_width="match_parent"
     android:layout_height="match_parent"
+    xmlns:card_view="http://schemas.android.com/apk/res-auto"
     android:keepScreenOn="true"
     tools:context="com.cmput401f17.eplscavengerhunt.activity.AboutActivity">
 
-    <TextView
-        android:id="@+id/about_text_view"
+    <LinearLayout
         android:layout_width="match_parent"
         android:layout_height="match_parent"
-        android:layout_marginTop="0dp"
-        android:gravity="center"
-        android:text="@string/about_text"
-        android:textColor="#000"
-        android:textSize="25sp"
-        android:textStyle="bold" />
+        android:background="@drawable/texture_background"
+        android:orientation="vertical">
 
-    <Button
-        android:id="@+id/about_return_button"
-        android:layout_width="wrap_content"
-        android:layout_height="wrap_content"
-        android:layout_alignParentBottom="true"
-        android:layout_centerHorizontal="true"
-        android:layout_marginBottom="100dp"
-        android:text="@string/return_button_text" />
+        <android.support.v7.widget.CardView
+            android:layout_width="match_parent"
+            android:layout_height="match_parent"
+            android:layout_margin="20dp"
+            card_view:cardBackgroundColor="#ffffff"
+            card_view:cardCornerRadius="30dp"
+            card_view:cardElevation="10dp">
 
+            <LinearLayout
+                android:layout_width="match_parent"
+                android:layout_height="match_parent"
+                android:orientation="vertical">
+
+                <FrameLayout
+                    android:layout_width="match_parent"
+                    android:layout_height="wrap_content">
+
+                    <android.support.v7.widget.CardView
+                        android:layout_width="match_parent"
+                        android:layout_height="wrap_content"
+                        card_view:cardBackgroundColor="@color/cardBackGround"
+                        card_view:cardCornerRadius="30dp">
+
+                        <TextView
+                            android:id="@+id/title_text"
+                            android:layout_width="wrap_content"
+                            android:layout_height="wrap_content"
+                            android:layout_gravity="center"
+                            android:fontFamily="@font/roboto_bold"
+                            android:padding="16dp"
+                            android:text="About"
+                            android:textColor="@color/colorLightText"
+                            android:textSize="40sp" />
+
+                    </android.support.v7.widget.CardView>
+
+                    <TextView
+                        android:layout_width="match_parent"
+                        android:layout_height="40dp"
+                        android:layout_gravity="center_horizontal|bottom"
+                        android:background="@color/cardBackGround" />
+
+                </FrameLayout>
+
+                <RelativeLayout
+                    android:layout_width="match_parent"
+                    android:layout_height="match_parent">
+
+                    <LinearLayout
+                        android:layout_width="match_parent"
+                        android:layout_height="wrap_content"
+                        android:layout_alignParentTop="true"
+                        android:orientation="vertical">
+
+                        <TextView
+                            android:layout_width="match_parent"
+                            android:layout_height="wrap_content"
+                            android:fontFamily="@font/roboto_regular"
+                            android:paddingHorizontal="16dp"
+                            android:paddingVertical="10dp"
+                            android:text="@string/about_text1"
+                            android:textColor="@color/colorDarkText"
+                            android:textSize="@dimen/aboutHeaderTextSize" />
+
+                        <TextView
+                            android:layout_width="match_parent"
+                            android:layout_height="wrap_content"
+                            android:fontFamily="@font/roboto_regular"
+                            android:paddingHorizontal="16dp"
+                            android:paddingVertical="2dp"
+                            android:text="@string/about_text2"
+                            android:textColor="@color/colorDarkText"
+                            android:textSize="@dimen/aboutBodyTextSize" />
+
+                        <TextView
+                            android:layout_width="match_parent"
+                            android:layout_height="wrap_content"
+                            android:fontFamily="@font/roboto_regular"
+                            android:paddingHorizontal="16dp"
+                            android:paddingVertical="2dp"
+                            android:text="@string/about_text3"
+                            android:textColor="@color/colorDarkText"
+                            android:textSize="@dimen/aboutBodyTextSize" />
+
+                        <TextView
+                            android:layout_width="match_parent"
+                            android:layout_height="wrap_content"
+                            android:fontFamily="@font/roboto_regular"
+                            android:paddingHorizontal="16dp"
+                            android:paddingVertical="2dp"
+                            android:text="@string/about_text4"
+                            android:textColor="@color/colorDarkText"
+                            android:textSize="@dimen/aboutBodyTextSize" />
+
+                        <TextView
+                            android:layout_width="match_parent"
+                            android:layout_height="wrap_content"
+                            android:fontFamily="@font/roboto_regular"
+                            android:paddingHorizontal="16dp"
+                            android:paddingVertical="2dp"
+                            android:text="@string/about_text5"
+                            android:textColor="@color/colorDarkText"
+                            android:textSize="@dimen/aboutBodyTextSize" />
+
+                        <TextView
+                            android:layout_width="match_parent"
+                            android:layout_height="wrap_content"
+                            android:fontFamily="@font/roboto_regular"
+                            android:paddingHorizontal="16dp"
+                            android:paddingVertical="2dp"
+                            android:text="@string/about_text6"
+                            android:textColor="@color/colorDarkText"
+                            android:textSize="@dimen/aboutBodyTextSize" />
+
+                        <TextView
+                            android:layout_width="match_parent"
+                            android:layout_height="wrap_content"
+                            android:fontFamily="@font/roboto_regular"
+                            android:paddingHorizontal="16dp"
+                            android:paddingVertical="2dp"
+                            android:text="@string/about_text7"
+                            android:textColor="@color/colorDarkText"
+                            android:textSize="@dimen/aboutBodyTextSize" />
+
+                        <TextView
+                            android:layout_width="match_parent"
+                            android:layout_height="wrap_content"
+                            android:fontFamily="@font/roboto_regular"
+                            android:paddingHorizontal="16dp"
+                            android:paddingVertical="2dp"
+                            android:text="@string/about_text8"
+                            android:textColor="@color/colorDarkText"
+                            android:textSize="@dimen/aboutBodyTextSize" />
+
+                        <TextView
+                            android:layout_width="match_parent"
+                            android:layout_height="wrap_content"
+                            android:fontFamily="@font/roboto_regular"
+                            android:paddingHorizontal="16dp"
+                            android:paddingVertical="2dp"
+                            android:text="@string/about_text9"
+                            android:textColor="@color/colorDarkText"
+                            android:textSize="@dimen/aboutBodyTextSize" />
+
+                        <TextView
+                            android:layout_width="match_parent"
+                            android:layout_height="wrap_content"
+                            android:fontFamily="@font/roboto_regular"
+                            android:paddingHorizontal="16dp"
+                            android:paddingVertical="2dp"
+                            android:text="@string/about_text10"
+                            android:textColor="@color/colorDarkText"
+                            android:textSize="@dimen/aboutBodyTextSize" />
+
+                    </LinearLayout>
+
+                    <LinearLayout
+                        android:id="@+id/title_buttons"
+                        android:layout_width="match_parent"
+                        android:layout_height="wrap_content"
+                        android:layout_alignParentBottom="true"
+                        android:layout_marginBottom="16dp"
+                        android:layout_marginTop="24dp"
+                        android:orientation="vertical">
+
+
+                        <Button
+                            android:id="@+id/about_return_button"
+                            style="@style/ButtonStyle"
+                            android:layout_width="@dimen/rulesButtonWidth"
+                            android:layout_height="wrap_content"
+                            android:layout_gravity="center"
+                            android:backgroundTint="@color/colorButtonPurple"
+                            android:fontFamily="@font/roboto_bold"
+                            android:padding="@dimen/rulesButtonPadding"
+                            android:text="@string/return_button_text"
+                            android:textAlignment="center"
+                            android:textAllCaps="true"
+                            android:textSize="@dimen/rulesButtonTextSize" />
+
+                    </LinearLayout>
+                </RelativeLayout>
+            </LinearLayout>
+        </android.support.v7.widget.CardView>
+    </LinearLayout>
 </RelativeLayout>

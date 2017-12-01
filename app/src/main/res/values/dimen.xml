@@ -1,8 +1,6 @@
 <?xml version="1.0" encoding="utf-8"?>
 <resources>
-    <dimen name="SkipSubmitTextSize">15sp</dimen>
-    <dimen name="QuestionCardViewHorMarg">10dp</dimen>
-    <dimen name="QuestionCardViewVerMarg">7dp</dimen>
+    <!-- Supports the Pixel device and other larger phones -->
 
     <!-- App -->
     <dimen name="cardViewHeight">125dp</dimen>
@@ -36,12 +34,15 @@
     <!-- Question -->
     <dimen name="QuestionTextSize">21sp</dimen>
     <dimen name="AreaNameZoneTextSize">18sp</dimen>
-    <dimen name="questionButtonTextSize">16sp</dimen>
+    <dimen name="questionButtonTextSize">18sp</dimen>
     <dimen name="questionButtonPadding">16dp</dimen>
+    <dimen name ="zoneCardMargHor">5dp</dimen>
+    <dimen name="QuestionCardViewHorMarg">10dp</dimen>
+    <dimen name="QuestionCardViewVerMarg">5dp</dimen>
 
     <!-- Written -->
-    <dimen name="questionAnswerPromptTextSize">20sp</dimen>
-    <dimen name="questionAnswerInputTextSize">20sp</dimen>
+    <dimen name="questionAnswerPromptTextSize">30sp</dimen>
+    <dimen name="questionAnswerInputTextSize">30sp</dimen>
 
     <!-- Multiple choice -->
     <dimen name="multipleChoiceRadioButtonTextSize">16sp</dimen>
@@ -59,7 +60,7 @@
     <!-- Question Answer -->
     <dimen name="questionAnswerImageWeight">50</dimen>
     <dimen name="questionAnswerOtherWeight">50</dimen>
-    <dimen name="questionAnswerMessageTextSize">36sp</dimen>
+    <dimen name="questionAnswerMessageTextSize">30sp</dimen>
     <dimen name="questionAnswerDetailedMessageTextSize">24sp</dimen>
     <dimen name="questionAnswerAnswerTextSize">20sp</dimen>
     <dimen name="questionAnswerButtonTextSize">14sp</dimen>
@@ -72,5 +73,12 @@
     <dimen name="rulesButtonTextSize">14sp</dimen>
     <dimen name="rulesButtonPadding">16dp</dimen>
     <dimen name="rulesButtonWidth">100dp</dimen>
+
+    <!-- Credits -->
+    <dimen name="creditsBodyTextSize">12sp</dimen>
+
+    <!-- About -->
+    <dimen name="aboutHeaderTextSize">16sp</dimen>
+    <dimen name="aboutBodyTextSize">14sp</dimen>
 
 </resources>

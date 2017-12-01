@@ -50,6 +50,9 @@ public class GameController {
 
         String branch = scavHuntState.getBranch();
         final List<Zone> zoneRoute = generateZoneRoute(branch,5);
+        if (zoneRoute.size() > 0) {
+            System.out.println("IT WORKSADAWDAWDAW");
+        }
 
         /* No data drawn. Return to restart */
         if(zoneRoute.isEmpty()) {

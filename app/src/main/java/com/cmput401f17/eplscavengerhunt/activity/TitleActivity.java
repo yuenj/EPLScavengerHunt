@@ -52,6 +52,8 @@ public class TitleActivity extends AppCompatActivity {
         startButton.setOnClickListener(new View.OnClickListener() {
             public void onClick(View v) {
                 Intent intent = new Intent(TitleActivity.this, LocationActivity.class);
+                gameController.initGame();
+
                 startButton.setEnabled(false);
                 gameController.initGame();
 
