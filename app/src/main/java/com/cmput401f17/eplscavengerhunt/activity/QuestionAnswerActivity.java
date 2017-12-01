@@ -8,6 +8,7 @@ import android.support.v7.widget.CardView;
 import android.view.View;
 import android.widget.Button;
 import android.widget.ImageView;
+import android.widget.RadioButton;
 import android.widget.TextView;
 
 import com.cmput401f17.eplscavengerhunt.R;
@@ -21,6 +22,10 @@ import com.cmput401f17.eplscavengerhunt.model.Question;
 import com.cmput401f17.eplscavengerhunt.model.Response;
 import com.cmput401f17.eplscavengerhunt.model.ScavHuntState;
 import com.cmput401f17.eplscavengerhunt.model.WrittenInputQuestion;
+
+import java.util.Arrays;
+import java.util.List;
+import java.util.Random;
 
 import javax.inject.Inject;
 
@@ -44,6 +49,11 @@ public class QuestionAnswerActivity extends AppCompatActivity {
         super.onCreate(savedInstanceState);
         setContentView(R.layout.activity_question_answer);
         ScavengerHuntApplication.getInstance().getAppComponent().inject(this);
+
+        // an image will be randomly picked from this container
+        final List<String> correctImages = Arrays.asList("ic_chick", "ic_dolphin",
+                "ic_frog", "ic_hamster", "ic_ladybug");
+        Random random = new Random();
 
         // find views
         final CardView cardCV = findViewById(R.id.CV_question_answer_card);
@@ -81,8 +91,9 @@ public class QuestionAnswerActivity extends AppCompatActivity {
             imageIV.setImageBitmap(response.getImageFile());
         } else {
             if (response.isCorrect()) {
+                int index = random.nextInt(correctImages.size());
                 final int resourceId = this.getResources().getIdentifier(
-                        "ic_dolphin", "drawable", this.getPackageName());
+                        correctImages.get(index), "drawable", this.getPackageName());
                 imageIV.setImageDrawable(this.getResources().getDrawable(resourceId));
                 messageTV.setText(getResources().getText(R.string.correct_answer_text));
             } else {
