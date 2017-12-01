@@ -45,7 +45,7 @@
                             android:padding="16dp"
                             android:text="About"
                             android:textColor="@color/colorLightText"
-                            android:textSize="@dimen/rulesTitleTextSize" />
+                            android:textSize="40sp" />
 
                     </android.support.v7.widget.CardView>
 
@@ -68,40 +68,104 @@
                         android:orientation="vertical">
 
                         <TextView
-                            android:id="@+id/rules_text_view_2"
                             android:layout_width="match_parent"
                             android:layout_height="wrap_content"
                             android:fontFamily="@font/roboto_regular"
                             android:paddingHorizontal="16dp"
                             android:paddingVertical="10dp"
                             android:text="@string/about_text1"
-                            android:textAlignment="center"
                             android:textColor="@color/colorDarkText"
-                            android:textSize="@dimen/rulesSecondaryHeaderTextSize" />
+                            android:textSize="@dimen/aboutHeaderTextSize" />
 
                         <TextView
-                            android:id="@+id/rules_text_view_3"
                             android:layout_width="match_parent"
                             android:layout_height="wrap_content"
                             android:fontFamily="@font/roboto_regular"
                             android:paddingHorizontal="16dp"
-                            android:paddingVertical="10dp"
+                            android:paddingVertical="2dp"
                             android:text="@string/about_text2"
-                            android:textAlignment="center"
                             android:textColor="@color/colorDarkText"
-                            android:textSize="@dimen/rulesBodyTextSize" />
+                            android:textSize="@dimen/aboutBodyTextSize" />
 
                         <TextView
-                            android:id="@+id/rules_text_view_4"
                             android:layout_width="match_parent"
                             android:layout_height="wrap_content"
                             android:fontFamily="@font/roboto_regular"
                             android:paddingHorizontal="16dp"
-                            android:paddingVertical="10dp"
+                            android:paddingVertical="2dp"
                             android:text="@string/about_text3"
-                            android:textAlignment="center"
                             android:textColor="@color/colorDarkText"
-                            android:textSize="@dimen/rulesBodyTextSize" />
+                            android:textSize="@dimen/aboutBodyTextSize" />
+
+                        <TextView
+                            android:layout_width="match_parent"
+                            android:layout_height="wrap_content"
+                            android:fontFamily="@font/roboto_regular"
+                            android:paddingHorizontal="16dp"
+                            android:paddingVertical="2dp"
+                            android:text="@string/about_text4"
+                            android:textColor="@color/colorDarkText"
+                            android:textSize="@dimen/aboutBodyTextSize" />
+
+                        <TextView
+                            android:layout_width="match_parent"
+                            android:layout_height="wrap_content"
+                            android:fontFamily="@font/roboto_regular"
+                            android:paddingHorizontal="16dp"
+                            android:paddingVertical="2dp"
+                            android:text="@string/about_text5"
+                            android:textColor="@color/colorDarkText"
+                            android:textSize="@dimen/aboutBodyTextSize" />
+
+                        <TextView
+                            android:layout_width="match_parent"
+                            android:layout_height="wrap_content"
+                            android:fontFamily="@font/roboto_regular"
+                            android:paddingHorizontal="16dp"
+                            android:paddingVertical="2dp"
+                            android:text="@string/about_text6"
+                            android:textColor="@color/colorDarkText"
+                            android:textSize="@dimen/aboutBodyTextSize" />
+
+                        <TextView
+                            android:layout_width="match_parent"
+                            android:layout_height="wrap_content"
+                            android:fontFamily="@font/roboto_regular"
+                            android:paddingHorizontal="16dp"
+                            android:paddingVertical="2dp"
+                            android:text="@string/about_text7"
+                            android:textColor="@color/colorDarkText"
+                            android:textSize="@dimen/aboutBodyTextSize" />
+
+                        <TextView
+                            android:layout_width="match_parent"
+                            android:layout_height="wrap_content"
+                            android:fontFamily="@font/roboto_regular"
+                            android:paddingHorizontal="16dp"
+                            android:paddingVertical="2dp"
+                            android:text="@string/about_text8"
+                            android:textColor="@color/colorDarkText"
+                            android:textSize="@dimen/aboutBodyTextSize" />
+
+                        <TextView
+                            android:layout_width="match_parent"
+                            android:layout_height="wrap_content"
+                            android:fontFamily="@font/roboto_regular"
+                            android:paddingHorizontal="16dp"
+                            android:paddingVertical="2dp"
+                            android:text="@string/about_text9"
+                            android:textColor="@color/colorDarkText"
+                            android:textSize="@dimen/aboutBodyTextSize" />
+
+                        <TextView
+                            android:layout_width="match_parent"
+                            android:layout_height="wrap_content"
+                            android:fontFamily="@font/roboto_regular"
+                            android:paddingHorizontal="16dp"
+                            android:paddingVertical="2dp"
+                            android:text="@string/about_text10"
+                            android:textColor="@color/colorDarkText"
+                            android:textSize="@dimen/aboutBodyTextSize" />
 
                     </LinearLayout>
 
@@ -130,9 +194,7 @@
                             android:textSize="@dimen/rulesButtonTextSize" />
 
                     </LinearLayout>
-
                 </RelativeLayout>
-
             </LinearLayout>
         </android.support.v7.widget.CardView>
     </LinearLayout>
