@@ -97,7 +97,10 @@ public class SummaryAdapter extends BaseAdapter {
         } */
 
         // Gets the full answer instead of just 'A' or 'C'
-        if (question instanceof MultipleChoiceQuestion) {
+        if(question.isSkipped()){
+            answerTV.setText("You skipped this question.");
+        }
+        else if (question instanceof MultipleChoiceQuestion) {
             for (String string: question.getChoices()) {
                 if (string.charAt(0) == question.getAnswer().charAt(0)) {
                     answerTV.setText("Correct Answer: " + string);
