@@ -64,4 +64,7 @@
     <dimen name="rulesButtonPadding">24dp</dimen>
     <dimen name="rulesButtonWidth">150dp</dimen>
 
+    <!-- Credits -->
+    <dimen name="creditsBodyTextSize">16sp</dimen>
+
 </resources>
