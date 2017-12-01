@@ -13,6 +13,7 @@
         android:layout_width="match_parent"
         android:layout_height="0dp"
         android:layout_weight="@dimen/congratsImageLayoutWeight"
+        android:scaleType='fitXY'
         android:contentDescription="@string/congrats_image_content_description"
         android:paddingHorizontal="@dimen/congratsImagePaddingHorizontal"
         android:src="@drawable/ic_catapillar" />
