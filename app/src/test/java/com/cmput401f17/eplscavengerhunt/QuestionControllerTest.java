@@ -71,8 +71,5 @@ public class QuestionControllerTest {
 
         questionController.skip(question1);
         verify(question1,times(1)).skip();
-
     }
-
-
 }

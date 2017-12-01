@@ -22,8 +22,8 @@ public class CreditsActivityTest extends ActivityInstrumentationTestCase2<Credit
 
     public void testCreditsActivityIsProperlyDisplayed() {
         solo.assertCurrentActivity(ERR_MSG, CreditsActivity.class);
-        TextView creditsMessage = solo.getCurrentActivity().findViewById(R.id.credits_text_view);
-        assertEquals(creditsMessage.getText().toString(), solo.getString(R.string.credits_text));
+        TextView creditsMessage = solo.getCurrentActivity().findViewById(R.id.credits_text_view_2);
+        assertEquals(creditsMessage.getText().toString(), solo.getString(R.string.credits_text1));
     }
 
     public void testReturnButtonShouldGoToTitleActivity() {

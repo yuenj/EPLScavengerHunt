@@ -1,9 +1,8 @@
 package com.cmput401f17.eplscavengerhunt.activity;
 
 import android.content.Intent;
-import android.support.v7.app.AppCompatActivity;
 import android.os.Bundle;
-import android.util.Log;
+import android.support.v7.app.AppCompatActivity;
 import android.view.View;
 import android.widget.Button;
 
@@ -14,7 +13,8 @@ import com.cmput401f17.eplscavengerhunt.controller.GameController;
 import javax.inject.Inject;
 
 /**
- * Contains instructions on how to play the game which includes zones and types of questions
+ * The Rules page of the app
+ * Contains instructions on how to play the game
  */
 public class RulesActivity extends AppCompatActivity {
 
@@ -27,25 +27,25 @@ public class RulesActivity extends AppCompatActivity {
         setContentView(R.layout.activity_rules);
         ScavengerHuntApplication.getInstance().getAppComponent().inject(this);
 
+        // find views
         final Button startButton = findViewById(R.id.rules_start_button);
         final Button returnButton = findViewById(R.id.rules_return_button);
 
-        // User click leads them to the start of the game
+        // set up on click listeners
         startButton.setOnClickListener(new View.OnClickListener() {
             public void onClick(View v) {
-                Intent intent = new Intent(RulesActivity.this, DebugActivity.class);
                 startButton.setEnabled(false);
+                Intent intent = new Intent(RulesActivity.this, LocationActivity.class);
                 gameController.initGame();
                 startActivity(intent);
                 finish();
             }
         });
 
-        // User click leads them to the previous screen
         returnButton.setOnClickListener(new View.OnClickListener() {
             public void onClick(View v) {
-                Intent intent = new Intent(RulesActivity.this, TitleActivity.class);
                 returnButton.setEnabled(false);
+                Intent intent = new Intent(RulesActivity.this, TitleActivity.class);
                 startActivity(intent);
                 finish();
             }

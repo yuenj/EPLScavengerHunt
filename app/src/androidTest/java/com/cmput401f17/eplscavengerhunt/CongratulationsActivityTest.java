@@ -29,11 +29,6 @@ public class CongratulationsActivityTest extends
         assertEquals(congratsMsgBody.getText().toString(), solo.getString(R.string.congrats_msg_body));
     }
 
-    public void testSummaryButtonShouldGoToSummaryActivity() {
-        solo.clickOnText(solo.getString(R.string.goto_summary_activity_text));
-        solo.assertCurrentActivity(ERR_MSG, SummaryActivity.class);
-    }
-
     public void tearDown() {
         solo.finishOpenedActivities();
     }
