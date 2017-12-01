@@ -1,6 +1,8 @@
 package com.cmput401f17.eplscavengerhunt.activity;
 
 import android.Manifest;
+import android.app.Activity;
+import android.content.Context;
 import android.content.Intent;
 import android.content.pm.PackageManager;
 import android.os.Bundle;
@@ -9,10 +11,12 @@ import android.support.v4.content.ContextCompat;
 import android.support.v7.app.AppCompatActivity;
 import android.view.View;
 import android.widget.Button;
+import android.widget.Toast;
 
 import com.cmput401f17.eplscavengerhunt.R;
 import com.cmput401f17.eplscavengerhunt.ScavengerHuntApplication;
 import com.cmput401f17.eplscavengerhunt.controller.GameController;
+import com.cmput401f17.eplscavengerhunt.model.ScavHuntState;
 import com.estimote.coresdk.common.requirements.SystemRequirementsChecker;
 
 import javax.inject.Inject;
@@ -47,8 +51,18 @@ public class TitleActivity extends AppCompatActivity {
                 gameController.initGame();
 
                 startButton.setEnabled(false);
-                startActivity(intent);
-                finish();
+                gameController.initGame();
+
+                if(!checkConnection()) {
+                    System.out.println("Database Connection Error. Restarting.");
+                    intent = new  Intent(TitleActivity.this, TitleActivity.class);
+                    finish();
+                    startActivity(intent);
+                } else {
+                    System.out.println("Database Connected!!");
+                    startActivity(intent);
+                    finish();
+                }
             }
         });
 
@@ -78,6 +92,32 @@ public class TitleActivity extends AppCompatActivity {
                 finish();
             }
         });
+    }
+    /**
+     * Checks if a connection to the database was successful:
+     * Connection successful if:
+     * - zoneRoute from ScavHuntState is not empty
+     * - numStages from ScavHuntState is more than zero
+     * - questions from ScavHuntState is not empty
+     */
+    private boolean checkConnection() {
+        Context context = getApplicationContext();
+        CharSequence text = "Connection Error. Please ensure that you are connect to a network (WiFi or Data)";
+        int duration = Toast.LENGTH_SHORT;
+
+        if(scavHuntState == null) {
+            Toast.makeText(context, text, duration).show();
+            return(false);
+        }
+
+        if(scavHuntState.getZoneRoute() == null || scavHuntState.getZoneRoute().isEmpty()){
+            System.out.println("No Zones. Check database connection.");
+            Toast.makeText(context, text, duration).show();
+
+            return(false);
+        }
+
+        return(true);
     }
 
     @Override

@@ -1,5 +1,7 @@
 package com.cmput401f17.eplscavengerhunt.controller;
 
+import android.widget.Toast;
+
 import com.cmput401f17.eplscavengerhunt.model.MultipleChoiceQuestion;
 import com.cmput401f17.eplscavengerhunt.model.PicInputQuestion;
 import com.cmput401f17.eplscavengerhunt.model.Question;
@@ -52,6 +54,11 @@ public class GameController {
             System.out.println("IT WORKSADAWDAWDAW");
         }
 
+        /* No data drawn. Return to restart */
+        if(zoneRoute.isEmpty()) {
+            return (false);
+        }
+
         // TODO place 5 in a config file or somwhere else, don't hardcode it
         generateQuestionSet(zoneRoute);
 
@@ -77,8 +84,16 @@ public class GameController {
     private List<Zone> generateZoneRoute(final String branch, final int numZones) {
         //final List<Zone> zoneRoute = databaseController.retrieveRandomZonesInBranch(branch, numZones);
         List<Zone> zoneRoute = databaseController.retrieveZones(branch);
+
         scavHuntState.setZoneRoute(zoneRoute);
-        scavHuntState.setNumStages(zoneRoute.size());
+
+        if(zoneRoute == null || zoneRoute.isEmpty()) {
+            //Set empty list as there are no null checks anywhere else
+            zoneRoute = Arrays.asList();
+            scavHuntState.setNumStages(0);
+        } else {
+            scavHuntState.setNumStages(zoneRoute.size());
+        }
 
         return zoneRoute;
     }

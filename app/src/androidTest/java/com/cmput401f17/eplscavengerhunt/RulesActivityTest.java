@@ -33,6 +33,7 @@ public class RulesActivityTest extends ActivityInstrumentationTestCase2<RulesAct
         assertEquals(rulesMessage4.getText().toString(), solo.getString(R.string.rules_welcome_msg_4));
         TextView rulesMessage5 = solo.getCurrentActivity().findViewById(R.id.rules_text_view_5);
         assertEquals(rulesMessage5.getText().toString(), solo.getString(R.string.rules_welcome_msg_5));
+
     }
 
     public void testStartButtonShouldGoToDebugActivity() {

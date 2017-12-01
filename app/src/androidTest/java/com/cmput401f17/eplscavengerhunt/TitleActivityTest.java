@@ -37,7 +37,6 @@ public class TitleActivityTest {
     @Rule
     public ActivityTestRule<TitleActivity> mActivityRule = new ActivityTestRule<>(
             TitleActivity.class);
-
     @Before
     public void initValidString() {
         waitingTime = DateUtils.SECOND_IN_MILLIS;
