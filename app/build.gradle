@@ -60,6 +60,14 @@ dependencies {
 
     // Instrumentation Test
     androidTestCompile 'com.jayway.android.robotium:robotium-solo:5.3.1'
+    androidTestCompile('com.android.support.test.espresso:espresso-core:3.0.1') {
+        exclude group: 'com.android.support', module: 'support-annotations'
+    }
+    androidTestCompile('com.android.support.test:runner:0.3') {
+        exclude group: 'com.android.support', module: 'support-annotations'
+    }
+    androidTestCompile 'com.android.support.test.espresso:espresso-intents:3.0.1'
+
 
     // User Interface
     compile 'com.android.support.constraint:constraint-layout:1.0.2'

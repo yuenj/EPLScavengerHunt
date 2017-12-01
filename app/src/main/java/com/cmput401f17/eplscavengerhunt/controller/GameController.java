@@ -1,5 +1,7 @@
 package com.cmput401f17.eplscavengerhunt.controller;
 
+import android.widget.Toast;
+
 import com.cmput401f17.eplscavengerhunt.model.MultipleChoiceQuestion;
 import com.cmput401f17.eplscavengerhunt.model.PicInputQuestion;
 import com.cmput401f17.eplscavengerhunt.model.Question;
@@ -52,6 +54,11 @@ public class GameController {
             System.out.println("IT WORKSADAWDAWDAW");
         }
 
+        /* No data drawn. Return to restart */
+        if(zoneRoute.isEmpty()) {
+            return (false);
+        }
+
         // TODO place 5 in a config file or somwhere else, don't hardcode it
         generateQuestionSet(zoneRoute);
 
@@ -77,8 +84,16 @@ public class GameController {
     private List<Zone> generateZoneRoute(final String branch, final int numZones) {
         //final List<Zone> zoneRoute = databaseController.retrieveRandomZonesInBranch(branch, numZones);
         List<Zone> zoneRoute = databaseController.retrieveZones(branch);
+
         scavHuntState.setZoneRoute(zoneRoute);
-        scavHuntState.setNumStages(zoneRoute.size());
+
+        if(zoneRoute == null || zoneRoute.isEmpty()) {
+            //Set empty list as there are no null checks anywhere else
+            zoneRoute = Arrays.asList();
+            scavHuntState.setNumStages(0);
+        } else {
+            scavHuntState.setNumStages(zoneRoute.size());
+        }
 
         return zoneRoute;
     }
@@ -132,45 +147,5 @@ public class GameController {
      */
     public Boolean requestCheckGameOver() {
         return scavHuntState.isGameOver();
-    }
-
-    /** Hard coded questions, answers and zones for demo purposes */
-    public void initScav() {
-        scavHuntState.cleanState();
-
-        scavHuntState.setBranch("Clareview");
-
-        // Sets a zone with it's specific name and beacon id
-        Zone zone1 = new Zone("[4f8113396f78d23ec78edfb96c79e23a]", "Birds", "Children's area"); // DJBeet
-        Zone zone2 = new Zone("[ab1d6643c33e5f6ed7c52a062168f137]", "Landscape", "Non-fiction"); // CandyStore
-        Zone zone3 = new Zone("[9a78af8c1252fcb37abefecbbbe7322a]", "Landscape", "Fireplace"); // Lemonade
-        // Give each zone a color
-        zone1.setColor("#870099");
-        zone2.setColor("#1D93DC");
-        zone3.setColor("#60CE41");
-
-        // Create the zone route
-        List<Zone> zoneRoute = Arrays.asList(zone1, zone2, zone3);
-        scavHuntState.setZoneRoute(zoneRoute);
-        scavHuntState.setNumStages(3);
-
-        // Create multiple choice question
-        String question1Prompt = "This bird is 24 centimetres (9 inches) long and is easily identified by its long legs and short, barred tail. What bird am I?";
-        String question1Solution = "Burrowing Owl";
-        List<String> question1Choices = Arrays.asList("Peregrine Falcon", "Burrowing Owl", "Humming Bird", "Barn Owl");
-        Question question1 = new MultipleChoiceQuestion(0, question1Prompt, "burrowing_owl", question1Choices, question1Solution);
-        // Create written answer question
-        String question2Prompt = "Great rivers that flowed here 75 million years ago left sand and mud deposits. What landscape of Alberta is this?";
-        String question2Solution = "Badlands";
-        Question question2 = new WrittenInputQuestion(1, question2Prompt, "badlands", question2Solution);
-        // Create Picture with multiple choice question
-        String question3Prompt = "Located in the Southwestern edge of Alberta, the ________________ are perhaps the best known and most well visited of Alberta's six natural regions.";
-        String question3Solution = "Rocky Mountains";
-        List<String> choices = Arrays.asList("Mount Everest", question3Solution, "Grand Canyon");
-        Question question3 = new PicInputQuestion(3, question3Prompt, "rocky_mountains", choices, question3Solution);
-
-        // Create the question list
-        List<Question> questionList = Arrays.asList(question1, question2, question3);
-        scavHuntState.setQuestions(questionList);
     }
 }
