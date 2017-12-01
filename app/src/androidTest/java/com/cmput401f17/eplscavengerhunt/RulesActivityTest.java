@@ -3,6 +3,7 @@ package com.cmput401f17.eplscavengerhunt;
 import android.test.ActivityInstrumentationTestCase2;
 import android.widget.TextView;
 
+import com.cmput401f17.eplscavengerhunt.activity.LocationActivity;
 import com.cmput401f17.eplscavengerhunt.activity.RulesActivity;
 import com.cmput401f17.eplscavengerhunt.activity.TitleActivity;
 import com.robotium.solo.Solo;
@@ -38,7 +39,7 @@ public class RulesActivityTest extends ActivityInstrumentationTestCase2<RulesAct
 
     public void testStartButtonShouldGoToDebugActivity() {
         solo.clickOnText(solo.getString(R.string.start_button_text));
-        solo.assertCurrentActivity(ERR_MSG, DebugActivity.class);
+        solo.assertCurrentActivity(ERR_MSG, LocationActivity.class);
     }
 
     public void testReturnButtonShouldGoToTitleActivity() {
