@@ -109,7 +109,7 @@ public class SummaryAdapter extends BaseAdapter {
         }
         
         if(question.isSkipped()){
-            answerTV.setText("You skipped this question");
+            responseTV.setText("You skipped this question");
         }
         else {
             responseTV.setText("Your Answer: " + response.getResponseStr());
