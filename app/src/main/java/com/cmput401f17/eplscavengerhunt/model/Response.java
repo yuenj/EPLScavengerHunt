@@ -2,8 +2,6 @@ package com.cmput401f17.eplscavengerhunt.model;
 
 import android.graphics.Bitmap;
 
-import java.io.File;
-
 /**
  * Holds information for the user response
  */

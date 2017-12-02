@@ -8,6 +8,7 @@ import android.os.Bundle;
 import android.support.v4.app.ActivityCompat;
 import android.support.v4.content.ContextCompat;
 import android.support.v7.app.AppCompatActivity;
+import android.util.Log;
 import android.view.View;
 import android.widget.Button;
 import android.widget.Toast;
@@ -29,11 +30,15 @@ public class TitleActivity extends AppCompatActivity {
     @Inject
     GameController gameController;
 
+    // flag that keeps track of whether the game state is successfully initialized
+    boolean success;
+
     @Override
     protected void onCreate(Bundle savedInstanceState) {
         super.onCreate(savedInstanceState);
-        setContentView(R.layout.activity_title);
         ScavengerHuntApplication.getInstance().getAppComponent().inject(this);
+        success = gameController.initGame();
+        setContentView(R.layout.activity_title);
 
         // find views
         final Button startButton = findViewById(R.id.title_start_button);
@@ -44,19 +49,28 @@ public class TitleActivity extends AppCompatActivity {
         // set on click listeners
         startButton.setOnClickListener(new View.OnClickListener() {
             public void onClick(View v) {
-                Intent intent = new Intent(TitleActivity.this, LocationActivity.class);
-                // initialize the game state
                 startButton.setEnabled(false);
-                gameController.initGame();
 
-                if(!checkConnection()) {
-                    System.out.println("Database Connection Error. Restarting.");
-                    intent = new  Intent(TitleActivity.this, TitleActivity.class);
+                if (success) {
+                    Log.i("INFO","Successfully initialized the game state");
+                    Intent intent = new Intent(TitleActivity.this, LocationActivity.class);
+                    startActivity(intent);
                     finish();
-                    startActivity(intent);
                 } else {
-                    System.out.println("Database Connected!!");
+                    Log.e("ERROR", "Could not initialize the game state");
+                    Context context = getApplicationContext();
+                    // TODO this isn't necessarily true
+                    // - could just be no zones or all zones are without questions in the database
+                    // - need another way to check network instead of checking if scavHuntState is null
+                    // - but shouldn't crash now, if there is an error we catch and log it
+                    CharSequence text = "Connection Error. Please ensure that you are connected to a network (WiFi or Data)";
+                    int duration = Toast.LENGTH_SHORT;
+                    Toast toast = Toast.makeText(context, text, duration);
+                    toast.show();
+                    // restart the activity
+                    Intent intent = new Intent(TitleActivity.this, TitleActivity.class);
                     startActivity(intent);
+                    overridePendingTransition(0, 0); // cancel the animation between activity transitions
                     finish();
                 }
             }
@@ -85,22 +99,6 @@ public class TitleActivity extends AppCompatActivity {
                 finish();
             }
         });
-    }
-
-    /**
-     * Checks if the players device is connected to a network
-     */
-    private boolean checkConnection() {
-        Context context = getApplicationContext();
-        CharSequence text = "Connection Error. Please ensure that you are connect to a network (WiFi or Data)";
-        int duration = Toast.LENGTH_SHORT;
-
-        if (!gameController.requestCheckConnection()) {
-            Toast.makeText(context, text, duration).show();
-            return false;
-        };
-
-        return true;
     }
 
     @Override

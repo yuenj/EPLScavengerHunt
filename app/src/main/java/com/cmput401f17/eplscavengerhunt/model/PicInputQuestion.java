@@ -1,6 +1,5 @@
 package com.cmput401f17.eplscavengerhunt.model;
 
-import java.util.ArrayList;
 import java.util.List;
 
 /**
@@ -8,7 +7,6 @@ import java.util.List;
  * For now identical to MultipleChoiceQuestion because we aren't required to
  * do anything with the picture, and the way the player chooses their response
  * is by selecting from a list of choices.
- * @see Question
  */
 public class PicInputQuestion extends Question {
     private List<String> choices;

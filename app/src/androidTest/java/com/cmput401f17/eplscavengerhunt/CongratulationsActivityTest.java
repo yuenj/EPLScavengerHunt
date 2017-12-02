@@ -4,7 +4,6 @@ import android.test.ActivityInstrumentationTestCase2;
 import android.widget.TextView;
 
 import com.cmput401f17.eplscavengerhunt.activity.CongratulationsActivity;
-import com.cmput401f17.eplscavengerhunt.activity.SummaryActivity;
 import com.robotium.solo.Solo;
 
 public class CongratulationsActivityTest extends

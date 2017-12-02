@@ -1,13 +1,11 @@
 package com.cmput401f17.eplscavengerhunt.model;
 
-import android.util.Log;
-
 import java.util.ArrayList;
 import java.util.List;
 
 /**
  * Persistent application game state.
- * Stores game progress and contains game logic.
+ * Stores game progress.
  */
 public class ScavHuntState {
 

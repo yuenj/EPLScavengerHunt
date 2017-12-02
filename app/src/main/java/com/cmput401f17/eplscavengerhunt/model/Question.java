@@ -1,6 +1,5 @@
 package com.cmput401f17.eplscavengerhunt.model;
 
-import java.util.ArrayList;
 import java.util.List;
 
 public abstract class Question {

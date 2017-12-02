@@ -1,4 +1,6 @@
-package com.cmput401f17.eplscavengerhunt.controller;
+package com.cmput401f17.eplscavengerhunt.custom;
+
+import com.cmput401f17.eplscavengerhunt.controller.LocationController;
 
 /**
  * Used to get a return value from an inner class

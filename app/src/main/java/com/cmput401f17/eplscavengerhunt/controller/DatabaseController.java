@@ -25,78 +25,45 @@ import java.util.logging.Level;
 import java.util.logging.Logger;
 
 /**
- * Currently, DatabaseController handles retrieving the branch,
- * zones and questions in zones. It will possibly handle
- * adding responses to a question to the database as well.
- * TODO: Make DatabaseController act as a client connecting to an api middleware
+ * DatabaseController handles retrieving the branch, zones and questions.
  */
 public class DatabaseController {
 
     public DatabaseController() {
     }
 
-    /*** Returns a random list of unique [numZones] zones belonging to a library [branch)] */
-    public List<Zone> retrieveRandomZonesInBranch(final String branch, final int numQuestions) {
-        return null;
-    }
-
-    /** Given a list of [zones], returns a random list of unique questions
-     *  belonging to that zone.
-     */
-    public List<Question> retrieveRandomQuestionsForZones(final List<Zone> zones) {
-        return null;
-    }
-
     /**
-     * Uses inputted GPS coordinates to retrieve the name of the branch that
-     * the coordinate is inside from the database.
-     *
-     * @return String           Library branch name
+     * Retrieves all zones belonging to the library branch
      */
-    public String retrieveBranch() {
-        return null;
-    }
+    public List<Zone> retrieveZones(final String branch) {
+        List<Zone> zones = new ArrayList<>();
 
-    /**
-     * Retrieves all Zones that are in the inputted library branch name.
-     * NOTE: returned list's order is to be randomized in GameController
-     *
-     * @param branch            The name of a library branch
-     * @return List<Zone>       The zones in the inputted library branch
-     * @see GameController
-     */
-
-    public List<Zone> retrieveZones(String branch) {
-        // http://162.246.156.95:5000/getQuestion
-        // http://localhost:5000/getQuestion
         Zone zone = new Zone();
         zone.setBranch(branch);
-        taskParams responseParams = new taskParams(zone, null, "http://162.246.156.95:5000/getZone", null);
+        final String path = "http://162.246.156.95:5000/getZone";
+        // alternative path for local testing: http://localhost:5000/getQuestion
+        taskParams responseParams = new taskParams(zone, null, path, null);
         try {
             System.out.println(responseParams.zone.getBranch());
-            return new GetZone().execute(responseParams).get();
+            zones = new GetZone().execute(responseParams).get();
         } catch (InterruptedException e) {
             e.printStackTrace();
         } catch (ExecutionException e) {
             e.printStackTrace();
         }
-        return null;
+        return zones;
     }
 
     /**
-     * Retrieves all questions relating to inputted zone.
-     * Randomized selection handled by GameController
-     *
-     * @param zone              A zone object containing beacon ids and questions
-     * @return List<Question>   The questions pertaining to the zone
-     * @see GameController
+     * Retrieves all questions belonging to the zone.
      */
-    public List<Question> retrieveQuestionsinZone(Zone zone) {
-        // http://162.246.156.95:5000/getQuestion
-        // http://localhost:5000/getQuestion
-        taskParams responseParams = new taskParams(zone, null, "http://162.246.156.95:5000/getQuestion", null);
+    public List<Question> retrieveQuestionsInZone(final Zone zone) {
+        List<Question> testList = new ArrayList<>();
+        final String path = "http://162.246.156.95:5000/getQuestion";
+        // alternative path for local testing: http://localhost:5000/getQuestion
+        taskParams responseParams = new taskParams(zone, null, path, null);
         try {
-            List<Question> testList = new GetQuestion().execute(responseParams).get();
+            testList = new GetQuestion().execute(responseParams).get();
             Log.i("@@@DatabaseController", testList.toString());
             String tempZoneName = zone.getName();
             zone.setName(tempZoneName.replace("_", " "));
@@ -106,35 +73,22 @@ public class DatabaseController {
         } catch (ExecutionException e) {
             e.printStackTrace();
         }
-        return null;
+        return testList;
     }
 
     /**
-     * Retrieves all questions relating to inputted zone.
-     * Randomized selection handled by GameController
-     *
-     * @param question       Question that has been answered already.
-     * @see GameController
+     * Adds the users response to the data store
      */
-    public void updateAnalyticsForQuestion(Question question, Response response) {
-        // http://162.246.156.95:5000/getQuestion
-        // http://localhost:5000/getQuestion
-        taskParams responseParams = new taskParams(null, question, "http://162.246.156.95:5000/updateAnalytics", response);
+    public void updateAnalyticsForQuestion(final Question question, final Response response) {
+        final String path = "http://162.246.156.95:5000/updateAnalytics";
+        // alternative path for local testing: http://localhost:5000/getQuestion
+        taskParams responseParams = new taskParams(null, question, path, response);
         new UpdateAnalytics().execute(responseParams);
     }
 
-    /**
-     * (UNDECIDED FEATURE) Adds player response to Database.
-     * Used in case response statistics becomes requirement for
-     * system admin application.
-     *
-     * @param response          The users response to a specific question
-     */
-    public void addResponse(Response response) {}
-
     public class taskParams {
-        // zone will be used in both apps.
-        // question will be used in web app.
+        // Note: zone will be used in both apps.
+        //       question will be used in web app.
         Zone zone;
         Question question;
         String url;
@@ -153,6 +107,7 @@ public class DatabaseController {
 
         @Override
         protected List<Zone> doInBackground(taskParams... params) {
+            List<Zone> zones = new ArrayList<>();
             HttpURLConnection c = null;
             taskParams taskInfo = params[0];
             try {
@@ -162,8 +117,7 @@ public class DatabaseController {
 
                 c = (HttpURLConnection) u.openConnection();
 
-                // this setrequest stuff tells the api to GET something,
-                // and gives it variables it will need.
+                // tells the api to GET something, and gives it variables it will need.
                 c.setRequestMethod("GET");
                 //c.setRequestProperty("branch", taskInfo.zone.getBranch());
 
@@ -185,11 +139,11 @@ public class DatabaseController {
                 switch (status) {
                     case 200:
                         // reads what api returned, converts it into json format
-                        JsonReader jsonReader = new JsonReader (new BufferedReader(new InputStreamReader(c.getInputStream())));
+                        JsonReader jsonReader = new JsonReader(new BufferedReader(new InputStreamReader(c.getInputStream())));
                         Log.d("dbcontroller!!!", jsonReader.toString());
                         try {
                             //questions =  jsonQuestionArray(jsonReader);
-                            return jsonZoneArray(jsonReader);
+                            zones = jsonZoneArray(jsonReader);
 
                         } finally {
                             jsonReader.close();
@@ -208,7 +162,7 @@ public class DatabaseController {
                     }
                 }
             }
-            return null;
+            return zones;
         }
 
         @Override
@@ -216,7 +170,7 @@ public class DatabaseController {
             super.onPostExecute(q);
         }
 
-        private List<Zone> jsonZoneArray (JsonReader jsonReader) throws IOException {
+        private List<Zone> jsonZoneArray(JsonReader jsonReader) throws IOException {
             List<Zone> zones = new ArrayList<>();
             jsonReader.beginObject();
 
@@ -237,7 +191,7 @@ public class DatabaseController {
             return zones;
         }
 
-        private Zone readZone (JsonReader jsonReader) throws IOException {
+        private Zone readZone(JsonReader jsonReader) throws IOException {
             String key;
             Zone zone = new Zone();
             jsonReader.beginObject(); // start reading each sql row entry
@@ -247,7 +201,7 @@ public class DatabaseController {
                     zone.setBeaconID(jsonReader.nextString());
                 } else if (key.equals("zone")) {
                     zone.setName(jsonReader.nextString());
-                } else  if (key.equals("branch")) {
+                } else if (key.equals("branch")) {
                     zone.setBranch(jsonReader.nextString());
                 } else if (key.equals("category")) {
                     zone.setCategory(jsonReader.nextString());
@@ -266,6 +220,7 @@ public class DatabaseController {
 
         @Override
         protected List<Question> doInBackground(taskParams... params) {
+            List<Question> questions = new ArrayList<>();
             HttpURLConnection c = null;
             taskParams taskInfo = params[0];
             try {
@@ -275,7 +230,7 @@ public class DatabaseController {
                 System.out.println(restUrl);
                 c = (HttpURLConnection) u.openConnection();
 
-                // this setrequest stuff tells the api to GET something,
+                // tells the api to GET something,
                 // and gives it variables it will need.
                 //c.setRequestMethod("GET");
                 //c.setRequestProperty("zone", taskInfo.zone.getName());
@@ -300,10 +255,9 @@ public class DatabaseController {
                 switch (status) {
                     case 200:
                         // reads what api returned, converts it into json format
-                        JsonReader jsonReader = new JsonReader (new BufferedReader(new InputStreamReader(c.getInputStream())));
+                        JsonReader jsonReader = new JsonReader(new BufferedReader(new InputStreamReader(c.getInputStream())));
                         try {
-                            //questions =  jsonQuestionArray(jsonReader);
-                            return jsonQuestionArray(jsonReader);
+                            questions = jsonQuestionArray(jsonReader);
 
                         } finally {
                             jsonReader.close();
@@ -322,7 +276,7 @@ public class DatabaseController {
                     }
                 }
             }
-            return null;
+            return questions;
         }
 
         @Override
@@ -330,7 +284,7 @@ public class DatabaseController {
             super.onPostExecute(q);
         }
 
-        private List<Question> jsonQuestionArray (JsonReader jsonReader) throws IOException {
+        private List<Question> jsonQuestionArray(JsonReader jsonReader) throws IOException {
             List<Question> questions = new ArrayList<>();
             jsonReader.beginObject();
 
@@ -351,16 +305,16 @@ public class DatabaseController {
             return questions;
         }
 
-        private Question readQuestion (JsonReader jsonReader) throws IOException {
+        private Question readQuestion(JsonReader jsonReader) throws IOException {
             String key;
-            int questionID   = 0;
-            String prompt    = "";
-            String answer    = "";
-            String zone      = "";
-            String branch    = "";
-            String type      = ""; // the type of input for question.
-            String iLink     = "";
-            String sLink     = "";
+            int questionID = 0;
+            String prompt = "";
+            String answer = "";
+            String zone = "";
+            String branch = "";
+            String type = ""; // the type of input for question.
+            String iLink = "";
+            String sLink = "";
             String blanks = "";
             List<String> choiceList = null;
             Question question;
@@ -375,7 +329,7 @@ public class DatabaseController {
                 } else if (key.equals("Choices")) {
                     String choices = jsonReader.nextString();
                     choiceList = new ArrayList<>(Arrays.asList(choices.split("\\|_\\|")));
-                } else  if (key.equals("Solution")) {
+                } else if (key.equals("Solution")) {
                     answer = jsonReader.nextString();
                 } else if (key.equals("zone")) {
                     zone = jsonReader.nextString();
@@ -433,7 +387,7 @@ public class DatabaseController {
                 URL u = new URL(restUrl);
                 c = (HttpURLConnection) u.openConnection();
 
-                // this setrequest stuff tells the api to GET something,
+                // tells the api to GET something,
                 // and gives it variables it will need.
                 c.setRequestMethod("PUT");
 
