@@ -3,15 +3,9 @@ package com.cmput401f17.eplscavengerhunt;
 import android.support.test.filters.LargeTest;
 import android.support.test.rule.ActivityTestRule;
 import android.support.test.runner.AndroidJUnit4;
-import android.test.ActivityInstrumentationTestCase2;
 import android.text.format.DateUtils;
 
-import com.cmput401f17.eplscavengerhunt.activity.AboutActivity;
-import com.cmput401f17.eplscavengerhunt.activity.CreditsActivity;
-import com.cmput401f17.eplscavengerhunt.activity.LocationActivity;
-import com.cmput401f17.eplscavengerhunt.activity.RulesActivity;
 import com.cmput401f17.eplscavengerhunt.activity.TitleActivity;
-import com.robotium.solo.Solo;
 
 import org.junit.After;
 import org.junit.Before;

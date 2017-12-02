@@ -12,7 +12,7 @@ import android.widget.TextView;
 import com.cmput401f17.eplscavengerhunt.R;
 import com.cmput401f17.eplscavengerhunt.ScavengerHuntApplication;
 import com.cmput401f17.eplscavengerhunt.controller.LocationController;
-import com.cmput401f17.eplscavengerhunt.controller.SimpleCallback;
+import com.cmput401f17.eplscavengerhunt.custom.SimpleCallback;
 
 import javax.inject.Inject;
 

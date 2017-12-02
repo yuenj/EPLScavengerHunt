@@ -1,28 +1,22 @@
 package com.cmput401f17.eplscavengerhunt.controller;
 
-import android.widget.Toast;
+import android.util.Log;
 
-import com.cmput401f17.eplscavengerhunt.model.MultipleChoiceQuestion;
-import com.cmput401f17.eplscavengerhunt.model.PicInputQuestion;
 import com.cmput401f17.eplscavengerhunt.model.Question;
 import com.cmput401f17.eplscavengerhunt.model.Response;
 import com.cmput401f17.eplscavengerhunt.model.ScavHuntState;
 import com.cmput401f17.eplscavengerhunt.model.Summary;
-import com.cmput401f17.eplscavengerhunt.model.WrittenInputQuestion;
 import com.cmput401f17.eplscavengerhunt.model.Zone;
 
 import java.util.ArrayList;
-import java.util.Arrays;
 import java.util.List;
 import java.util.Random;
 
 import javax.inject.Inject;
 
 /**
- * Responsible for initializing a new game scenario, game logic
- * such as checking for gameOver and incrementing current stage
- * when user is ready to get the next zone, and generating summary
- * of the game upon gameOver.
+ * GameController handles the initialization, manipulation, and
+ * progression of the game state and fetches data from it.
  */
 public class GameController {
 
@@ -37,113 +31,84 @@ public class GameController {
     }
 
     /**
-     * Initializes the game when start is pressed
-     * This method is not used for now as initScav is sufficient
-     * for demo purposes and because this method relies on the
-     * DatabaseController through generateZoneRoute
-     *
-     * @return Boolean          Returns true or false if the game was initiated correctly
+     * Initializes the game state. Returns true on successful initialization.
      */
     public Boolean initGame() {
         scavHuntState.cleanState();
-        scavHuntState.setBranch("Clareview"); // Hardcoded branch for testing
+        scavHuntState.setBranch("Clareview");
 
         String branch = scavHuntState.getBranch();
-        final List<Zone> zoneRoute = generateZoneRoute(branch,5);
+        final List<Zone> zoneRoute = generateZoneRoute(branch);
+        scavHuntState.setZoneRoute(zoneRoute);
         if (zoneRoute.size() > 0) {
-            System.out.println("IT WORKSADAWDAWDAW");
+            List<Question> questions = generateQuestionSet(zoneRoute);
+            if (questions.size() > 0) {
+                scavHuntState.setQuestions(questions);
+                scavHuntState.setNumStages(questions.size());
+                return true;
+            } else {
+                Log.d("DEBUG", "no questions drawn from the database");
+                return false;
+            }
+        } else {
+            Log.d("DEBUG", "no zones drawn from the database");
+            return false;
         }
-
-        /* No data drawn. Return to restart */
-        if(zoneRoute.isEmpty()) {
-            return (false);
-        }
-
-        // TODO place 5 in a config file or somwhere else, don't hardcode it
-        generateQuestionSet(zoneRoute);
-
-        // TODO: Change this when branch detection is implemented
-        return !(scavHuntState.getZoneRoute().size() == 0 || scavHuntState.getNumStages() == 0);
     }
 
     /**
-     * Increments current stage.
-     * Called when user submits a question (called by QuestionActivity after submission)
+     * generate a sequence of zones belonging to the branch
+     */
+    private List<Zone> generateZoneRoute(final String branch) {
+        return databaseController.retrieveZones(branch);
+    }
+
+    /**
+     * Generates a sequence of questions.
+     */
+    private List<Question> generateQuestionSet(final List<Zone> zoneRoute) {
+        List<Question> questionSet = new ArrayList<>();
+
+        Random rand = new Random();
+        List<Question> questionPool;
+        int size = zoneRoute.size();
+        for (int i = 0; i < size; ++i) {
+            questionPool = databaseController.retrieveQuestionsInZone(zoneRoute.get(i));
+            if (questionPool.size() > 0) {
+                Question randomQuestion = questionPool.get(rand.nextInt(questionPool.size()));
+                questionSet.add(randomQuestion);
+            } else {
+                // skip over this zone if there are no questions belonging to it
+                zoneRoute.set(i, zoneRoute.get(size - 1)); // swap with the last zone
+                --i;                                       // check the new zone
+                --size;                                    // ignore those zones with empty questions
+            }
+        }
+        return questionSet;
+    }
+
+    /**
+     * Increments the current stage
      */
     public void requestIncrementCurrentStage() {
         scavHuntState.incrementCurrentStage();
     }
 
     /**
-     * Generates a sequence of zones in the branch in randomized order, storing it in
-     * ScavHuntApplication. Since num Zones = num Questions, also updates numStages
-     * in ScavHuntState
-     *
-     * @return zoneRoute        The current order of zones the user will go to
+     * Generates a summary of the game results
      */
-    private List<Zone> generateZoneRoute(final String branch, final int numZones) {
-        //final List<Zone> zoneRoute = databaseController.retrieveRandomZonesInBranch(branch, numZones);
-        List<Zone> zoneRoute = databaseController.retrieveZones(branch);
-
-        scavHuntState.setZoneRoute(zoneRoute);
-
-        if(zoneRoute == null || zoneRoute.isEmpty()) {
-            //Set empty list as there are no null checks anywhere else
-            zoneRoute = Arrays.asList();
-            scavHuntState.setNumStages(0);
-        } else {
-            scavHuntState.setNumStages(zoneRoute.size());
-        }
-
-        return zoneRoute;
-    }
-
-    /**
-     * Generates a sequence of questions.
-     *
-     * @param zoneRoute A list of zones a user will go through
-     */
-    private void generateQuestionSet(final List<Zone> zoneRoute) {
-        //final List<Question> questions = databaseController.retrieveRandomQuestionsForZones(zoneRoute);
-        //scavHuntState.setQuestions(questions);
-        List<Question> questionPool;
-        List<Question> questionSet = new ArrayList<>();
-
-        Random rand = new Random();
-
-        for (Zone zone : zoneRoute) {
-            questionPool = databaseController.retrieveQuestionsinZone(zone);
-            Question randomQuestion = questionPool.get(rand.nextInt(questionPool.size()));
-            questionSet.add(randomQuestion);
-        }
-        scavHuntState.setQuestions(questionSet);
-    }
-
-    /**
-     * Generates a summary to be used for display
-     *
-     * @return Summary          Contains the end-state of a users game
-     * Most importantly, this contains the answers correct and their responses
-     */
-    private Summary generateSummary() {
+    public Summary requestSummary() {
         final List<Response> responses = scavHuntState.getPlayerResponses();
         final List<Question> questions = scavHuntState.getQuestions();
         final List<Zone> zones = scavHuntState.getZoneRoute();
         final int score = scavHuntState.getNumCorrect();
         final int numQuestions = scavHuntState.getNumStages();
 
-        final Summary summary = new Summary(responses, questions, zones, score, numQuestions);
-
-        return summary;
-    }
-
-
-    public Summary requestSummary() {
-        return generateSummary();
+        return new Summary(responses, questions, zones, score, numQuestions);
     }
 
     /**
-     * @return Boolean          True if game is over, false otherwise
+     * Checks if the game is over
      */
     public Boolean requestCheckGameOver() {
         return scavHuntState.isGameOver();

@@ -34,6 +34,7 @@ public class QuestionControllerTest {
 
     Question question1;
     Response response1;
+    String responseString;
     String answer1;
 
     @Before
@@ -42,7 +43,8 @@ public class QuestionControllerTest {
 
         question1 = mock(Question.class);
         response1 = mock(Response.class);
-        answer1 = "ANSWER1";
+        responseString = "testResponse";
+        answer1 = "testAnswer";
     }
 
     @Test
@@ -57,7 +59,7 @@ public class QuestionControllerTest {
 
     @Test
     public void requestSubmitResponseTest() {
-        questionController.requestSubmitResponse(answer1);
+        questionController.requestSubmitResponse(responseString, answer1);
 
         verify(mockScavHuntState,times(1)).addResponse(responseCaptor.capture());
 

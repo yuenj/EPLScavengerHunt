@@ -6,30 +6,21 @@ import android.support.annotation.NonNull;
 import android.util.Log;
 
 import com.cmput401f17.eplscavengerhunt.ScavengerHuntApplication;
+import com.cmput401f17.eplscavengerhunt.custom.SimpleCallback;
 import com.cmput401f17.eplscavengerhunt.model.ScavHuntState;
 import com.cmput401f17.eplscavengerhunt.model.Zone;
-import com.estimote.coresdk.observation.region.RegionUtils;
-import com.estimote.coresdk.observation.utils.Proximity;
-import com.estimote.coresdk.recognition.packets.EstimoteLocation;
 import com.estimote.coresdk.service.BeaconManager;
-
-import java.util.List;
 
 import javax.inject.Inject;
 
 /**
- * Location controller handles finding beacons
- * and requesting the current zone. It uses estimote api
- * to determine if the user is near to a beacon
+ * LocationController performs player zone detection and fetches the current zone.
  */
 public class LocationController {
 
     private final ScavHuntState scavHuntState;
     private final BeaconManager beaconManager;
 
-    /**
-     * Instantiates the beacon manager to use beacon technologies
-     */
     @Inject
     public LocationController(final ScavHuntState scavHuntState) {
         Context appContext = ScavengerHuntApplication.getInstance();
@@ -57,12 +48,9 @@ public class LocationController {
     /**
      * Sets a listener for proximity to see if the user has
      * entered the zone of the current beacon
-     *
-     * https://stackoverflow.com/questions/42128909/return-value-from-valueeventlistener-java 06/10/2017
-     * Hacky method to get a return value
+     * Taken from https://stackoverflow.com/questions/42128909/return-value-from-valueeventlistener-java 06/10/2017
      */
     public void verifyLocation(@NonNull final SimpleCallback<Boolean> finishedCallback) {
-        // Uncomment to use this for testing
         final Handler handler = new Handler();
         handler.postDelayed(new Runnable() {
             @Override
@@ -99,12 +87,10 @@ public class LocationController {
 
     /**
      * Requests the next zone along the zone route
-     * from the singleton scavHuntState
-     * @return Zone         A zone in a branch of a library
      */
     public Zone requestZone() {
         final int currentStage = scavHuntState.getCurrentStage();
-        Log.d("HELLOOO!!", Integer.toString(currentStage));
+        Log.d("DEBUG", "Current stage: " + Integer.toString(currentStage));
         return scavHuntState.getZoneRoute().get(currentStage);
     }
 }

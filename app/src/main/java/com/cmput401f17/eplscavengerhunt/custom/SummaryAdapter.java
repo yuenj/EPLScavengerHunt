@@ -3,18 +3,15 @@ package com.cmput401f17.eplscavengerhunt.custom;
 import android.app.Activity;
 import android.content.Context;
 import android.graphics.Color;
-import android.graphics.drawable.Drawable;
 import android.view.LayoutInflater;
 import android.view.View;
 import android.view.ViewGroup;
 import android.widget.BaseAdapter;
-import android.widget.Button;
 import android.widget.ImageView;
 import android.widget.RelativeLayout;
 import android.widget.TextView;
 
 import com.cmput401f17.eplscavengerhunt.R;
-import com.cmput401f17.eplscavengerhunt.model.MultipleChoiceQuestion;
 import com.cmput401f17.eplscavengerhunt.model.PicInputQuestion;
 import com.cmput401f17.eplscavengerhunt.model.Question;
 import com.cmput401f17.eplscavengerhunt.model.Response;
@@ -23,6 +20,9 @@ import com.squareup.picasso.Picasso;
 
 import java.util.List;
 
+/**
+ * SummaryAdapter is an adapter for setting the content for the summary page of the app
+ */
 public class SummaryAdapter extends BaseAdapter {
 
     private static LayoutInflater inflater = null;
@@ -41,16 +41,18 @@ public class SummaryAdapter extends BaseAdapter {
         this.zones = zones;
         this.responses = responses;
 
-        inflater = (LayoutInflater)activity.getSystemService(Context.LAYOUT_INFLATER_SERVICE);
+        inflater = (LayoutInflater) activity.getSystemService(Context.LAYOUT_INFLATER_SERVICE);
     }
 
+    // Taken from https://stackoverflow.com/questions/24832497/avoid-passing-null-as-the-view-root-need-to-resolve-layout-parameters-on-the-in
+    // Accessed on 20/10/2017
     public View getView(int position, View convertView, ViewGroup parent) {
         View vi = convertView;
-        if (convertView == null)
-            // https://stackoverflow.com/questions/24832497/avoid-passing-null-as-the-view-root-need-to-resolve-layout-parameters-on-the-in
-            // 20/10/2017
+        if (convertView == null) {
             vi = inflater.inflate(R.layout.item_summary, parent, false);
+        }
 
+        // find views
         final ImageView pictureIV = vi.findViewById(R.id.IV_summary_picture);
         final TextView zoneTV = vi.findViewById(R.id.TV_summary_zone);
         final TextView areaTV = vi.findViewById(R.id.TV_summary_area);
@@ -58,16 +60,15 @@ public class SummaryAdapter extends BaseAdapter {
         final TextView responseTV = vi.findViewById(R.id.TV_summary_response);
         final RelativeLayout summaryContentRL = vi.findViewById(R.id.RL_summary_content);
 
+        // get the question and response belonging to summary at this position
         final Question question = questions.get(position);
         final Zone zone = zones.get(position);
         final Response response = responses.get(position);
 
-        // TODO: Set this as the user's photo
         String picture;
         if (question instanceof PicInputQuestion) {
-
-            // Set to monkey or dolphin
             if (question.isSkipped()) {
+                // set a default image if the user did not take a picture
                 if (response.isCorrect()) {
                     picture = "ic_dolphin";
                 } else {
@@ -77,43 +78,26 @@ public class SummaryAdapter extends BaseAdapter {
                         picture, "drawable", activity.getPackageName());
                 pictureIV.setImageDrawable(activity.getResources().getDrawable(resourceId));
             } else {
+                // user took a picture
                 pictureIV.setImageBitmap(response.getImageFile());
             }
         } else {
+            // for the other two types of questions, set the image associated with the question
             Picasso.with(activity).load(question.getImageLink()).fit().into(pictureIV);
         }
-        /*
-        if (question.getImageLink().isEmpty()) {
-            if (response.isCorrect()) {
-                picture = "ic_dolphin";
-            } else {
-                picture = "ic_monkey_wrong";
-            }
-            final int resourceId = activity.getResources().getIdentifier(
-                    picture, "drawable", activity.getPackageName());
-            pictureIV.setImageDrawable(activity.getResources().getDrawable(resourceId));
-        } else {
-            Picasso.with(activity).load(question.getImageLink()).fit().into(pictureIV);
-        } */
 
-        // Gets the full answer instead of just 'A' or 'C'
-
-
-
+        // set the correct answer and player's response
         answerTV.setText("Correct Answer : " + question.getAnswer());
-
-
-        if(question.isSkipped()){
+        if (question.isSkipped()) {
             responseTV.setText("You skipped this question");
-        }
-        else {
+        } else {
             responseTV.setText("Your Answer: " + response.getResponseStr());
         }
 
-
+        // set the zone description and theme
         zoneTV.setText(zone.getName());
-        zoneTV.setBackgroundColor(Color.parseColor(zone.getColor()));
         areaTV.setText(zone.getCategory());
+        zoneTV.setBackgroundColor(Color.parseColor(zone.getColor()));
         summaryContentRL.setBackgroundColor(Color.parseColor(zone.getColor()));
 
         return vi;

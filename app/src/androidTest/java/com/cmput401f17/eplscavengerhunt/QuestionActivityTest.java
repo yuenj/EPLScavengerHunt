@@ -7,8 +7,6 @@ import android.widget.TextView;
 import com.cmput401f17.eplscavengerhunt.activity.QuestionActivity;
 import com.robotium.solo.Solo;
 
-import junit.framework.Assert;
-
 /**
  * Tests QuestionActivityTest
  */
