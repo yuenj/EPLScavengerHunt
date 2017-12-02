@@ -51,9 +51,17 @@ public class QuestionAnswerActivity extends AppCompatActivity {
         ScavengerHuntApplication.getInstance().getAppComponent().inject(this);
 
         // an image will be randomly picked from this container
-        final List<String> correctImages = Arrays.asList("ic_chick", "ic_dolphin",
-                "ic_frog", "ic_hamster", "ic_ladybug");
-        Random random = new Random();
+        final List<String> correctImages = Arrays.asList("ic_bat", "ic_bee", "ic_butterfly",
+                "ic_chick", "ic_dog_body", "ic_dolphin", "ic_duck",
+                "ic_eagle", "ic_fox", "ic_goat", "ic_hamster", "ic_koala", "ic_ladybug",
+                "ic_leopard", "ic_lizard", "ic_monkey_body", "ic_monkey_correct",
+                "ic_monkey_cover_ear", "ic_octopus", "ic_owl", "ic_panda", "ic_penguin",
+                "ic_shark", "ic_spider", "ic_tutrle");
+        final List<String> skippedImages = Arrays.asList("ic_blue_bird", "ic_fish",
+                "ic_rooster", "ic_frog");
+        final List<String> incorrectImages = Arrays.asList("ic_gorilla", "ic_monkey_wrong",
+                "ic_shrimp", "ic_squirrel");
+        final Random random = new Random();
 
         // find views
         final CardView cardCV = findViewById(R.id.CV_question_answer_card);
@@ -97,12 +105,17 @@ public class QuestionAnswerActivity extends AppCompatActivity {
                 imageIV.setImageDrawable(this.getResources().getDrawable(resourceId));
                 messageTV.setText(getResources().getText(R.string.correct_answer_text));
             } else {
-                final int resourceId = this.getResources().getIdentifier(
-                        "ic_monkey_wrong", "drawable", this.getPackageName());
-                imageIV.setImageDrawable(this.getResources().getDrawable(resourceId));
                 if (question.isSkipped()) {
+                    int index = random.nextInt(skippedImages.size());
+                    final int resourceId = this.getResources().getIdentifier(
+                            skippedImages.get(index), "drawable", this.getPackageName());
+                    imageIV.setImageDrawable(this.getResources().getDrawable(resourceId));
                     messageTV.setText(getResources().getText(R.string.skipped_answer_text));
                 } else {
+                    int index = random.nextInt(incorrectImages.size());
+                    final int resourceId = this.getResources().getIdentifier(
+                            incorrectImages.get(index), "drawable", this.getPackageName());
+                    imageIV.setImageDrawable(this.getResources().getDrawable(resourceId));
                     messageTV.setText(getResources().getText(R.string.wrong_answer_text));
                 }
                 cardCV.setCardBackgroundColor(Color.parseColor("#EF005D")); // red
