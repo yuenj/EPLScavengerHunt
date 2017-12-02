@@ -1,7 +1,6 @@
 package com.cmput401f17.eplscavengerhunt.activity;
 
 import android.Manifest;
-import android.app.Activity;
 import android.content.Context;
 import android.content.Intent;
 import android.content.pm.PackageManager;
@@ -16,7 +15,6 @@ import android.widget.Toast;
 import com.cmput401f17.eplscavengerhunt.R;
 import com.cmput401f17.eplscavengerhunt.ScavengerHuntApplication;
 import com.cmput401f17.eplscavengerhunt.controller.GameController;
-import com.cmput401f17.eplscavengerhunt.model.ScavHuntState;
 import com.estimote.coresdk.common.requirements.SystemRequirementsChecker;
 
 import javax.inject.Inject;
@@ -30,8 +28,6 @@ public class TitleActivity extends AppCompatActivity {
     static final int MY_PERMISSIONS_REQUEST_WRITE_EXTERNAL_STORAGE = 20;
     @Inject
     GameController gameController;
-    @Inject
-    ScavHuntState scavHuntState;
 
     @Override
     protected void onCreate(Bundle savedInstanceState) {
@@ -50,8 +46,6 @@ public class TitleActivity extends AppCompatActivity {
             public void onClick(View v) {
                 Intent intent = new Intent(TitleActivity.this, LocationActivity.class);
                 // initialize the game state
-                gameController.initGame();
-
                 startButton.setEnabled(false);
                 gameController.initGame();
 
@@ -67,7 +61,6 @@ public class TitleActivity extends AppCompatActivity {
                 }
             }
         });
-
         rulesButton.setOnClickListener(new View.OnClickListener() {
             public void onClick(View v) {
                 Intent intent = new Intent(TitleActivity.this, RulesActivity.class);
@@ -76,7 +69,6 @@ public class TitleActivity extends AppCompatActivity {
                 finish();
             }
         });
-
         aboutButton.setOnClickListener(new View.OnClickListener() {
             public void onClick(View v) {
                 Intent intent = new Intent(TitleActivity.this, AboutActivity.class);
@@ -85,7 +77,6 @@ public class TitleActivity extends AppCompatActivity {
                 finish();
             }
         });
-
         creditsButton.setOnClickListener(new View.OnClickListener() {
             public void onClick(View v) {
                 Intent intent = new Intent(TitleActivity.this, CreditsActivity.class);
@@ -95,31 +86,21 @@ public class TitleActivity extends AppCompatActivity {
             }
         });
     }
+
     /**
-     * Checks if a connection to the database was successful:
-     * Connection successful if:
-     * - zoneRoute from ScavHuntState is not empty
-     * - numStages from ScavHuntState is more than zero
-     * - questions from ScavHuntState is not empty
+     * Checks if the players device is connected to a network
      */
     private boolean checkConnection() {
         Context context = getApplicationContext();
         CharSequence text = "Connection Error. Please ensure that you are connect to a network (WiFi or Data)";
         int duration = Toast.LENGTH_SHORT;
 
-        if(scavHuntState == null) {
+        if (!gameController.requestCheckConnection()) {
             Toast.makeText(context, text, duration).show();
-            return(false);
-        }
+            return false;
+        };
 
-        if(scavHuntState.getZoneRoute() == null || scavHuntState.getZoneRoute().isEmpty()){
-            System.out.println("No Zones. Check database connection.");
-            Toast.makeText(context, text, duration).show();
-
-            return(false);
-        }
-
-        return(true);
+        return true;
     }
 
     @Override

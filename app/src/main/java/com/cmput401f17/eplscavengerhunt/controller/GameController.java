@@ -1,14 +1,9 @@
 package com.cmput401f17.eplscavengerhunt.controller;
 
-import android.widget.Toast;
-
-import com.cmput401f17.eplscavengerhunt.model.MultipleChoiceQuestion;
-import com.cmput401f17.eplscavengerhunt.model.PicInputQuestion;
 import com.cmput401f17.eplscavengerhunt.model.Question;
 import com.cmput401f17.eplscavengerhunt.model.Response;
 import com.cmput401f17.eplscavengerhunt.model.ScavHuntState;
 import com.cmput401f17.eplscavengerhunt.model.Summary;
-import com.cmput401f17.eplscavengerhunt.model.WrittenInputQuestion;
 import com.cmput401f17.eplscavengerhunt.model.Zone;
 
 import java.util.ArrayList;
@@ -34,6 +29,25 @@ public class GameController {
                           final DatabaseController databaseController) {
         this.scavHuntState = scavHuntState;
         this.databaseController = databaseController;
+    }
+
+    /**
+     * Checks if a connection to the database was successful:
+     * Connection successful if:
+     * - zoneRoute from ScavHuntState is not empty
+     * - numStages from ScavHuntState is more than zero
+     * - questions from ScavHuntState is not empty
+     */
+    public Boolean requestCheckConnection() {
+        if(scavHuntState == null) {
+            return false;
+        } else {
+            if(scavHuntState.getZoneRoute() == null || scavHuntState.getZoneRoute().isEmpty()) {
+                System.out.println("No Zones. Check database connection.");
+                return false;
+            }
+        }
+        return true;
     }
 
     /**
