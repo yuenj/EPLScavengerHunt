@@ -53,7 +53,7 @@ public class QuestionAnswerActivity extends AppCompatActivity {
                 "ic_eagle", "ic_fox", "ic_goat", "ic_hamster", "ic_koala", "ic_ladybug",
                 "ic_leopard", "ic_lizard", "ic_monkey_body", "ic_monkey_correct",
                 "ic_monkey_cover_ear", "ic_octopus", "ic_owl", "ic_panda", "ic_penguin",
-                "ic_shark", "ic_spider", "ic_tutrle");
+                "ic_shark", "ic_spider", "ic_turtle");
         final List<String> skippedImages = Arrays.asList("ic_blue_bird", "ic_fish",
                 "ic_rooster", "ic_frog");
         final List<String> incorrectImages = Arrays.asList("ic_gorilla", "ic_monkey_wrong",
