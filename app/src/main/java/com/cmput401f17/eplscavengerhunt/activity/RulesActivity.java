@@ -52,8 +52,8 @@ public class RulesActivity extends AppCompatActivity {
                     Toast.makeText(context, text, duration).show();
                     // restart the activity
                     Intent intent = new Intent(RulesActivity.this, RulesActivity.class);
-                    startActivity(intent);
                     overridePendingTransition(0, 0); // cancel the animation between activity transitions
+                    startActivity(intent);
                     finish();
                 }
             }

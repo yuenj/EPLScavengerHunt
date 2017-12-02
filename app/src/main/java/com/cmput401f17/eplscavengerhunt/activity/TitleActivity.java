@@ -69,8 +69,8 @@ public class TitleActivity extends AppCompatActivity {
                     toast.show();
                     // restart the activity
                     Intent intent = new Intent(TitleActivity.this, TitleActivity.class);
-                    startActivity(intent);
                     overridePendingTransition(0, 0); // cancel the animation between activity transitions
+                    startActivity(intent);
                     finish();
                 }
             }
