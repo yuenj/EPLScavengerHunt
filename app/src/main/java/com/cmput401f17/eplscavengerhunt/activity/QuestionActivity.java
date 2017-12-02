@@ -77,7 +77,9 @@ public class QuestionActivity extends AppCompatActivity {
             public void onClick(View v) {
                 skipButton.setEnabled(false); // prevent skipping again
                 questionController.skip(currentQuestion);
-                questionController.requestSubmitResponse("");
+                questionController.requestSubmitResponse("",currentQuestion.getAnswer());
+                skipButton.setEnabled(false);
+
                 startQuestionAnswerActivity();
                 finish();
             }
@@ -140,7 +142,7 @@ public class QuestionActivity extends AppCompatActivity {
                 // if so, submit the response
                 if (choice != null) {
                     confirmButton.setEnabled(false);
-                    questionController.requestSubmitResponse(choice);
+                    questionController.requestSubmitResponse(choice,currentQuestion.getAnswer());
                     startQuestionAnswerActivity();
                     finish();
                 } else {
@@ -194,6 +196,11 @@ public class QuestionActivity extends AppCompatActivity {
         });
     }
 
+
+    /**
+     * Displays view for a picture input question
+     */
+
     private void displayPictureInputLayout() {
         setContentView(R.layout.activity_pic_input);
 
@@ -242,7 +249,7 @@ public class QuestionActivity extends AppCompatActivity {
                 }
                 // if the player has made a choice and taken a picture, submit the response
                 if (choice != null && hasImage(picTakenIV)) {
-                    questionController.requestSubmitResponse(choice, downScaledBitMap);
+                    questionController.requestSubmitResponseImage(choice, downScaledBitMap);
                     confirmButton.setEnabled(false);
                     startQuestionAnswerActivity();
                     finish();
@@ -310,7 +317,7 @@ public class QuestionActivity extends AppCompatActivity {
         ((InputMethodManager) getSystemService(Context.INPUT_METHOD_SERVICE)).
                 hideSoftInputFromWindow(view.getWindowToken(), InputMethodManager.HIDE_NOT_ALWAYS);
 
-        questionController.requestSubmitResponse(editText.getText().toString());
+        questionController.requestSubmitResponse(editText.getText().toString(),currentQuestion.getAnswer());
         return true;
     }
 

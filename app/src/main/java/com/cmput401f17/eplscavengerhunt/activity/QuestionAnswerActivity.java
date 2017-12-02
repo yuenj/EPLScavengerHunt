@@ -5,6 +5,7 @@ import android.graphics.Color;
 import android.os.Bundle;
 import android.support.v7.app.AppCompatActivity;
 import android.support.v7.widget.CardView;
+import android.util.Log;
 import android.view.View;
 import android.widget.Button;
 import android.widget.ImageView;
@@ -56,30 +57,12 @@ public class QuestionAnswerActivity extends AppCompatActivity {
         // 'T' of 'F' and 'A'/'B'/'C'/'D'
         final Question question = questionController.requestQuestion();
         final Response response = questionController.requestResponse();
-        response.markIncorrect();
-        if (question instanceof MultipleChoiceQuestion && !response.getResponseStr().isEmpty()) {
-            if (question.getAnswer().charAt(0) == response.getResponseStr().charAt(0)) {
-                response.markCorrect();
-            }
-        }
-        // perform case-insensitive comparison of the answer and players response
-        // and ignore spaces
-        else if (question instanceof WrittenInputQuestion) {
-            if (question.getAnswer().toLowerCase().replaceAll("\\s+", "").
-                    equals(response.getResponseStr().toLowerCase().replaceAll("\\s+", ""))) {
-                response.markCorrect();
-            }
-        }
-        // TODO: Define this later for pic input questions
-        // Else if instead of else for the case where a user skips the question
-        else if (question instanceof PicInputQuestion) {
-            response.markCorrect();
-        }
 
-        // display feedback for the player
         if (question instanceof PicInputQuestion && !question.isSkipped()) {
             imageIV.setImageBitmap(response.getImageFile());
         } else {
+            Log.d("QuestAnswer","Not Picture");
+            Log.d("QuestAnswer",response.getResponseStr());
             if (response.isCorrect()) {
                 final int resourceId = this.getResources().getIdentifier(
                         "ic_dolphin", "drawable", this.getPackageName());
@@ -98,16 +81,9 @@ public class QuestionAnswerActivity extends AppCompatActivity {
             }
         }
 
-        // gets the full answer instead of just 'A' or 'C'
-        if (question instanceof MultipleChoiceQuestion) {
-            for (String string : question.getChoices()) {
-                if (string.charAt(0) == question.getAnswer().charAt(0)) {
-                    answerTV.setText(string);
-                }
-            }
-        } else {
-            answerTV.setText(question.getAnswer());
-        }
+
+        answerTV.setText(question.getAnswer());
+
 
         final Intent intent;
         // if the game is not over, give the player a location

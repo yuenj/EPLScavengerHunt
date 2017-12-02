@@ -1,6 +1,7 @@
 package com.cmput401f17.eplscavengerhunt.controller;
 
 import android.graphics.Bitmap;
+import android.util.Log;
 
 import com.cmput401f17.eplscavengerhunt.model.PicInputQuestion;
 import com.cmput401f17.eplscavengerhunt.model.Question;
@@ -23,29 +24,35 @@ public class QuestionController {
 
     /**
      *  Passes/ updates the user answer
+     *  Also confirms the correctness of the response
      *  @pre User has input an answer
      *  @param answer       The user's answer
      */
-    public void requestSubmitResponse(final String answer) {
-        Response response = new Response(answer);
+    public void requestSubmitResponse(final String responseString,final String answer) {
+        Log.d("RequestMadeAnswer",answer.toLowerCase().replaceAll("\\s+", ""));
+        Log.d("RequestMadeResponse",responseString.toLowerCase().replaceAll("\\s+", ""));
+        Response response = new Response(responseString);
+        if (answer.toLowerCase().replaceAll("\\s+", "").
+                equals(responseString.toLowerCase().replaceAll("\\s+", ""))) {
+            Log.d("Answer","Answer was corrcet");
+            response.markCorrect();
+        }
+
+        Log.d("RequestSubmit","Request Was submitted");
         scavHuntState.addResponse(response);
     }
 
     /**
      * Used to set the a users picture to the result
+     * Also confirms the correctness of the response
      * @param answer
      * @param imageFile
      */
-    public void requestSubmitResponse(final String answer, Bitmap imageFile){
-        if (requestQuestion() instanceof PicInputQuestion) {
+    public void requestSubmitResponseImage(final String answer, Bitmap imageFile){
             Response response = new Response(answer);
+            response.markCorrect();
             response.setImageFile(imageFile);
             scavHuntState.addResponse(response);
-
-        } else {
-            Response response = new Response(answer);
-            scavHuntState.addResponse(response);
-        }
     }
 
     /**

@@ -28,21 +28,14 @@ public class ScavHuntState {
     }
 
     /**
-     * Checks response correctness.
      * If correct, mark it correct and increment numCorrect.
-     * @param question
      * @param response
      */
-    private void validateResponse(final Question question, final Response response) {
-        final String answer = question.getAnswer();
+    private void validateResponse(final Response response) {
 
         // Compare answer and response and update score and response accordingly
-        if (answer.equals(response.getResponseStr())) {
-            response.markCorrect();
+        if (response.isCorrect()) {
             incrementNumCorrect();
-        }
-        else {
-            response.markIncorrect();
         }
     }
 
@@ -53,7 +46,7 @@ public class ScavHuntState {
     public void addResponse(final Response response) {
         // check correctness of response.
         // by comparing the response with the question of the current stage
-        validateResponse(questions.get(currentStage), response);
+        validateResponse(response);
         this.playerResponses.add(response);
     }
 
