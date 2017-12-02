@@ -98,7 +98,9 @@ public class SummaryAdapter extends BaseAdapter {
 
         // Gets the full answer instead of just 'A' or 'C'
 
+
         if (question instanceof MultipleChoiceQuestion) {
+
             for (String string: question.getChoices()) {
                 if (string.charAt(0) == question.getAnswer().charAt(0)) {
                     answerTV.setText("Correct Answer: " + string);
@@ -106,6 +108,7 @@ public class SummaryAdapter extends BaseAdapter {
             }
         } else {
             answerTV.setText("Correct Answer: " + question.getAnswer());
+
         }
         
         if(question.isSkipped()){
@@ -114,6 +117,7 @@ public class SummaryAdapter extends BaseAdapter {
         else {
             responseTV.setText("Your Answer: " + response.getResponseStr());
         }
+
 
         zoneTV.setText(zone.getName());
         zoneTV.setBackgroundColor(Color.parseColor(zone.getColor()));
