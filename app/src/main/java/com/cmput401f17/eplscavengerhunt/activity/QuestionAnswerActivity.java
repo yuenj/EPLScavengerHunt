@@ -5,11 +5,9 @@ import android.graphics.Color;
 import android.os.Bundle;
 import android.support.v7.app.AppCompatActivity;
 import android.support.v7.widget.CardView;
-import android.util.Log;
 import android.view.View;
 import android.widget.Button;
 import android.widget.ImageView;
-import android.widget.RadioButton;
 import android.widget.TextView;
 
 import com.cmput401f17.eplscavengerhunt.R;
@@ -17,12 +15,10 @@ import com.cmput401f17.eplscavengerhunt.ScavengerHuntApplication;
 import com.cmput401f17.eplscavengerhunt.controller.GameController;
 import com.cmput401f17.eplscavengerhunt.controller.LocationController;
 import com.cmput401f17.eplscavengerhunt.controller.QuestionController;
-import com.cmput401f17.eplscavengerhunt.model.MultipleChoiceQuestion;
 import com.cmput401f17.eplscavengerhunt.model.PicInputQuestion;
 import com.cmput401f17.eplscavengerhunt.model.Question;
 import com.cmput401f17.eplscavengerhunt.model.Response;
 import com.cmput401f17.eplscavengerhunt.model.ScavHuntState;
-import com.cmput401f17.eplscavengerhunt.model.WrittenInputQuestion;
 
 import java.util.Arrays;
 import java.util.List;
@@ -71,43 +67,46 @@ public class QuestionAnswerActivity extends AppCompatActivity {
         final TextView answerTV = findViewById(R.id.TV_question_answer_answer);
         final Button doneButton = findViewById(R.id.button_question_answer_done);
 
-        // compare the first character for multiple choice questions
-        // 'T' of 'F' and 'A'/'B'/'C'/'D'
         final Question question = questionController.requestQuestion();
         final Response response = questionController.requestResponse();
 
+        // the layout of the user interface depends on the players correctness
         if (question instanceof PicInputQuestion && !question.isSkipped()) {
+            // display the players picture that they took with the camera
             imageIV.setImageBitmap(response.getImageFile());
         } else {
-            Log.d("QuestAnswer","Not Picture");
-            Log.d("QuestAnswer",response.getResponseStr());
+            int index;
+            int resourceId;
             if (response.isCorrect()) {
-                int index = random.nextInt(correctImages.size());
-                final int resourceId = this.getResources().getIdentifier(
+                // the player answered the question correctly
+                index = random.nextInt(correctImages.size());
+                resourceId = this.getResources().getIdentifier(
                         correctImages.get(index), "drawable", this.getPackageName());
                 imageIV.setImageDrawable(this.getResources().getDrawable(resourceId));
                 messageTV.setText(getResources().getText(R.string.correct_answer_text));
             } else {
                 if (question.isSkipped()) {
-                    int index = random.nextInt(skippedImages.size());
-                    final int resourceId = this.getResources().getIdentifier(
+                    // the player skipped the question
+                    index = random.nextInt(skippedImages.size());
+                    resourceId = this.getResources().getIdentifier(
                             skippedImages.get(index), "drawable", this.getPackageName());
                     imageIV.setImageDrawable(this.getResources().getDrawable(resourceId));
                     messageTV.setText(getResources().getText(R.string.skipped_answer_text));
+                    cardCV.setCardBackgroundColor(Color.parseColor("#EF005D")); // red
                 } else {
-                    int index = random.nextInt(incorrectImages.size());
-                    final int resourceId = this.getResources().getIdentifier(
+                    // the player answered the question incorrectly
+                    index = random.nextInt(incorrectImages.size());
+                    resourceId = this.getResources().getIdentifier(
                             incorrectImages.get(index), "drawable", this.getPackageName());
                     imageIV.setImageDrawable(this.getResources().getDrawable(resourceId));
                     messageTV.setText(getResources().getText(R.string.wrong_answer_text));
+                    cardCV.setCardBackgroundColor(Color.parseColor("#EF005D")); // red
                 }
-                cardCV.setCardBackgroundColor(Color.parseColor("#EF005D")); // red
             }
         }
 
-
+        // display the correct answer
         answerTV.setText(question.getAnswer());
-
 
         final Intent intent;
         // if the game is not over, give the player a location
@@ -116,11 +115,13 @@ public class QuestionAnswerActivity extends AppCompatActivity {
             gameController.requestIncrementCurrentStage();
             intent = new Intent(QuestionAnswerActivity.this, LocationActivity.class);
         }
-        // End game otherwise
+        // end game otherwise
         else {
             doneButton.setText("HURRAY!");
             intent = new Intent(QuestionAnswerActivity.this, CongratulationsActivity.class);
         }
+
+        // set on click listeners
         doneButton.setOnClickListener(new View.OnClickListener() {
             public void onClick(View v) {
                 doneButton.setEnabled(false);

@@ -50,6 +50,7 @@ public class SummaryActivity extends AppCompatActivity {
         summaryAdapter = new SummaryAdapter(this, questions, zones, responses);
         summaryContentLV.setAdapter(summaryAdapter);
 
+        // set on click listeners
         replayButton.setOnClickListener(new View.OnClickListener() {
             public void onClick(View v) {
                 Intent intent = new Intent(SummaryActivity.this, TitleActivity.class);

@@ -41,7 +41,6 @@ public class RulesActivity extends AppCompatActivity {
                 finish();
             }
         });
-
         returnButton.setOnClickListener(new View.OnClickListener() {
             public void onClick(View v) {
                 returnButton.setEnabled(false);
