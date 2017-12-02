@@ -99,7 +99,9 @@ public class SummaryAdapter extends BaseAdapter {
         // Gets the full answer instead of just 'A' or 'C'
 
 
+
         answerTV.setText("Correct Answer : " + question.getAnswer());
+
 
         if(question.isSkipped()){
             responseTV.setText("You skipped this question");
