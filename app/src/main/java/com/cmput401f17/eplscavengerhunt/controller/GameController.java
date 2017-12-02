@@ -71,13 +71,17 @@ public class GameController {
 
         Random rand = new Random();
         List<Question> questionPool;
-        for (Zone zone : zoneRoute) {
-            questionPool = databaseController.retrieveQuestionsInZone(zone);
+        int size = zoneRoute.size();
+        for (int i = 0; i < size; ++i) {
+            questionPool = databaseController.retrieveQuestionsInZone(zoneRoute.get(i));
             if (questionPool.size() > 0) {
                 Question randomQuestion = questionPool.get(rand.nextInt(questionPool.size()));
                 questionSet.add(randomQuestion);
             } else {
                 // skip over this zone if there are no questions belonging to it
+                zoneRoute.set(i, zoneRoute.get(size - 1)); // swap with the last zone
+                --i;                                       // check the new zone
+                --size;                                    // ignore those zones with empty questions
             }
         }
         return questionSet;
